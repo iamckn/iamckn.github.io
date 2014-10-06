@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[the poetry of insecurity]]></title>
+  <title><![CDATA[the poetry of (in)security]]></title>
   <link href="http://iamckn.github.io/atom.xml" rel="self"/>
   <link href="http://iamckn.github.io/"/>
-  <updated>2014-10-06T23:41:11+03:00</updated>
+  <updated>2014-10-06T23:46:27+03:00</updated>
   <id>http://iamckn.github.io/</id>
   <author>
     <name><![CDATA[ck]]></name>
