@@ -99,3 +99,10 @@ google_analytics_tracking_id:
 
 # Facebook Like
 facebook_like: false
+
+navigation:
+- text: whomai
+- text: home
+  url: /index.html
+- text: security
+- text: insecurity 	
