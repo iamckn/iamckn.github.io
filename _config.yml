@@ -101,7 +101,7 @@ google_analytics_tracking_id:
 facebook_like: false
 
 navigation:
-- text: whomai
+- text: whoami
 - text: home
   url: /index.html
 - text: security
