@@ -4,7 +4,7 @@
   <title><![CDATA[the poetry of (in)security]]></title>
   <link href="http://iamckn.github.io/atom.xml" rel="self"/>
   <link href="http://iamckn.github.io/"/>
-  <updated>2014-10-09T18:17:49+03:00</updated>
+  <updated>2014-10-09T19:18:03+03:00</updated>
   <id>http://iamckn.github.io/</id>
   <author>
     <name><![CDATA[ck]]></name>
@@ -18,7 +18,10 @@
     <link href="http://iamckn.github.io/blog/2014/10/09/a-second-test-post/"/>
     <updated>2014-10-09T13:34:32+03:00</updated>
     <id>http://iamckn.github.io/blog/2014/10/09/a-second-test-post</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<iframe src="http://www.slideshare.net/slideshow/embed_code/iamckn " width="595" height="446" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen></iframe>
+
+
+<p></p>
 ]]></content>
   </entry>
   
