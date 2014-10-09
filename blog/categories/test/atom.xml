@@ -4,7 +4,7 @@
   <title><![CDATA[Category: test | the poetry of (in)security]]></title>
   <link href="http://iamckn.github.io/blog/categories/test/atom.xml" rel="self"/>
   <link href="http://iamckn.github.io/"/>
-  <updated>2014-10-09T20:56:19+03:00</updated>
+  <updated>2014-10-10T01:56:56+03:00</updated>
   <id>http://iamckn.github.io/</id>
   <author>
     <name><![CDATA[ck]]></name>
@@ -38,7 +38,18 @@
     <link href="http://iamckn.github.io/blog/2014/10/09/a-test-post/"/>
     <updated>2014-10-09T13:09:19+03:00</updated>
     <id>http://iamckn.github.io/blog/2014/10/09/a-test-post</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<pre><code class="bash postgresql setup">sudo pacman -S postgresql
+sudo -i -u postgres
+initdb --locale en_US.UTF-8 -E UTF8 -D '/var/lib/postgres/data'
+exit
+sudo systemctl start postgresql
+sudo systemctl enable postgresql
+sudo -i -u postgres
+createuser ck -P -S -R -D
+createdb -O ck msf
+</code></pre>
+
+<p><blockquote><p>I shall be a denizen of the undeground or a successfull man of the world.<br/>There shall be no compromise!</p><footer><strong>ck</strong></footer></blockquote></p>
 ]]></content>
   </entry>
   

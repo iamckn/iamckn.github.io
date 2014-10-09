@@ -4,7 +4,7 @@
   <title><![CDATA[the poetry of (in)security]]></title>
   <link href="http://iamckn.github.io/atom.xml" rel="self"/>
   <link href="http://iamckn.github.io/"/>
-  <updated>2014-10-09T20:56:19+03:00</updated>
+  <updated>2014-10-10T01:56:56+03:00</updated>
   <id>http://iamckn.github.io/</id>
   <author>
     <name><![CDATA[ck]]></name>
@@ -40,7 +40,29 @@
     <link href="http://iamckn.github.io/blog/2014/10/09/a-test-post/"/>
     <updated>2014-10-09T13:09:19+03:00</updated>
     <id>http://iamckn.github.io/blog/2014/10/09/a-test-post</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<figure class='code'><figcaption><span>postgresql setup</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo pacman -S postgresql
+</span><span class='line'>sudo -i -u postgres
+</span><span class='line'>initdb --locale en_US.UTF-8 -E UTF8 -D <span class="s1">&#39;/var/lib/postgres/data&#39;</span>
+</span><span class='line'><span class="nb">exit</span>
+</span><span class='line'>sudo systemctl start postgresql
+</span><span class='line'>sudo systemctl <span class="nb">enable </span>postgresql
+</span><span class='line'>sudo -i -u postgres
+</span><span class='line'>createuser ck -P -S -R -D
+</span><span class='line'>createdb -O ck msf
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>I shall be a denizen of the undeground or a successfull man of the world.<br/>There shall be no compromise!</p><footer><strong>ck</strong></footer></blockquote>
+
 ]]></content>
   </entry>
   
