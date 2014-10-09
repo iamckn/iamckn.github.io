@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[the poetry of (in)security]]></title>
-  <link href="http://iamckn.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: experiment | the poetry of (in)security]]></title>
+  <link href="http://iamckn.github.io/blog/categories/experiment/atom.xml" rel="self"/>
   <link href="http://iamckn.github.io/"/>
   <updated>2014-10-09T16:37:19+03:00</updated>
   <id>http://iamckn.github.io/</id>
