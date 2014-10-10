@@ -4,7 +4,7 @@
   <title><![CDATA[Category: new | the poetry of (in)security]]></title>
   <link href="http://iamckn.github.io/blog/categories/new/atom.xml" rel="self"/>
   <link href="http://iamckn.github.io/"/>
-  <updated>2014-10-10T17:24:47+03:00</updated>
+  <updated>2014-10-10T20:45:27+03:00</updated>
   <id>http://iamckn.github.io/</id>
   <author>
     <name><![CDATA[ck]]></name>
@@ -18,7 +18,10 @@
     <link href="http://iamckn.github.io/blog/2014/10/09/a-test-post/"/>
     <updated>2014-10-09T13:09:19+03:00</updated>
     <id>http://iamckn.github.io/blog/2014/10/09/a-test-post</id>
-    <content type="html"><![CDATA[<pre><code class="bash postgresql setup">sudo pacman -S postgresql
+    <content type="html"><![CDATA[<!--more-->
+
+
+<pre><code class="bash postgresql setup">sudo pacman -S postgresql
 sudo -i -u postgres
 initdb --locale en_US.UTF-8 -E UTF8 -D '/var/lib/postgres/data'
 exit
