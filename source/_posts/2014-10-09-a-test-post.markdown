@@ -5,6 +5,7 @@ date: 2014-10-09 13:09:19 +0300
 comments: true
 categories: [test,new,experiment] 
 ---
+<!--more-->
 ``` bash postgresql setup
 sudo pacman -S postgresql
 sudo -i -u postgres

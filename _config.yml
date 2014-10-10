@@ -105,5 +105,8 @@ navigation:
   url: /whoami.html
 - text: home
   url: /index.html
+- text: crypto
+  url: /crypto.html
 - text: archive
   url: /blog/archives/index.html
+
