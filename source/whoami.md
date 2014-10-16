@@ -12,7 +12,7 @@ footer: true
 > ***
 > #### i am the founder and head of [crypto ke](cke.io)  
 > ***
-> #### i sudied electrical and electronics engineering at university  
+> #### i studied electrical and electronics engineering at university  
 > #### i worked in telecommunications for a few months after which i spent a couple of years in system administration      
 > ***
 > #### i am now an information security engineer...sort of :)
