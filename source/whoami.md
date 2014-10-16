@@ -6,34 +6,35 @@ comments: true
 sharing: true
 footer: true
 ---
-#i am ck 
-> a denizen of the underground
+### i am ck 
 
-# work stuff
-i am the founder and head of [crypto ke](cke.io "check it out here")  
-  
-  
-
-# education
-i sudied electrical and electronics engineering at university.  
-i have also done a couple of professional certifications here and there.  
-i however am not that much a fan of them so I will not list them here :)
+> #### a denizen of the underground
+> ***
+> #### i am the founder and head of [crypto ke](cke.io)  
+> ***
+> #### i sudied electrical and electronics engineering at university  
+> #### i worked in telecommunications for a few months after which i spent a couple of years in system administration      
+> ***
+> #### i am now an information security engineer...sort of :)
 
 
-# away from work
-when not tinkering or trying to break things, you'll probably find me doing one of these things:
+### interests 
 
-* **chess** i love chess and am pretty good at it, challenges are welcome!
+> #### cryptpgraphy intrigues me, and a large part of this blog will be dedicated to it [here](crypto.html)
+> #### i play chess and am pretty good at it, challengers are welcome to join the long list of fallen victims
+> #### i read all sorts of books and carry a kindle paperwhite everywhere
+> #### once upon a time i used to be a poet, i just may start writing again
+> #### i love learning foreign languages, you can catch me speaking a few words of German or Italian :)
+> #### and the list goes on and on...movies and series, football, a bit of photography...
 
-* **poetry** i used to write lots of poems and even published a book. i plan to start writing again
 
-* **reading** i love reading all sorts of books, i carry a kindle paperwhite everywhere
+### alter ego
 
-* **movies** and **series** good movies and series will keep me home all day!
+> #### everyone needs an alter ego :)
+> ## i am keyser söze
 
-* **languages** i love learning foreign languages, i've learnt some basic **_German_** and **_Italian_** 
 
-* other stuff i like include **video games**, **football**, **photography** 
 
-Let's get started [a test post](/blog/2014/10/09/a-test-post/)
+
+
 
