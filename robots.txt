@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://iamckn.github.io/sitemap.xml 
+Sitemap: http://www.ckn.io/sitemap.xml 

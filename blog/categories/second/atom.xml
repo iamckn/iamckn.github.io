@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: second | the poetry of (in)security]]></title>
-  <link href="http://iamckn.github.io/blog/categories/second/atom.xml" rel="self"/>
-  <link href="http://iamckn.github.io/"/>
-  <updated>2015-01-23T10:10:41+03:00</updated>
-  <id>http://iamckn.github.io/</id>
+  <link href="http://www.ckn.io/blog/categories/second/atom.xml" rel="self"/>
+  <link href="http://www.ckn.io/"/>
+  <updated>2015-01-23T10:51:18+03:00</updated>
+  <id>http://www.ckn.io/</id>
   <author>
     <name><![CDATA[ck]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[a second test post]]></title>
-    <link href="http://iamckn.github.io/blog/2014/10/09/a-second-test-post/"/>
+    <link href="http://www.ckn.io/blog/2014/10/09/a-second-test-post/"/>
     <updated>2014-10-09T13:34:32+03:00</updated>
-    <id>http://iamckn.github.io/blog/2014/10/09/a-second-test-post</id>
+    <id>http://www.ckn.io/blog/2014/10/09/a-second-test-post</id>
     <content type="html"><![CDATA[<!--more-->
 
 ]]></content>
