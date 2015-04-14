@@ -8,5 +8,3 @@ footer: true
 ---
 [ck's setup](/blog/2015/03/14/ck-the-setup/)
 
-
-[test]()

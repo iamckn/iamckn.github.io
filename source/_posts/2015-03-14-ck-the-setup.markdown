@@ -14,7 +14,7 @@ categories: [the setup]
 
 #what's your setup like?
 
-###I use an acer c720p Chromebook as my main laptop. I tinkered with it, got rid of the chrome OS and replaced it with archlinux. It's a nifty liitle machine that is light and portable. It has a 32GB SSD and about 7 hours of battery life which I love. The processor and ram are not as high as I'd like but it does the job.
+###I use an acer c720p Chromebook as my main laptop. I tinkered with it, got rid of the chrome OS and replaced it with archlinux. It's a nifty little machine that is light and portable. It has a 32GB SSD and about 7 hours of battery life which I love. The processor and ram are not as high as I'd like but it does the job.
 
 ###For the heavy lifting I have a Samsung laptop which I dual boot Kali Linux and Windows. It's a core i5 with 6GB ram and Nvidia graphics card, not one of the high end ones though :(. It also has a 750GB hard drive which comes in handy for stuff such as virtual machines and large wordlists.
 
