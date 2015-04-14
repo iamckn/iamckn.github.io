@@ -107,6 +107,8 @@ navigation:
   url: /index.html
 - text: crypto
   url: /crypto.html
+- text: the setup
+  url: /the-setup.html
 - text: archive
   url: /blog/archives/index.html
 

@@ -22,13 +22,7 @@ footer: true
 > #### i read all sorts of books and carry a kindle paperwhite everywhere
 > #### once upon a time i used to write what passed as poetry, i just may start writing again
 > #### i love learning foreign languages, you can catch me speaking a few words of German or Italian :)
-> #### and the list goes on and on...
-
-
-### alter ego
-
-> #### everyone needs an alter ego :)
-> ## i am keyser söze
+> #### and the list goes on
 
 
 
