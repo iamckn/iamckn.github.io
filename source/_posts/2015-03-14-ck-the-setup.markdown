@@ -8,7 +8,7 @@ categories: [the setup]
 
 #who are you?
 
-###I am an information security engineer with main interests in cryptography and network security.
+###I am an information security engineer with main interests in cryptography (specifically cryptanalysis) and network security.
 
 <!--more-->
 
@@ -16,13 +16,13 @@ categories: [the setup]
 
 ###I use an acer c720p Chromebook as my main laptop. I tinkered with it, got rid of the chrome OS and replaced it with archlinux. It's a nifty liitle machine that is light and portable. It has a 32GB SSD and about 7 hours of battery life which I love. The processor and ram are not as high as I'd like but it does the job.
 
-###For the heavy lifting I have a Samsung laptop which I dual boot Kali Linux and Windows. It's a core i5 with 6GB ram and Nvidia graphics card though not one of the high end ones :(. It also has a 750GB hard drive which comes in handy for stuff such as virtual machines and large wordlists.
+###For the heavy lifting I have a Samsung laptop which I dual boot Kali Linux and Windows. It's a core i5 with 6GB ram and Nvidia graphics card, not one of the high end ones though :(. It also has a 750GB hard drive which comes in handy for stuff such as virtual machines and large wordlists.
 
 ###I also have a raspberry pi model B. I play around with it and use it for experiments and diverse projects. Right now it has Kali Linux on it.
 
-###My phone is a Nexus 5 - great phone! It serves all my needs and more. I have set up Nethunter on it and it comes in handy in remote testing and exploitation :). I see it remaining as my phone for a long time!
+###My phone is a Nexus 5 - awesome phone! It serves all my needs and more. I have set up Nethunter on it and it comes in handy in remote testing and exploitation :). I see it remaining as my phone for a long time.
 
-###I read a lot and have a Kindle Paperwhite 2. Next to my phone, it's the device I take almost everywhere with me. It's battery lasts forever and the reading experience is amazing whatever the lighting conditions.
+###I read a lot and have a Kindle Paperwhite 2. Next to my phone, it's the device I take almost everywhere with me. Its battery lasts forever and the reading experience is amazing whatever the lighting conditions.
 
 ###I also have some interest in photography and own a Nikon P520 camera. It serves my casual needs adequately and the zoom - 42x - is awesome!
 
@@ -34,7 +34,7 @@ categories: [the setup]
 
 #what tools do you run?
 
-###On the acer, I only configure the tools that I use regularly. These are a few crypto and network security tools. I tailor them to my needs to keep my archlinux installation minimal and fast. I do most of my scripting on it mainly python, shell and sublime text - which i highly recommend it - as my editor.
+###On the acer, I only configure the tools that I use regularly. These are a few crypto and network security tools. I tailor them to my needs to keep my archlinux installation minimal and fast. I do most of my scripting on it, mainly python and shell using sublime text (which i highly recommend) as my editor. I add other tools as they became necessary, on archlinux this is mostly seamless. I've added the blackarch and archassault repos which host a wealth of security tools.
 
 ###As the Samsung laptop has a full Kali Installation, I use it when I need to do automated testing and require speed. I also use it when I need to do GPU password cracking. I also run my VMS on it. I have Windows on it too for games, testing and so on.
 
