@@ -34,7 +34,7 @@ categories: [the setup]
 
 #what tools do you run?
 
-###On the acer, I only configure the tools that I use regularly. These are a few crypto and network security tools. I tailor them to my needs to keep my archlinux installation minimal and fast. I do most of my scripting on it, mainly python and shell using sublime text (which i highly recommend) as my editor. I add other tools as they became necessary, on archlinux this is mostly seamless. I've added the blackarch and archassault repos which host a wealth of security tools.
+###On the acer, I only configure the tools that I use regularly. These are a few crypto and network security tools. I tailor them to my needs to keep my archlinux installation minimal and fast. I do most of my scripting on it, mainly python and shell using sublime text (which i highly recommend) as my editor. I add other tools as they become necessary, on archlinux this is mostly seamless. I've added the blackarch and archassault repos which host a wealth of security tools.
 
 ###As the Samsung laptop has a full Kali Installation, I use it when I need to do automated testing and require speed. I also use it when I need to do GPU password cracking. I also run my VMS on it. I have Windows on it too for games, testing and so on.
 
