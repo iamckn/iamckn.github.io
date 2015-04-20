@@ -1,0 +1,50 @@
+---
+layout: post
+title: "Jade"
+date: 2015-04-20 06:34:17 +0300
+comments: true
+categories: [the setup]
+---
+
+#who are you?
+
+###I am Jade Solomon, an Infosec/Code machine, I dedicate a lot of sleepless nights to Reverse Engineering, GSM/Mobile technology and Exploit Development.
+
+<!--more-->
+
+#what's your setup like?
+
+###Well, my main playground is a MacBook late 2008 edition, running Yosemite 10.10. It has 8GB RAM, a superb Samsung 256GB SSD drive, and Nvidia GeForce Card.
+
+###Next is a CR-48 Chromebook, the first ever chromebook to be released. It has 1GB of RAM, a 16GB SSD, and a dual processor with GSM Modem capability, so no need for other internet sources like Wi-Fi and so on. It's not a power hog so the battery does 7hrs (this works so well for me). It's 11 inches and weighs 780mg making it really portable and super light. It runs my own OS Typhon v2.0 Beta with GSM attack tools, IDA Pro with Hex Ray (all plus 14 custom plugins I have picked up from github and two of my own). 
+
+###My phone is a Phantom Z running Android that I am replacing this week with the BlackBerry Z. The Phantom has 8 cores, 2.0ghz speed and 2GB Ram. It runs on stock ROM which I've rooted. I am on this (the phantom and stock rom) because it's the only phone I have seen with the capability of detecting SMS payloads in the form of SI/SL with binary(malware) injected into it.
+
+
+###I own a gaming rig though not yet fully setup. It consists of a 128GB SSD drive, 500GB HDD, 8GB RAM (wanted 16 but...le sigh) and a 4GB Nvidia Geforce dedicated VRAM. The setup lacks a good motherboard so it's not yet complete.
+
+###I also have a kindle (keyboard version). It's battery life is beyond amazing (last around 2/3 months) and has unlimited 3G (coolest thing ever).
+
+###In my arsenal I have two BTS's - or rather SDRs that I have moded to BTS's, a borrowed USRP N200 , calypso devices - Motorola C139s (I have 4 of these, others I've overloaded and exploded). I also have an RTL-SDR which has a superb range of 2.5MHz to 1900MHz, various antennae and an alpha card that is on the way :).
+
+###And oh, I have AWEI earphones, best friend EVER!
+
+{% img /images/jade_setup.jpg 500 100 %}
+
+#what tools do you run?
+
+###Ha! TYPHON (my baby... my OS). This has nearly everything custom. 
+###I run a custom version of OpenBTS - which can inject exploits to baseband level, SIM attack kits and Binary SMS vxsploit (a custom exploit dev kit).
+###It also has RF tools (such as OsmocomBB), RTL-SDR tools, Kalibrate, nano (a must), Terminator, BackBox tools repo, IDA PRO 6.7 full with Hex Ray Debugger and Decompilers.
+###I also have a tool I cannot really disclose, but for fun's sake let me explain what it does. After exploiting the BaseBand/SIM of the victim and injecting a persistent bot on your SIM control via CnC with Mapping, I get STK takeover, Network level takeover and control... aheem.
+
+###On Yosemite I run IDA Pro, Android Studio Tools (ndk), Photoshop/Illustrator, ITUNES (music), VMWARE Fusion, Eclipse, Netbeans (JavaCard), iTerm , Qemu, MAMP Pro, Sublime for text editing, GCC from MacPorts and so on.
+
+
+#What's your dream setup
+
+###Hahaha, I guess I can't really pull mine off, why? Possibly because it's out of this world... but I do want a BladeRF :), maybe an Alienware mx15 or a MacBook Pro 15" with Retina Display.   
+
+***
+
+> ###Check out Jade's site http://0x7678.com and blog http://blog.0x7678.com for some cool stuff :)
