@@ -7,6 +7,10 @@ sharing: true
 footer: true
 ---
 
+#[Bright](/blog/2015/04/27/bright/)
+
+***
+
 #[Jade](/blog/2015/04/20/jade/)
 
 ***
