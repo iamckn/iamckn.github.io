@@ -4,7 +4,7 @@
   <title><![CDATA[the poetry of (in)security]]></title>
   <link href="http://www.ckn.io/atom.xml" rel="self"/>
   <link href="http://www.ckn.io/"/>
-  <updated>2015-04-20T09:29:15+03:00</updated>
+  <updated>2015-04-27T10:43:44+03:00</updated>
   <id>http://www.ckn.io/</id>
   <author>
     <name><![CDATA[ck]]></name>
@@ -12,6 +12,50 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Bright]]></title>
+    <link href="http://www.ckn.io/blog/2015/04/27/bright/"/>
+    <updated>2015-04-27T08:01:00+03:00</updated>
+    <id>http://www.ckn.io/blog/2015/04/27/bright</id>
+    <content type="html"><![CDATA[<h1>who are you?</h1>
+
+<h3>Bright Gameli Mawudor is my name. Friends in the infosec world called me ~ze3D~. A passionate information security engineer with a love for system exploitation, gleaning information from all corners of the web about a target, and social engineering using all possible methods.</h3>
+
+<!--more-->
+
+
+<h1>what&rsquo;s your setup like?</h1>
+
+<h3>My laptop is an 8GB memory Samsung Series 9 13.3&#8221; HD+ cruising on an Intel® Core™ i5-3317U CPU @ 1.70GHz × 4 with Intel® Ivybridge Mobile for graphics and 128 SSD storage. It&rsquo;s pretty thin and lightweight.</h3>
+
+<h3>External Storage space for me is a total of 2 Terabytes, 10GB Dropbox and 15GB on Google Drive, which is something I find very convenient.</h3>
+
+<h3>I am running Kali linux as my primary OS and dual boot Windows 8 on the side when needed. Kali has all the tools I need for my infosec work and experiments. I also import tools from various sources.</h3>
+
+<h3>I have a Nexus 5 phone and a Nexus 7 Generation 2 tab. I run <a href="http://www.nethunter.com/">Kali NetHunter</a> on both, although I recently misplaced the Nexus 7. Kali Nethunter running on Android 5.0 makes it just the kind of phone to have in terms of the all purpose features.</h3>
+
+<h3>I have a lot of interest in Wireless Networks which is one of the areas in my PhD research. For that matter, I&rsquo;ve got a WiFi Pineapple Mark V Tactical Bundle 6800 with a 9dBi Dipole Antenna and a magnetic Base. The many features included in the WiFi Pineapple are beyond description. It makes wireless pentesting very easy if one understands the basics involved.</h3>
+
+<h3>I have a <a href="http://hakshop.myshopify.com/collections/usb-rubber-ducky/products/usb-rubber-ducky-deluxe?variant=353378649">USB Rubber Ducky Deluxe</a> that I use for Red Teaming assessments and other pentests when needed. It helps a lot in grabbing passwords when close to a target&rsquo;s machine, and also for any other function that would take long to type manually.</h3>
+
+<p><img src="http://www.ckn.io/images/bright_setup.jpg" width="500" height="100"></p>
+
+<h1>what tools do you run?</h1>
+
+<h3>For now, Kali linux does the job on the Samsung Series 9 with it having most of the tools that I need. I clone a lot of scripts from github to complement the ones already included in the Kali linux collection. The collection keeps growing by the day. The Nexus 5 having Kali NetHunter is good enough due to its dynamic nature as I mostly like porting scripts to it from the Samsung laptop.</h3>
+
+<h1>What&rsquo;s your dream setup</h1>
+
+<h3>Anyone in the infosec field will keep dreaming for faster equipment no matter how much they have.</h3>
+
+<h3>It&rsquo;ll be great to have some of the toys from the <a href="http://hakshop.myshopify.com/">HAK5 SHOP</a> which include some radio stuff and the THROWING STAR LAN. It would also be great to have a good Rainbow table collection on an external hard drive, a <a href="https://www.pwnieexpress.com/product/pwn-plug-r3penetration-testing-device/">Pwn-plug</a> for future pentests and a powerful blade server to host all my goodies.</h3>
+
+<hr />
+
+<blockquote><h3>Follow Bright on twitter <a href="https://twitter.com/BRIGHTZEED">@BRIGHTZEED</a> for lots more infosec stuff :)</h3></blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Jade]]></title>
