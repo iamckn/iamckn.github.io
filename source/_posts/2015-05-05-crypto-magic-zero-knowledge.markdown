@@ -37,7 +37,7 @@ categories: [crypto, crypto magic]
 ***
 ###Also check out this cool explanation with a modified version of [Ali Baba and the forty thieves](http://pages.cs.wisc.edu/~mkowalcz/628.pdf)
 ***
-###In part two of Crypto Magic, I'll talk about Private Outsourcing Computation :).
+###In part two of Crypto Magic, I'll talk about homomorphic encryption :).
 
 
 
