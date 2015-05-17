@@ -14,8 +14,8 @@ categories:
 ##The hacker mindset
 
 ###The word hacker has long been desecrated. People immediately picture this antisocial person that is out to break into their computers and steal their data and do other equally nefarious acts.
-###But they are wrong, hacking is an art form, practised by people who push the boundaries of innovation. It's about having light bulbs lighting up in your head as you figure out some new way to make something work. About discovering ways to make things work more efficiently. 
-###It's about find ways to use things in a way even their creator never imagined.
+###But they are wrong, hacking is an art form, practised by people who push the boundaries of innovation. It's about having bulbs lighting up in your head as you figure out some new way to make something work. About discovering ways to make things work more efficiently. 
+###It's about finding ways to use things in a way even their creator never imagined.
 ###It is about tweaking the firing timing of your spark plugs to make your engine add a bit of power, for car enthusiasts.
 ###It's about creating a new masterpiece in a way that has never been attempted, for painters.
 ###It's about building that robot using random materials, for the hardware enthusiasts.
@@ -36,7 +36,7 @@ categories:
 ###Another avenue is conferences. This July the 31st, they will be hosting the second AfricaHackOn conference. Having attended the last one, take it from me that it's a unique experience that should not be missed.
 ###Come watch as these billiant minds take you through real life happenings in the world of information security. Watch them show how the bad guys can attack your systems and then how to defend against them. 
 ###This is no ordinary conference. No long boring powerpoints, but interactive demonstrations.
-###I am sure there are some of you who have discovered some interesting ways someone can use all these technology around us. How someone can break into a system. It may only be an idea, but that's all it takes. The AfricaHackOn team is more than happy to help you explore and develop it. 
+###I am sure there are some of you who have discovered some interesting ways someone can use all this technology around us. How someone can break into a system. It may only be an idea, but that's all it takes. The AfricaHackOn team is more than happy to help you explore and develop it. 
 ###The AfricaHackOn team wants you to come make a presentation at this conference. You'll get to be mentored by the best minds in the field.
 ###The silver lining is you'll get to present your ideas to some of the biggest companies in the country who'll be in attendance. You'll get to interact with them first hand and have genuine discussions. In attendance will also be major international and local media houses.
 ###The ball is in your court.
