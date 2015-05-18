@@ -3,7 +3,7 @@ layout: post
 title: "AfricaHackOn - Be part of the story"
 date: 2015-05-17 08:42:08 +0300
 comments: true
-categories: 
+categories: [AfricaHackOn]
 ---
 ###I first heard of AfricaHackOn at my previous job where I was working in IT. A colleague and friend told me about a conference about information security that would be held at our building. This was early last year. Being in charge of the network, I would be assisting in setting up internet access for the conference. Now when you're incharge of the network and you hear you'll be giving access to your network to a room full of the best "hackers" in the country, you get a bit nervous. I use the word "hackers" in quotes because that's where I'd like to start.
 
@@ -34,7 +34,7 @@ categories:
 
 ##The second AfricaHackOn conference
 ###Another avenue is conferences. This July the 31st, they will be hosting the second AfricaHackOn conference. Having attended the last one, take it from me that it's a unique experience that should not be missed.
-###Come watch as these billiant minds take you through real life happenings in the world of information security. Watch them show how the bad guys can attack your systems and then how to defend against them. 
+###Come watch as these brilliant minds take you through real life happenings in the world of information security. Watch them show how the bad guys can attack your systems and then how to defend against them. 
 ###This is no ordinary conference. No long boring powerpoints, but interactive demonstrations.
 ###I am sure there are some of you who have discovered some interesting ways someone can use all this technology around us. How someone can break into a system. It may only be an idea, but that's all it takes. The AfricaHackOn team is more than happy to help you explore and develop it. 
 ###The AfricaHackOn team wants you to come make a presentation at this conference. You'll get to be mentored by the best minds in the field.
