@@ -4,7 +4,7 @@
   <title><![CDATA[the poetry of (in)security]]></title>
   <link href="http://www.ckn.io/atom.xml" rel="self"/>
   <link href="http://www.ckn.io/"/>
-  <updated>2015-08-25T13:35:56+03:00</updated>
+  <updated>2015-08-25T14:28:25+03:00</updated>
   <id>http://www.ckn.io/</id>
   <author>
     <name><![CDATA[ck]]></name>
@@ -16,70 +16,9 @@
   <entry>
     <title type="html"><![CDATA[The hacking journey]]></title>
     <link href="http://www.ckn.io/blog/2015/08/25/the-hacking-journey/"/>
-    <updated>2015-08-25T12:18:08+03:00</updated>
+    <updated>2015-08-25T14:27:24+03:00</updated>
     <id>http://www.ckn.io/blog/2015/08/25/the-hacking-journey</id>
-    <content type="html"><![CDATA[<h3>Becoming a skilled hacker or the politically correct &ldquo;information security specialist&rdquo; doesn&rsquo;t have a straightforward defined path. Here I will try to layout what constitutes a good way to go about it.</h3>
-
-<!--more-->
-
-
-<h2>Bits and Pieces - Digital Logic</h2>
-
-<h3>Everything starts here. Every computer process is just sequences of simple logic operations.</h3>
-
-<h3>Learn about AND, OR, XOR and so on. Go through the full course material if you&rsquo;re already being taught this in school. If not, don&rsquo;t skim through this, dedicate enough time to it. This is interesting stuff for the hacker mind so it shouldn&rsquo;t be too taxing.</h3>
-
-<h3>Ideally take it deeper to the circuit level implementations. Study NAND gates and so on. If you&rsquo;re so inclined go even further to diodes and transistors. With this you&rsquo;ll be primed for the next area - Assembly Language.</h3>
-
-<h2>POP POP RET - Assembly Language</h2>
-
-<h3>A lot of people will avoid Assembly due to the false impression that it&rsquo;s very complex. It really isn&rsquo;t, infact it&rsquo;s a lot more fun and rewarding. If you took time on your digital logic and you aren&rsquo;t afraid of a bit of math, this will be a lot easier to grasp.</h3>
-
-<h3>You&rsquo;ll get to learn how the processor runs at a low level. You&rsquo;ll get to learn about instructions, registers and programming logic. Once you&rsquo;ve got this figured out, higher level languages will be a breeze. You&rsquo;ll get to understand how your programs interact with different hardware. Best of all you&rsquo;ll spare yourself the agony of trying to figure it out when you try your hand at things like exploit development, reverse engineering and hardware hacking.</h3>
-
-<h3>There are free emulators out there that will help you along the process and make the experience fulfilling. Try lighting some LEDs or programming some hardware. Once you&rsquo;re done with this, you&rsquo;ll be able to hold your own any in almost any information security field you decide to pursue.</h3>
-
-<h2>PCAP or it never happened - The Network</h2>
-
-<h3>Next you need to learn how devices and services communicate. Start from the basics and build up from there. Study the OSI model, network devices and related services. Learn as much as you can about IPv4, IPv6, subnetting, routing, switching, DNS, DHCP and so on. From there move on to network security and the various attacks and countermeasures. Master the theory behind attacks such as MAC flooding, DNS and DHCP hijacks and so on. Learn about common defenses and network setups, Firewalls, IPS&rsquo;s and IDS&rsquo;s, DMZ&rsquo;s, VLANS, VPNS and so on.</h3>
-
-<h3>A straightforward way would be to go through the Cisco Network Certification material, you can even get yourself certified along the way :)</h3>
-
-<h2>The Box - *nix</h2>
-
-<h3>You need a system that is powerful and flexible. This is where linux and the other variants of the *nix family come in. If you&rsquo;re just beginning, set up a virtual machine or dual boot your computer. I would suggest you begin with the latest stable version of Ubuntu to get yourself going and make the transition from Windows smooth. Learn how to set it up and how to do various tasks on the system. Learn about various commands and how to automate process using scripts. All this is still at a high level so the learning curve is still manageable. Once you&rsquo;re comfortable, you can transition to using it as your primary OS.</h3>
-
-<h3>Next dive into the guts of the system. Learn about the building blocks of the system and how everything fits in together. One way is to build your linux system from the ground up. Distros like ArchLinux and Gentoo that require you to build from an initial shell interface are an option you can use in the learning proces. The Arch Wiki for one is amazingly comprehensive and structured for both the beginner and the advanced user.</h3>
-
-<h3>Kali Linux then comes in. Once you understand Linux well enough, you can let the good people at Offensive Security do the work for you. Kali Linux is a powerful and well built system that will give you access to tools that you&rsquo;ll use a lot in your information security work.</h3>
-
-<h2>Explore the world - The organisation</h2>
-
-<h3>The real world is made up of people and the decisions they make. It is therefore highly important that you understand how they operate in various environments.</h3>
-
-<h3>I therefore suggest that you find a way of working in an organisation and experience how information security is approached. Intern as a system admin or whatever position that allows you to interact with systems and people in IT departments. Learn the common practices and errors that are made along the way. Get an internal perspective so that your thought process takes into account what goes into building and setting up systems.</h3>
-
-<h3>You don&rsquo;t want to gain temporary access to a network and start wondering how a domain controller ties in to the network.</h3>
-
-<h3>Being part of an organisation also will give you insight into the behaviour of various people in the organistation. Understanding how everyone from the tech savvy to the management react to various situations will come in handy as you progess.</h3>
-
-<h2>Tying up the pieces</h2>
-
-<h3>There are a lot of areas you can focus your attention on along your information security journey and that is up to you. Experiment, change, adapt, and tweak what you need to.</h3>
-
-<h3>Some things will remain throughout though.</h3>
-
-<h3>You will need to be creative to see beyond the black and white.</h3>
-
-<h3>You&rsquo;ll need passion to take you through hours of research and reading through RFCs&hellip;hehe.</h3>
-
-<h3>You&rsquo;ll need some code to live by or you may get lost along the way.</h3>
-
-<h3>Being a hacker isn&rsquo;t about writing the most complicated exploit, it is about figuring out elegant solutions to some problem - easy or challenging.</h3>
-
-<h3>In the end it&rsquo;s about the thrill of discovery and creation.</h3>
-
-<h3>I leave you with this book by James Gleick that I believe every information security person should read at least once <a href="http://www.amazon.com/The-Information-History-Theory-Flood/dp/1400096235">http://www.amazon.com/The-Information-History-Theory-Flood/dp/1400096235</a></h3>
+    <content type="html"><![CDATA[
 ]]></content>
   </entry>
   
@@ -143,7 +82,7 @@
 
 <h3>The ball is in your court.</h3>
 
-<h2>Submit your papers and ideas to <a href="&#109;&#97;&#105;&#x6c;&#116;&#111;&#58;&#105;&#x6e;&#102;&#111;&#64;&#97;&#x66;&#114;&#105;&#99;&#x61;&#x68;&#x61;&#x63;&#107;&#x6f;&#110;&#x2e;&#x63;&#x6f;&#x6d;">&#x69;&#x6e;&#x66;&#x6f;&#x40;&#x61;&#x66;&#x72;&#105;&#x63;&#97;&#x68;&#x61;&#99;&#x6b;&#x6f;&#x6e;&#46;&#99;&#x6f;&#x6d;</a> before 30th of May.</h2>
+<h2>Submit your papers and ideas to <a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#105;&#x6e;&#102;&#x6f;&#64;&#x61;&#x66;&#x72;&#x69;&#x63;&#x61;&#x68;&#x61;&#99;&#x6b;&#x6f;&#x6e;&#x2e;&#99;&#x6f;&#x6d;">&#105;&#110;&#x66;&#111;&#64;&#x61;&#x66;&#114;&#x69;&#99;&#97;&#x68;&#97;&#99;&#x6b;&#x6f;&#x6e;&#x2e;&#99;&#x6f;&#109;</a> before 30th of May.</h2>
 
 <blockquote><h3>Read this <a href="http://sylviamunyisia.blogspot.com/2015/05/call-for-papers.html">page</a> by Sylvia that explains the call for papers very well.</h3>
 
