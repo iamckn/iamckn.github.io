@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The hacking journey"
-date: 2015-08-25 12:18:08 +0300
+date: 2015-08-25 14:27:24 +0300
 comments: true
 categories: [Ramblings]
 ---
@@ -51,4 +51,3 @@ categories: [Ramblings]
 ###In the end it's about the thrill of discovery and creation.
 
 ###I leave you with this book by James Gleick that I believe every information security person should read at least once http://www.amazon.com/The-Information-History-Theory-Flood/dp/1400096235
-
