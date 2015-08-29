@@ -4,7 +4,7 @@
   <title><![CDATA[the poetry of (in)security]]></title>
   <link href="http://www.ckn.io/atom.xml" rel="self"/>
   <link href="http://www.ckn.io/"/>
-  <updated>2015-08-25T14:37:41+03:00</updated>
+  <updated>2015-08-29T09:48:12+03:00</updated>
   <id>http://www.ckn.io/</id>
   <author>
     <name><![CDATA[ck]]></name>
@@ -14,254 +14,254 @@
 
   
   <entry>
-    <title type="html"><![CDATA[The hacking journey]]></title>
+    <title type="html"><![CDATA[A hacker's journey]]></title>
     <link href="http://www.ckn.io/blog/2015/08/25/the-hacking-journey/"/>
     <updated>2015-08-25T14:27:24+03:00</updated>
     <id>http://www.ckn.io/blog/2015/08/25/the-hacking-journey</id>
-    <content type="html"><![CDATA[<h3>Becoming a skilled hacker or the politically correct &ldquo;information security specialist&rdquo; doesn&rsquo;t have a straightforward defined path. Here I will try to layout what constitutes a good way to go about it.</h3>
+    <content type="html"><![CDATA[<h4>Becoming a skilled hacker or the politically correct &ldquo;information security specialist&rdquo; doesn&rsquo;t have a straightforward defined path. Here I will try to layout what constitutes a good way to go about it.</h4>
 
 <!--more-->
 
 
-<h2>Bits and Pieces - Digital Logic</h2>
+<h1>Bits and Pieces - Digital Logic</h1>
 
-<h3>Everything starts here. Every computer process is just sequences of simple logic operations.</h3>
+<h4>Everything starts here. Every computer process is just sequences of simple logic operations.</h4>
 
-<h3>Learn about AND, OR, XOR and so on. Go through the full course material if you&rsquo;re already being taught this in school. If not, don&rsquo;t skim through this, dedicate enough time to it. This is interesting stuff for the hacker mind so it shouldn&rsquo;t be too taxing.</h3>
+<h4>Learn about AND, OR, XOR and so on. Go through the full course material if you&rsquo;re already being taught this in school. If not, don&rsquo;t skim through this, dedicate enough time to it. This is interesting stuff for the hacker mind so it shouldn&rsquo;t be too taxing.</h4>
 
-<h3>Ideally take it deeper to the circuit level implementations. Study NAND gates and so on. If you&rsquo;re so inclined go even further to diodes and transistors. With this you&rsquo;ll be primed for the next area - Assembly Language.</h3>
+<h4>Ideally take it deeper to the circuit level implementations. Study NAND gates and so on. If you&rsquo;re so inclined go even further to diodes and transistors. With this you&rsquo;ll be primed for the next area - Assembly Language.</h4>
 
-<h2>POP POP RET - Assembly Language</h2>
+<h1>POP POP RET - Assembly Language</h1>
 
-<h3>A lot of people will avoid Assembly due to the false impression that it&rsquo;s very complex. It really isn&rsquo;t, infact it&rsquo;s a lot more fun and rewarding. If you took time on your digital logic and you aren&rsquo;t afraid of a bit of math, this will be a lot easier to grasp.</h3>
+<h4>A lot of people will avoid Assembly due to the false impression that it&rsquo;s very complex. It really isn&rsquo;t, infact it&rsquo;s a lot more fun and rewarding. If you took time on your digital logic and you aren&rsquo;t afraid of a bit of math, this will be a lot easier to grasp.</h4>
 
-<h3>You&rsquo;ll get to learn how the processor runs at a low level. You&rsquo;ll get to learn about instructions, registers and programming logic. Once you&rsquo;ve got this figured out, higher level languages will be a breeze. You&rsquo;ll get to understand how your programs interact with different hardware. Best of all you&rsquo;ll spare yourself the agony of trying to figure it out when you try your hand at things like exploit development, reverse engineering and hardware hacking.</h3>
+<h4>You&rsquo;ll get to learn how the processor runs at a low level. You&rsquo;ll get to learn about instructions, registers and programming logic. Once you&rsquo;ve got this figured out, higher level languages will be a breeze. You&rsquo;ll get to understand how your programs interact with different hardware. Best of all you&rsquo;ll spare yourself the agony of trying to figure it out when you try your hand at things like exploit development, reverse engineering and hardware hacking.</h4>
 
-<h3>There are free emulators out there that will help you along the process and make the experience fulfilling. Try lighting some LEDs or programming some hardware. Once you&rsquo;re done with this, you&rsquo;ll be able to hold your own any in almost any information security field you decide to pursue.</h3>
+<h4>There are free emulators out there that will help you along the process and make the experience fulfilling. Try lighting some LEDs or programming some hardware. Once you&rsquo;re done with this, you&rsquo;ll be able to hold your own any in almost any information security field you decide to pursue.</h4>
 
-<h2>PCAP or it never happened - The Network</h2>
+<h1>PCAP or it never happened - The Network</h1>
 
-<h3>Next you need to learn how devices and services communicate. Start from the basics and build up from there. Study the OSI model, network devices and related services. Learn as much as you can about IPv4, IPv6, subnetting, routing, switching, DNS, DHCP and so on. From there move on to network security and the various attacks and countermeasures. Master the theory behind attacks such as MAC flooding, DNS and DHCP hijacks and so on. Learn about common defenses and network setups, Firewalls, IPS&rsquo;s and IDS&rsquo;s, DMZ&rsquo;s, VLANS, VPNS and so on.</h3>
+<h4>Next you need to learn how devices and services communicate. Start from the basics and build up from there. Study the OSI model, network devices and related services. Learn as much as you can about IPv4, IPv6, subnetting, routing, switching, DNS, DHCP and so on. From there move on to network security and the various attacks and countermeasures. Master the theory behind attacks such as MAC flooding, DNS and DHCP hijacks and so on. Learn about common defenses and network setups, Firewalls, IPS&rsquo;s and IDS&rsquo;s, DMZ&rsquo;s, VLANS, VPNS and so on.</h4>
 
-<h3>A straightforward way would be to go through the Cisco Network Certification material, you can even get yourself certified along the way :)</h3>
+<h4>A straightforward way would be to go through the Cisco Network Certification material, you can even get yourself certified along the way :)</h4>
 
-<h2>The Box - *nix</h2>
+<h1>The Box - *nix</h1>
 
-<h3>You need a system that is powerful and flexible. This is where linux and the other variants of the *nix family come in. If you&rsquo;re just beginning, set up a virtual machine or dual boot your computer. I would suggest you begin with the latest stable version of Ubuntu to get yourself going and make the transition from Windows smooth. Learn how to set it up and how to do various tasks on the system. Learn about various commands and how to automate process using scripts. All this is still at a high level so the learning curve is still manageable. Once you&rsquo;re comfortable, you can transition to using it as your primary OS.</h3>
+<h4>You need a system that is powerful and flexible. This is where linux and the other variants of the *nix family come in. If you&rsquo;re just beginning, set up a virtual machine or dual boot your computer. I would suggest you begin with the latest stable version of Ubuntu to get yourself going and make the transition from Windows smooth. Learn how to set it up and how to do various tasks on the system. Learn about various commands and how to automate process using scripts. All this is still at a high level so the learning curve is still manageable. Once you&rsquo;re comfortable, you can transition to using it as your primary OS.</h4>
 
-<h3>Next dive into the guts of the system. Learn about the building blocks of the system and how everything fits in together. One way is to build your linux system from the ground up. Distros like ArchLinux and Gentoo that require you to build from an initial shell interface are an option you can use in the learning proces. The Arch Wiki for one is amazingly comprehensive and structured for both the beginner and the advanced user.</h3>
+<h4>Next dive into the guts of the system. Learn about the building blocks of the system and how everything fits in together. One way is to build your linux system from the ground up. Distros like ArchLinux and Gentoo that require you to build from an initial shell interface are an option you can use in the learning proces. The Arch Wiki for one is amazingly comprehensive and structured for both the beginner and the advanced user.</h4>
 
-<h3>Kali Linux then comes in. Once you understand Linux well enough, you can let the good people at Offensive Security do the work for you. Kali Linux is a powerful and well built system that will give you access to tools that you&rsquo;ll use a lot in your information security work.</h3>
+<h4>Kali Linux then comes in. Once you understand Linux well enough, you can let the good people at Offensive Security do the work for you. Kali Linux is a powerful and well built system that will give you access to tools that you&rsquo;ll use a lot in your information security work.</h4>
 
-<h2>Explore the world - The organisation</h2>
+<h1>Explore the world - The organisation</h1>
 
-<h3>The real world is made up of people and the decisions they make. It is therefore highly important that you understand how they operate in various environments.</h3>
+<h4>The real world is made up of people and the decisions they make. It is therefore highly important that you understand how they operate in various environments.</h4>
 
-<h3>I therefore suggest that you find a way of working in an organisation and experience how information security is approached. Intern as a system admin or whatever position that allows you to interact with systems and people in IT departments. Learn the common practices and errors that are made along the way. Get an internal perspective so that your thought process takes into account what goes into building and setting up systems.</h3>
+<h4>I therefore suggest that you find a way of working in an organisation and experience how information security is approached. Intern as a system admin or whatever position that allows you to interact with systems and people in IT departments. Learn the common practices and errors that are made along the way. Get an internal perspective so that your thought process takes into account what goes into building and setting up systems.</h4>
 
-<h3>You don&rsquo;t want to gain temporary access to a network and start wondering how a domain controller ties in to the network.</h3>
+<h4>You don&rsquo;t want to gain temporary access to a network and start wondering how a domain controller ties in to the network.</h4>
 
-<h3>Being part of an organisation also will give you insight into the behaviour of various people in the organistation. Understanding how everyone from the tech savvy to the management react to various situations will come in handy as you progess.</h3>
+<h4>Being part of an organisation also will give you insight into the behaviour of various people in the organistation. Understanding how everyone from the tech savvy to the management react to various situations will come in handy as you progess.</h4>
 
-<h2>Tying up the pieces</h2>
+<h1>Tying up the pieces</h1>
 
-<h3>There are a lot of areas you can focus your attention on along your information security journey and that is up to you. Experiment, change, adapt, and tweak what you need to.</h3>
+<h4>There are a lot of areas you can focus your attention on along your information security journey and that is up to you. Experiment, change, adapt, and tweak what you need to.</h4>
 
-<h3>Some things will remain throughout though.</h3>
+<h4>Some things will remain throughout though.</h4>
 
-<h3>You will need to be creative to see beyond the black and white.</h3>
+<h4>You will need to be creative to see beyond the black and white.</h4>
 
-<h3>You&rsquo;ll need passion to take you through hours of research and reading through RFCs&hellip;hehe.</h3>
+<h4>You&rsquo;ll need passion to take you through hours of research and reading through RFCs&hellip;hehe.</h4>
 
-<h3>You&rsquo;ll need some code to live by or you may get lost along the way.</h3>
+<h4>You&rsquo;ll need some code to live by or you may get lost along the way.</h4>
 
-<h3>Being a hacker isn&rsquo;t about writing the most complicated exploit, it is about figuring out elegant solutions to some problem - easy or challenging.</h3>
+<h4>Being a hacker isn&rsquo;t about writing the most complicated exploit, it is about figuring out elegant solutions to some problem - easy or challenging.</h4>
 
-<h3>In the end it&rsquo;s about the thrill of discovery and creation.</h3>
+<h4>In the end it&rsquo;s about the thrill of discovery and creation.</h4>
 
-<h3>I leave you with this book by James Gleick that I believe every information security person should read at least once <a href="http://www.amazon.com/The-Information-History-Theory-Flood/dp/1400096235">http://www.amazon.com/The-Information-History-Theory-Flood/dp/1400096235</a></h3>
+<h4>I leave you with this book by James Gleick that I believe every information security person should read at least once <a href="http://www.amazon.com/The-Information-History-Theory-Flood/dp/1400096235">http://www.amazon.com/The-Information-History-Theory-Flood/dp/1400096235</a></h4>
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[AfricaHackOn - Be part of the story]]></title>
+    <title type="html"><![CDATA[AfricaHackon - Be part of the story]]></title>
     <link href="http://www.ckn.io/blog/2015/05/17/africahackon-be-part-of-the-story/"/>
     <updated>2015-05-17T08:42:08+03:00</updated>
     <id>http://www.ckn.io/blog/2015/05/17/africahackon-be-part-of-the-story</id>
-    <content type="html"><![CDATA[<h3>I first heard of AfricaHackOn at my previous job where I was working in IT. A colleague and friend told me about a conference about information security that would be held at our building. This was early last year. Being in charge of the network, I would be assisting in setting up internet access for the conference. Now when you&rsquo;re incharge of the network and you hear you&rsquo;ll be giving access to your network to a room full of the best &ldquo;hackers&rdquo; in the country, you get a bit nervous. I use the word &ldquo;hackers&rdquo; in quotes because that&rsquo;s where I&rsquo;d like to start.</h3>
+    <content type="html"><![CDATA[<h4>I first heard of AfricaHackon at my previous job where I was working in IT. A colleague and friend told me about a conference about information security that would be held at our building. This was early last year. Being in charge of the network, I would be assisting in setting up internet access for the conference. Now when you&rsquo;re incharge of the network and you hear you&rsquo;ll be giving access to your network to a room full of the best &ldquo;hackers&rdquo; in the country, you get a bit nervous. I use the word &ldquo;hackers&rdquo; in quotes because that&rsquo;s where I&rsquo;d like to start.</h4>
 
 <!--more-->
 
 
-<p><img src="http://www.ckn.io/images/africahackon_logo.jpg"></p>
+<p><img src="http://www.ckn.io/images/AfricaHackon_logo.jpg"></p>
 
-<h2>The hacker mindset</h2>
+<h1>The hacker mindset</h1>
 
-<h3>The word hacker has long been desecrated. People immediately picture this antisocial person that is out to break into their computers and steal their data and do other equally nefarious acts.</h3>
+<h4>The word hacker has long been desecrated. People immediately picture this antisocial person that is out to break into their computers and steal their data and do other equally nefarious acts.</h4>
 
-<h3>But they are wrong, hacking is an art form, practised by people who push the boundaries of innovation. It&rsquo;s about having bulbs lighting up in your head as you figure out some new way to make something work. About discovering ways to make things work more efficiently.</h3>
+<h4>But they are wrong, hacking is an art form, practised by people who push the boundaries of innovation. It&rsquo;s about having bulbs lighting up in your head as you figure out some new way to make something work. About discovering ways to make things work more efficiently.</h4>
 
-<h3>It&rsquo;s about finding ways to use things in a way even their creator never imagined.</h3>
+<h4>It&rsquo;s about finding ways to use things in a way even their creator never imagined.</h4>
 
-<h3>It is about tweaking the firing timing of your spark plugs to make your engine add a bit of power, for car enthusiasts.</h3>
+<h4>It is about tweaking the firing timing of your spark plugs to make your engine add a bit of power, for car enthusiasts.</h4>
 
-<h3>It&rsquo;s about creating a new masterpiece in a way that has never been attempted, for painters.</h3>
+<h4>It&rsquo;s about creating a new masterpiece in a way that has never been attempted, for painters.</h4>
 
-<h3>It&rsquo;s about building that robot using random materials, for the hardware enthusiasts.</h3>
+<h4>It&rsquo;s about building that robot using random materials, for the hardware enthusiasts.</h4>
 
-<h3>It&rsquo;s about automating your lights, and electrical gadgets, for the electrical and electronics people.</h3>
+<h4>It&rsquo;s about automating your lights, and electrical gadgets, for the electrical and electronics people.</h4>
 
-<h3>There&rsquo;s a little bit of hacking in everyone of us. As you try to piece together that jigsaw puzzle, fill in that crossword, finish that sudoku. We do it all the time.</h3>
+<h4>There&rsquo;s a little bit of hacking in everyone of us. As you try to piece together that jigsaw puzzle, fill in that crossword, finish that sudoku. We do it all the time.</h4>
 
-<h3>If one sentence can sum up what a hacker is, it would be this:</h3>
+<h4>If one sentence can sum up what a hacker is, it would be this:</h4>
 
 <blockquote><h2>A hacker is a person who enjoys the intellectual challenge of creatively circumventing limitations.</h2></blockquote>
 
-<h2>Back to AfricaHackOn</h2>
+<h1>Back to AfricaHackon</h1>
 
-<h3>That day I did end up turning off all the wireless networks that I felt weren&rsquo;t secure enough&hellip;hehe. But I shouldn&rsquo;t have been worried, these were the good type of hackers. They are the ones that help keep you secure. They help you protect yourself from people who would like to steal your private data. They help your company adopt practices that make it hard for the bad guys. They assist you incase you&rsquo;ve undergone an attack.</h3>
+<h4>That day I did end up turning off all the wireless networks that I felt weren&rsquo;t secure enough&hellip;hehe. But I shouldn&rsquo;t have been worried, these were the good type of hackers. They are the ones that help keep you secure. They help you protect yourself from people who would like to steal your private data. They help your company adopt practices that make it hard for the bad guys. They assist you incase you&rsquo;ve undergone an attack.</h4>
 
-<h3>They are some of the brightest minds you&rsquo;ll meet, some help the biggest companies in the country and Africa keep their information secure. Some are still learning. They are drawn from diverse fields and they are on a mission.</h3>
+<h4>They are some of the brightest minds you&rsquo;ll meet, some help the biggest companies in the country and Africa keep their information secure. Some are still learning. They are drawn from diverse fields and they are on a mission.</h4>
 
-<h3>They want to protect your information, they want to help your bank keep your accounts safe from prying eyes. They want to ensure you can access the internet and make your calls without someone monitoring or listening in.</h3>
+<h4>They want to protect your information, they want to help your bank keep your accounts safe from prying eyes. They want to ensure you can access the internet and make your calls without someone monitoring or listening in.</h4>
 
-<h3>The first phase of this is to build capacity. They are conducting training sessions to train students and spark their interest in the field of information security. They are bringing awareness to companies and the general public on the way to approach security of their systems and data. They plan on building a culture of information security awareness, and to bring up the right skills in the untapped growing generation of brilliant students.</h3>
+<h4>The first phase of this is to build capacity. They are conducting training sessions to train students and spark their interest in the field of information security. They are bringing awareness to companies and the general public on the way to approach security of their systems and data. They plan on building a culture of information security awareness, and to bring up the right skills in the untapped growing generation of brilliant students.</h4>
 
-<h2>The second AfricaHackOn conference</h2>
+<h1>The second AfricaHackon conference</h1>
 
-<h3>Another avenue is conferences. This July the 31st, they will be hosting the second AfricaHackOn conference. Having attended the last one, take it from me that it&rsquo;s a unique experience that should not be missed.</h3>
+<h4>Another avenue is conferences. This July the 31st, they will be hosting the second AfricaHackon conference. Having attended the last one, take it from me that it&rsquo;s a unique experience that should not be missed.</h4>
 
-<h3>Come watch as these brilliant minds take you through real life happenings in the world of information security. Watch them show how the bad guys can attack your systems and then how to defend against them.</h3>
+<h4>Come watch as these brilliant minds take you through real life happenings in the world of information security. Watch them show how the bad guys can attack your systems and then how to defend against them.</h4>
 
-<h3>This is no ordinary conference. No long boring powerpoints, but interactive demonstrations.</h3>
+<h4>This is no ordinary conference. No long boring powerpoints, but interactive demonstrations.</h4>
 
-<h3>I am sure there are some of you who have discovered some interesting ways someone can use all this technology around us. How someone can break into a system. It may only be an idea, but that&rsquo;s all it takes. The AfricaHackOn team is more than happy to help you explore and develop it.</h3>
+<h4>I am sure there are some of you who have discovered some interesting ways someone can use all this technology around us. How someone can break into a system. It may only be an idea, but that&rsquo;s all it takes. The AfricaHackon team is more than happy to help you explore and develop it.</h4>
 
-<h3>The AfricaHackOn team wants you to come make a presentation at this conference. You&rsquo;ll get to be mentored by the best minds in the field.</h3>
+<h4>The AfricaHackon team wants you to come make a presentation at this conference. You&rsquo;ll get to be mentored by the best minds in the field.</h4>
 
-<h3>The silver lining is you&rsquo;ll get to present your ideas to some of the biggest companies in the country who&rsquo;ll be in attendance. You&rsquo;ll get to interact with them first hand and have genuine discussions. In attendance will also be major international and local media houses.</h3>
+<h4>The silver lining is you&rsquo;ll get to present your ideas to some of the biggest companies in the country who&rsquo;ll be in attendance. You&rsquo;ll get to interact with them first hand and have genuine discussions. In attendance will also be major international and local media houses.</h4>
 
-<h3>The ball is in your court.</h3>
+<h4>The ball is in your court.</h4>
 
-<h2>Submit your papers and ideas to <a href="&#109;&#x61;&#105;&#x6c;&#116;&#111;&#58;&#105;&#x6e;&#x66;&#x6f;&#64;&#x61;&#102;&#x72;&#x69;&#x63;&#x61;&#x68;&#97;&#x63;&#107;&#x6f;&#110;&#46;&#x63;&#x6f;&#x6d;">&#x69;&#x6e;&#x66;&#x6f;&#64;&#x61;&#x66;&#114;&#x69;&#x63;&#97;&#104;&#x61;&#99;&#x6b;&#111;&#110;&#46;&#99;&#x6f;&#109;</a> before 30th of May.</h2>
+<h2>Submit your papers and ideas to <a href="&#x6d;&#97;&#x69;&#108;&#116;&#111;&#58;&#x69;&#110;&#x66;&#111;&#x40;&#65;&#102;&#114;&#105;&#99;&#97;&#72;&#97;&#99;&#107;&#x6f;&#110;&#46;&#99;&#x6f;&#109;">&#105;&#110;&#x66;&#x6f;&#64;&#65;&#x66;&#114;&#x69;&#x63;&#97;&#x48;&#x61;&#99;&#x6b;&#x6f;&#110;&#x2e;&#99;&#x6f;&#109;</a> before 30th of May.</h2>
 
-<blockquote><h3>Read this <a href="http://sylviamunyisia.blogspot.com/2015/05/call-for-papers.html">page</a> by Sylvia that explains the call for papers very well.</h3>
+<blockquote><h4>Read this <a href="http://sylviamunyisia.blogspot.com/2015/05/call-for-papers.html">page</a> by Sylvia that explains the call for papers very well.</h4>
 
-<h3>Also feel free to interact with the team on social media through <a href="https://twitter.com/africahackon">twitter</a> and <a href="https://www.facebook.com/africahackon">facebook</a></h3>
+<h4>Also feel free to interact with the team on social media through <a href="https://twitter.com/AfricaHackon">twitter</a> and <a href="https://www.facebook.com/AfricaHackon">facebook</a></h4>
 
-<h3>And visit the <a href="http://www.africahackon.com/">AfricaHackOn site</a> for past presentations and to keep yourself updated.</h3></blockquote>
+<h4>And visit the <a href="http://www.AfricaHackon.com/">AfricaHackon site</a> for past presentations and to keep yourself updated.</h4></blockquote>
 
-<h2>Be part of the story</h2>
+<h4>Be part of the story.</h4>
 
-<h2>And remember, everybody needs a hacker :)</h2>
+<h4>And remember, everybody needs a hacker :)</h4>
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[crypto magic - homomorphic encryption]]></title>
+    <title type="html"><![CDATA[Crypto magic - homomorphic encryption]]></title>
     <link href="http://www.ckn.io/blog/2015/05/11/crypto-magic-homomorphic-encryption/"/>
     <updated>2015-05-11T13:45:52+03:00</updated>
     <id>http://www.ckn.io/blog/2015/05/11/crypto-magic-homomorphic-encryption</id>
-    <content type="html"><![CDATA[<h3>Could Google do your search without knowing what it was looking for? Could your hospital provide you with information regarding your health records without knowing what you asked?</h3>
+    <content type="html"><![CDATA[<h4>Could Google do your search without knowing what it was looking for? Could your hospital provide you with information regarding your health records without knowing what you asked?</h4>
 
 <!--more-->
 
 
-<h3>Can data be encrypted in such a way that computation can be done on it without decrypting it first?</h3>
+<h4>Can data be encrypted in such a way that computation can be done on it without decrypting it first?</h4>
 
-<h3>Yes it can! This is what homomorphic encryption is all about.</h3>
+<h4>Yes it can! This is what homomorphic encryption is all about.</h4>
 
-<h3>Our exploration of crypto magic continues :)</h3>
+<h4>Our exploration of crypto magic continues :)</h4>
 
-<h3>Let&rsquo;s start with two scenarios</h3>
+<h4>Let&rsquo;s start with two scenarios</h4>
 
-<h2>scenario 1: encrypted search</h2>
+<h1>scenario 1: encrypted search</h1>
 
-<h3>First, I am not talking about searching over secure protocols like https. What I am referring to is where your search term is in encrypted form before it reaches the search engine (say Google). Google therefore doesn&rsquo;t know what you want to search for.</h3>
+<h4>First, I am not talking about searching over secure protocols like https. What I am referring to is where your search term is in encrypted form before it reaches the search engine (say Google). Google therefore doesn&rsquo;t know what you want to search for.</h4>
 
-<h3>After Google receives your encrypted search term, it searches for it in an encrypted database. The results it gets are also encrypted which are then passed on to you. You can then privately decrypt them :). You&rsquo;ll note that Google never knew what you were looking for nor what results were returned. No decryption occured at any point before you received the results.</h3>
+<h4>After Google receives your encrypted search term, it searches for it in an encrypted database. The results it gets are also encrypted which are then passed on to you. You can then privately decrypt them :). You&rsquo;ll note that Google never knew what you were looking for nor what results were returned. No decryption occured at any point before you received the results.</h4>
 
-<h2>scenario 2: secure cloud processing</h2>
+<h1>scenario 2: secure cloud processing</h1>
 
-<h3>Would it not be nice to have some powerful hosting provider do complex computation on your data without them ever knowing the contents? A case would be like your bank having a cloud provider hosting its data. The bank would encrypt the data before uploading it, so the cloud provider never sees the plain version. The bank would then be able to perform complex computation on the encrypted data using the cloud providers powerful processing power without it ever been decrypted. The bank could also be able to request information from the encrypted data using encrypted queries. The returned answers would also be in encrypted form which only the bank can decrypt. And again no decryption takes place at the cloud provider.</h3>
+<h4>Would it not be nice to have some powerful hosting provider do complex computation on your data without them ever knowing the contents? A case would be like your bank having a cloud provider hosting its data. The bank would encrypt the data before uploading it, so the cloud provider never sees the plain version. The bank would then be able to perform complex computation on the encrypted data using the cloud providers powerful processing power without it ever been decrypted. The bank could also be able to request information from the encrypted data using encrypted queries. The returned answers would also be in encrypted form which only the bank can decrypt. And again no decryption takes place at the cloud provider.</h4>
 
-<h2>How can this be done?</h2>
+<h1>How can this be done?</h1>
 
-<h3>This concept was first proposed over 30 years ago by Rivest, Adleman and Dertouzos and is referred to homomorphic encryption (They also suggested it was probably impossible).</h3>
+<h4>This concept was first proposed over 30 years ago by Rivest, Adleman and Dertouzos and is referred to homomorphic encryption (They also suggested it was probably impossible).</h4>
 
-<h3>Let&rsquo;s say you have x and y. if you multiply the encrypted version of x and the encrypted version of y and the answer is the same as if you multiplied their plain values and encrypted the answer, then the process is said to be homomorphic with respect to multiplication.</h3>
+<h4>Let&rsquo;s say you have x and y. if you multiply the encrypted version of x and the encrypted version of y and the answer is the same as if you multiplied their plain values and encrypted the answer, then the process is said to be homomorphic with respect to multiplication.</h4>
 
-<h3>Any computer algorithm is a series of arithmetic steps so if we can get a process that is homomorphic with respect to both addition and multiplication, any computing application would be possible on encrypted data.</h3>
+<h4>Any computer algorithm is a series of arithmetic steps so if we can get a process that is homomorphic with respect to both addition and multiplication, any computing application would be possible on encrypted data.</h4>
 
-<h2>Has it been achieved?</h2>
+<h1>Has it been achieved?</h1>
 
-<h3>Over the past three decades, partial solutions have been discovered.</h3>
+<h4>Over the past three decades, partial solutions have been discovered.</h4>
 
-<h3>However, it is not until 2009 that Craig Gentry developed a fully homomorphic system. Unfortunately it requires lots and lots of computational power. For instance, an encrypted Google search would multiply the computation time to 1 trillion times that of a normal one :(.</h3>
+<h4>However, it is not until 2009 that Craig Gentry developed a fully homomorphic system. Unfortunately it requires lots and lots of computational power. For instance, an encrypted Google search would multiply the computation time to 1 trillion times that of a normal one :(.</h4>
 
-<h3>The good news is that the theoretical barrier was broken and with lots of work a practical solution may be found :).</h3>
+<h4>The good news is that the theoretical barrier was broken and with lots of work a practical solution may be found :).</h4>
 
-<blockquote><h3>For anyone willing to give it a go, <a href="http://www.i-programmer.info/news/112-theory/2330-darpa-spends-20-million-on-homomorphic-encryption.html">DARPA is offering $20 million</a> if you can come up with a scheme that only takes 100,000 times as long as unencrypted calculations :).</h3></blockquote>
+<blockquote><h4>For anyone willing to give it a go, <a href="http://www.i-programmer.info/news/112-theory/2330-darpa-spends-20-million-on-homomorphic-encryption.html">DARPA is offering $20 million</a> if you can come up with a scheme that only takes 100,000 times as long as unencrypted calculations :).</h4></blockquote>
 
-<h3>And we may well be on our way there, three MIT scientists developed a system that emulates fully homomorphic encryption for most of the functions of the SQL databases used in many applications. It computes only with encrypted data and takes just 15% to 26% more computing time.</h3>
+<h4>And we may well be on our way there, three MIT scientists developed a system that emulates fully homomorphic encryption for most of the functions of the SQL databases used in many applications. It computes only with encrypted data and takes just 15% to 26% more computing time.</h4>
 
-<h3>The project is called CryptDB and you can check it out <a href="https://github.com/CryptDB/cryptdb">here</a>.</h3>
+<h4>The project is called CryptDB and you can check it out <a href="https://github.com/CryptDB/cryptdb">here</a>.</h4>
 
-<h3>The application of this in information security does not even need explaining :)</h3>
+<h4>The application of this in information security does not even need explaining :)</h4>
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[crypto magic - zero knowledge]]></title>
+    <title type="html"><![CDATA[Crypto magic - zero knowledge]]></title>
     <link href="http://www.ckn.io/blog/2015/05/05/crypto-magic-zero-knowledge/"/>
     <updated>2015-05-05T09:23:11+03:00</updated>
     <id>http://www.ckn.io/blog/2015/05/05/crypto-magic-zero-knowledge</id>
-    <content type="html"><![CDATA[<h3>There are some applications of cryptography that can only be classified as magical. It is only fitting that my first crypto post begins with one of them - zero knowledge proofs.</h3>
+    <content type="html"><![CDATA[<h4>There are some applications of cryptography that can only be classified as magical. It is only fitting that my first crypto post begins with one of them - zero knowledge proofs.</h4>
 
-<h3>I will try and explain it without all the rather complicated mathematical stuff.</h3>
+<h4>I will try and explain it without all the rather complicated mathematical stuff.</h4>
 
 <!--more-->
 
 
 <p><img src="http://www.ckn.io/images/Zero-Knowledge.png" width="200" height="200"></p>
 
-<h3>Let&rsquo;s start with a simple definition.</h3>
+<h4>Let&rsquo;s start with a simple definition.</h4>
 
-<blockquote><h2>This is where one party (called the Prover) convinces a second party (called the Verifier) that they know the answer to some question. The catch is that the Verifier never gains any knowledge of what the actual answer is.</h2></blockquote>
+<blockquote><h4>This is where one party (called the Prover) convinces a second party (called the Verifier) that they know the answer to some question. The catch is that the Verifier never gains any knowledge of what the actual answer is.</h4></blockquote>
 
-<h3>I&rsquo;ll start with a crude example to explain further (don&rsquo;t worry, I&rsquo;ll give a detailed one later).</h3>
+<h4>I&rsquo;ll start with a crude example to explain further (don&rsquo;t worry, I&rsquo;ll give a detailed one later).</h4>
 
-<h3>Let&rsquo;s say I want to sell a super secret formula about how to cure a disease to a powerful company. A problem arises where the company needs proof that I indeed know the super secret formula yet I cannot tell them what it is (my payday depends on it). The company should gain no information of what the super secret formula is from my proof, so I cannot let them test it. In the real world we would use a third party to hold both the payment and formula, and do some independent tests of the formula, but where&rsquo;s the magic in that :). In any case I don&rsquo;t trust anybody with the formula till I get paid. And so arises our dilemma.</h3>
+<h4>Let&rsquo;s say I want to sell a super secret formula about how to cure a disease to a powerful company. A problem arises where the company needs proof that I indeed know the super secret formula yet I cannot tell them what it is (my payday depends on it). The company should gain no information of what the super secret formula is from my proof, so I cannot let them test it. In the real world we would use a third party to hold both the payment and formula, and do some independent tests of the formula, but where&rsquo;s the magic in that :). In any case I don&rsquo;t trust anybody with the formula till I get paid. And so arises our dilemma.</h4>
 
-<h2>So, are zero knowledge proofs possible? Can I have my cake and eat it?</h2>
+<h1>So, are zero knowledge proofs possible? Can I have my cake and eat it?</h1>
 
-<h3>The answer is yes and let me explain with the detailed example I promised :).</h3>
+<h4>The answer is yes and let me explain with the detailed example I promised :).</h4>
 
-<h3>Let&rsquo;s say I have two identical balls, one is red and one is blue. I want to prove to a color blind guy that they are of different colors.</h3>
+<h4>Let&rsquo;s say I have two identical balls, one is red and one is blue. I want to prove to a color blind guy that they are of different colors.</h4>
 
-<h3>What I&rsquo;ll do is ask him to hold one ball in each hand so that he has a red ball in one hand and a blue one in the other. I can tell the color of each but he cannot (color blindness). Next I tell him to put his hands behind his back so that I cannot see them. Then he can decide whether to switch the balls or not to. After which he shows me what ball he&rsquo;s holding in each hand. He then asks me to tell him if he switched them or not. I obviously will get the answer correct as I know what color he was holding in each hand before.</h3>
+<h4>What I&rsquo;ll do is ask him to hold one ball in each hand so that he has a red ball in one hand and a blue one in the other. I can tell the color of each but he cannot (color blindness). Next I tell him to put his hands behind his back so that I cannot see them. Then he can decide whether to switch the balls or not to. After which he shows me what ball he&rsquo;s holding in each hand. He then asks me to tell him if he switched them or not. I obviously will get the answer correct as I know what color he was holding in each hand before.</h4>
 
-<h3>Now here is the interesting part, the only way I can tell whether he switched the balls behind his back is if they are of different colors. So I easily prove to him they are of different colors if I consistently can tell if he switched them (which I can). I will have to get the answer correct a number of times to convince him am not guessing (Probability and Maths come in which I promised to avoid in this post). He is color blind, so at the end of it all he still doesn&rsquo;t get to know which ball is red and which one is blue. And so the zero knowledge proof is complete. I prove that the balls are of different colors while he gains no knowledge at all which of them is blue and which is red.</h3>
+<h4>Now here is the interesting part, the only way I can tell whether he switched the balls behind his back is if they are of different colors. So I easily prove to him they are of different colors if I consistently can tell if he switched them (which I can). I will have to get the answer correct a number of times to convince him am not guessing (Probability and Maths come in which I promised to avoid in this post). He is color blind, so at the end of it all he still doesn&rsquo;t get to know which ball is red and which one is blue. And so the zero knowledge proof is complete. I prove that the balls are of different colors while he gains no knowledge at all which of them is blue and which is red.</h4>
 
-<h2>Can this be applied in the information Security world?</h2>
+<h1>Can this be applied in the information Security world?</h1>
 
-<h3>Yes it can :)</h3>
+<h4>Yes it can :)</h4>
 
-<h3>Let&rsquo;s say I want to authenticate with a server. I however don&rsquo;t want to reveal my password to the server. I just want to prove to the server that I know the password to be authenticated. I also don&rsquo;t want the server to gain any knowledge of what my password is. In the real world, the server stores passwords in a hashed form. You send over your plain password and the server calculates its hash value and compares it with what it has stored. This fails our zero knowledge proof as the server still sees your password before conversion. So we need a different implementation. I will explain it in detail in a different post - there&rsquo;s mathematics involved and I want to avoid information overload here :).</h3>
+<h4>Let&rsquo;s say I want to authenticate with a server. I however don&rsquo;t want to reveal my password to the server. I just want to prove to the server that I know the password to be authenticated. I also don&rsquo;t want the server to gain any knowledge of what my password is. In the real world, the server stores passwords in a hashed form. You send over your plain password and the server calculates its hash value and compares it with what it has stored. This fails our zero knowledge proof as the server still sees your password before conversion. So we need a different implementation. I will explain it in detail in a different post - there&rsquo;s mathematics involved and I want to avoid information overload here :).</h4>
 
 <h2>I&rsquo;ll leave you with the following fun zero knowledge proofs for now.</h2>
 
 <hr />
 
-<h3>See how a person can prove to another that they know the solution to a sudoku puzzle without actually reavealing the solution. Check it out <a href="http://www.wisdom.weizmann.ac.il/~naor/PAPERS/SUDOKU_DEMO/">here</a>.</h3>
+<h4>See how a person can prove to another that they know the solution to a sudoku puzzle without actually reavealing the solution. Check it out <a href="http://www.wisdom.weizmann.ac.il/~naor/PAPERS/SUDOKU_DEMO/">here</a>.</h4>
 
 <hr />
 
-<h3>Also check out this cool explanation with a modified version of <a href="http://pages.cs.wisc.edu/~mkowalcz/628.pdf">Ali Baba and the forty thieves</a></h3>
+<h4>Also check out this cool explanation with a modified version of <a href="http://pages.cs.wisc.edu/~mkowalcz/628.pdf">Ali Baba and the forty thieves</a></h4>
 
 <hr />
 
-<h3>In part two of Crypto Magic, I&rsquo;ll talk about homomorphic encryption :).</h3>
+<h4>In part two of Crypto Magic, I&rsquo;ll talk about homomorphic encryption :).</h4>
 ]]></content>
   </entry>
   
@@ -272,40 +272,40 @@
     <id>http://www.ckn.io/blog/2015/04/27/bright</id>
     <content type="html"><![CDATA[<h1>who are you?</h1>
 
-<h3>Bright Gameli Mawudor is my name. Friends in the infosec world called me ~ze3D~. A passionate information security engineer with a love for system exploitation, gleaning information from all corners of the web about a target, and social engineering using all possible methods.</h3>
+<h4>Bright Gameli Mawudor is my name. Friends in the infosec world called me ~ze3D~. A passionate information security engineer with a love for system exploitation, gleaning information from all corners of the web about a target, and social engineering using all possible methods.</h4>
 
 <!--more-->
 
 
 <h1>what&rsquo;s your setup like?</h1>
 
-<h3>My laptop is an 8GB memory Samsung Series 9 13.3&#8221; HD+ cruising on an Intel® Core™ i5-3317U CPU @ 1.70GHz × 4 with Intel® Ivybridge Mobile for graphics and 128 SSD storage. It&rsquo;s pretty thin and lightweight.</h3>
+<h4>My laptop is an 8GB memory Samsung Series 9 13.3&#8221; HD+ cruising on an Intel® Core™ i5-3317U CPU @ 1.70GHz × 4 with Intel® Ivybridge Mobile for graphics and 128 SSD storage. It&rsquo;s pretty thin and lightweight.</h4>
 
-<h3>External Storage space for me is a total of 2 Terabytes, 10GB Dropbox and 15GB on Google Drive, which is something I find very convenient.</h3>
+<h4>External Storage space for me is a total of 2 Terabytes, 10GB Dropbox and 15GB on Google Drive, which is something I find very convenient.</h4>
 
-<h3>I am running Kali linux as my primary OS and dual boot Windows 8 on the side when needed. Kali has all the tools I need for my infosec work and experiments. I also import tools from various sources.</h3>
+<h4>I am running Kali linux as my primary OS and dual boot Windows 8 on the side when needed. Kali has all the tools I need for my infosec work and experiments. I also import tools from various sources.</h4>
 
-<h3>I have a Nexus 5 phone and a Nexus 7 Generation 2 tab. I run <a href="http://www.nethunter.com/">Kali NetHunter</a> on both, although I recently misplaced the Nexus 7. Kali Nethunter running on Android 5.0 makes it just the kind of phone to have in terms of the all purpose features.</h3>
+<h4>I have a Nexus 5 phone and a Nexus 7 Generation 2 tab. I run <a href="http://www.nethunter.com/">Kali NetHunter</a> on both, although I recently misplaced the Nexus 7. Kali Nethunter running on Android 5.0 makes it just the kind of phone to have in terms of the all purpose features.</h4>
 
-<h3>I have a lot of interest in Wireless Networks which is one of the areas in my PhD research. For that matter, I&rsquo;ve got a WiFi Pineapple Mark V Tactical Bundle 6800 with a 9dBi Dipole Antenna and a magnetic Base. The many features included in the WiFi Pineapple are beyond description. It makes wireless pentesting very easy if one understands the basics involved.</h3>
+<h4>I have a lot of interest in Wireless Networks which is one of the areas in my PhD research. For that matter, I&rsquo;ve got a WiFi Pineapple Mark V Tactical Bundle 6800 with a 9dBi Dipole Antenna and a magnetic Base. The many features included in the WiFi Pineapple are beyond description. It makes wireless pentesting very easy if one understands the basics involved.</h4>
 
-<h3>I have a <a href="http://hakshop.myshopify.com/collections/usb-rubber-ducky/products/usb-rubber-ducky-deluxe?variant=353378649">USB Rubber Ducky Deluxe</a> that I use for Red Teaming assessments and other pentests when needed. It helps a lot in grabbing passwords when close to a target&rsquo;s machine, and also for any other function that would take long to type manually.</h3>
+<h4>I have a <a href="http://hakshop.myshopify.com/collections/usb-rubber-ducky/products/usb-rubber-ducky-deluxe?variant=353378649">USB Rubber Ducky Deluxe</a> that I use for Red Teaming assessments and other pentests when needed. It helps a lot in grabbing passwords when close to a target&rsquo;s machine, and also for any other function that would take long to type manually.</h4>
 
 <p><img src="http://www.ckn.io/images/bright_setup.jpg" width="500" height="100"></p>
 
 <h1>what tools do you run?</h1>
 
-<h3>For now, Kali linux does the job on the Samsung Series 9 with it having most of the tools that I need. I clone a lot of scripts from github to complement the ones already included in the Kali linux collection. The collection keeps growing by the day. The Nexus 5 having Kali NetHunter is good enough due to its dynamic nature as I mostly like porting scripts to it from the Samsung laptop.</h3>
+<h4>For now, Kali linux does the job on the Samsung Series 9 with it having most of the tools that I need. I clone a lot of scripts from github to complement the ones already included in the Kali linux collection. The collection keeps growing by the day. The Nexus 5 having Kali NetHunter is good enough due to its dynamic nature as I mostly like porting scripts to it from the Samsung laptop.</h4>
 
 <h1>What&rsquo;s your dream setup</h1>
 
-<h3>Anyone in the infosec field will keep dreaming for faster equipment no matter how much they have.</h3>
+<h4>Anyone in the infosec field will keep dreaming for faster equipment no matter how much they have.</h4>
 
-<h3>It&rsquo;ll be great to have some of the toys from the <a href="http://hakshop.myshopify.com/">HAK5 SHOP</a> which include some radio stuff and the THROWING STAR LAN. It would also be great to have a good Rainbow table collection on an external hard drive, a <a href="https://www.pwnieexpress.com/product/pwn-plug-r3penetration-testing-device/">Pwn-plug</a> for future pentests and a powerful blade server to host all my goodies.</h3>
+<h4>It&rsquo;ll be great to have some of the toys from the <a href="http://hakshop.myshopify.com/">HAK5 SHOP</a> which include some radio stuff and the THROWING STAR LAN. It would also be great to have a good Rainbow table collection on an external hard drive, a <a href="https://www.pwnieexpress.com/product/pwn-plug-r3penetration-testing-device/">Pwn-plug</a> for future pentests and a powerful blade server to host all my goodies.</h4>
 
 <hr />
 
-<blockquote><h3>Follow Bright on twitter <a href="https://twitter.com/BRIGHTZEED">@BRIGHTZEED</a> for lots more infosec stuff :)</h3></blockquote>
+<blockquote><h4>Follow Bright on twitter <a href="https://twitter.com/BRIGHTZEED">@BRIGHTZEED</a> for lots more infosec stuff :)</h4></blockquote>
 ]]></content>
   </entry>
   
@@ -316,48 +316,48 @@
     <id>http://www.ckn.io/blog/2015/04/20/jade</id>
     <content type="html"><![CDATA[<h1>who are you?</h1>
 
-<h3>I am Jade Solomon, an Infosec/Code machine, I dedicate a lot of sleepless nights to Reverse Engineering, GSM/Mobile technology and Exploit Development.</h3>
+<h4>I am Jade Solomon, an Infosec/Code machine, I dedicate a lot of sleepless nights to Reverse Engineering, GSM/Mobile technology and Exploit Development.</h4>
 
 <!--more-->
 
 
 <h1>what&rsquo;s your setup like?</h1>
 
-<h3>Well, my main playground is a MacBook late 2008 edition, running Yosemite 10.10. It has 8GB RAM, a superb Samsung 256GB SSD drive, and Nvidia GeForce Card.</h3>
+<h4>Well, my main playground is a MacBook late 2008 edition, running Yosemite 10.10. It has 8GB RAM, a superb Samsung 256GB SSD drive, and Nvidia GeForce Card.</h4>
 
-<h3>Next is a CR-48 Chromebook, the first ever chromebook to be released. It has 1GB of RAM, a 16GB SSD, and a dual processor with GSM Modem capability, so no need for other internet sources like Wi-Fi and so on. It&rsquo;s not a power hog so the battery does 7hrs (this works so well for me). It&rsquo;s 11 inches and weighs 780mg making it really portable and super light. It runs my own OS Typhon v2.0 Beta with GSM attack tools, IDA Pro with Hex Ray (all plus 14 custom plugins I have picked up from github and two of my own).</h3>
+<h4>Next is a CR-48 Chromebook, the first ever chromebook to be released. It has 1GB of RAM, a 16GB SSD, and a dual processor with GSM Modem capability, so no need for other internet sources like Wi-Fi and so on. It&rsquo;s not a power hog so the battery does 7hrs (this works so well for me). It&rsquo;s 11 inches and weighs 780mg making it really portable and super light. It runs my own OS Typhon v2.0 Beta with GSM attack tools, IDA Pro with Hex Ray (all plus 14 custom plugins I have picked up from github and two of my own).</h4>
 
-<h3>My phone is a Phantom Z running Android that I am replacing this week with the BlackBerry Z. The Phantom has 8 cores, 2.0ghz speed and 2GB Ram. It runs on stock ROM which I&rsquo;ve rooted. I am on this (the phantom and stock rom) because it&rsquo;s the only phone I have seen with the capability of detecting SMS payloads in the form of SI/SL with binary(malware) injected into it.</h3>
+<h4>My phone is a Phantom Z running Android that I am replacing this week with the BlackBerry Z. The Phantom has 8 cores, 2.0ghz speed and 2GB Ram. It runs on stock ROM which I&rsquo;ve rooted. I am on this (the phantom and stock rom) because it&rsquo;s the only phone I have seen with the capability of detecting SMS payloads in the form of SI/SL with binary(malware) injected into it.</h4>
 
-<h3>I own a gaming rig though not yet fully setup. It consists of a 128GB SSD drive, 500GB HDD, 8GB RAM (wanted 16 but&hellip;le sigh) and a 4GB Nvidia Geforce dedicated VRAM. The setup lacks a good motherboard so it&rsquo;s not yet complete.</h3>
+<h4>I own a gaming rig though not yet fully setup. It consists of a 128GB SSD drive, 500GB HDD, 8GB RAM (wanted 16 but&hellip;le sigh) and a 4GB Nvidia Geforce dedicated VRAM. The setup lacks a good motherboard so it&rsquo;s not yet complete.</h4>
 
-<h3>I also have a kindle (keyboard version). It&rsquo;s battery life is beyond amazing (last around 2/3 months) and has unlimited 3G (coolest thing ever).</h3>
+<h4>I also have a kindle (keyboard version). It&rsquo;s battery life is beyond amazing (last around 2/3 months) and has unlimited 3G (coolest thing ever).</h4>
 
-<h3>In my arsenal I have two BTS&rsquo;s - or rather SDRs that I have moded to BTS&rsquo;s, a borrowed USRP N200 , calypso devices - Motorola C139s (I have 4 of these, others I&rsquo;ve overloaded and exploded). I also have an RTL-SDR which has a superb range of 2.5MHz to 1900MHz, various antennae and an alpha card that is on the way :).</h3>
+<h4>In my arsenal I have two BTS&rsquo;s - or rather SDRs that I have moded to BTS&rsquo;s, a borrowed USRP N200 , calypso devices - Motorola C139s (I have 4 of these, others I&rsquo;ve overloaded and exploded). I also have an RTL-SDR which has a superb range of 2.5MHz to 1900MHz, various antennae and an alpha card that is on the way :).</h4>
 
-<h3>And oh, I have AWEI earphones, best friend EVER!</h3>
+<h4>And oh, I have AWEI earphones, best friend EVER!</h4>
 
 <p><img src="http://www.ckn.io/images/jade_setup.jpg" width="500" height="100"></p>
 
 <h1>what tools do you run?</h1>
 
-<h3>Ha! TYPHON (my baby&hellip; my OS). This has nearly everything custom.</h3>
+<h4>Ha! TYPHON (my baby&hellip; my OS). This has nearly everything custom.</h4>
 
-<h3>I run a custom version of OpenBTS - which can inject exploits to baseband level, SIM attack kits and Binary SMS vxsploit (a custom exploit dev kit).</h3>
+<h4>I run a custom version of OpenBTS - which can inject exploits to baseband level, SIM attack kits and Binary SMS vxsploit (a custom exploit dev kit).</h4>
 
-<h3>It also has RF tools (such as OsmocomBB), RTL-SDR tools, Kalibrate, nano (a must), Terminator, BackBox tools repo, IDA PRO 6.7 full with Hex Ray Debugger and Decompilers.</h3>
+<h4>It also has RF tools (such as OsmocomBB), RTL-SDR tools, Kalibrate, nano (a must), Terminator, BackBox tools repo, IDA PRO 6.7 full with Hex Ray Debugger and Decompilers.</h4>
 
-<h3>I also have a tool I cannot really disclose, but for fun&rsquo;s sake let me explain what it does. After exploiting the BaseBand/SIM of the victim and injecting a persistent bot on your SIM control via CnC with Mapping, I get STK takeover, Network level takeover and control&hellip; aheem.</h3>
+<h4>I also have a tool I cannot really disclose, but for fun&rsquo;s sake let me explain what it does. After exploiting the BaseBand/SIM of the victim and injecting a persistent bot on your SIM control via CnC with Mapping, I get STK takeover, Network level takeover and control&hellip; aheem.</h4>
 
-<h3>On Yosemite I run IDA Pro, Android Studio Tools (ndk), Photoshop/Illustrator, ITUNES (music), VMWARE Fusion, Eclipse, Netbeans (JavaCard), iTerm , Qemu, MAMP Pro, Sublime for text editing, GCC from MacPorts and so on.</h3>
+<h4>On Yosemite I run IDA Pro, Android Studio Tools (ndk), Photoshop/Illustrator, ITUNES (music), VMWARE Fusion, Eclipse, Netbeans (JavaCard), iTerm , Qemu, MAMP Pro, Sublime for text editing, GCC from MacPorts and so on.</h4>
 
 <h1>What&rsquo;s your dream setup</h1>
 
-<h3>Hahaha, I guess I can&rsquo;t really pull mine off, why? Possibly because it&rsquo;s out of this world&hellip; but I do want a BladeRF :), maybe an Alienware mx15 or a MacBook Pro 15&#8221; with Retina Display.</h3>
+<h4>Hahaha, I guess I can&rsquo;t really pull mine off, why? Possibly because it&rsquo;s out of this world&hellip; but I do want a BladeRF :), maybe an Alienware mx15 or a MacBook Pro 15&#8221; with Retina Display.</h4>
 
 <hr />
 
-<blockquote><h3>Check out Jade&rsquo;s site <a href="http://0x7678.com">http://0x7678.com</a> and blog <a href="http://blog.0x7678.com">http://blog.0x7678.com</a> for some cool stuff :)</h3></blockquote>
+<blockquote><h4>Check out Jade&rsquo;s site <a href="http://0x7678.com">http://0x7678.com</a> and blog <a href="http://blog.0x7678.com">http://blog.0x7678.com</a> for some cool stuff :)</h4></blockquote>
 ]]></content>
   </entry>
   
@@ -368,48 +368,48 @@
     <id>http://www.ckn.io/blog/2015/03/14/ck-the-setup</id>
     <content type="html"><![CDATA[<h1>who are you?</h1>
 
-<h3>I am an information security engineer with main interests in cryptography (specifically cryptanalysis) and network security.</h3>
+<h4>I am an information security engineer with main interests in cryptography (specifically cryptanalysis) and network security.</h4>
 
 <!--more-->
 
 
 <h1>what&rsquo;s your setup like?</h1>
 
-<h3>I use an acer c720p Chromebook as my main laptop. I tinkered with it, got rid of the chrome OS and replaced it with archlinux. It&rsquo;s a nifty little machine that is light and portable. It has a 32GB SSD and about 7 hours of battery life which I love. The processor and ram are not as high as I&rsquo;d like but it does the job.</h3>
+<h4>I use an acer c720p Chromebook as my main laptop. I tinkered with it, got rid of the chrome OS and replaced it with archlinux. It&rsquo;s a nifty little machine that is light and portable. It has a 32GB SSD and about 7 hours of battery life which I love. The processor and ram are not as high as I&rsquo;d like but it does the job.</h4>
 
-<h3>For the heavy lifting I have a Samsung laptop which I dual boot Kali Linux and Windows. It&rsquo;s a core i5 with 6GB ram and Nvidia graphics card, not one of the high end ones though :(. It also has a 750GB hard drive which comes in handy for stuff such as virtual machines and large wordlists.</h3>
+<h4>For the heavy lifting I have a Samsung laptop which I dual boot Kali Linux and Windows. It&rsquo;s a core i5 with 6GB ram and Nvidia graphics card, not one of the high end ones though :(. It also has a 750GB hard drive which comes in handy for stuff such as virtual machines and large wordlists.</h4>
 
-<h3>I also have a raspberry pi model B. I play around with it and use it for experiments and diverse projects. Right now it has Kali Linux on it.</h3>
+<h4>I also have a raspberry pi model B. I play around with it and use it for experiments and diverse projects. Right now it has Kali Linux on it.</h4>
 
-<h3>My phone is a Nexus 5 - awesome phone! It serves all my needs and more. I have set up Nethunter on it and it comes in handy in remote testing and exploitation :). I see it remaining as my phone for a long time.</h3>
+<h4>My phone is a Nexus 5 - awesome phone! It serves all my needs and more. I have set up Nethunter on it and it comes in handy in remote testing and exploitation :). I see it remaining as my phone for a long time.</h4>
 
-<h3>I read a lot and have a Kindle Paperwhite 2. Next to my phone, it&rsquo;s the device I take almost everywhere with me. Its battery lasts forever and the reading experience is amazing whatever the lighting conditions.</h3>
+<h4>I read a lot and have a Kindle Paperwhite 2. Next to my phone, it&rsquo;s the device I take almost everywhere with me. Its battery lasts forever and the reading experience is amazing whatever the lighting conditions.</h4>
 
-<h3>I also have some interest in photography and own a Nikon P520 camera. It serves my casual needs adequately and the zoom - 42x - is awesome!</h3>
+<h4>I also have some interest in photography and own a Nikon P520 camera. It serves my casual needs adequately and the zoom - 42x - is awesome!</h4>
 
-<h3>For storage I have two external drives - 2TB and 500GB. This complements the 750GB on the Samsung laptop. I also have lots of online storage, starting with 1TB Google Drive space - which I got free for two years from the Chromebook purchase :).</h3>
+<h4>For storage I have two external drives - 2TB and 500GB. This complements the 750GB on the Samsung laptop. I also have lots of online storage, starting with 1TB Google Drive space - which I got free for two years from the Chromebook purchase :).</h4>
 
-<h3>The rest of my setup includes miscellaneous devices such as wireless cards, switches and so on.</h3>
+<h4>The rest of my setup includes miscellaneous devices such as wireless cards, switches and so on.</h4>
 
 <p><img src="http://www.ckn.io/images/ck_setup.jpg" width="500" height="100"></p>
 
 <h1>what tools do you run?</h1>
 
-<h3>On the acer, I only configure the tools that I use regularly. These are a few crypto and network security tools. I tailor them to my needs to keep my archlinux installation minimal and fast. I do most of my scripting on it, mainly python and shell using sublime text (which i highly recommend) as my editor. I add other tools as they become necessary, on archlinux this is mostly seamless. I&rsquo;ve added the blackarch and archassault repos which host a wealth of security tools.</h3>
+<h4>On the acer, I only configure the tools that I use regularly. These are a few crypto and network security tools. I tailor them to my needs to keep my archlinux installation minimal and fast. I do most of my scripting on it, mainly python and shell using sublime text (which i highly recommend) as my editor. I add other tools as they become necessary, on archlinux this is mostly seamless. I&rsquo;ve added the blackarch and archassault repos which host a wealth of security tools.</h4>
 
-<h3>As the Samsung laptop has a full Kali Installation, I use it when I need to do automated testing and require speed. I also use it when I need to do GPU password cracking. I also run my VMS on it. I have Windows on it too for games, testing and so on.</h3>
+<h4>As the Samsung laptop has a full Kali Installation, I use it when I need to do automated testing and require speed. I also use it when I need to do GPU password cracking. I also run my VMS on it. I have Windows on it too for games, testing and so on.</h4>
 
-<h3>The Nexus has Nethunter on it, which I use mostly to run network assessment tools.</h3>
+<h4>The Nexus has Nethunter on it, which I use mostly to run network assessment tools.</h4>
 
 <h1>What&rsquo;s your dream setup</h1>
 
-<h3>Ideally I&rsquo;d like to have one light, fast, and extremely powerful laptop. Something like; 1TB SSD, 16GB ram and at least 8 hours battery life and of course powerful processor and graphics card.</h3>
+<h4>Ideally I&rsquo;d like to have one light, fast, and extremely powerful laptop. Something like; 1TB SSD, 16GB ram and at least 8 hours battery life and of course powerful processor and graphics card.</h4>
 
-<h3>Next I&rsquo;d love to setup a multi-GPU cluster machine. Something like <a href="http://arstechnica.com/security/2012/12/25-gpu-cluster-cracks-every-standard-windows-password-in-6-hours/">this 25-GPU cluster monster</a>. Can i dream :)?</h3>
+<h4>Next I&rsquo;d love to setup a multi-GPU cluster machine. Something like <a href="http://arstechnica.com/security/2012/12/25-gpu-cluster-cracks-every-standard-windows-password-in-6-hours/">this 25-GPU cluster monster</a>. Can i dream :)?</h4>
 
-<h3>I am very happy with my Nexus 5 so am good there.</h3>
+<h4>I am very happy with my Nexus 5 so am good there.</h4>
 
-<h3>Finally, I hope and plan to setup a fully equipped lab with lots of automation. It&rsquo;ll have very high speed internet and cutting edge technology. I have an interest in communication protocols and technology and it will have a plethora of relevant testing devices. This includes oftware defined radio devices, antennas, the whole nine yards :). Of course it&rsquo;ll have powerful processing machines&hellip;hey, crypto is resource intensive. The lab will basically be used for research and lots of fun!</h3>
+<h4>Finally, I hope and plan to setup a fully equipped lab with lots of automation. It&rsquo;ll have very high speed internet and cutting edge technology. I have an interest in communication protocols and technology and it will have a plethora of relevant testing devices. This includes oftware defined radio devices, antennas, the whole nine yards :). Of course it&rsquo;ll have powerful processing machines&hellip;hey, crypto is resource intensive. The lab will basically be used for research and lots of fun!</h4>
 ]]></content>
   </entry>
   
