@@ -15,3 +15,7 @@ footer: true
 ***
 
 #[ramblings](/blog/categories/ramblings/)
+
+***
+
+#[the network project](blog/categories/the-network-project/)
