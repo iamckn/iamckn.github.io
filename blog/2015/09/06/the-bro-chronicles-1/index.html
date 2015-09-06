@@ -117,12 +117,12 @@
 </header>
   <div class="row-fluid">
     <div class="span12">
-      <h4>I was just having a random conversation with Christian - one indefatigable hacker (I&rsquo;ll be using the word hacker for infosec people henceforth. I find political correctness a bit tedious :). The converstation was based around Kali Nethunter and all the cool stuff that can be done with it. The discussion was revolving around &ldquo;man in the middle attacks&rdquo; and I suggested that having BRO running on Nethunter would be awesome. This got Christian excited and true to his nature, he couldn&rsquo;t rest till he&rsquo;d attempted it. Long story short, he did some amazing work and had it running soon afterwards complete with a detailed &ldquo;how to&rdquo; guide. Here&rsquo;s a link to the guide ().</h4>
+      <h4>I was having a random conversation with <a href="https://twitter.com/xtian_kisutsa" target="_blank">Christian</a> - one indefatigable hacker (I&rsquo;ll be using the word hacker for infosec people henceforth. I find political correctness a bit tedious). The conversation was based around Kali Nethunter and all the cool stuff that can be done with it. The discussion was revolving around &ldquo;man in the middle attacks&rdquo; and I suggested that having <a href="https://www.bro.org/" target="_blank">BRO</a> running on Nethunter would be awesome. This got him excited and true to his nature, he couldn&rsquo;t rest till he&rsquo;d attempted it. Long story short, he did some amazing work and had it running soon afterwards complete with a detailed &ldquo;how to&rdquo; guide. Here&rsquo;s a link to the <a href="http://t.co/Iz992aMCL5" target="_blank">guide</a>.</h4>
 
 <!--more-->
 
 
-<h4>With bro running on a phone, a world of exploration is opened up. You now have an enterprise level IDS running on your phone :). I hope you see where this is headed. What do you do with an IDS on your phone? You obviously investigate what your phone communicates to.</h4>
+<h4>With bro running on a phone, a world of exploration is opened up. You now have an enterprise level IDS running on your phone :). I hope you see where this is headed. What do you do with an IDS on your phone? You obviously investigate what your phone communicates with.</h4>
 
 <h4>What interested me most was the rmnet0 interface on android. This is the interface assigned to your data connection. It gets assigned a public IP by your telecommunications provider so no NAT issues.</h4>
 
@@ -142,7 +142,7 @@
 
 <h4>shodan-cli to investigate IPs</h4></blockquote>
 
-<h4>Once everything was in place I used the phone as I would normally for about 10 minutes or so - browsed a bit and open a few applications such as twitter and facebook. After that I left it idle for about an hour.</h4>
+<h4>Once everything was in place I used the phone as I would normally for about 10 minutes or so - browsed a bit and opened a few apps such as Twitter and Facebook. After that I left it idle for about an hour.</h4>
 
 <h1>Results and Analysis</h1>
 
@@ -203,6 +203,86 @@
 </span><span class='line'> <span class="mi">57553</span>   <span class="mf">0.0</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">46.228</span><span class="p">.</span><span class="mf">164.13</span><span class="err">#</span><span class="mi">13</span>     <span class="mf">1.4</span><span class="o">%</span> <span class="o">|</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+<h4>As expected most traffic is either HTTP (80), HTTPS (443) or DNS (53). NTP traffic (123) also features prominently when the phone is idle.</h4>
+
+<h4>Of interest is that we can confirm Safaricom uses their own DNS servers, in this case <code>196.201.216.21</code>, <code>196.201.218.15</code> and <code>196.201.217.7</code>. An OpenDNS server <code>208.67.222.222</code> was also queried once so they probably have OpenDNS as an option.</h4>
+
+<h4>The ntp servers were distributed among African countries, Angola - <code>196.223.19.3</code>, Tunisia - <code>197.12.0.14</code>, SA - <code>197.84.150.123</code> and so on. We can therefore safely say they use the africa.pool.ntp.org pool.</h4>
+
+<h4>Then comes the interesting bit, there were some Safaricom IPs communicating to the phone on some weird ports, one case is <code>196.201.216.4</code> on port <code>3</code>, Shodan reveals port <code>500</code> and <code>4500</code> open on whatever is running on that IP. Let&rsquo;s leave Safaricom for now and look at the other traffic.</h4>
+
+<h4>The BRO logs are pretty detailed and therefore I needed some way to clean them up to do my own analysis. I therefore wrote a bash script to do some filtering.</h4>
+
+<h4>I then used Shodan-cli to get information of every unique IP and save the output. Here is the script for anyone interested.</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Enter the name of the connection log: &quot;</span>
+</span><span class='line'><span class="nb">read </span>LOG
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Getting details from shodan&quot;</span>
+</span><span class='line'><span class="sb">`</span>sed -e <span class="s1">&#39;/^#/d&#39;</span> <span class="nv">$LOG</span> <span class="p">|</span> cut -f <span class="m">5</span> <span class="p">|</span> sort -u &gt; filtered<span class="sb">`</span>
+</span><span class='line'>touch output
+</span><span class='line'>
+</span><span class='line'><span class="k">while</span> <span class="nb">read</span> -r line<span class="p">;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="nb">echo</span> <span class="nv">$line</span>
+</span><span class='line'>  <span class="sb">`</span>sudo shodan host <span class="nv">$line</span> &gt;&gt; output<span class="sb">`</span>
+</span><span class='line'>  <span class="nb">echo</span> <span class="s2">&quot;&quot;</span>&gt;&gt; output
+</span><span class='line'><span class="k">done</span> &lt; <span class="s2">&quot;filtered&quot;</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Done! Output saved to output&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">exit </span><span class="m">0</span>     
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>I am going to cut right to the chase as this post is getting too long. The world is being taken over by analytics, advertising and digital content companies!</h4>
+
+<h4>Let me just list a few of the companies that communicated with my phone over that one hour period, remember I left it idle most of that time. Here we go</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Mediamath.com         Mixpane.com         Criteo.com
+</span><span class='line'>Fastly Inc            AOL                 AppNexus
+</span><span class='line'>Akamai                Chango              Trapad
+</span><span class='line'>Exelate.com           Openx.com           Adtech.de
+</span><span class='line'>Lijit.com             Crashlytics.com     Pubmatic
+</span><span class='line'>ACNielson             Amazon              ...and several others
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>I usually am not worried about companies using analytics for their marketing purposes but this time something spooked me.</h4>
+
+<h4>Several of these servers are vulnerable to the <a href="https://weakdh.org/" target="_blank">logjam attack</a> and even more worringly some are vulnerable to heartbleed. It would therefore not be far-fetched to assume they&rsquo;ve already been compromised or they will be. With all the traffic going on between my phone and these servers, I had hoped they&rsquo;d have their security figured out. It&rsquo;s often said that third parties are some of the most promising targets for hackers and you can see exactly why here.</h4>
+
+<h1>Conclusion</h1>
+
+<h4>That was a long post so let&rsquo;s wrap it up.</h4>
+
+<h4>There were some peculiar IPs that I&rsquo;ll be investigating in subsequent BRO chronicles. Other random titbits include the discovery that several Instagram servers communicating with my phone are also vulnerable to the logjam attack, Yahoo mail is particularly noisy traffic wise and so on.</h4>
+
+<h4>When going through all that analytics and ad based traffic I remembered a quote by Jeffrey Hammerbacher, one of Facebook&rsquo;s first 100 employees. I therefore aptly end this post with his quote:</h4>
+
+<blockquote><h2>The best minds of my generation are thinking about how to make people click ads. That sucks.</h2></blockquote>
 
     </div>
   </div>
