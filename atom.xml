@@ -4,7 +4,7 @@
   <title><![CDATA[the poetry of (in)security]]></title>
   <link href="http://www.ckn.io/atom.xml" rel="self"/>
   <link href="http://www.ckn.io/"/>
-  <updated>2015-08-29T09:48:12+03:00</updated>
+  <updated>2015-09-06T13:02:44+03:00</updated>
   <id>http://www.ckn.io/</id>
   <author>
     <name><![CDATA[ck]]></name>
@@ -12,6 +12,130 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The BRO Chronicles 1]]></title>
+    <link href="http://www.ckn.io/blog/2015/09/06/the-bro-chronicles-1/"/>
+    <updated>2015-09-06T08:56:06+03:00</updated>
+    <id>http://www.ckn.io/blog/2015/09/06/the-bro-chronicles-1</id>
+    <content type="html"><![CDATA[<h4>I was just having a random conversation with Christian - one indefatigable hacker (I&rsquo;ll be using the word hacker for infosec people henceforth. I find political correctness a bit tedious :). The converstation was based around Kali Nethunter and all the cool stuff that can be done with it. The discussion was revolving around &ldquo;man in the middle attacks&rdquo; and I suggested that having BRO running on Nethunter would be awesome. This got Christian excited and true to his nature, he couldn&rsquo;t rest till he&rsquo;d attempted it. Long story short, he did some amazing work and had it running soon afterwards complete with a detailed &ldquo;how to&rdquo; guide. Here&rsquo;s a link to the guide ().</h4>
+
+<!--more-->
+
+
+<h4>With bro running on a phone, a world of exploration is opened up. You now have an enterprise level IDS running on your phone :). I hope you see where this is headed. What do you do with an IDS on your phone? You obviously investigate what your phone communicates to.</h4>
+
+<h4>What interested me most was the rmnet0 interface on android. This is the interface assigned to your data connection. It gets assigned a public IP by your telecommunications provider so no NAT issues.</h4>
+
+<h1>The set up</h1>
+
+<h4>This Saturday afternoon I decided to see what my phone communicates to over a one hour period while connected to the mobile data network.</h4>
+
+<h4>This is how I set up things:</h4>
+
+<blockquote><h4>Nethunter running on a Nexus 5 with Android 5.1</h4>
+
+<h4>BRO running in standalone mode monitoring rmnet0</h4>
+
+<h4>Mobile data connection on the Safaricom network</h4>
+
+<h4>ADB connection to a laptop</h4>
+
+<h4>shodan-cli to investigate IPs</h4></blockquote>
+
+<h4>Once everything was in place I used the phone as I would normally for about 10 minutes or so - browsed a bit and open a few applications such as twitter and facebook. After that I left it idle for about an hour.</h4>
+
+<h1>Results and Analysis</h1>
+
+<h4>It was then time to process and analyse the results. Nethunter runs in a chroot environment so I transferred the BRO logs to the sdcard then to my laptop, that&rsquo;s where adb comes in handy.</h4>
+
+<h4>Lets start with the ports and IPs that were most active during both normal usage of the phone and when it was idle.</h4>
+
+<h2>Idle</h2>
+
+<blockquote><table>
+<thead>
+<tr>
+<th style="text-align:center;">Ports</th>
+<th style="text-align:center;">%</th>
+<th style="text-align:center;">Sources</th>
+<th style="text-align:center;">%</th>
+<th style="text-align:center;">Destinations</th>
+<th style="text-align:center;">%</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">&mdash;443&mdash;</td>
+<td style="text-align:center;">&mdash;38.5%&mdash;+</td>
+<td style="text-align:center;">&mdash;105.57.36.93&mdash;</td>
+<td style="text-align:center;">&mdash;99.0%&mdash;+</td>
+<td style="text-align:center;">&mdash;196.201.216.21&mdash;</td>
+<td style="text-align:center;">&mdash;20.0%&mdash;</td>
+</tr>
+<tr>
+<td style="text-align:center;">&mdash;53&mdash;</td>
+<td style="text-align:center;">&mdash;25.5%&mdash;+</td>
+<td style="text-align:center;">&mdash;196.201.216.4&mdash;</td>
+<td style="text-align:center;">&mdash;0.5%&mdash;+</td>
+<td style="text-align:center;">&mdash;216.58.223.10&mdash;</td>
+<td style="text-align:center;">&mdash;10.0%&mdash;</td>
+</tr>
+<tr>
+<td style="text-align:center;">&mdash;123&mdash;</td>
+<td style="text-align:center;">&mdash;24.0%&mdash;+</td>
+<td style="text-align:center;">&mdash;66.196.116.132&mdash;</td>
+<td style="text-align:center;">&mdash;0.5%&mdash;+</td>
+<td style="text-align:center;">&mdash;196.49.6.67&mdash;</td>
+<td style="text-align:center;">&mdash;9.0%&mdash;</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+
+<h2>Normal use</h2>
+
+<blockquote><table>
+<thead>
+<tr>
+<th style="text-align:center;">Ports</th>
+<th style="text-align:center;">%</th>
+<th style="text-align:center;">Sources</th>
+<th style="text-align:center;">%</th>
+<th style="text-align:center;">Destinations</th>
+<th style="text-align:center;">%</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">&mdash;80&mdash;</td>
+<td style="text-align:center;">&mdash;7.7%&mdash;+</td>
+<td style="text-align:center;">&mdash;105.161.166.138&mdash;</td>
+<td style="text-align:center;">&mdash;99.9%&mdash;+</td>
+<td style="text-align:center;">&mdash;196.201.217.7&mdash;</td>
+<td style="text-align:center;">&mdash;14.6%&mdash;</td>
+</tr>
+<tr>
+<td style="text-align:center;">&mdash;53&mdash;</td>
+<td style="text-align:center;">&mdash;5.8%&mdash;+</td>
+<td style="text-align:center;">&mdash;66.196.116.132&mdash;</td>
+<td style="text-align:center;">&mdash;0.1%&mdash;+</td>
+<td style="text-align:center;">&mdash;173.241.248.221&mdash;</td>
+<td style="text-align:center;">&mdash;11.4%&mdash;</td>
+</tr>
+<tr>
+<td style="text-align:center;">&mdash;443&mdash;</td>
+<td style="text-align:center;">&mdash;5.0%&mdash;+</td>
+<td style="text-align:center;">&mdash;174.37.231.85&mdash;</td>
+<td style="text-align:center;">&mdash;0.0%&mdash;+</td>
+<td style="text-align:center;">&mdash;173.241.248.220&mdash;</td>
+<td style="text-align:center;">&mdash;5.2%&mdash;</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A hacker's journey]]></title>
@@ -143,7 +267,7 @@
 
 <h4>The ball is in your court.</h4>
 
-<h2>Submit your papers and ideas to <a href="&#x6d;&#97;&#x69;&#108;&#116;&#111;&#58;&#x69;&#110;&#x66;&#111;&#x40;&#65;&#102;&#114;&#105;&#99;&#97;&#72;&#97;&#99;&#107;&#x6f;&#110;&#46;&#99;&#x6f;&#109;">&#105;&#110;&#x66;&#x6f;&#64;&#65;&#x66;&#114;&#x69;&#x63;&#97;&#x48;&#x61;&#99;&#x6b;&#x6f;&#110;&#x2e;&#99;&#x6f;&#109;</a> before 30th of May.</h2>
+<h2>Submit your papers and ideas to <a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#58;&#x69;&#110;&#102;&#x6f;&#x40;&#x41;&#x66;&#114;&#105;&#99;&#97;&#x48;&#x61;&#x63;&#107;&#111;&#110;&#x2e;&#x63;&#111;&#x6d;">&#x69;&#110;&#x66;&#111;&#x40;&#x41;&#x66;&#114;&#x69;&#x63;&#x61;&#72;&#x61;&#99;&#x6b;&#111;&#110;&#46;&#x63;&#111;&#109;</a> before 30th of May.</h2>
 
 <blockquote><h4>Read this <a href="http://sylviamunyisia.blogspot.com/2015/05/call-for-papers.html">page</a> by Sylvia that explains the call for papers very well.</h4>
 
