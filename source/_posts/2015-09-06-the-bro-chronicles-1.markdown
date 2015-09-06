@@ -91,7 +91,7 @@ categories: ["the network project"]
 	ACNielson 			Amazon  			...and several others
 ```
 ####I usually am not worried about companies using analytics for their marketing purposes but this time something spooked me.
-####Several of these servers are vulnerable to the <a href="https://weakdh.org/" target="_blank">logjam attack</a> and even more worringly some are vulnerable to heartbleed. It would therefore not be far-fetched to assume they've already been compromised or they will be. With all the traffic going on between my phone and these servers, I had hoped they'd have their security figured out. It's often said that third parties are some of the most promising targets for hackers and you can see exactly why here.
+####Several of these servers are vulnerable to the <a href="https://weakdh.org/" target="_blank">logjam attack</a> and even more worryingly some are vulnerable to heartbleed. It would therefore not be far-fetched to assume they've already been compromised or they will be. With all the traffic going on between my phone and these servers, I had hoped they'd have their security figured out. It's often said that third parties are some of the most promising targets for hackers and you can see exactly why here.
 
 #Conclusion
 ####That was a long post so let's wrap it up.
