@@ -9,7 +9,7 @@ categories: [ramblings]
 
 <!--more-->
 
-{% img /images/AfricaHackon_logo.jpg%}
+{% img /images/africaHackon_logo.jpg%}
 
 #The hacker mindset
 
