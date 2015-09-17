@@ -1,0 +1,470 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>The BRO Chronicles 2 - the poetry of (in)security</title>
+  <meta name="author" content="ck">
+
+   
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.ckn.io/blog/2015/09/17/the-bro-chronicles-2">
+  <link href="/favicon.png" rel="icon">
+  <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="the poetry of (in)security" type="application/atom+xml">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/js/modernizr-2.0.js"></script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <script src="/js/application.js"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-55596013-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+    
+        <li ><a href="/whoami.html">whoami</a></li>
+    
+        <li ><a href="/index.html">home</a></li>
+    
+        <li ><a href="/category.html">category</a></li>
+    
+        <li ><a href="/blog/archives/index.html">archive</a></li>
+    
+</ul>
+
+<ul class="nav pull-right">
+    
+    <li><a href="http://github.com/iamckn" title="Github Profile"><i class="icon-github-sign social-navbar"></i></a></li>
+    
+    
+    
+    
+    <li><a href="http://twitter.com/iamckn" title="Twitter Profile"><i class="icon-twitter-sign social-navbar"></i></a></li>
+    
+    
+    
+    
+
+    
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+      <div class="row-fluid">
+        <div id="content">
+          <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+  <div class="jumbotron">
+    The BRO Chronicles 2
+	<h5>
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2015-09-17T20:54:07+03:00" pubdate data-updated="true"></time></h5>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
+      <h4>In part one I analysed the data communication that takes place on a phone over a one hour period. Read the post <a href="https://www.ckn.io/blog/2015/09/06/the-bro-chronicles-1/" target="_blank">here</a> for details and background info.</h4>
+
+<h4>Here, I go further and analyse what happens over a twelve hour period of normal phone usage. I ran <a href="https://www.bro.org/" target="_blank">BRO</a> on my phone from <code>6:40am</code> to <code>6:40pm</code> and ensured that data was on and WIFI off the whole time.</h4>
+
+<!--more-->
+
+
+<h4>Let me start with figures of some standout statistics.</h4>
+
+<blockquote><h4>The phone communicated with <code>233</code> unique IPs from diverse parts of the globe over that period.</h4></blockquote>
+
+<h4>I broke this down further to specific ports of interest. Note that my IP was <code>105.52.174.7</code> during that period.</h4>
+
+<h2>Port 21 : FTP</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">Unique</span> <span class="nx">IPs</span> <span class="o">:</span> <span class="mi">2</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Source</span>            <span class="nx">Destination</span>
+</span><span class='line'><span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>       <span class="mf">158.69</span><span class="p">.</span><span class="mf">128.126</span>
+</span><span class='line'><span class="mf">180.97</span><span class="p">.</span><span class="mf">106.37</span>      <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Why my phone wanted to connect to <code>158.69.128.126</code> on FTP raises some interesting questions.</h4>
+
+<h2>Port 22 : SSH</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">Unique</span> <span class="nx">IPs</span> <span class="o">:</span> <span class="mi">6</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Source</span>            <span class="nx">Destination</span>
+</span><span class='line'><span class="mf">180.97</span><span class="p">.</span><span class="mf">106.36</span>      <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>
+</span><span class='line'><span class="mf">218.65</span><span class="p">.</span><span class="mf">30.23</span>       <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>
+</span><span class='line'><span class="mf">42.116</span><span class="p">.</span><span class="mf">163.127</span>     <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">65.123</span>       <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>
+</span><span class='line'><span class="mf">89.248</span><span class="p">.</span><span class="mf">168.28</span>      <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>
+</span><span class='line'><span class="mf">94.102</span><span class="p">.</span><span class="mf">49.102</span>      <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Port 23 : Telnet</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">Unique</span> <span class="nx">IPs</span> <span class="o">:</span> <span class="mi">24</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Source</span>            <span class="nx">Destination</span>
+</span><span class='line'><span class="mf">101.29</span><span class="p">.</span><span class="mf">2.192</span>       <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span> <span class="mi">23</span>
+</span><span class='line'><span class="mf">106.115</span><span class="p">.</span><span class="mf">98.232</span>     <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span> <span class="mi">23</span>
+</span><span class='line'><span class="mf">110.195</span><span class="p">.</span><span class="mf">77.199</span>     <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span> <span class="mi">23</span>
+</span><span class='line'><span class="nx">and</span> <span class="mi">21</span> <span class="nx">others</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>That translates to an average of two telnet connection attempts per hour from unique IPs!</h4>
+
+<h2>Summary of some other ports of interest</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">Port</span>       <span class="nx">Unique</span> <span class="nx">IPs</span>  
+</span><span class='line'><span class="mi">53</span>            <span class="mi">24</span>
+</span><span class='line'><span class="mi">25</span>            <span class="mi">1</span>
+</span><span class='line'><span class="mi">80</span>            <span class="mi">129</span>
+</span><span class='line'><span class="mi">123</span>           <span class="mi">26</span>
+</span><span class='line'><span class="mi">443</span>           <span class="mi">218</span>
+</span><span class='line'><span class="mi">993</span>           <span class="mi">4</span>
+</span><span class='line'><span class="mi">995</span>           <span class="mi">1</span>
+</span><span class='line'><span class="mi">1900</span>          <span class="mi">3</span>
+</span><span class='line'><span class="mi">5060</span>          <span class="mi">1</span>
+</span><span class='line'><span class="mi">5222</span>          <span class="mi">51</span>
+</span><span class='line'><span class="mi">5228</span>          <span class="mi">7</span>
+</span><span class='line'><span class="mi">8080</span>          <span class="mi">4</span>
+</span><span class='line'><span class="mi">8996</span>          <span class="mi">1</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>These results immediately direct our attention to internet wide scanning. This has slowly become a growing phenomenon over the past two years and has been aided by the release of extremely fast scanning tools. We have <a href="https://zmap.io/" target="_blank">zmap</a> created and maintained by a team from the University of Michigan which can scan the entire IPv4 space in under 5 minutes with a ten gigabit ethernet connection. Masscan, created by Robert Graham of Errata Security is fast enough to do the same in under <a href="http://blog.erratasec.com/2013/09/masscan-entire-internet-in-3-minutes.html" target="_blank">3 minutes</a>!</h4>
+
+<h4>Internet wide scanning is being used a lot by researchers to investigate vulnerabilities and do various internet wide studies. A case in point is that several internet wide scans were done targeting the heartbleed vulnerability within 48 hours of disclosure. A more recent case is this week&rsquo;s <a href="https://zmap.io/synful/" target="_blank">synful attack scan</a> done by the zmap team on September 15, 2015.</h4>
+
+<h4><a href="https://www.shodan.io/" target="_blank">Shodan</a> does regular internet wide scans and hosts the data on their site which is made available to the public in an interactive way.</h4>
+
+<h4>The University of Michigan team (same one that maintains zmap) also does daily scans and hosts the raw data on the <a href="https://www.scans.io/" target="_blank">scans.io</a> site. They also host scans done by other researchers such as the Rapid7 team which does various scans regularly.</h4>
+
+<h4>The flip side of this is that a lot more people do these scans with malicious intent. They&rsquo;re always on the lookout for vulnerable systems on the internet and their activity spikes every time a major vulnerable is released. They mostly hide behind <a href="https://en.wikipedia.org/wiki/Bulletproof_hosting" target="_blank">bulletproof hosting providers</a> or run their scans from countries likely to be lenient, with China featuring prominently.</h4>
+
+<h4>Let me now relate the activity on my phone with internet wide scanning.</h4>
+
+<h2>Some known research scans I observed during that 12 hour period</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">IP</span>                 <span class="nx">Domain</span> <span class="nx">Name</span>
+</span><span class='line'><span class="mf">169.229</span><span class="p">.</span><span class="mf">3.90</span>       <span class="nx">researchscan0</span><span class="p">.</span><span class="nx">EECS</span><span class="p">.</span><span class="nx">Berkeley</span><span class="p">.</span><span class="nx">EDU</span>
+</span><span class='line'><span class="mf">216.218</span><span class="p">.</span><span class="mf">206.69</span>     <span class="nx">scan</span><span class="o">-</span><span class="mi">08</span><span class="p">.</span><span class="nx">shadowserver</span><span class="p">.</span><span class="nx">org</span>
+</span><span class='line'><span class="mf">74.82</span><span class="p">.</span><span class="mf">47.20</span>        <span class="nx">scan</span><span class="o">-</span><span class="mi">12</span><span class="nx">e</span><span class="p">.</span><span class="nx">shadowserver</span><span class="p">.</span><span class="nx">org</span>
+</span><span class='line'><span class="mf">184.105</span><span class="p">.</span><span class="mf">247.204</span>    <span class="nx">scan</span><span class="o">-</span><span class="mi">15</span><span class="nx">b</span><span class="p">.</span><span class="nx">shadowserver</span><span class="p">.</span><span class="nx">org</span>
+</span><span class='line'><span class="mf">74.82</span><span class="p">.</span><span class="mf">47.29</span>        <span class="nx">scan</span><span class="o">-</span><span class="mi">12</span><span class="nx">e</span><span class="p">.</span><span class="nx">shadowserver</span><span class="p">.</span><span class="nx">org</span>
+</span><span class='line'><span class="mf">188.138</span><span class="p">.</span><span class="mf">9.50</span>       <span class="nx">atlantic</span><span class="p">.</span><span class="nx">census</span><span class="p">.</span><span class="nx">shodan</span><span class="p">.</span><span class="nx">io</span>
+</span><span class='line'><span class="mf">93.120</span><span class="p">.</span><span class="mf">27.62</span>       <span class="nx">m247</span><span class="p">.</span><span class="nx">ro</span><span class="p">.</span><span class="nx">shodan</span><span class="p">.</span><span class="nx">io</span>
+</span><span class='line'><span class="mf">71.6</span><span class="p">.</span><span class="mf">167.142</span>       <span class="nx">census9</span><span class="p">.</span><span class="nx">shodan</span><span class="p">.</span><span class="nx">io</span>
+</span><span class='line'><span class="mf">71.6</span><span class="p">.</span><span class="mf">165.200</span>       <span class="nx">census12</span><span class="p">.</span><span class="nx">shodan</span><span class="p">.</span><span class="nx">io</span>
+</span><span class='line'><span class="mf">198.20</span><span class="p">.</span><span class="mf">70.114</span>      <span class="nx">census3</span><span class="p">.</span><span class="nx">shodan</span><span class="p">.</span><span class="nx">io</span>
+</span><span class='line'><span class="mf">188.138</span><span class="p">.</span><span class="mf">9.51</span>       <span class="nx">atlantic482</span><span class="p">.</span><span class="nx">serverprofi24</span><span class="p">.</span><span class="nx">de</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.198</span>       <span class="nx">icsresearch1</span><span class="p">.</span><span class="nx">plcscan</span><span class="p">.</span><span class="nx">org</span>
+</span><span class='line'><span class="mf">141.212</span><span class="p">.</span><span class="mf">122.181</span>    <span class="nx">researchscan436</span><span class="p">.</span><span class="nx">eecs</span><span class="p">.</span><span class="nx">umich</span><span class="p">.</span><span class="nx">edu</span>
+</span><span class='line'><span class="mf">141.212</span><span class="p">.</span><span class="mf">122.182</span>    <span class="nx">researchscan436</span><span class="p">.</span><span class="nx">eecs</span><span class="p">.</span><span class="nx">umich</span><span class="p">.</span><span class="nx">edu</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>And of course several scans from unknown actors</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">IP</span>                 <span class="nx">Country</span>
+</span><span class='line'><span class="mf">124.193</span><span class="p">.</span><span class="mf">141.130</span>    <span class="nx">China</span>
+</span><span class='line'><span class="mf">223.167</span><span class="p">.</span><span class="mf">14.33</span>      <span class="nx">China</span>
+</span><span class='line'><span class="mf">123.151</span><span class="p">.</span><span class="mf">149.222</span>    <span class="nx">China</span>
+</span><span class='line'><span class="mf">104.245</span><span class="p">.</span><span class="mf">101.253</span>    <span class="nx">US</span>
+</span><span class='line'><span class="mf">199.203</span><span class="p">.</span><span class="mf">59.120</span>     <span class="nx">Israel</span>
+</span><span class='line'><span class="mf">125.253</span><span class="p">.</span><span class="mf">126.75</span>     <span class="nx">Vietnam</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>       <span class="nx">Netherlands</span>
+</span><span class='line'><span class="mf">115.230</span><span class="p">.</span><span class="mf">124.164</span>    <span class="nx">China</span>
+</span><span class='line'><span class="mf">177.44</span><span class="p">.</span><span class="mf">69.36</span>       <span class="nx">Brazil</span>
+</span><span class='line'><span class="mf">119.235</span><span class="p">.</span><span class="mf">95.174</span>     <span class="nx">Fiji</span>
+</span><span class='line'><span class="mf">125.24</span><span class="p">.</span><span class="mf">223.93</span>      <span class="nx">Thailand</span>
+</span><span class='line'><span class="mf">220.134</span><span class="p">.</span><span class="mf">101.246</span>    <span class="nx">Taiwan</span>
+</span><span class='line'><span class="mf">37.145</span><span class="p">.</span><span class="mf">43.253</span>      <span class="nx">Russia</span>
+</span><span class='line'><span class="mf">95.59</span><span class="p">.</span><span class="mf">98.19</span>        <span class="nx">Kazakhstan</span>
+</span><span class='line'><span class="mf">91.236</span><span class="p">.</span><span class="mf">75.224</span>      <span class="nx">Polland</span>
+</span><span class='line'><span class="mf">46.10</span><span class="p">.</span><span class="mf">74.117</span>       <span class="nx">Bulgaria</span>
+</span><span class='line'><span class="mf">186.45</span><span class="p">.</span><span class="mf">49.254</span>      <span class="nx">Trinidad</span>
+</span><span class='line'><span class="mf">202.12</span><span class="p">.</span><span class="mf">81.138</span>      <span class="nx">India</span>
+</span><span class='line'><span class="mf">211.247</span><span class="p">.</span><span class="mf">102.117</span>    <span class="nx">South</span> <span class="nx">Korea</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>It is evident that every day, anything you put on the internet will be poked at unless you are behind some NAT network and/or have some form of firewall filtering traffic.</h4>
+
+<h4>The takeaway is that you really should keep your internet facing systems updated and with as good a security posture as possible. Watch out for newly released vulnerabilities and patch them as fast as possible. Past cases indicate that 48 hours later may already be too late.</h4>
+
+<h4>Implement defences on the edge of your network and monitor your logs regularly and diligently. Try out the awesome BRO IDS (I am not being paid to promote it incase you&rsquo;re wondering).</h4>
+
+<h4>Some of these scanners are extremely aggressive. To demonstrate just how aggressive, I leave you with this Netherlands IP that was scanning port numbers that have the digits 443.</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">Source</span> <span class="nx">IP</span>      <span class="nx">Destination</span> <span class="nx">IP</span>  <span class="nx">Destination</span> <span class="nx">Port</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">1443</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">2443</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">3443</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">4431</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">4435</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">4436</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">4438</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">4439</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">4443</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">5443</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">6443</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">7443</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">10443</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">11443</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">22443</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">33443</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">44310</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">44322</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">44366</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">55443</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+    </div>
+  </div>
+
+
+
+  <footer>
+    <hr>
+    
+    <div class="row-fluid">
+      
+      <div class="span6">
+        <p class="meta">
+        
+        
+
+
+
+  <a href="/blog/categories/the-network-project/"><span class="badge">the network project</span></a>
+
+
+
+
+        </p>
+      </div>
+      
+      <div class="span6 social-sharing">
+        <div class="sharing">
+  <div class="addthis_toolbox addthis_default_style ">
+  
+  
+  <a class="addthis_button_tweet"></a>
+  
+  
+  <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+      </div>
+      
+      
+    </div>
+    
+    <div class="row-fluid">
+      <div class="span12">
+        <p class="meta">
+          
+            <a class="basic-alignment left" href="/blog/2015/09/13/hackers-wanted/" title="Previous Post: Hackers Wanted!">&laquo; Hackers Wanted!</a>
+          
+          
+        </p>
+      </div>
+    </div>
+  </footer>
+</article>
+
+</div>
+
+
+
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
+  Copyright &copy; 2015 - ck -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+
+        </footer>
+      </div>
+  </div>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
