@@ -58,7 +58,7 @@ categories: ["the network project"]
 ####As expected most traffic is either HTTP (80), HTTPS (443) or DNS (53). NTP traffic (123) also features prominently when the phone is idle.
 ####Of interest is that we can confirm Safaricom uses their own DNS servers, in this case `196.201.216.21`, `196.201.218.15` and `196.201.217.7`. An OpenDNS server `208.67.222.222` was also queried once so they probably have OpenDNS as an option.
 ####The ntp servers were distributed among African countries, Angola - `196.223.19.3`, Tunisia - `197.12.0.14`, SA - `197.84.150.123` and so on. We can therefore safely say they use the africa.pool.ntp.org pool.
-####Then comes the interesting bit, there were some Safaricom IPs communicating to the phone on some weird ports, one case is `196.201.216.4` on port `3`, Shodan reveals port `500` and `4500` open on whatever is running on that IP. Let's leave Safaricom for now and look at the other traffic.
+####Then comes the interesting bit, there were some Safaricom IPs communicating with the phone on some weird ports, one case is `196.201.216.4`, Shodan reveals port `500` and `4500` open on whatever is running on that IP. Let's leave Safaricom for now and look at the other traffic.
 
 ####The BRO logs are pretty detailed and therefore I needed some way to clean them up to do my own analysis. I therefore wrote a bash script to do some filtering.
 ####I then used Shodan-cli to get information of every unique IP and save the output. Here is the script for anyone interested.
