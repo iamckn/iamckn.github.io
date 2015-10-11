@@ -4,7 +4,7 @@
   <title><![CDATA[the poetry of (in)security]]></title>
   <link href="http://www.ckn.io/atom.xml" rel="self"/>
   <link href="http://www.ckn.io/"/>
-  <updated>2015-10-04T12:39:45+03:00</updated>
+  <updated>2015-10-11T23:08:17+03:00</updated>
   <id>http://www.ckn.io/</id>
   <author>
     <name><![CDATA[ck]]></name>
@@ -12,6 +12,131 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The HackRF One: First steps]]></title>
+    <link href="http://www.ckn.io/blog/2015/10/11/the-hackrf-one-first-steps/"/>
+    <updated>2015-10-11T20:18:10+03:00</updated>
+    <id>http://www.ckn.io/blog/2015/10/11/the-hackrf-one-first-steps</id>
+    <content type="html"><![CDATA[<h4>The wireless world is an area I&rsquo;ve been interested in for a long time. From the the more common applications such as Wi-Fi, bluetooth and FM to the more lesser explored such as radar, satellite and GSM, radio frequency is an area I plan to explore extensively. How awesome is the concept of <a href="https://en.wikipedia.org/wiki/Electromagnetic_pulse" target="_blank">electromagnetic pulses</a> in this age that is driven by electromagnetism. I digress so let me get back on track, there will be several more posts to explore the possibilities.</h4>
+
+<!--more-->
+
+
+<h4>I recently acquired the awesome <a href="https://greatscottgadgets.com/hackrf/" target="_blank">HackRF One</a>, a Software Defined Radio peripheral capable of transmission or reception of radio signals from 1 MHz to 6 GHz. I added the <a href="http://www.nooelec.com/store/ham-it-up.html" target="_blank">Ham It Up v1.3 - RF Upconverter</a> to boost performance in the lower frequency ranges. A telescopic antenna and various connectors complete the setup.</h4>
+
+<h2>The Hardware</h2>
+
+<h4><strong>The HackRF One, telescopic antenna (ANT 500), some connectors and a Ham It Up v1.3 - RF Upconverter</strong></h4>
+
+<p><img src="http://www.ckn.io/images/hackrf_hardware.JPG"></p>
+
+<h2>Software setup</h2>
+
+<h4>I did my setup on archlinux but it should be just as easy on other OS&rsquo;s. Here are the instructions from the <a href="https://github.com/mossmann/hackrf/wiki/Operating-System-Tips" target="_blank">HackRF Github wiki page</a>.</h4>
+
+<h4>On my system I followed the following steps:</h4>
+
+<h3><strong><em>Installation of various software</em></strong></h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo pacman -S hackrf gnuradio-osmosdr gnuradio gnuradio-companion gqrx
+</span><span class='line'>yaourt -S gr-fosphor-git
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><strong><em>Creation of udev rules to allow access to the HackRF</em></strong></h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo nano /etc/udev/rules.d/52-hackrf.rules
+</span><span class='line'>  ATTR<span class="o">{</span>idVendor<span class="o">}==</span><span class="s2">&quot;1d50&quot;</span>, ATTR<span class="o">{</span>idProduct<span class="o">}==</span><span class="s2">&quot;6089&quot;</span>, SYMLINK+<span class="o">=</span><span class="s2">&quot;hackrf-one-%k&quot;</span>, <span class="nv">MODE</span><span class="o">=</span><span class="s2">&quot;660&quot;</span>, TAG+<span class="o">=</span><span class="s2">&quot;uaccess&quot;</span>
+</span><span class='line'>  ATTR<span class="o">{</span>idVendor<span class="o">}==</span><span class="s2">&quot;1fc9&quot;</span>, ATTR<span class="o">{</span>idProduct<span class="o">}==</span><span class="s2">&quot;000c&quot;</span>, SYMLINK+<span class="o">=</span><span class="s2">&quot;hackrf-dfu-%k&quot;</span>, <span class="nv">MODE</span><span class="o">=</span><span class="s2">&quot;660&quot;</span>, TAG+<span class="o">=</span><span class="s2">&quot;uaccess&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><strong><em>Testing the HackRF</em></strong></h3>
+
+<h4>Plug in the HackRF and run</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>hackrf_info
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>You should get output similar to:</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Found HackRF board 0:
+</span><span class='line'>USB descriptor string: 000000000000000014d463dc2f45a7e1
+</span><span class='line'>Board ID Number: <span class="m">2</span> <span class="o">(</span>HackRF One<span class="o">)</span>
+</span><span class='line'>Firmware Version: 2015.07.2
+</span><span class='line'>Part ID Number: 0xa000cb3c 0x0069435b
+</span><span class='line'>Serial Number: 0x00000000 0x00000000 0x14d463dc 0x2f45a7e1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>If you get an error, recheck your udev rules and ensure the HackRF USB connection is ok.</h4>
+
+<h3><strong><em>Updating the SPI Flash Firmware</em></strong></h3>
+
+<h4>Download the last firmware <a href="https://github.com/mossmann/hackrf/releases/tag/v2015.07.2" target="_blank">here</a>.</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>wget https://github.com/mossmann/hackrf/releases/download/v2015.07.2/hackrf-2015.07.2.zip
+</span><span class='line'>unzip hackrf-2015.07.2.zip
+</span><span class='line'><span class="nb">cd </span>hackrf-2015.07.2/firmware-bin/
+</span><span class='line'>hackrf_spiflash -w hackrf_one_usb_rom_to_ram.bin
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><strong><em>Updating the CPLD</em></strong></h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> ..
+</span><span class='line'>hackrf_cpldjtag -x firmware/cpld/sgpio_if/default.xsvf
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Press the reset button, then run the <strong>hackrf_info</strong> command and confirm the firmware updated successfully.</h4>
+
+<h4>We are then ready to try the &ldquo;Hello World&rdquo; of Software Defined Radio, implementing an FM receiver.</h4>
+
+<h2>An FM Receiver</h2>
+
+<h4>We will use the gnuradio-companion for this.</h4>
+
+<h4>Download and save this <a href="https://raw.githubusercontent.com/rrobotics/hackrf-tests/master/fm_radio/fm_radio_rx.grc" target="_blank">file</a>, then open it using gnuradio from the terminal.</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gnuradio-companion fm_radio_rx.grc
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>You can then tune in to your preferred radio frequency and listen in.</h4>
+
+<p><img src="http://www.ckn.io/images/fm_receiver.png"></p>
+
+<h4>With that out of the way, you can try building the FM receiver yourself using the gnuradio-companion.</h4>
+
+<h4>With the HackRF&rsquo;s transmission capability, an FM transmitter can also be implemented.</h4>
+
+<h4>In the next post, I&rsquo;ll show how to sniff gsm traffic.</h4>
+
+<h4>Till then, happy hacking :).</h4>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Saints and Outlaws]]></title>
@@ -629,10 +754,10 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[A hacker's journey]]></title>
-    <link href="http://www.ckn.io/blog/2015/08/25/the-hacking-journey/"/>
+    <title type="html"><![CDATA[Learning to hack]]></title>
+    <link href="http://www.ckn.io/blog/2015/08/25/learning-to-hack/"/>
     <updated>2015-08-25T14:27:24+03:00</updated>
-    <id>http://www.ckn.io/blog/2015/08/25/the-hacking-journey</id>
+    <id>http://www.ckn.io/blog/2015/08/25/learning-to-hack</id>
     <content type="html"><![CDATA[<h4>Becoming a skilled hacker or the politically correct &ldquo;information security specialist&rdquo; doesn&rsquo;t have a straightforward defined path. Here I will try to layout what constitutes a good way to go about it.</h4>
 
 <!--more-->
@@ -758,7 +883,7 @@
 
 <h4>The ball is in your court.</h4>
 
-<h2>Submit your papers and ideas to <a href="&#x6d;&#x61;&#105;&#108;&#116;&#111;&#x3a;&#x69;&#110;&#102;&#x6f;&#64;&#x41;&#102;&#x72;&#105;&#x63;&#x61;&#x48;&#x61;&#99;&#107;&#111;&#110;&#x2e;&#99;&#111;&#x6d;">&#105;&#x6e;&#102;&#x6f;&#64;&#65;&#x66;&#114;&#105;&#99;&#97;&#x48;&#97;&#x63;&#x6b;&#111;&#110;&#46;&#99;&#x6f;&#x6d;</a> before 30th of May.</h2>
+<h2>Submit your papers and ideas to <a href="&#109;&#x61;&#105;&#108;&#116;&#111;&#58;&#105;&#x6e;&#102;&#111;&#x40;&#x41;&#102;&#x72;&#105;&#99;&#97;&#72;&#x61;&#99;&#x6b;&#111;&#x6e;&#x2e;&#x63;&#111;&#x6d;">&#x69;&#x6e;&#x66;&#x6f;&#64;&#x41;&#x66;&#114;&#x69;&#99;&#97;&#72;&#97;&#99;&#x6b;&#x6f;&#110;&#46;&#x63;&#111;&#x6d;</a> before 30th of May.</h2>
 
 <blockquote><h4>Read this <a href="http://sylviamunyisia.blogspot.com/2015/05/call-for-papers.html">page</a> by Sylvia that explains the call for papers very well.</h4>
 
