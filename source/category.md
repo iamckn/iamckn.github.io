@@ -6,7 +6,7 @@ comments: true
 sharing: true
 footer: true
 ---
-#[crypto](/blog/categories/crypto/)
+#[radio](/blog/categories/radio/)
 
 ***
 
@@ -19,3 +19,7 @@ footer: true
 ***
 
 #[the network project](blog/categories/the-network-project/)
+
+***
+
+#[crypto](/blog/categories/crypto/)

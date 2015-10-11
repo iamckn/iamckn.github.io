@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "A hacker's journey"
+title: "Learning to hack"
 date: 2015-08-25 14:27:24 +0300
 comments: true
 categories: [ramblings]
