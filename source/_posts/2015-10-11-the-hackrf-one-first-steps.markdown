@@ -47,7 +47,7 @@ Serial Number: 0x00000000 0x00000000 0x14d463dc 0x2f45a7e1
 ```
 ####If you get an error, recheck your udev rules and ensure the HackRF USB connection is ok.
 ###***Updating the SPI Flash Firmware***
-####Download the last firmware <a href="https://github.com/mossmann/hackrf/releases/tag/v2015.07.2" target="_blank">here</a>.
+####Download the latest firmware <a href="https://github.com/mossmann/hackrf/releases/tag/v2015.07.2" target="_blank">here</a>.
 ```bash
 wget https://github.com/mossmann/hackrf/releases/download/v2015.07.2/hackrf-2015.07.2.zip
 unzip hackrf-2015.07.2.zip 
@@ -72,6 +72,6 @@ gnuradio-companion fm_radio_rx.grc
 {% img /images/fm_receiver.png %}
 
 ####With that out of the way, you can try building the FM receiver yourself using the gnuradio-companion.
-####With the HackRF's transmission capability, an FM transmitter can also be implemented.
+####With the HackRF's transmission capability, an FM transmitter can also be implemented. I won't say I haven't thought of jamming certain frequencies in the vicinity, but that would be illegal, wouldn't it :)?
 ####In the next post, I'll show how to sniff gsm traffic.
 ####Till then, happy hacking :).
