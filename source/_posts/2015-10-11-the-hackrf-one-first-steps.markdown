@@ -5,7 +5,7 @@ date: 2015-10-11 20:18:10 +0300
 comments: true
 categories: [radio]
 ---
-####The wireless world is an area I've been interested in for a long time. From the the more common applications such as Wi-Fi, bluetooth and FM to the more lesser explored such as radar, satellite and GSM, radio frequency is an area I plan to explore extensively. How awesome is the concept of <a href="https://en.wikipedia.org/wiki/Electromagnetic_pulse" target="_blank">electromagnetic pulses</a> in this age that is driven by electromagnetism. I digress so let me get back on track, there will be several more posts to explore the possibilities.
+####The wireless world is an area I've been interested in for a long time. From the the more common applications such as Wi-Fi, bluetooth and FM to the lesser explored such as radar, satellite and GSM, radio frequency is an area I plan to explore extensively. How awesome is the concept of <a href="https://en.wikipedia.org/wiki/Electromagnetic_pulse" target="_blank">electromagnetic pulses</a> in this age that is driven by electromagnetism. I digress so let me get back on track, there will be several more posts to explore the possibilities.
 
 <!--more-->
 
