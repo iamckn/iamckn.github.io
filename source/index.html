@@ -18,7 +18,11 @@ layout: default
     <a class="prev" href="{{paginator.next_page}}">&larr; Older</a>
     {% endif %}
 
-    {% if paginator.previous_page %}
+    {% if paginator.previous_page == 1 %}
+    <a class="next" href="/index.html">Newer &rarr;</a>
+    {% endif %}
+
+    {% if paginator.previous_page > 1 %}
     <a class="next" href="{{paginator.previous_page}}">Newer &rarr;</a>
     {% endif %}
   </div>
