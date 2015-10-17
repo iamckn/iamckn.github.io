@@ -4,7 +4,7 @@
   <title><![CDATA[the poetry of (in)security]]></title>
   <link href="http://www.ckn.io/atom.xml" rel="self"/>
   <link href="http://www.ckn.io/"/>
-  <updated>2015-10-14T07:36:05+03:00</updated>
+  <updated>2015-10-17T19:32:24+03:00</updated>
   <id>http://www.ckn.io/</id>
   <author>
     <name><![CDATA[ck]]></name>
@@ -12,6 +12,68 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Christian ~ 127.0.0.1]]></title>
+    <link href="http://www.ckn.io/blog/2015/10/17/christian/"/>
+    <updated>2015-10-17T11:40:08+03:00</updated>
+    <id>http://www.ckn.io/blog/2015/10/17/christian</id>
+    <content type="html"><![CDATA[<h1>who are you?</h1>
+
+<h4>I am a passionate Information Security enthusiast. I specialize in Digital Forensics and Incident Response (DFIR). Research and artifacts analysis are the cause of my sleepless nights. I have a keen interest in PC and mobile device malware, I am therefore always tinkering with VMs and mobile phones.</h4>
+
+<!--more-->
+
+
+<h1>what&rsquo;s your setup like?</h1>
+
+<h4>As is the norm with geeks, i have a few toys i play around with to facilitate my research.</h4>
+
+<blockquote><h4>HP S2031a 20&#8221; LCD Monitor</h4>
+
+<h4>HP Compaq LE2002x 20&#8221; LED monitor</h4>
+
+<h4>Dell Inspiron 15­5558 Notebook</h4>
+
+<h4>HP Envy 15&#8221; laptop</h4>
+
+<h4>Rubber Ducky Deluxe</h4>
+
+<h4>Teensy 3.1</h4>
+
+<h4>TP LInk MR3020 Portable Wireless Router</h4>
+
+<h4>TP link TLWN722N USB WiFI adapter</h4>
+
+<h4>Nexus 5 2013 (Black) and USB OTG cables</h4>
+
+<h4>Intel Galileo Board (Gen 2)</h4></blockquote>
+
+<p><img src="http://www.ckn.io/images/christian_setup.jpg" width="500" height="100"></p>
+
+<h4>The Dell laptop is my daily driver and it runs kali linux. It has an Intel Core i5­5200U processor clocking 2.2.Ghz x 4, 4GB Nvidia GeForce 920M graphics card, 8 GB ram and 1TB of storage.</h4>
+
+<h4>The HP Envy 15 is my research laptop, running Ubuntu desktop, it has an Intel core i7 4700MQ processor clocking 2.4Ghz x 8, 16GB RAM and 1TB of Storage.</h4>
+
+<h4>I use Kali as my primary OS because of the flexibility and the tools it comes with. The Ubuntu OS comes in very handy with research, development and the analysis that i do. I also run a windows VM for my documentation needs.</h4>
+
+<h4>My phone runs Kali nethunter with BRO IDS to keep track of traffic in and out of my phone.</h4>
+
+<h4>My interest in other fields have grown over the past few years and I have slowly incorporated Wireless and HID gadgets and resources for my research, hence some of the toys I have. It is always interesting to see how different infosec disciplines integrate and complement each other to achieve a predefined set of objectives.</h4>
+
+<h1>what tools do you run?</h1>
+
+<h4>The tools i run usually depend on the type of activity i am performing. The bare minimum is Santoku and REMnux for malware analysis, Kali linux for the usual infosec stuff, Security Onion for network traffic analysis, and Windows for forensic analysis and documentation.</h4>
+
+<h1>What&rsquo;s your dream setup</h1>
+
+<h4>My dream setup would be three 27 inch LED monitors side by side and a powerful enough CPU for decent 50­60 fps gaming and infosec research, a multicoloured  LED backlit keyboard and gaming mouse. As for the infosec toys, a quadcopter drone bundled with a WiFi pineapple, camera module and goggles, would do it for me. I hope Santa is gonna read this blog lol.</h4>
+
+<hr />
+
+<blockquote><h4>Follow Christian on twitter <a href="https://twitter.com/xtian_kisutsa" target="_blank"><strong>@xtian_kisutsa</strong></a> to keep up with what he&rsquo;s up to.</h4></blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The HackRF One: First steps]]></title>
@@ -883,7 +945,7 @@
 
 <h4>The ball is in your court.</h4>
 
-<h2>Submit your papers and ideas to <a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#111;&#x3a;&#105;&#x6e;&#102;&#111;&#64;&#65;&#x66;&#x72;&#105;&#x63;&#x61;&#72;&#97;&#99;&#107;&#x6f;&#110;&#46;&#99;&#111;&#109;">&#105;&#x6e;&#102;&#x6f;&#64;&#x41;&#102;&#114;&#x69;&#x63;&#97;&#72;&#x61;&#99;&#107;&#111;&#110;&#x2e;&#99;&#x6f;&#109;</a> before 30th of May.</h2>
+<h2>Submit your papers and ideas to <a href="&#109;&#x61;&#x69;&#108;&#116;&#111;&#x3a;&#x69;&#x6e;&#x66;&#111;&#x40;&#65;&#x66;&#114;&#105;&#x63;&#97;&#72;&#97;&#x63;&#x6b;&#111;&#110;&#x2e;&#x63;&#111;&#x6d;">&#105;&#x6e;&#102;&#x6f;&#64;&#x41;&#x66;&#x72;&#105;&#99;&#97;&#x48;&#x61;&#99;&#107;&#x6f;&#x6e;&#46;&#x63;&#111;&#109;</a> before 30th of May.</h2>
 
 <blockquote><h4>Read this <a href="http://sylviamunyisia.blogspot.com/2015/05/call-for-papers.html">page</a> by Sylvia that explains the call for papers very well.</h4>
 

@@ -1,87 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://www.ckn.io/blog/2015/10/17/christian/</loc>
+    <lastmod>2015-10-17T11:40:08+03:00</lastmod>
+  </url>
+  <url>
     <loc>http://www.ckn.io/blog/2015/10/11/the-hackrf-one-first-steps/</loc>
     <lastmod>2015-10-11T20:18:10+03:00</lastmod>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>http://www.ckn.io/blog/2015/10/04/saints-and-outlaws/</loc>
     <lastmod>2015-10-04T09:06:09+03:00</lastmod>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>http://www.ckn.io/blog/2015/09/17/the-bro-chronicles-2/</loc>
     <lastmod>2015-09-17T20:54:07+03:00</lastmod>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>http://www.ckn.io/blog/2015/09/13/hackers-wanted/</loc>
     <lastmod>2015-09-13T11:31:27+03:00</lastmod>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>http://www.ckn.io/blog/2015/09/06/the-bro-chronicles-1/</loc>
     <lastmod>2015-09-06T08:56:06+03:00</lastmod>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>http://www.ckn.io/blog/2015/08/25/learning-to-hack/</loc>
     <lastmod>2015-08-25T14:27:24+03:00</lastmod>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>http://www.ckn.io/blog/2015/05/17/africahackon-be-part-of-the-story/</loc>
     <lastmod>2015-05-17T08:42:08+03:00</lastmod>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>http://www.ckn.io/blog/2015/05/11/crypto-magic-homomorphic-encryption/</loc>
     <lastmod>2015-05-11T13:45:52+03:00</lastmod>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>http://www.ckn.io/blog/2015/05/05/crypto-magic-zero-knowledge/</loc>
     <lastmod>2015-05-05T09:23:11+03:00</lastmod>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>http://www.ckn.io/blog/2015/04/27/bright/</loc>
     <lastmod>2015-04-27T08:01:00+03:00</lastmod>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>http://www.ckn.io/blog/2015/04/20/jade/</loc>
     <lastmod>2015-04-20T06:34:17+03:00</lastmod>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>http://www.ckn.io/blog/2015/03/14/ck-the-setup/</loc>
     <lastmod>2015-03-14T19:46:34+03:00</lastmod>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>http://www.ckn.io/category.html</loc>
-    <lastmod>2015-10-14T07:36:05+03:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>http://www.ckn.io/blog/archives/</loc>
-    <lastmod>2015-10-14T07:36:05+03:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>http://www.ckn.io/</loc>
-    <lastmod>2015-10-14T07:36:05+03:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
   </url>
   <url>
     <loc>http://www.ckn.io/whoami.html</loc>
-    <lastmod>2015-10-14T07:36:05+03:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://www.ckn.io/blog/categories/the-setup/</loc>
+  </url>
+  <url>
+    <loc>http://www.ckn.io/blog/categories/crypto/</loc>
+  </url>
+  <url>
+    <loc>http://www.ckn.io/blog/categories/ramblings/</loc>
+  </url>
+  <url>
+    <loc>http://www.ckn.io/blog/categories/the-network-project/</loc>
+  </url>
+  <url>
+    <loc>http://www.ckn.io/blog/categories/radio/</loc>
   </url>
 </urlset>
