@@ -29,9 +29,9 @@ categories: [crypto]
 ####Over the past three decades, partial solutions have been discovered. 
 ####However, it is not until 2009 that Craig Gentry developed a fully homomorphic system. Unfortunately it requires lots and lots of computational power. For instance, an encrypted Google search would multiply the computation time to 1 trillion times that of a normal one :(.
 ####The good news is that the theoretical barrier was broken and with lots of work a practical solution may be found :).
->####For anyone willing to give it a go, [DARPA is offering $20 million](http://www.i-programmer.info/news/112-theory/2330-darpa-spends-20-million-on-homomorphic-encryption.html) if you can come up with a scheme that only takes 100,000 times as long as unencrypted calculations :).
+>####For anyone willing to give it a go, <a href="http://www.i-programmer.info/news/112-theory/2330-darpa-spends-20-million-on-homomorphic-encryption.html" target="_blank">**DARPA is offering $20 million**</a> if you can come up with a scheme that only takes 100,000 times as long as unencrypted calculations :).
 
 ####And we may well be on our way there, three MIT scientists developed a system that emulates fully homomorphic encryption for most of the functions of the SQL databases used in many applications. It computes only with encrypted data and takes just 15% to 26% more computing time.
-####The project is called CryptDB and you can check it out [here](https://github.com/CryptDB/cryptdb).
+####The project is called CryptDB and you can check it out <a href="https://github.com/CryptDB/cryptdb" target="_blank">**here**</a>.
 
 ####The application of this in information security does not even need explaining :)

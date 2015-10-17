@@ -33,9 +33,9 @@ categories: [crypto]
 
 ##I'll leave you with the following fun zero knowledge proofs for now.
 ***
-####See how a person can prove to another that they know the solution to a sudoku puzzle without actually reavealing the solution. Check it out [here](http://www.wisdom.weizmann.ac.il/~naor/PAPERS/SUDOKU_DEMO/).
+####See how a person can prove to another that they know the solution to a sudoku puzzle without actually reavealing the solution. Check it out <a href="http://www.wisdom.weizmann.ac.il/~naor/PAPERS/SUDOKU_DEMO/" target="_blank">**here**</a>.
 ***
-####Also check out this cool explanation with a modified version of [Ali Baba and the forty thieves](http://pages.cs.wisc.edu/~mkowalcz/628.pdf)
+####Also check out this cool explanation with a modified version of <a href="http://pages.cs.wisc.edu/~mkowalcz/628.pdf" target="_blank">**Ali Baba and the forty thieves**</a>.
 ***
 ####In part two of Crypto Magic, I'll talk about homomorphic encryption :).
 

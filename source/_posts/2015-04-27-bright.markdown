@@ -20,11 +20,11 @@ categories: [the setup]
 
 ####I am running Kali linux as my primary OS and dual boot Windows 8 on the side when needed. Kali has all the tools I need for my infosec work and experiments. I also import tools from various sources.
 
-####I have a Nexus 5 phone and a Nexus 7 Generation 2 tab. I run [Kali NetHunter](http://www.nethunter.com/) on both, although I recently misplaced the Nexus 7. Kali Nethunter running on Android 5.0 makes it just the kind of phone to have in terms of the all purpose features.
+####I have a Nexus 5 phone and a Nexus 7 Generation 2 tab. I run <a href="http://www.nethunter.com/" target="_blank">**Kali Nethunter**</a> on both, although I recently misplaced the Nexus 7. Kali Nethunter running on Android 5.0 makes it just the kind of phone to have in terms of the all purpose features.
 
 ####I have a lot of interest in Wireless Networks which is one of the areas in my PhD research. For that matter, I've got a WiFi Pineapple Mark V Tactical Bundle 6800 with a 9dBi Dipole Antenna and a magnetic Base. The many features included in the WiFi Pineapple are beyond description. It makes wireless pentesting very easy if one understands the basics involved.
 
-####I have a [USB Rubber Ducky Deluxe](http://hakshop.myshopify.com/collections/usb-rubber-ducky/products/usb-rubber-ducky-deluxe?variant=353378649) that I use for Red Teaming assessments and other pentests when needed. It helps a lot in grabbing passwords when close to a target's machine, and also for any other function that would take long to type manually.
+####I have a <a href="http://hakshop.myshopify.com/collections/usb-rubber-ducky/products/usb-rubber-ducky-deluxe?variant=353378649" target="_blank">**USB Rubber Ducky Deluxe**</a> that I use for Red Teaming assessments and other pentests when needed. It helps a lot in grabbing passwords when close to a target's machine, and also for any other function that would take long to type manually.
 
 {% img /images/bright_setup.jpg 500 100 %}
 
@@ -35,8 +35,8 @@ categories: [the setup]
 #What's your dream setup
 
 ####Anyone in the infosec field will keep dreaming for faster equipment no matter how much they have. 
-####It'll be great to have some of the toys from the [HAK5 SHOP](http://hakshop.myshopify.com/) which include some radio stuff and the THROWING STAR LAN. It would also be great to have a good Rainbow table collection on an external hard drive, a [Pwn-plug](https://www.pwnieexpress.com/product/pwn-plug-r3penetration-testing-device/) for future pentests and a powerful blade server to host all my goodies.
+####It'll be great to have some of the toys from the <a href="http://hakshop.myshopify.com/" target="_blank">**HAK5 shop**</a> which include some radio stuff and the THROWING STAR LAN. It would also be great to have a good Rainbow table collection on an external hard drive, a <a href="https://www.pwnieexpress.com/product/pwn-plug-r3penetration-testing-device/" target="_blank">**Pwn-plug**</a> for future pentests and a powerful blade server to host all my goodies.
 
 ***
 
-> ####Follow Bright on twitter [@BRIGHTZEED](https://twitter.com/BRIGHTZEED) for lots more infosec stuff :)
+> ####Follow Bright on twitter <a href="https://twitter.com/BRIGHTZEED" target="_blank">**@brightzeed**</a> for lots more infosec stuff :)

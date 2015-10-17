@@ -36,6 +36,6 @@ categories: [ramblings]
 ####The same things that make the state of information security so precarious are the same ones that if employed appropriately can salvage it.
 ####Hackers too are driven by self interest and pride and that's all businesses need to offer them to keep them on their side. Offering bounty programs to people who discover vulnerabilities is an easy and effective way to accomplish this. 
 ####Hackers love recognition and appreciation of their skills, offer them this and they'll be your first line of defence. They'll even notify you of imminent threats as they arise. 
-####Deride them and they may spend the rest of their days trying to get back at you, just ask <a href="http://gizmodo.com/why-sony-keeps-getting-hacked-1667259233" target="_blank">Sony</a>.
+####Deride them and they may spend the rest of their days trying to get back at you, just ask <a href="http://gizmodo.com/why-sony-keeps-getting-hacked-1667259233" target="_blank">**Sony**</a>.
 ####The exponentially growing number of young skilled hackers getting into the field with time to burn will need an outlet. They will have to be jointly supported by both businesses and established professionals in creation of opportunities and in mentorship. 
 ####With that, the saints will have every chance of winning the war.

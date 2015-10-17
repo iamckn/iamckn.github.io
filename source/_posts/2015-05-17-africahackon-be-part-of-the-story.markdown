@@ -42,9 +42,9 @@ categories: [ramblings]
 ####The ball is in your court.
 
 ##Submit your papers and ideas to info@AfricaHackon.com before 30th of May.
->####Read this [page](http://sylviamunyisia.blogspot.com/2015/05/call-for-papers.html) by Sylvia that explains the call for papers very well.
->####Also feel free to interact with the team on social media through [twitter](https://twitter.com/AfricaHackon) and [facebook](https://www.facebook.com/AfricaHackon)
->####And visit the [AfricaHackon site](http://www.AfricaHackon.com/) for past presentations and to keep yourself updated.
+>####Read this <a href="http://sylviamunyisia.blogspot.com/2015/05/call-for-papers.html" target="_blank">**page**</a> by Sylvia that explains the call for papers very well.
+>####Also feel free to interact with the team on social media through <a href="https://twitter.com/AfricaHackon" target="_blank">**twitter**</a> and <a href="https://www.facebook.com/AfricaHackon" target="_blank">**facebook**</a>.
+>####And visit the <a href="http://www.AfricaHackon.com/" target="_blank">**AfricaHackon site**</a> for past presentations and to keep yourself updated.
 
 ####Be part of the story.
 ####And remember, everybody needs a hacker :)

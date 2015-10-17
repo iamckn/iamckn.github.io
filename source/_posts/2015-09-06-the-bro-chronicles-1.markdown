@@ -5,7 +5,7 @@ date: 2015-09-06 08:56:06 +0300
 comments: true
 categories: ["the network project"]
 ---
-####I was having a random conversation with <a href="https://twitter.com/xtian_kisutsa" target="_blank">Christian</a> - one indefatigable hacker (I'll be using the word hacker for infosec people henceforth. I find political correctness a bit tedious). The conversation was based around Kali Nethunter and all the cool stuff that can be done with it. The discussion was revolving around "man in the middle attacks" and I suggested that having <a href="https://www.bro.org/" target="_blank">BRO</a> running on Nethunter would be awesome. This got him excited and true to his nature, he couldn't rest till he'd attempted it. Long story short, he did some amazing work and had it running soon afterwards complete with a detailed "how to" guide. Here's a link to the <a href="http://t.co/Iz992aMCL5" target="_blank">guide</a>.
+####I was having a random conversation with <a href="https://twitter.com/xtian_kisutsa" target="_blank">**Christian**</a> - one indefatigable hacker (I'll be using the word hacker for infosec people henceforth. I find political correctness a bit tedious). The conversation was based around Kali Nethunter and all the cool stuff that can be done with it. The discussion was revolving around "man in the middle attacks" and I suggested that having <a href="https://www.bro.org/" target="_blank">**BRO**</a> running on Nethunter would be awesome. This got him excited and true to his nature, he couldn't rest till he'd attempted it. Long story short, he did some amazing work and had it running soon afterwards complete with a detailed "how to" guide. Here's a link to the <a href="http://t.co/Iz992aMCL5" target="_blank">**guide**</a>.
 
 <!--more-->
 
@@ -74,7 +74,7 @@ categories: ["the network project"]
 	while read -r line; do
 		echo $line
 		`sudo shodan host $line >> output`
-		echo "">> output
+		echo "">**> output
 	done < "filtered"
 	echo "Done! Output saved to output"
 	
@@ -91,7 +91,7 @@ categories: ["the network project"]
 	ACNielson 			Amazon  			...and several others
 ```
 ####I usually am not worried about companies using analytics for their marketing purposes but this time something spooked me.
-####Several of these servers are vulnerable to the <a href="https://weakdh.org/" target="_blank">logjam attack</a> and even more worryingly some are vulnerable to heartbleed. It would therefore not be far-fetched to assume they've already been compromised or they will be. With all the traffic going on between my phone and these servers, I had hoped they'd have their security figured out. It's often said that third parties are some of the most promising targets for hackers and you can see exactly why here.
+####Several of these servers are vulnerable to the <a href="https://weakdh.org/" target="_blank">**logjam attack**</a> and even more worryingly some are vulnerable to heartbleed. It would therefore not be far-fetched to assume they've already been compromised or they will be. With all the traffic going on between my phone and these servers, I had hoped they'd have their security figured out. It's often said that third parties are some of the most promising targets for hackers and you can see exactly why here.
 
 #Conclusion
 ####That was a long post so let's wrap it up.

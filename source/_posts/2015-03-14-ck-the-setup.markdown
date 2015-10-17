@@ -44,7 +44,7 @@ categories: [the setup]
 
 ####Ideally I'd like to have one light, fast, and extremely powerful laptop. Something like; 1TB SSD, 16GB ram and at least 8 hours battery life and of course powerful processor and graphics card. 
 
-####Next I'd love to setup a multi-GPU cluster machine. Something like [this 25-GPU cluster monster](http://arstechnica.com/security/2012/12/25-gpu-cluster-cracks-every-standard-windows-password-in-6-hours/). Can i dream :)?
+####Next I'd love to setup a multi-GPU cluster machine. Something like <a href="http://arstechnica.com/security/2012/12/25-gpu-cluster-cracks-every-standard-windows-password-in-6-hours/" target="_blank">**this 25-GPU cluster monster**</a>. Can i dream :)?
 
 ####I am very happy with my Nexus 5 so am good there.
 
