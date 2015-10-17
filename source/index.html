@@ -15,15 +15,17 @@ layout: default
   {% endfor %}
   <div class="pagination">
     {% if paginator.next_page %}
-    <a class="prev" href="{{paginator.next_page}}">&larr; Older</a>
+    <a class="prev" href="{{paginator.next_page_path}}">&larr; Older</a>
     {% endif %}
 
     {% if paginator.previous_page == 1 %}
+    <span>|</span>
     <a class="next" href="/index.html">Newer &rarr;</a>
     {% endif %}
 
     {% if paginator.previous_page > 1 %}
-    <a class="next" href="{{paginator.previous_page}}">Newer &rarr;</a>
+    <span>|</span>
+    <a class="next" href="{{paginator.previous_page_path}}">Newer &rarr;</a>
     {% endif %}
   </div>
 </div>
