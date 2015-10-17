@@ -4,7 +4,7 @@
   <title><![CDATA[Category: radio | the poetry of (in)security]]></title>
   <link href="http://www.ckn.io/blog/categories/radio/atom.xml" rel="self"/>
   <link href="http://www.ckn.io/"/>
-  <updated>2015-10-17T19:32:24+03:00</updated>
+  <updated>2015-10-17T22:42:53+03:00</updated>
   <id>http://www.ckn.io/</id>
   <author>
     <name><![CDATA[ck]]></name>
@@ -18,12 +18,12 @@
     <link href="http://www.ckn.io/blog/2015/10/11/the-hackrf-one-first-steps/"/>
     <updated>2015-10-11T20:18:10+03:00</updated>
     <id>http://www.ckn.io/blog/2015/10/11/the-hackrf-one-first-steps</id>
-    <content type="html"><![CDATA[<h4>The wireless world is an area I&rsquo;ve been interested in for a long time. From the the more common applications such as Wi-Fi, bluetooth and FM to the lesser explored such as radar, satellite and GSM, radio frequency is an area I plan to explore extensively. How awesome is the concept of <a href="https://en.wikipedia.org/wiki/Electromagnetic_pulse" target="_blank">electromagnetic pulses</a> in this age that is driven by electromagnetism. I digress so let me get back on track, there will be several more posts to explore the possibilities.</h4>
+    <content type="html"><![CDATA[<h4>The wireless world is an area I&rsquo;ve been interested in for a long time. From the the more common applications such as Wi-Fi, bluetooth and FM to the lesser explored such as radar, satellite and GSM, radio frequency is an area I plan to explore extensively. How awesome is the concept of <a href="https://en.wikipedia.org/wiki/Electromagnetic_pulse" target="_blank"><strong>electromagnetic pulses</strong></a> in this age that is driven by electromagnetism. I digress so let me get back on track, there will be several more posts to explore the possibilities.</h4>
 
 <!--more-->
 
 
-<h4>I recently acquired the awesome <a href="https://greatscottgadgets.com/hackrf/" target="_blank">HackRF One</a>, a Software Defined Radio peripheral capable of transmission or reception of radio signals from 1 MHz to 6 GHz. I added the <a href="http://www.nooelec.com/store/ham-it-up.html" target="_blank">Ham It Up v1.3 - RF Upconverter</a> to boost performance in the lower frequency ranges. A telescopic antenna and various connectors complete the setup.</h4>
+<h4>I recently acquired the awesome <a href="https://greatscottgadgets.com/hackrf/" target="_blank"><strong>HackRF One</strong></a>, a Software Defined Radio peripheral capable of transmission or reception of radio signals from 1 MHz to 6 GHz. I added the <a href="http://www.nooelec.com/store/ham-it-up.html" target="_blank"><strong>Ham It Up v1.3 - RF Upconverter</strong></a> to boost performance in the lower frequency ranges. A telescopic antenna and various connectors complete the setup.</h4>
 
 <h2>The Hardware</h2>
 
@@ -33,7 +33,7 @@
 
 <h2>Software setup</h2>
 
-<h4>I did my setup on archlinux but it should be just as easy on other OS&rsquo;s. Here are the instructions from the <a href="https://github.com/mossmann/hackrf/wiki/Operating-System-Tips" target="_blank">HackRF Github wiki page</a>.</h4>
+<h4>I did my setup on archlinux but it should be just as easy on other OS&rsquo;s. Here are the instructions from the <a href="https://github.com/mossmann/hackrf/wiki/Operating-System-Tips" target="_blank"><strong>HackRF Github wiki page</strong></a>.</h4>
 
 <h4>On my system I followed the following steps:</h4>
 
@@ -71,7 +71,7 @@ Serial Number: 0x00000000 0x00000000 0x14d463dc 0x2f45a7e1
 
 <h3><strong><em>Updating the SPI Flash Firmware</em></strong></h3>
 
-<h4>Download the latest firmware <a href="https://github.com/mossmann/hackrf/releases/tag/v2015.07.2" target="_blank">here</a>.</h4>
+<h4>Download the latest firmware <a href="https://github.com/mossmann/hackrf/releases/tag/v2015.07.2" target="_blank"><strong>here</strong></a>.</h4>
 
 <pre><code class="bash">wget https://github.com/mossmann/hackrf/releases/download/v2015.07.2/hackrf-2015.07.2.zip
 unzip hackrf-2015.07.2.zip 
@@ -93,7 +93,7 @@ hackrf_cpldjtag -x firmware/cpld/sgpio_if/default.xsvf
 
 <h4>We will use the gnuradio-companion for this.</h4>
 
-<h4>Download and save this <a href="https://raw.githubusercontent.com/rrobotics/hackrf-tests/master/fm_radio/fm_radio_rx.grc" target="_blank">file</a>, then open it using gnuradio from the terminal.</h4>
+<h4>Download and save this <a href="https://raw.githubusercontent.com/rrobotics/hackrf-tests/master/fm_radio/fm_radio_rx.grc" target="_blank"><strong>file</strong></a>, then open it using gnuradio from the terminal.</h4>
 
 <pre><code class="bash">gnuradio-companion fm_radio_rx.grc
 </code></pre>

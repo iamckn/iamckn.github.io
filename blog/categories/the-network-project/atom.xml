@@ -4,7 +4,7 @@
   <title><![CDATA[Category: the network project | the poetry of (in)security]]></title>
   <link href="http://www.ckn.io/blog/categories/the-network-project/atom.xml" rel="self"/>
   <link href="http://www.ckn.io/"/>
-  <updated>2015-10-17T19:32:24+03:00</updated>
+  <updated>2015-10-17T22:42:53+03:00</updated>
   <id>http://www.ckn.io/</id>
   <author>
     <name><![CDATA[ck]]></name>
@@ -18,9 +18,9 @@
     <link href="http://www.ckn.io/blog/2015/09/17/the-bro-chronicles-2/"/>
     <updated>2015-09-17T20:54:07+03:00</updated>
     <id>http://www.ckn.io/blog/2015/09/17/the-bro-chronicles-2</id>
-    <content type="html"><![CDATA[<h4>In part one I analysed the data communication that takes place on a phone over a one hour period. Read the post <a href="https://www.ckn.io/blog/2015/09/06/the-bro-chronicles-1/" target="_blank">here</a> for details and background info.</h4>
+    <content type="html"><![CDATA[<h4>In part one I analysed the data communication that takes place on a phone over a one hour period. Read the post <a href="https://www.ckn.io/blog/2015/09/06/the-bro-chronicles-1/" target="_blank"><strong>here</strong></a> for details and background info.</h4>
 
-<h4>Here, I go further and analyse what happens over a twelve hour period of normal phone usage. I ran <a href="https://www.bro.org/" target="_blank">BRO</a> on my phone from <code>6:40am</code> to <code>6:40pm</code> and ensured that data was on and WIFI off the whole time.</h4>
+<h4>Here, I go further and analyse what happens over a twelve hour period of normal phone usage. I ran <a href="https://www.bro.org/" target="_blank"><strong>BRO</strong></a> on my phone from <code>6:40am</code> to <code>6:40pm</code> and ensured that data was on and WIFI off the whole time.</h4>
 
 <!--more-->
 
@@ -86,15 +86,15 @@
     8996            1
 </code></pre>
 
-<h4>These results immediately direct our attention to internet wide scanning. This has slowly become a growing phenomenon over the past two years and has been aided by the release of extremely fast scanning tools. We have <a href="https://zmap.io/" target="_blank">zmap</a> created and maintained by a team from the University of Michigan which can scan the entire IPv4 space in under 5 minutes with a ten gigabit ethernet connection. Masscan, created by Robert Graham of Errata Security is fast enough to do the same in under <a href="http://blog.erratasec.com/2013/09/masscan-entire-internet-in-3-minutes.html" target="_blank">3 minutes</a>!</h4>
+<h4>These results immediately direct our attention to internet wide scanning. This has slowly become a growing phenomenon over the past two years and has been aided by the release of extremely fast scanning tools. We have <a href="https://zmap.io/" target="_blank"><strong>zmap</strong></a> created and maintained by a team from the University of Michigan which can scan the entire IPv4 space in under 5 minutes with a ten gigabit ethernet connection. Masscan, created by Robert Graham of Errata Security is fast enough to do the same in under <a href="http://blog.erratasec.com/2013/09/masscan-entire-internet-in-3-minutes.html" target="_blank"><strong>3 minutes</strong></a>!</h4>
 
-<h4>Internet wide scanning is being used a lot by researchers to investigate vulnerabilities and do various internet wide studies. A case in point is that several internet wide scans were done targeting the heartbleed vulnerability within 48 hours of disclosure. A more recent case is this week&rsquo;s <a href="https://zmap.io/synful/" target="_blank">synful attack scan</a> done by the zmap team on September 15, 2015.</h4>
+<h4>Internet wide scanning is being used a lot by researchers to investigate vulnerabilities and do various internet wide studies. A case in point is that several internet wide scans were done targeting the heartbleed vulnerability within 48 hours of disclosure. A more recent case is this week&rsquo;s <a href="https://zmap.io/synful/" target="_blank"><strong>synful attack scan</strong></a> done by the zmap team on September 15, 2015.</h4>
 
-<h4><a href="https://www.shodan.io/" target="_blank">Shodan</a> does regular internet wide scans and hosts the data on their site which is made available to the public in an interactive way.</h4>
+<h4><a href="https://www.shodan.io/" target="_blank"><strong>Shodan</strong></a> does regular internet wide scans and hosts the data on their site which is made available to the public in an interactive way.</h4>
 
-<h4>The University of Michigan team (same one that maintains zmap) also does daily scans and hosts the raw data on the <a href="https://www.scans.io/" target="_blank">scans.io</a> site. They also host scans done by other researchers such as the Rapid7 team which does various scans regularly.</h4>
+<h4>The University of Michigan team (same one that maintains zmap) also does daily scans and hosts the raw data on the <a href="https://www.scans.io/" target="_blank"><strong>scans.io</strong></a> site. They also host scans done by other researchers such as the Rapid7 team which does various scans regularly.</h4>
 
-<h4>The flip side of this is that a lot more people do these scans with malicious intent. They&rsquo;re always on the lookout for vulnerable systems on the internet and their activity spikes every time a major vulnerable is released. They mostly hide behind <a href="https://en.wikipedia.org/wiki/Bulletproof_hosting" target="_blank">bulletproof hosting providers</a> or run their scans from countries likely to be lenient, with China featuring prominently.</h4>
+<h4>The flip side of this is that a lot more people do these scans with malicious intent. They&rsquo;re always on the lookout for vulnerable systems on the internet and their activity spikes every time a major vulnerable is released. They mostly hide behind <a href="https://en.wikipedia.org/wiki/Bulletproof_hosting" target="_blank"><strong>bulletproof hosting providers</strong></a> or run their scans from countries likely to be lenient, with China featuring prominently.</h4>
 
 <h4>Let me now relate the activity on my phone with internet wide scanning.</h4>
 
@@ -179,7 +179,7 @@
     <link href="http://www.ckn.io/blog/2015/09/06/the-bro-chronicles-1/"/>
     <updated>2015-09-06T08:56:06+03:00</updated>
     <id>http://www.ckn.io/blog/2015/09/06/the-bro-chronicles-1</id>
-    <content type="html"><![CDATA[<h4>I was having a random conversation with <a href="https://twitter.com/xtian_kisutsa" target="_blank">Christian</a> - one indefatigable hacker (I&rsquo;ll be using the word hacker for infosec people henceforth. I find political correctness a bit tedious). The conversation was based around Kali Nethunter and all the cool stuff that can be done with it. The discussion was revolving around &ldquo;man in the middle attacks&rdquo; and I suggested that having <a href="https://www.bro.org/" target="_blank">BRO</a> running on Nethunter would be awesome. This got him excited and true to his nature, he couldn&rsquo;t rest till he&rsquo;d attempted it. Long story short, he did some amazing work and had it running soon afterwards complete with a detailed &ldquo;how to&rdquo; guide. Here&rsquo;s a link to the <a href="http://t.co/Iz992aMCL5" target="_blank">guide</a>.</h4>
+    <content type="html"><![CDATA[<h4>I was having a random conversation with <a href="https://twitter.com/xtian_kisutsa" target="_blank"><strong>Christian</strong></a> - one indefatigable hacker (I&rsquo;ll be using the word hacker for infosec people henceforth. I find political correctness a bit tedious). The conversation was based around Kali Nethunter and all the cool stuff that can be done with it. The discussion was revolving around &ldquo;man in the middle attacks&rdquo; and I suggested that having <a href="https://www.bro.org/" target="_blank"><strong>BRO</strong></a> running on Nethunter would be awesome. This got him excited and true to his nature, he couldn&rsquo;t rest till he&rsquo;d attempted it. Long story short, he did some amazing work and had it running soon afterwards complete with a detailed &ldquo;how to&rdquo; guide. Here&rsquo;s a link to the <a href="http://t.co/Iz992aMCL5" target="_blank"><strong>guide</strong></a>.</h4>
 
 <!--more-->
 
@@ -265,7 +265,7 @@
     while read -r line; do
         echo $line
         `sudo shodan host $line &gt;&gt; output`
-        echo ""&gt;&gt; output
+        echo ""&gt;**&gt; output
     done &lt; "filtered"
     echo "Done! Output saved to output"
 
@@ -286,7 +286,7 @@
 
 <h4>I usually am not worried about companies using analytics for their marketing purposes but this time something spooked me.</h4>
 
-<h4>Several of these servers are vulnerable to the <a href="https://weakdh.org/" target="_blank">logjam attack</a> and even more worryingly some are vulnerable to heartbleed. It would therefore not be far-fetched to assume they&rsquo;ve already been compromised or they will be. With all the traffic going on between my phone and these servers, I had hoped they&rsquo;d have their security figured out. It&rsquo;s often said that third parties are some of the most promising targets for hackers and you can see exactly why here.</h4>
+<h4>Several of these servers are vulnerable to the <a href="https://weakdh.org/" target="_blank"><strong>logjam attack</strong></a> and even more worryingly some are vulnerable to heartbleed. It would therefore not be far-fetched to assume they&rsquo;ve already been compromised or they will be. With all the traffic going on between my phone and these servers, I had hoped they&rsquo;d have their security figured out. It&rsquo;s often said that third parties are some of the most promising targets for hackers and you can see exactly why here.</h4>
 
 <h1>Conclusion</h1>
 
