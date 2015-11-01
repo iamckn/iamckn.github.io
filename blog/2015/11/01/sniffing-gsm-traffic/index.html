@@ -1,0 +1,324 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Sniffing GSM Traffic - the poetry of (in)security</title>
+  <meta name="author" content="ck">
+
+   
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.ckn.io/blog/2015/11/01/sniffing-gsm-traffic">
+  <link href="/favicon.png" rel="icon">
+  <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="the poetry of (in)security" type="application/atom+xml">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/js/modernizr-2.0.js"></script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <script src="/js/application.js"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-55596013-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+    
+        <li ><a href="/whoami.html">whoami</a></li>
+    
+        <li ><a href="/index.html">home</a></li>
+    
+        <li ><a href="/category.html">category</a></li>
+    
+        <li ><a href="/blog/archives/index.html">archive</a></li>
+    
+</ul>
+
+<ul class="nav pull-right">
+    
+    <li><a href="http://github.com/iamckn" title="Github Profile"><i class="icon-github-sign social-navbar"></i></a></li>
+    
+    
+    
+    
+    <li><a href="http://twitter.com/iamckn" title="Twitter Profile"><i class="icon-twitter-sign social-navbar"></i></a></li>
+    
+    
+    
+    
+
+    
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+      <div class="row-fluid">
+        <div id="content">
+          <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+  <div class="jumbotron">
+    Sniffing GSM Traffic
+      <h5>
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2015-11-01T09:30:27+03:00" pubdate data-updated="true">Nov 01, 2015</time></h5>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
+      <h4>I have been playing around with the HackRF for the past couple of weeks and progressively exploring the Radio Frequency spectrum. In this post I&rsquo;ll take you through how to sniff GSM traffic. I&rsquo;ll be specifically monitoring the <a href="https://en.wikipedia.org/wiki/Um_interface" target="_blank"><strong>Um interface</strong></a>. This in the air interface between the Mobile Station (MS) and the Base Transceiver Station (BTS). The MS in this case will be the mobile phone while the BTS is what the phone connects to on the Mobile network. The BTS is usually hosted on towers which you can spot in various locations. Here is what a typical one looks like.</h4>
+
+<!--more-->
+
+
+<p><img src="/images/BTS.jpg" width="400"></p>
+
+<h4>We first ensure that our HackRF is well set up as detailed in <a href="https://www.ckn.io/blog/2015/10/11/the-hackrf-one-first-steps/" target="_blank"><strong>this earlier post</strong></a>.</h4>
+
+<h4>This setup is tailored to Archlinux but other linux distros closely follow the same process.</h4>
+
+<h4>Next we install <a href="https://github.com/ptrkrysik/gr-gsm" target="_blank"><strong>gr-gsm</strong></a> which consists of gnuradio blocks and tools for receiving GSM transmissions.</h4>
+
+<h3><strong><em>Setting up gr-gsm</em></strong></h3>
+
+<h4>Install libosmocore libraries</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>yaourt -S libosmocore    
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Install gr-gsm</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone https://github.com/ptrkrysik/gr-gsm
+</span><span class='line'><span class="nb">cd </span>gr-gsm
+</span><span class='line'>mkdir build
+</span><span class='line'><span class="nb">cd </span>build
+</span><span class='line'>cmake ..
+</span><span class='line'>make
+</span><span class='line'>sudo make install
+</span><span class='line'>sudo ldconfig
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Add the path of the gr-gsm blocks to gnuradio</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>nano ~/.gnuradio/config.conf     
+</span><span class='line'>  <span class="o">[</span>grc<span class="o">]</span>
+</span><span class='line'>  <span class="nv">local_blocks_path</span><span class="o">=</span>/usr/local/share/gnuradio/grc/blocks
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Move gr-gsm library and python modules to correct location (depends on your environment).</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo mv /usr/local/lib/python2.7/site-packages/grgsm /usr/lib/python2.7/site-packages/
+</span><span class='line'>sudo mv /usr/local/lib/libgnuradio-grgsm.so /usr/lib/
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Next we will set up kalibrate-hackrf which we will use to find what GSM frequencies to sniff on.</h4>
+
+<h3><strong><em>Setting up kalibrate-hackrf</em></strong></h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone https://github.com/scateu/kalibrate-hackrf.git
+</span><span class='line'><span class="nb">cd </span>kalibrate-hackrf
+</span><span class='line'>./bootstrap
+</span><span class='line'>./configure
+</span><span class='line'>make
+</span><span class='line'>sudo make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><strong><em>Finding GSM frequencies</em></strong></h3>
+
+<h4>With our prerequisites done, the next step is to find GSM frequencies to listen on. First we consult <a href="http://www.worldtimezone.com/gsm.html" target="_blank"><strong>this site</strong></a> to identify GSM bands used by our local providers.</h4>
+
+<p><img src="/images/gsm_bands.png"></p>
+
+<h4>Let&rsquo;s concentrate on the 900MHz band for now.</h4>
+
+<h4>We use kalibrate-hackrf (kal) to find the frequencies as below:</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>kal -s GSM900 -g <span class="m">40</span> -l 40
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4><strong>-s</strong> is the band to scan, <strong>-g</strong> is the baseband gain and <strong>-l</strong> the interface gain</h4>
+
+<h4>Let it run for a minute or so and you should get output similar to:</h4>
+
+<p><img src="/images/kal.png"></p>
+
+<h3><strong><em>Sniffing!</em></strong></h3>
+
+<h4>Let us now use gqrx to confirm the frequencies by tuning in to the first one. In this case <strong>936.4MHz</strong></h4>
+
+<p><img src="/images/gqrx_gsm.png"></p>
+
+<h4>We can see that the activity is centered around <strong>936.8MHz</strong> so we adjust accordingly and use that as the frequency.</h4>
+
+<h4>We now start capturing gsm traffic using gr-gsm :). What we do is launch gnuradio companion and open <strong>the airprobe_rtlsdr.grc</strong> block that is part of gr-gsm and run it.</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gnuradio-companion airprobe_rtlsdr.grc
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Tune to <strong>936.8MHz</strong> and if all went well we should get data streaming through the console window.</h4>
+
+<p><img src="/images/gr_gsm_traffic.png"></p>
+
+<h4>We finally launch wireshark and monitor the loopback interface to see the decoded traffic :)</h4>
+
+<h4>Here is a sample showing BTS Location details.</h4>
+
+<p><img src="/images/gsm_wireshark.png"></p>
+
+<h4>So what next after sniffing the traffic?</h4>
+
+<h4>In subsequent posts I&rsquo;ll explain and show how to interpret the decoded traffic as I explain how GSM communication takes place.</h4>
+
+<h4>From there I&rsquo;ll demonstrate how to decrypt the traffic. That is where it gets really interesting as we start reading SMS&rsquo;s, listening to calls and so on :).</h4>
+
+<h4>Till then, happy hacking.</h4>
+
+    </div>
+  </div>
+
+
+  <footer>
+    <hr>
+    <div class="row-fluid">
+      <div class="span12">
+        <p class="meta">
+          
+            <a class="basic-alignment left" href="/blog/2015/10/17/christian/" title="Previous Post: Christian ~ 127.0.0.1">&laquo; Christian ~ 127.0.0.1</a>
+          
+          
+        </p>
+      </div>
+    </div>
+  </footer>
+</article>
+
+</div>
+
+
+
+
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
+  <span class="credit">The difficult we do immediately; the impossible takes a little longer</span>
+</p>
+
+
+        </footer>
+      </div>
+  </div>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

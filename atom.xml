@@ -4,7 +4,7 @@
   <title><![CDATA[the poetry of (in)security]]></title>
   <link href="http://www.ckn.io/atom.xml" rel="self"/>
   <link href="http://www.ckn.io/"/>
-  <updated>2015-10-17T23:34:25+03:00</updated>
+  <updated>2015-11-01T12:12:43+03:00</updated>
   <id>http://www.ckn.io/</id>
   <author>
     <name><![CDATA[ck]]></name>
@@ -12,6 +12,149 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Sniffing GSM Traffic]]></title>
+    <link href="http://www.ckn.io/blog/2015/11/01/sniffing-gsm-traffic/"/>
+    <updated>2015-11-01T09:30:27+03:00</updated>
+    <id>http://www.ckn.io/blog/2015/11/01/sniffing-gsm-traffic</id>
+    <content type="html"><![CDATA[<h4>I have been playing around with the HackRF for the past couple of weeks and progressively exploring the Radio Frequency spectrum. In this post I&rsquo;ll take you through how to sniff GSM traffic. I&rsquo;ll be specifically monitoring the <a href="https://en.wikipedia.org/wiki/Um_interface" target="_blank"><strong>Um interface</strong></a>. This in the air interface between the Mobile Station (MS) and the Base Transceiver Station (BTS). The MS in this case will be the mobile phone while the BTS is what the phone connects to on the Mobile network. The BTS is usually hosted on towers which you can spot in various locations. Here is what a typical one looks like.</h4>
+
+<!--more-->
+
+
+<p><img src="http://www.ckn.io/images/BTS.jpg" width="400"></p>
+
+<h4>We first ensure that our HackRF is well set up as detailed in <a href="https://www.ckn.io/blog/2015/10/11/the-hackrf-one-first-steps/" target="_blank"><strong>this earlier post</strong></a>.</h4>
+
+<h4>This setup is tailored to Archlinux but other linux distros closely follow the same process.</h4>
+
+<h4>Next we install <a href="https://github.com/ptrkrysik/gr-gsm" target="_blank"><strong>gr-gsm</strong></a> which consists of gnuradio blocks and tools for receiving GSM transmissions.</h4>
+
+<h3><strong><em>Setting up gr-gsm</em></strong></h3>
+
+<h4>Install libosmocore libraries</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>yaourt -S libosmocore    
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Install gr-gsm</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone https://github.com/ptrkrysik/gr-gsm
+</span><span class='line'><span class="nb">cd </span>gr-gsm
+</span><span class='line'>mkdir build
+</span><span class='line'><span class="nb">cd </span>build
+</span><span class='line'>cmake ..
+</span><span class='line'>make
+</span><span class='line'>sudo make install
+</span><span class='line'>sudo ldconfig
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Add the path of the gr-gsm blocks to gnuradio</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>nano ~/.gnuradio/config.conf     
+</span><span class='line'>  <span class="o">[</span>grc<span class="o">]</span>
+</span><span class='line'>  <span class="nv">local_blocks_path</span><span class="o">=</span>/usr/local/share/gnuradio/grc/blocks
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Move gr-gsm library and python modules to correct location (depends on your environment).</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo mv /usr/local/lib/python2.7/site-packages/grgsm /usr/lib/python2.7/site-packages/
+</span><span class='line'>sudo mv /usr/local/lib/libgnuradio-grgsm.so /usr/lib/
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Next we will set up kalibrate-hackrf which we will use to find what GSM frequencies to sniff on.</h4>
+
+<h3><strong><em>Setting up kalibrate-hackrf</em></strong></h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone https://github.com/scateu/kalibrate-hackrf.git
+</span><span class='line'><span class="nb">cd </span>kalibrate-hackrf
+</span><span class='line'>./bootstrap
+</span><span class='line'>./configure
+</span><span class='line'>make
+</span><span class='line'>sudo make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><strong><em>Finding GSM frequencies</em></strong></h3>
+
+<h4>With our prerequisites done, the next step is to find GSM frequencies to listen on. First we consult <a href="http://www.worldtimezone.com/gsm.html" target="_blank"><strong>this site</strong></a> to identify GSM bands used by our local providers.</h4>
+
+<p><img src="http://www.ckn.io/images/gsm_bands.png"></p>
+
+<h4>Let&rsquo;s concentrate on the 900MHz band for now.</h4>
+
+<h4>We use kalibrate-hackrf (kal) to find the frequencies as below:</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>kal -s GSM900 -g <span class="m">40</span> -l 40
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4><strong>-s</strong> is the band to scan, <strong>-g</strong> is the baseband gain and <strong>-l</strong> the interface gain</h4>
+
+<h4>Let it run for a minute or so and you should get output similar to:</h4>
+
+<p><img src="http://www.ckn.io/images/kal.png"></p>
+
+<h3><strong><em>Sniffing!</em></strong></h3>
+
+<h4>Let us now use gqrx to confirm the frequencies by tuning in to the first one. In this case <strong>936.4MHz</strong></h4>
+
+<p><img src="http://www.ckn.io/images/gqrx_gsm.png"></p>
+
+<h4>We can see that the activity is centered around <strong>936.8MHz</strong> so we adjust accordingly and use that as the frequency.</h4>
+
+<h4>We now start capturing gsm traffic using gr-gsm :). What we do is launch gnuradio companion and open <strong>the airprobe_rtlsdr.grc</strong> block that is part of gr-gsm and run it.</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gnuradio-companion airprobe_rtlsdr.grc
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Tune to <strong>936.8MHz</strong> and if all went well we should get data streaming through the console window.</h4>
+
+<p><img src="http://www.ckn.io/images/gr_gsm_traffic.png"></p>
+
+<h4>We finally launch wireshark and monitor the loopback interface to see the decoded traffic :)</h4>
+
+<h4>Here is a sample showing BTS Location details.</h4>
+
+<p><img src="http://www.ckn.io/images/gsm_wireshark.png"></p>
+
+<h4>So what next after sniffing the traffic?</h4>
+
+<h4>In subsequent posts I&rsquo;ll explain and show how to interpret the decoded traffic as I explain how GSM communication takes place.</h4>
+
+<h4>From there I&rsquo;ll demonstrate how to decrypt the traffic. That is where it gets really interesting as we start reading SMS&rsquo;s, listening to calls and so on :).</h4>
+
+<h4>Till then, happy hacking.</h4>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Christian ~ 127.0.0.1]]></title>
@@ -945,7 +1088,7 @@
 
 <h4>The ball is in your court.</h4>
 
-<h2>Submit your papers and ideas to <a href="&#109;&#x61;&#105;&#x6c;&#x74;&#111;&#58;&#x69;&#x6e;&#x66;&#x6f;&#64;&#x41;&#102;&#114;&#105;&#99;&#x61;&#x48;&#x61;&#x63;&#x6b;&#x6f;&#110;&#46;&#x63;&#x6f;&#x6d;">&#105;&#x6e;&#x66;&#111;&#64;&#x41;&#102;&#x72;&#105;&#99;&#97;&#x48;&#x61;&#99;&#107;&#111;&#110;&#46;&#x63;&#111;&#x6d;</a> before 30th of May.</h2>
+<h2>Submit your papers and ideas to <a href="&#109;&#97;&#105;&#108;&#x74;&#111;&#x3a;&#x69;&#110;&#x66;&#x6f;&#64;&#65;&#102;&#114;&#x69;&#99;&#97;&#72;&#x61;&#99;&#x6b;&#111;&#110;&#x2e;&#x63;&#x6f;&#109;">&#105;&#110;&#x66;&#111;&#64;&#x41;&#102;&#x72;&#105;&#x63;&#97;&#72;&#x61;&#x63;&#107;&#x6f;&#x6e;&#x2e;&#x63;&#x6f;&#x6d;</a> before 30th of May.</h2>
 
 <blockquote><h4>Read this <a href="http://sylviamunyisia.blogspot.com/2015/05/call-for-papers.html" target="_blank"><strong>page</strong></a> by Sylvia that explains the call for papers very well.</h4>
 
