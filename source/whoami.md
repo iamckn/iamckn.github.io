@@ -13,8 +13,9 @@ footer: true
 ***
 #### Electrical and Electronics Engineer by study
 #### Information Security Engineer by practice
+#### Author - <a href="https://www.amazon.com/author/ck" target="_blank">**www.amazon.com/author/ck**</a>
 ***
-#### Here is where I can be reached at - ck@ckn.io
+#### Here is where I can be reached at - **ck@ckn.io**
 ***
 # Interests 
 
