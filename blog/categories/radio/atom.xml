@@ -4,7 +4,7 @@
   <title><![CDATA[Category: radio | the poetry of (in)security]]></title>
   <link href="http://www.ckn.io/blog/categories/radio/atom.xml" rel="self"/>
   <link href="http://www.ckn.io/"/>
-  <updated>2016-01-25T07:20:47+03:00</updated>
+  <updated>2016-01-25T07:22:46+03:00</updated>
   <id>http://www.ckn.io/</id>
   <author>
     <name><![CDATA[ck]]></name>
@@ -23,7 +23,7 @@
 <!--more-->
 
 
-<h4>We will capture the traffic using a hackRF one and the call will take place between two Safaricom lines. The capture will take place on the downlink - that is the receiving end of the call. I&rsquo;ll use a Blackberry as the receiving device so that I can easily get the TMSI and Kc.</h4>
+<h4>We will capture the traffic using the <strong>HackRF one</strong> and the call will take place between two Safaricom lines. The capture will take place on the downlink - that is the receiving end of the call. I&rsquo;ll use a Blackberry as the receiving device so that I can easily get the TMSI and Kc.</h4>
 
 <h2><strong>Capturing the traffic</strong></h2>
 
