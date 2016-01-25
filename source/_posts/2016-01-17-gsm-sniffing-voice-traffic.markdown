@@ -9,7 +9,7 @@ categories: [radio]
 
 <!--more-->
 
-####We will capture the traffic using a hackRF one and the call will take place between two Safaricom lines. The capture will take place on the downlink - that is the receiving end of the call. I'll use a Blackberry as the receiving device so that I can easily get the TMSI and Kc.
+####We will capture the traffic using the **HackRF one** and the call will take place between two Safaricom lines. The capture will take place on the downlink - that is the receiving end of the call. I'll use a Blackberry as the receiving device so that I can easily get the TMSI and Kc.
 
 ##**Capturing the traffic**
 
