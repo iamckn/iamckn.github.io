@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://www.ckn.io/blog/2016/02/16/a-diy-listening-device/</loc>
+    <lastmod>2016-02-16T19:51:44+03:00</lastmod>
+  </url>
+  <url>
     <loc>http://www.ckn.io/blog/2016/01/25/gsm-sniffing-voice-traffic/</loc>
     <lastmod>2016-01-25T06:51:00+03:00</lastmod>
   </url>
@@ -90,5 +94,11 @@
   </url>
   <url>
     <loc>http://www.ckn.io/blog/categories/radio/</loc>
+  </url>
+  <url>
+    <loc>http://www.ckn.io/blog/categories/hardware/</loc>
+  </url>
+  <url>
+    <loc>http://www.ckn.io/2/</loc>
   </url>
 </urlset>
