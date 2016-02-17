@@ -22,4 +22,8 @@ footer: true
 
 ***
 
+#[hardware](/blog/categories/hardware/)
+
+***
+
 #[crypto](/blog/categories/crypto/)
