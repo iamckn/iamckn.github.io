@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: the network project | the poetry of (in)security]]></title>
+  <link href="http://www.ckn.io/blog/categories/the-network-project/atom.xml" rel="self"/>
+  <link href="http://www.ckn.io/"/>
+  <updated>2016-06-12T12:02:16+03:00</updated>
+  <id>http://www.ckn.io/</id>
+  <author>
+    <name><![CDATA[ck]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The BRO Chronicles 2]]></title>
+    <link href="http://www.ckn.io/blog/2015/09/17/the-bro-chronicles-2/"/>
+    <updated>2015-09-17T20:54:07+03:00</updated>
+    <id>http://www.ckn.io/blog/2015/09/17/the-bro-chronicles-2</id>
+    <content type="html"><![CDATA[<h4>In part one I analysed the data communication that takes place on a phone over a one hour period. Read the post <a href="https://www.ckn.io/blog/2015/09/06/the-bro-chronicles-1/" target="_blank"><strong>here</strong></a> for details and background info.</h4>
+
+<h4>Here, I go further and analyse what happens over a twelve hour period of normal phone usage. I ran <a href="https://www.bro.org/" target="_blank"><strong>BRO</strong></a> on my phone from <code>6:40am</code> to <code>6:40pm</code> and ensured that data was on and WIFI off the whole time.</h4>
+
+<!--more-->
+
+
+<h4>Let me start with figures of some standout statistics.</h4>
+
+<blockquote><h4>The phone communicated with <code>233</code> unique IPs from diverse parts of the globe over that period.</h4></blockquote>
+
+<h4>I broke this down further to specific ports of interest. Note that my IP was <code>105.52.174.7</code> during that period.</h4>
+
+<h2>Port 21 : FTP</h2>
+
+<pre><code class="javascript">    Unique IPs : 2
+
+    Source          Destination
+    105.52.174.7        158.69.128.126
+    180.97.106.37       105.52.174.7
+</code></pre>
+
+<h4>Why my phone wanted to connect to <code>158.69.128.126</code> on FTP raises some interesting questions.</h4>
+
+<h2>Port 22 : SSH</h2>
+
+<pre><code class="javascript">    Unique IPs : 6
+
+    Source          Destination
+    180.97.106.36       105.52.174.7
+    218.65.30.23        105.52.174.7
+    42.116.163.127  105.52.174.7
+    80.82.65.123        105.52.174.7
+    89.248.168.28       105.52.174.7
+    94.102.49.102       105.52.174.7
+</code></pre>
+
+<h2>Port 23 : Telnet</h2>
+
+<pre><code class="javascript">    Unique IPs : 24
+
+    Source          Destination
+    101.29.2.192        105.52.174.7 23
+    106.115.98.232  105.52.174.7 23
+    110.195.77.199  105.52.174.7 23
+    and 21 others
+</code></pre>
+
+<h4>That translates to an average of two telnet connection attempts per hour from unique IPs!</h4>
+
+<h2>Summary of some other ports of interest</h2>
+
+<pre><code class="javascript">    Port        Unique IPs  
+    53          24
+    25          1
+    80          129
+    123         26
+    443             218
+    993             4
+    995             1
+    1900            3
+    5060            1
+    5222            51
+    5228            7
+    8080            4
+    8996            1
+</code></pre>
+
+<h4>These results immediately direct our attention to internet wide scanning. This has slowly become a growing phenomenon over the past two years and has been aided by the release of extremely fast scanning tools. We have <a href="https://zmap.io/" target="_blank"><strong>zmap</strong></a> created and maintained by a team from the University of Michigan which can scan the entire IPv4 space in under 5 minutes with a ten gigabit ethernet connection. Masscan, created by Robert Graham of Errata Security is fast enough to do the same in under <a href="http://blog.erratasec.com/2013/09/masscan-entire-internet-in-3-minutes.html" target="_blank"><strong>3 minutes</strong></a>!</h4>
+
+<h4>Internet wide scanning is being used a lot by researchers to investigate vulnerabilities and do various internet wide studies. A case in point is that several internet wide scans were done targeting the heartbleed vulnerability within 48 hours of disclosure. A more recent case is this week&rsquo;s <a href="https://zmap.io/synful/" target="_blank"><strong>synful attack scan</strong></a> done by the zmap team on September 15, 2015.</h4>
+
+<h4><a href="https://www.shodan.io/" target="_blank"><strong>Shodan</strong></a> does regular internet wide scans and hosts the data on their site which is made available to the public in an interactive way.</h4>
+
+<h4>The University of Michigan team (same one that maintains zmap) also does daily scans and hosts the raw data on the <a href="https://www.scans.io/" target="_blank"><strong>scans.io</strong></a> site. They also host scans done by other researchers such as the Rapid7 team which does various scans regularly.</h4>
+
+<h4>The flip side of this is that a lot more people do these scans with malicious intent. They&rsquo;re always on the lookout for vulnerable systems on the internet and their activity spikes every time a major vulnerable is released. They mostly hide behind <a href="https://en.wikipedia.org/wiki/Bulletproof_hosting" target="_blank"><strong>bulletproof hosting providers</strong></a> or run their scans from countries likely to be lenient, with China featuring prominently.</h4>
+
+<h4>Let me now relate the activity on my phone with internet wide scanning.</h4>
+
+<h2>Some known research scans I observed during that 12 hour period</h2>
+
+<pre><code class="javascript">    IP              Domain Name
+    169.229.3.90        researchscan0.EECS.Berkeley.EDU
+    216.218.206.69      scan-08.shadowserver.org
+    74.82.47.20         scan-12e.shadowserver.org
+    184.105.247.204 scan-15b.shadowserver.org
+    74.82.47.29     scan-12e.shadowserver.org
+    188.138.9.50        atlantic.census.shodan.io
+    93.120.27.62        m247.ro.shodan.io
+    71.6.167.142        census9.shodan.io
+    71.6.165.200        census12.shodan.io
+    198.20.70.114       census3.shodan.io 
+    188.138.9.51        atlantic482.serverprofi24.de
+    80.82.70.198        icsresearch1.plcscan.org
+    141.212.122.181 researchscan436.eecs.umich.edu
+    141.212.122.182 researchscan436.eecs.umich.edu
+</code></pre>
+
+<h2>And of course several scans from unknown actors</h2>
+
+<pre><code class="javascript">    IP              Country
+    124.193.141.130 China
+    223.167.14.33       China
+    123.151.149.222 China
+    104.245.101.253 US
+    199.203.59.120      Israel
+    125.253.126.75  Vietnam
+    80.82.70.238        Netherlands
+    115.230.124.164 China
+    177.44.69.36        Brazil
+    119.235.95.174      Fiji
+    125.24.223.93       Thailand
+    220.134.101.246 Taiwan
+    37.145.43.253       Russia
+    95.59.98.19     Kazakhstan
+    91.236.75.224       Polland
+    46.10.74.117        Bulgaria
+    186.45.49.254       Trinidad
+    202.12.81.138       India
+    211.247.102.117 South Korea
+</code></pre>
+
+<h4>It is evident that every day, anything you put on the internet will be poked at unless you are behind some NAT network and/or have some form of firewall filtering traffic.</h4>
+
+<h4>The takeaway is that you really should keep your internet facing systems updated and with as good a security posture as possible. Watch out for newly released vulnerabilities and patch them as fast as possible. Past cases indicate that 48 hours later may already be too late.</h4>
+
+<h4>Implement defences on the edge of your network and monitor your logs regularly and diligently. Try out the awesome BRO IDS (I am not being paid to promote it incase you&rsquo;re wondering).</h4>
+
+<h4>Some of these scanners are extremely aggressive. To demonstrate just how aggressive, I leave you with this Netherlands IP that was scanning port numbers that have the digits 443.</h4>
+
+<pre><code class="javascript">    Source IP       Destination IP  Destination Port
+    80.82.70.238    105.52.174.7    1443
+    80.82.70.238    105.52.174.7    2443
+    80.82.70.238    105.52.174.7    3443
+    80.82.70.238    105.52.174.7    4431
+    80.82.70.238    105.52.174.7    4435
+    80.82.70.238    105.52.174.7    4436
+    80.82.70.238    105.52.174.7    4438
+    80.82.70.238    105.52.174.7    4439
+    80.82.70.238    105.52.174.7    4443
+    80.82.70.238    105.52.174.7    5443
+    80.82.70.238    105.52.174.7    6443
+    80.82.70.238    105.52.174.7    7443
+    80.82.70.238    105.52.174.7    10443
+    80.82.70.238    105.52.174.7    11443
+    80.82.70.238    105.52.174.7    22443
+    80.82.70.238    105.52.174.7    33443
+    80.82.70.238    105.52.174.7    44310
+    80.82.70.238    105.52.174.7    44322
+    80.82.70.238    105.52.174.7    44366
+    80.82.70.238    105.52.174.7    55443
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The BRO Chronicles 1]]></title>
+    <link href="http://www.ckn.io/blog/2015/09/06/the-bro-chronicles-1/"/>
+    <updated>2015-09-06T08:56:06+03:00</updated>
+    <id>http://www.ckn.io/blog/2015/09/06/the-bro-chronicles-1</id>
+    <content type="html"><![CDATA[<h4>I was having a random conversation with <a href="https://twitter.com/xtian_kisutsa" target="_blank"><strong>Christian</strong></a> - one indefatigable hacker (I&rsquo;ll be using the word hacker for infosec people henceforth. I find political correctness a bit tedious). The conversation was based around Kali Nethunter and all the cool stuff that can be done with it. The discussion was revolving around &ldquo;man in the middle attacks&rdquo; and I suggested that having <a href="https://www.bro.org/" target="_blank"><strong>BRO</strong></a> running on Nethunter would be awesome. This got him excited and true to his nature, he couldn&rsquo;t rest till he&rsquo;d attempted it. Long story short, he did some amazing work and had it running soon afterwards complete with a detailed &ldquo;how to&rdquo; guide. Here&rsquo;s a link to the <a href="http://t.co/Iz992aMCL5" target="_blank"><strong>guide</strong></a>.</h4>
+
+<!--more-->
+
+
+<h4>With bro running on a phone, a world of exploration is opened up. You now have an enterprise level IDS running on your phone :). I hope you see where this is headed. What do you do with an IDS on your phone? You obviously investigate what your phone communicates with.</h4>
+
+<h4>What interested me most was the rmnet0 interface on android. This is the interface assigned to your data connection. It gets assigned a public IP by your telecommunications provider so no NAT issues.</h4>
+
+<h1>The set up</h1>
+
+<h4>This Saturday afternoon I decided to see what my phone communicates to over a one hour period while connected to the mobile data network.</h4>
+
+<h4>This is how I set up things:</h4>
+
+<blockquote><h4>Nethunter running on a Nexus 5 with Android 5.1</h4>
+
+<h4>BRO running in standalone mode monitoring rmnet0</h4>
+
+<h4>Mobile data connection on the Safaricom network</h4>
+
+<h4>ADB connection to a laptop</h4>
+
+<h4>shodan-cli to investigate IPs</h4></blockquote>
+
+<h4>Once everything was in place I used the phone as I would normally for about 10 minutes or so - browsed a bit and opened a few apps such as Twitter and Facebook. After that I left it idle for about an hour.</h4>
+
+<h1>Results and Analysis</h1>
+
+<h4>It was then time to process and analyse the results. Nethunter runs in a chroot environment so I transferred the BRO logs to the sdcard then to my laptop, that&rsquo;s where adb comes in handy.</h4>
+
+<h4>Lets start with the ports and IPs that were most active during both normal usage of the phone and when it was idle.</h4>
+
+<h2>Idle</h2>
+
+<pre><code class="javascript">     Ports        | Sources                   | Destinations              |
+     443    38.5% | 105.57.36.93#1      99.0% | 196.201.216.21#2    20.0% | 
+     53     25.5% | 196.201.216.4#3      0.5% | 216.58.223.10#4     10.0% | 
+     123    24.0% | 66.196.116.132#5     0.5% | 196.49.6.67#6        9.0% | 
+     993     3.0% |                           | 196.201.218.15#7     6.5% | 
+     80      3.0% |                           | 197.12.0.14#8        5.0% | 
+     995     1.5% |                           | 196.25.1.5#9         5.0% | 
+     8996    1.0% |                           | 197.84.150.123#10    3.5% | 
+     5228    1.0% |                           | 199.16.156.199#11    3.0% | 
+     3       1.0% |                           | 62.210.87.71#12      3.0% | 
+     55602   0.5% |                           | 216.58.223.14#13     2.0% | 
+</code></pre>
+
+<h2>Normal use</h2>
+
+<pre><code class="javascript">     Ports        | Sources                   | Destinations              |
+     80     67.7% | 105.161.166.138#1   99.9% | 196.201.217.7#2     14.6% |
+     53     15.8% | 66.196.116.132#3     0.1% | 173.241.248.221#4   11.4% |
+     443    15.0% | 174.37.231.85#5      0.0% | 173.241.248.220#6    5.2% |
+     993     0.4% |                           | 94.31.29.96#7        3.2% |
+     995     0.3% |                           | 198.232.124.225#8    2.5% |
+     8996    0.2% |                           | 192.0.77.2#9         1.7% |
+     3       0.1% |                           | 31.13.75.8#10        1.7% |
+     5228    0.1% |                           | 46.228.164.11#11     1.6% |
+     123     0.1% |                           | 95.172.94.57#12      1.5% |
+     57553   0.0% |                           | 46.228.164.13#13     1.4% |
+</code></pre>
+
+<h4>As expected most traffic is either HTTP (80), HTTPS (443) or DNS (53). NTP traffic (123) also features prominently when the phone is idle.</h4>
+
+<h4>Of interest is that we can confirm Safaricom uses their own DNS servers, in this case <code>196.201.216.21</code>, <code>196.201.218.15</code> and <code>196.201.217.7</code>. An OpenDNS server <code>208.67.222.222</code> was also queried once so they probably have OpenDNS as an option.</h4>
+
+<h4>The ntp servers were distributed among African countries, Angola - <code>196.223.19.3</code>, Tunisia - <code>197.12.0.14</code>, SA - <code>197.84.150.123</code> and so on. We can therefore safely say they use the africa.pool.ntp.org pool.</h4>
+
+<h4>Then comes the interesting bit, there were some Safaricom IPs communicating with the phone on some weird ports, one case is <code>196.201.216.4</code>, Shodan reveals port <code>500</code> and <code>4500</code> open on whatever is running on that IP. Let&rsquo;s leave Safaricom for now and look at the other traffic.</h4>
+
+<h4>The BRO logs are pretty detailed and therefore I needed some way to clean them up to do my own analysis. I therefore wrote a bash script to do some filtering.</h4>
+
+<h4>I then used Shodan-cli to get information of every unique IP and save the output. Here is the script for anyone interested.</h4>
+
+<pre><code class="bash">    #!/bin/bash
+
+    echo "Enter the name of the connection log: "
+    read LOG
+    echo "Getting details from shodan"
+    `sed -e '/^#/d' $LOG | cut -f 5 | sort -u &gt; filtered`
+    touch output
+
+    while read -r line; do
+        echo $line
+        `sudo shodan host $line &gt;&gt; output`
+        echo ""&gt;**&gt; output
+    done &lt; "filtered"
+    echo "Done! Output saved to output"
+
+    exit 0  
+</code></pre>
+
+<h4>I am going to cut right to the chase as this post is getting too long. The world is being taken over by analytics, advertising and digital content companies!</h4>
+
+<h4>Let me just list a few of the companies that communicated with my phone over that one hour period, remember I left it idle most of that time. Here we go</h4>
+
+<pre><code class="bash">    Mediamath.com        Mixpane.com         Criteo.com
+    Fastly Inc          AOL                 AppNexus
+    Akamai              Chango              Trapad
+    Exelate.com             Openx.com           Adtech.de
+    Lijit.com           Crashlytics.com     Pubmatic
+    ACNielson           Amazon              ...and several others
+</code></pre>
+
+<h4>I usually am not worried about companies using analytics for their marketing purposes but this time something spooked me.</h4>
+
+<h4>Several of these servers are vulnerable to the <a href="https://weakdh.org/" target="_blank"><strong>logjam attack</strong></a> and even more worryingly some are vulnerable to heartbleed. It would therefore not be far-fetched to assume they&rsquo;ve already been compromised or they will be. With all the traffic going on between my phone and these servers, I had hoped they&rsquo;d have their security figured out. It&rsquo;s often said that third parties are some of the most promising targets for hackers and you can see exactly why here.</h4>
+
+<h1>Conclusion</h1>
+
+<h4>That was a long post so let&rsquo;s wrap it up.</h4>
+
+<h4>There were some peculiar IPs that I&rsquo;ll be investigating in subsequent BRO chronicles. Other random titbits include the discovery that several Instagram servers communicating with my phone are also vulnerable to the logjam attack, Yahoo mail is particularly noisy traffic wise and so on.</h4>
+
+<h4>When going through all that analytics and ad based traffic I remembered a quote by Jeffrey Hammerbacher, one of Facebook&rsquo;s first 100 employees. I therefore aptly end this post with his quote:</h4>
+
+<blockquote><h2>The best minds of my generation are thinking about how to make people click ads. That sucks.</h2></blockquote>
+]]></content>
+  </entry>
+  
+</feed>

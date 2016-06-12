@@ -1,0 +1,358 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>The BRO Chronicles 1 - the poetry of (in)security</title>
+  <meta name="author" content="ck">
+
+   
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.ckn.io/blog/2015/09/06/the-bro-chronicles-1">
+  <link href="/favicon.png" rel="icon">
+  <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="the poetry of (in)security" type="application/atom+xml">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/js/modernizr-2.0.js"></script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <script src="/js/application.js"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-55596013-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+    
+        <li ><a href="/whoami.html">whoami</a></li>
+    
+        <li ><a href="/index.html">home</a></li>
+    
+        <li ><a href="/category.html">category</a></li>
+    
+        <li ><a href="/blog/archives/index.html">archive</a></li>
+    
+</ul>
+
+<ul class="nav pull-right">
+    
+    <li><a href="http://github.com/iamckn" title="Github Profile"><i class="icon-github-sign social-navbar"></i></a></li>
+    
+    
+    
+    
+    <li><a href="http://twitter.com/iamckn" title="Twitter Profile"><i class="icon-twitter-sign social-navbar"></i></a></li>
+    
+    
+    
+    
+
+    
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+      <div class="row-fluid">
+        <div id="content">
+          <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+  <div class="jumbotron">
+    The BRO Chronicles 1
+      <h5>
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2015-09-06T08:56:06+03:00" pubdate data-updated="true">Sep 06, 2015</time></h5>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
+      <h4>I was having a random conversation with <a href="https://twitter.com/xtian_kisutsa" target="_blank"><strong>Christian</strong></a> - one indefatigable hacker (I&rsquo;ll be using the word hacker for infosec people henceforth. I find political correctness a bit tedious). The conversation was based around Kali Nethunter and all the cool stuff that can be done with it. The discussion was revolving around &ldquo;man in the middle attacks&rdquo; and I suggested that having <a href="https://www.bro.org/" target="_blank"><strong>BRO</strong></a> running on Nethunter would be awesome. This got him excited and true to his nature, he couldn&rsquo;t rest till he&rsquo;d attempted it. Long story short, he did some amazing work and had it running soon afterwards complete with a detailed &ldquo;how to&rdquo; guide. Here&rsquo;s a link to the <a href="http://t.co/Iz992aMCL5" target="_blank"><strong>guide</strong></a>.</h4>
+
+<!--more-->
+
+
+<h4>With bro running on a phone, a world of exploration is opened up. You now have an enterprise level IDS running on your phone :). I hope you see where this is headed. What do you do with an IDS on your phone? You obviously investigate what your phone communicates with.</h4>
+
+<h4>What interested me most was the rmnet0 interface on android. This is the interface assigned to your data connection. It gets assigned a public IP by your telecommunications provider so no NAT issues.</h4>
+
+<h1>The set up</h1>
+
+<h4>This Saturday afternoon I decided to see what my phone communicates to over a one hour period while connected to the mobile data network.</h4>
+
+<h4>This is how I set up things:</h4>
+
+<blockquote><h4>Nethunter running on a Nexus 5 with Android 5.1</h4>
+
+<h4>BRO running in standalone mode monitoring rmnet0</h4>
+
+<h4>Mobile data connection on the Safaricom network</h4>
+
+<h4>ADB connection to a laptop</h4>
+
+<h4>shodan-cli to investigate IPs</h4></blockquote>
+
+<h4>Once everything was in place I used the phone as I would normally for about 10 minutes or so - browsed a bit and opened a few apps such as Twitter and Facebook. After that I left it idle for about an hour.</h4>
+
+<h1>Results and Analysis</h1>
+
+<h4>It was then time to process and analyse the results. Nethunter runs in a chroot environment so I transferred the BRO logs to the sdcard then to my laptop, that&rsquo;s where adb comes in handy.</h4>
+
+<h4>Lets start with the ports and IPs that were most active during both normal usage of the phone and when it was idle.</h4>
+
+<h2>Idle</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'> <span class="nx">Ports</span>        <span class="o">|</span> <span class="nx">Sources</span>                   <span class="o">|</span> <span class="nx">Destinations</span>              <span class="o">|</span>
+</span><span class='line'> <span class="mi">443</span>    <span class="mf">38.5</span><span class="o">%</span> <span class="o">|</span> <span class="mf">105.57</span><span class="p">.</span><span class="mf">36.93</span><span class="err">#</span><span class="mi">1</span>      <span class="mf">99.0</span><span class="o">%</span> <span class="o">|</span> <span class="mf">196.201</span><span class="p">.</span><span class="mf">216.21</span><span class="err">#</span><span class="mi">2</span>    <span class="mf">20.0</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">53</span>     <span class="mf">25.5</span><span class="o">%</span> <span class="o">|</span> <span class="mf">196.201</span><span class="p">.</span><span class="mf">216.4</span><span class="err">#</span><span class="mi">3</span>      <span class="mf">0.5</span><span class="o">%</span> <span class="o">|</span> <span class="mf">216.58</span><span class="p">.</span><span class="mf">223.10</span><span class="err">#</span><span class="mi">4</span>     <span class="mf">10.0</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">123</span>    <span class="mf">24.0</span><span class="o">%</span> <span class="o">|</span> <span class="mf">66.196</span><span class="p">.</span><span class="mf">116.132</span><span class="err">#</span><span class="mi">5</span>     <span class="mf">0.5</span><span class="o">%</span> <span class="o">|</span> <span class="mf">196.49</span><span class="p">.</span><span class="mf">6.67</span><span class="err">#</span><span class="mi">6</span>        <span class="mf">9.0</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">993</span>     <span class="mf">3.0</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">196.201</span><span class="p">.</span><span class="mf">218.15</span><span class="err">#</span><span class="mi">7</span>     <span class="mf">6.5</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">80</span>      <span class="mf">3.0</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">197.12</span><span class="p">.</span><span class="mf">0.14</span><span class="err">#</span><span class="mi">8</span>        <span class="mf">5.0</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">995</span>     <span class="mf">1.5</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">196.25</span><span class="p">.</span><span class="mf">1.5</span><span class="err">#</span><span class="mi">9</span>         <span class="mf">5.0</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">8996</span>    <span class="mf">1.0</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">197.84</span><span class="p">.</span><span class="mf">150.123</span><span class="err">#</span><span class="mi">10</span>    <span class="mf">3.5</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">5228</span>    <span class="mf">1.0</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">199.16</span><span class="p">.</span><span class="mf">156.199</span><span class="err">#</span><span class="mi">11</span>    <span class="mf">3.0</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">3</span>       <span class="mf">1.0</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">62.210</span><span class="p">.</span><span class="mf">87.71</span><span class="err">#</span><span class="mi">12</span>      <span class="mf">3.0</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">55602</span>   <span class="mf">0.5</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">216.58</span><span class="p">.</span><span class="mf">223.14</span><span class="err">#</span><span class="mi">13</span>     <span class="mf">2.0</span><span class="o">%</span> <span class="o">|</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Normal use</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'> <span class="nx">Ports</span>        <span class="o">|</span> <span class="nx">Sources</span>                   <span class="o">|</span> <span class="nx">Destinations</span>              <span class="o">|</span>
+</span><span class='line'> <span class="mi">80</span>     <span class="mf">67.7</span><span class="o">%</span> <span class="o">|</span> <span class="mf">105.161</span><span class="p">.</span><span class="mf">166.138</span><span class="err">#</span><span class="mi">1</span>   <span class="mf">99.9</span><span class="o">%</span> <span class="o">|</span> <span class="mf">196.201</span><span class="p">.</span><span class="mf">217.7</span><span class="err">#</span><span class="mi">2</span>     <span class="mf">14.6</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">53</span>     <span class="mf">15.8</span><span class="o">%</span> <span class="o">|</span> <span class="mf">66.196</span><span class="p">.</span><span class="mf">116.132</span><span class="err">#</span><span class="mi">3</span>     <span class="mf">0.1</span><span class="o">%</span> <span class="o">|</span> <span class="mf">173.241</span><span class="p">.</span><span class="mf">248.221</span><span class="err">#</span><span class="mi">4</span>   <span class="mf">11.4</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">443</span>    <span class="mf">15.0</span><span class="o">%</span> <span class="o">|</span> <span class="mf">174.37</span><span class="p">.</span><span class="mf">231.85</span><span class="err">#</span><span class="mi">5</span>      <span class="mf">0.0</span><span class="o">%</span> <span class="o">|</span> <span class="mf">173.241</span><span class="p">.</span><span class="mf">248.220</span><span class="err">#</span><span class="mi">6</span>    <span class="mf">5.2</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">993</span>     <span class="mf">0.4</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">94.31</span><span class="p">.</span><span class="mf">29.96</span><span class="err">#</span><span class="mi">7</span>        <span class="mf">3.2</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">995</span>     <span class="mf">0.3</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">198.232</span><span class="p">.</span><span class="mf">124.225</span><span class="err">#</span><span class="mi">8</span>    <span class="mf">2.5</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">8996</span>    <span class="mf">0.2</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">192.0</span><span class="p">.</span><span class="mf">77.2</span><span class="err">#</span><span class="mi">9</span>         <span class="mf">1.7</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">3</span>       <span class="mf">0.1</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">31.13</span><span class="p">.</span><span class="mf">75.8</span><span class="err">#</span><span class="mi">10</span>        <span class="mf">1.7</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">5228</span>    <span class="mf">0.1</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">46.228</span><span class="p">.</span><span class="mf">164.11</span><span class="err">#</span><span class="mi">11</span>     <span class="mf">1.6</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">123</span>     <span class="mf">0.1</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">95.172</span><span class="p">.</span><span class="mf">94.57</span><span class="err">#</span><span class="mi">12</span>      <span class="mf">1.5</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">57553</span>   <span class="mf">0.0</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">46.228</span><span class="p">.</span><span class="mf">164.13</span><span class="err">#</span><span class="mi">13</span>     <span class="mf">1.4</span><span class="o">%</span> <span class="o">|</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>As expected most traffic is either HTTP (80), HTTPS (443) or DNS (53). NTP traffic (123) also features prominently when the phone is idle.</h4>
+
+<h4>Of interest is that we can confirm Safaricom uses their own DNS servers, in this case <code>196.201.216.21</code>, <code>196.201.218.15</code> and <code>196.201.217.7</code>. An OpenDNS server <code>208.67.222.222</code> was also queried once so they probably have OpenDNS as an option.</h4>
+
+<h4>The ntp servers were distributed among African countries, Angola - <code>196.223.19.3</code>, Tunisia - <code>197.12.0.14</code>, SA - <code>197.84.150.123</code> and so on. We can therefore safely say they use the africa.pool.ntp.org pool.</h4>
+
+<h4>Then comes the interesting bit, there were some Safaricom IPs communicating with the phone on some weird ports, one case is <code>196.201.216.4</code>, Shodan reveals port <code>500</code> and <code>4500</code> open on whatever is running on that IP. Let&rsquo;s leave Safaricom for now and look at the other traffic.</h4>
+
+<h4>The BRO logs are pretty detailed and therefore I needed some way to clean them up to do my own analysis. I therefore wrote a bash script to do some filtering.</h4>
+
+<h4>I then used Shodan-cli to get information of every unique IP and save the output. Here is the script for anyone interested.</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Enter the name of the connection log: &quot;</span>
+</span><span class='line'><span class="nb">read </span>LOG
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Getting details from shodan&quot;</span>
+</span><span class='line'><span class="sb">`</span>sed -e <span class="s1">&#39;/^#/d&#39;</span> <span class="nv">$LOG</span> <span class="p">|</span> cut -f <span class="m">5</span> <span class="p">|</span> sort -u &gt; filtered<span class="sb">`</span>
+</span><span class='line'>touch output
+</span><span class='line'>
+</span><span class='line'><span class="k">while</span> <span class="nb">read</span> -r line<span class="p">;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="nb">echo</span> <span class="nv">$line</span>
+</span><span class='line'>  <span class="sb">`</span>sudo shodan host <span class="nv">$line</span> &gt;&gt; output<span class="sb">`</span>
+</span><span class='line'>  <span class="nb">echo</span> <span class="s2">&quot;&quot;</span>&gt;**&gt; output
+</span><span class='line'><span class="k">done</span> &lt; <span class="s2">&quot;filtered&quot;</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Done! Output saved to output&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">exit </span><span class="m">0</span>     
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>I am going to cut right to the chase as this post is getting too long. The world is being taken over by analytics, advertising and digital content companies!</h4>
+
+<h4>Let me just list a few of the companies that communicated with my phone over that one hour period, remember I left it idle most of that time. Here we go</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Mediamath.com         Mixpane.com         Criteo.com
+</span><span class='line'>Fastly Inc            AOL                 AppNexus
+</span><span class='line'>Akamai                Chango              Trapad
+</span><span class='line'>Exelate.com           Openx.com           Adtech.de
+</span><span class='line'>Lijit.com             Crashlytics.com     Pubmatic
+</span><span class='line'>ACNielson             Amazon              ...and several others
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>I usually am not worried about companies using analytics for their marketing purposes but this time something spooked me.</h4>
+
+<h4>Several of these servers are vulnerable to the <a href="https://weakdh.org/" target="_blank"><strong>logjam attack</strong></a> and even more worryingly some are vulnerable to heartbleed. It would therefore not be far-fetched to assume they&rsquo;ve already been compromised or they will be. With all the traffic going on between my phone and these servers, I had hoped they&rsquo;d have their security figured out. It&rsquo;s often said that third parties are some of the most promising targets for hackers and you can see exactly why here.</h4>
+
+<h1>Conclusion</h1>
+
+<h4>That was a long post so let&rsquo;s wrap it up.</h4>
+
+<h4>There were some peculiar IPs that I&rsquo;ll be investigating in subsequent BRO chronicles. Other random titbits include the discovery that several Instagram servers communicating with my phone are also vulnerable to the logjam attack, Yahoo mail is particularly noisy traffic wise and so on.</h4>
+
+<h4>When going through all that analytics and ad based traffic I remembered a quote by Jeffrey Hammerbacher, one of Facebook&rsquo;s first 100 employees. I therefore aptly end this post with his quote:</h4>
+
+<blockquote><h2>The best minds of my generation are thinking about how to make people click ads. That sucks.</h2></blockquote>
+
+    </div>
+  </div>
+
+
+  <footer>
+    <hr>
+    <div class="row-fluid">
+      <div class="span12">
+        <p class="meta">
+          
+            <a class="basic-alignment left" href="/blog/2015/08/25/learning-to-hack/" title="Previous Post: Learning to hack">&laquo; Learning to hack</a>
+          
+          
+            <span><<<<+>>>></span>
+            <a class="basic-alignment right" href="/blog/2015/09/13/hackers-wanted/" title="Next Post: Hackers Wanted!">Hackers Wanted! &raquo;</a>
+          
+        </p>
+      </div>
+    </div>
+  </footer>
+</article>
+
+</div>
+
+
+
+
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
+  <span class="credit">The difficult we do immediately; the impossible takes a little longer</span>
+</p>
+
+
+        </footer>
+      </div>
+  </div>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

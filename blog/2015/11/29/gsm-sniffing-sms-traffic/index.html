@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>GSM: Sniffing SMS traffic - the poetry of (in)security</title>
+  <meta name="author" content="ck">
+
+   
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.ckn.io/blog/2015/11/29/gsm-sniffing-sms-traffic">
+  <link href="/favicon.png" rel="icon">
+  <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="the poetry of (in)security" type="application/atom+xml">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/js/modernizr-2.0.js"></script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <script src="/js/application.js"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-55596013-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+    
+        <li ><a href="/whoami.html">whoami</a></li>
+    
+        <li ><a href="/index.html">home</a></li>
+    
+        <li ><a href="/category.html">category</a></li>
+    
+        <li ><a href="/blog/archives/index.html">archive</a></li>
+    
+</ul>
+
+<ul class="nav pull-right">
+    
+    <li><a href="http://github.com/iamckn" title="Github Profile"><i class="icon-github-sign social-navbar"></i></a></li>
+    
+    
+    
+    
+    <li><a href="http://twitter.com/iamckn" title="Twitter Profile"><i class="icon-twitter-sign social-navbar"></i></a></li>
+    
+    
+    
+    
+
+    
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+      <div class="row-fluid">
+        <div id="content">
+          <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+  <div class="jumbotron">
+    GSM: Sniffing SMS traffic
+      <h5>
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2015-11-29T10:14:48+03:00" pubdate data-updated="true">Nov 29, 2015</time></h5>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
+      <h4>In the previous <a href="https://www.ckn.io/blog/2015/11/01/sniffing-gsm-traffic/" target="_blank"><strong>post</strong></a>, I explained how GSM traffic can be sniffed with the <a href="https://www.ckn.io/blog/2015/10/11/the-hackrf-one-first-steps/" target="_blank"><strong>HackRF One</strong></a>. GSM traffic carries a lot of information, from system information to the actual voice and data we are familiar with. The traffic that the normal user of a telecommunication network is concerned with is voice and data. With this in mind I&rsquo;ll do a two part series to demonstrate how voice and data can be sniffed using the HackRF. I start with SMS traffic which falls under the data category. Let&rsquo;s get right into it!</h4>
+
+<!--more-->
+
+
+<h4>I am going to send an SMS from a Safaricom line to an Orange line, capture the traffic over the <a href="https://en.wikipedia.org/wiki/Um_interface" target="_blank"><strong>Um (air) interface</strong></a> and decrypt the data to retrieve the SMS. I own both lines steering clear of the legality issue of decrypting other people&rsquo;s traffic.</h4>
+
+<h2><strong>Identifying the BTS</strong></h2>
+
+<h4>The specific point at which I&rsquo;ll capture the traffic is as it&rsquo;s being sent by the BTS to the Orange line. The technical term for this is the downlink. I therefore need to identify the BTS that my Orange line is connected to. A BTS is uniquely identified using an assigned cell identity (Cell ID). The cell identity combined with the <a href="https://en.wikipedia.org/wiki/Location_area_identity" target="_blank"><strong>location area identity (LAI)</strong></a> which uniquely identifies the country, mobile network and location area code is what we need to get. There are various ways to get this information such as the engineering menu on blackberries. The phone I am using is an android phone and there are several android apps that will give you this information. In my case I use the awesome <a href="https://github.com/SecUpwN/Android-IMSI-Catcher-Detector" target="_blank"><strong>Android IMSI Catcher Detector</strong></a>.</h4>
+
+<h4>Next we sniff the GSM frequencies our mobile operators use and identify the specific frequency the BTS is operating on. Follow the previous <a href="https://www.ckn.io/blog/2015/11/01/sniffing-gsm-traffic/" target="_blank"><strong>post</strong></a> on how to do this. We will accomplish this by searching the traffic being captured on wireshark for the LAI and Cell ID our phone is on until we have a match. In this case the frequency the Orange BTS was operating on is 949.2MHz.</h4>
+
+<h2><strong>Capturing SMS traffic</strong></h2>
+
+<h4>I&rsquo;ll use the airprobe_rtlsdr_capture module of <a href="https://github.com/ptrkrysik/gr-gsm" target="_blank"><strong>gr-gsm</strong></a> to capture the SMS traffic. I begin the capture using the following command:</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>airprobe_rtlsdr_capture.py -f <span class="m">949200000</span> -s <span class="m">1000000</span> -g <span class="m">40</span> -c capture.cfile -T 60
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>-f</strong> is the frequency in Hz, <strong>-s</strong> the sample rate in Hz, <strong>-g</strong> the gain, <strong>-c</strong> the output file and <strong>-T</strong> the duration of our capture in seconds.</p>
+
+<h4>I then send an SMS reading &ldquo;This is a demo of GSM decryption&rdquo; to the Orange line.</h4>
+
+<h2><strong>Getting the TMSI and Kc</strong></h2>
+
+<h4>We now have the traffic captured and saved in a file called <strong>capture.cfile</strong>. Before we get into the decryption process, we need some information specific to our SIM card.</h4>
+
+<h4>First we need the Temporary Mobile Subscriber Identity (<strong>TMSI</strong>). This is a random assigned identity assigned to the SIM when it connects to a BTS. Its purpose is to avoid the subscriber from being identified and tracked by eavesdroppers on the air interface as I am trying to do :).</h4>
+
+<h4>We will then need to get the <strong>Kc</strong>, which is the key used to encrypt the traffic between the phone and the BTS over the air. I will get into the details of how the <strong>Kc</strong> is calculated in a later post but for now you can read up on the <strong>A8</strong> algorithm.</h4>
+
+<h4>There are various ways to get the <strong>TMSI</strong> and <strong>Kc</strong>. These guides <a href="http://domonkos.tomcsanyi.net/?p=369" target="_blank"><strong>here</strong></a> and <a href="http://openbsc.osmocom.org/trac/wiki/A5_GSM_AT_tricks" target="_blank"><strong>here</strong></a> are great references.</h4>
+
+<h4>I used AT commands on a connected Samsung S3 mini as follows:</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>AT+CRSM<span class="o">=</span>176,28448,0,0,9
+</span><span class='line'>+CRSM: 144,0,0E10EAF30299F2C404
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>The <strong>Kc</strong> from the output is <strong>0E10EAF30299F2C4</strong></h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>AT+CRSM<span class="o">=</span>176,28542,0,0,11
+</span><span class='line'>+CRSM: 144,0,38256E5136F9702B5D0000
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>The <strong>TMSI</strong> from the output is <strong>38256E51</strong></h4>
+
+<h2><strong>Decoding BCCH</strong></h2>
+
+<h4>BCCH is the Broadcast Control Channel that the BTS uses to communicate system information messages to the mobile device on.</h4>
+
+<h4>In idle mode the phone has to listen on the BCCH to detect traffic to be sent to it.</h4>
+
+<h4>In this case the BTS sends two paging request messages which inform the phone of an incoming SMS.</h4>
+
+<h4>This will then be followed by an Immediate Assignment where an SDCCH is established for the SMS transfer.</h4>
+
+<h4>SDCCH is a Standalone Dedicated Control Channel used for most short transactions, including initial call setup step, registration and SMS transfer.</h4>
+
+<h4>We therefore need to identify what SDCCH is used for the SMS transfer.</h4>
+
+<h4>We first start wireshark and monitor the loopback interface and then run the following command:</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>airprobe_decode.py -c capture.cfile -s <span class="m">1000000</span> -f <span class="m">949200000</span> -m BCCH -t 0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4><strong>capture.cfile</strong> is the file with the traffic we captured earlier.</h4>
+
+<h4>We then search for traffic specific to our TMSI by searching for it in wireshark packet details.</h4>
+
+<p><img src="/images/tmsi_search.png"></p>
+
+<h4>we look for the two paging requests and inspect the Immediate Assignment that follows:</h4>
+
+<p><img src="/images/sdcch_channel.png"></p>
+
+<h4>Note that it&rsquo;s <strong>SDCCH/8</strong>, <strong>Timeslot 2</strong>.</h4>
+
+<h2><strong>Decoding SDCCH</strong></h2>
+
+<h4>We now need to identify the ciphering mode the BTS tells the phone to use.</h4>
+
+<h4>We restart wireshark on the loopback interface and then run the following command specifying <strong>SDCCH8</strong> and <strong>Timeslot 2</strong>:</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>airprobe_decode.py -c capture.cfile -s <span class="m">1000000</span> -f <span class="m">949200000</span> -m SDCCH8 -t 2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>We look for a Paging Response followed by a Ciphering Mode Command.</h4>
+
+<p><img src="/images/cipher_mode.png"></p>
+
+<h4>We see that the algorithm in use is <strong>A5/1</strong> (more on this in a later post).</h4>
+
+<h2><strong>Decrypting the SMS traffic. Finally!</strong></h2>
+
+<h4>We confirm the most recently used <strong>Kc</strong> as shown earlier, then we restart wireshark on the loopback interface and run the following command:</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>airprobe_decode.py -c capture.cfile -s <span class="m">1000000</span> -f <span class="m">949200000</span> -m SDCCH8 -t <span class="m">2</span> -e <span class="m">1</span> -k 0x0E,0x10,0xEA,0xF3,0x02,0x99,0xF2,0xC4
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4><strong>-e 1</strong> specifies the algorithm <strong>A5/1</strong>, <strong>-k 0x0E,0x10,0xEA,0xF3,0x02,0x99,0xF2,0xC4</strong> specifies the <strong>Kc</strong>.</h4>
+
+<h4>On wireshark we look for the GSM SMS traffic and we can see the text of our SMS :).</h4>
+
+<p><img src="/images/decrypted_sms.png"></p>
+
+<h2><strong>Wrapping up</strong></h2>
+
+<h4>If you&rsquo;ve followed through keenly you&rsquo;ll note that every variable is available readily from just sniffing the traffic except the <strong>Kc</strong>. Everything else is exchanged between the BTS and Mobile device, from the TMSI and BTS details to the data traffic though encrypted. The question becomes how do you get the <strong>Kc</strong> in use by another mobile device? The good people at <a href="https://srlabs.de/decrypting_gsm/" target="_blank"><strong>SRLabs</strong></a> figured out how to crack the A5/1 encryption used and created a tool called <strong>Kraken</strong> and 2TB rainbow tables to find the <strong>Kc</strong>.</h4>
+
+<h4>They also automated a lot of the steps in this post making decryption of gsm voice and data almost trivial.</h4>
+
+<h4>In the next post I&rsquo;ll demonstrate how to decrypt voice traffic :) as I continue explaining GSM communication.</h4>
+
+<h4>Till then, happy hacking.</h4>
+
+    </div>
+  </div>
+
+
+  <footer>
+    <hr>
+    <div class="row-fluid">
+      <div class="span12">
+        <p class="meta">
+          
+            <a class="basic-alignment left" href="/blog/2015/11/01/sniffing-gsm-traffic/" title="Previous Post: Sniffing GSM Traffic">&laquo; Sniffing GSM Traffic</a>
+          
+          
+            <span><<<<+>>>></span>
+            <a class="basic-alignment right" href="/blog/2016/01/25/gsm-sniffing-voice-traffic/" title="Next Post: GSM: Sniffing voice traffic">GSM: Sniffing voice traffic &raquo;</a>
+          
+        </p>
+      </div>
+    </div>
+  </footer>
+</article>
+
+</div>
+
+
+
+
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
+  <span class="credit">The difficult we do immediately; the impossible takes a little longer</span>
+</p>
+
+
+        </footer>
+      </div>
+  </div>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

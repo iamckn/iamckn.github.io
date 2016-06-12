@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Crypto magic - homomorphic encryption - the poetry of (in)security</title>
+  <meta name="author" content="ck">
+
+   
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.ckn.io/blog/2015/05/11/crypto-magic-homomorphic-encryption">
+  <link href="/favicon.png" rel="icon">
+  <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="the poetry of (in)security" type="application/atom+xml">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/js/modernizr-2.0.js"></script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <script src="/js/application.js"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-55596013-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+    
+        <li ><a href="/whoami.html">whoami</a></li>
+    
+        <li ><a href="/index.html">home</a></li>
+    
+        <li ><a href="/category.html">category</a></li>
+    
+        <li ><a href="/blog/archives/index.html">archive</a></li>
+    
+</ul>
+
+<ul class="nav pull-right">
+    
+    <li><a href="http://github.com/iamckn" title="Github Profile"><i class="icon-github-sign social-navbar"></i></a></li>
+    
+    
+    
+    
+    <li><a href="http://twitter.com/iamckn" title="Twitter Profile"><i class="icon-twitter-sign social-navbar"></i></a></li>
+    
+    
+    
+    
+
+    
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+      <div class="row-fluid">
+        <div id="content">
+          <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+  <div class="jumbotron">
+    Crypto magic - homomorphic encryption
+      <h5>
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2015-05-11T13:45:52+03:00" pubdate data-updated="true">May 11, 2015</time></h5>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
+      <h4>Could Google do your search without knowing what it was looking for? Could your hospital provide you with information regarding your health records without knowing what you asked?</h4>
+
+<!--more-->
+
+
+<h4>Can data be encrypted in such a way that computation can be done on it without decrypting it first?</h4>
+
+<h4>Yes it can! This is what homomorphic encryption is all about.</h4>
+
+<h4>Our exploration of crypto magic continues :)</h4>
+
+<h4>Let&rsquo;s start with two scenarios</h4>
+
+<h1>scenario 1: encrypted search</h1>
+
+<h4>First, I am not talking about searching over secure protocols like https. What I am referring to is where your search term is in encrypted form before it reaches the search engine (say Google). Google therefore doesn&rsquo;t know what you want to search for.</h4>
+
+<h4>After Google receives your encrypted search term, it searches for it in an encrypted database. The results it gets are also encrypted which are then passed on to you. You can then privately decrypt them :). You&rsquo;ll note that Google never knew what you were looking for nor what results were returned. No decryption occured at any point before you received the results.</h4>
+
+<h1>scenario 2: secure cloud processing</h1>
+
+<h4>Would it not be nice to have some powerful hosting provider do complex computation on your data without them ever knowing the contents? A case would be like your bank having a cloud provider hosting its data. The bank would encrypt the data before uploading it, so the cloud provider never sees the plain version. The bank would then be able to perform complex computation on the encrypted data using the cloud providers powerful processing power without it ever been decrypted. The bank could also be able to request information from the encrypted data using encrypted queries. The returned answers would also be in encrypted form which only the bank can decrypt. And again no decryption takes place at the cloud provider.</h4>
+
+<h1>How can this be done?</h1>
+
+<h4>This concept was first proposed over 30 years ago by Rivest, Adleman and Dertouzos and is referred to homomorphic encryption (They also suggested it was probably impossible).</h4>
+
+<h4>Let&rsquo;s say you have x and y. if you multiply the encrypted version of x and the encrypted version of y and the answer is the same as if you multiplied their plain values and encrypted the answer, then the process is said to be homomorphic with respect to multiplication.</h4>
+
+<h4>Any computer algorithm is a series of arithmetic steps so if we can get a process that is homomorphic with respect to both addition and multiplication, any computing application would be possible on encrypted data.</h4>
+
+<h1>Has it been achieved?</h1>
+
+<h4>Over the past three decades, partial solutions have been discovered.</h4>
+
+<h4>However, it is not until 2009 that Craig Gentry developed a fully homomorphic system. Unfortunately it requires lots and lots of computational power. For instance, an encrypted Google search would multiply the computation time to 1 trillion times that of a normal one :(.</h4>
+
+<h4>The good news is that the theoretical barrier was broken and with lots of work a practical solution may be found :).</h4>
+
+<blockquote><h4>For anyone willing to give it a go, <a href="http://www.i-programmer.info/news/112-theory/2330-darpa-spends-20-million-on-homomorphic-encryption.html" target="_blank"><strong>DARPA is offering $20 million</strong></a> if you can come up with a scheme that only takes 100,000 times as long as unencrypted calculations :).</h4></blockquote>
+
+<h4>And we may well be on our way there, three MIT scientists developed a system that emulates fully homomorphic encryption for most of the functions of the SQL databases used in many applications. It computes only with encrypted data and takes just 15% to 26% more computing time.</h4>
+
+<h4>The project is called CryptDB and you can check it out <a href="https://github.com/CryptDB/cryptdb" target="_blank"><strong>here</strong></a>.</h4>
+
+<h4>The application of this in information security does not even need explaining :)</h4>
+
+    </div>
+  </div>
+
+
+  <footer>
+    <hr>
+    <div class="row-fluid">
+      <div class="span12">
+        <p class="meta">
+          
+            <a class="basic-alignment left" href="/blog/2015/05/05/crypto-magic-zero-knowledge/" title="Previous Post: Crypto magic - zero knowledge">&laquo; Crypto magic - zero knowledge</a>
+          
+          
+            <span><<<<+>>>></span>
+            <a class="basic-alignment right" href="/blog/2015/05/17/africahackon-be-part-of-the-story/" title="Next Post: AfricaHackon - Be part of the story">AfricaHackon - Be part of the story &raquo;</a>
+          
+        </p>
+      </div>
+    </div>
+  </footer>
+</article>
+
+</div>
+
+
+
+
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
+  <span class="credit">The difficult we do immediately; the impossible takes a little longer</span>
+</p>
+
+
+        </footer>
+      </div>
+  </div>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

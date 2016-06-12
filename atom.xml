@@ -1,0 +1,1718 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[the poetry of (in)security]]></title>
+  <link href="http://www.ckn.io/atom.xml" rel="self"/>
+  <link href="http://www.ckn.io/"/>
+  <updated>2016-06-12T12:02:16+03:00</updated>
+  <id>http://www.ckn.io/</id>
+  <author>
+    <name><![CDATA[ck]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[A DIY Listening Device]]></title>
+    <link href="http://www.ckn.io/blog/2016/02/16/a-diy-listening-device/"/>
+    <updated>2016-02-16T19:51:44+03:00</updated>
+    <id>http://www.ckn.io/blog/2016/02/16/a-diy-listening-device</id>
+    <content type="html"><![CDATA[<p>I have had a set of Intex Wireless Roaming Headphones lying around the house for a couple of years. They consist of a receiver (headphones) and a separate transmitter. The headphones include an FM receiver powered by two AAA batteries with reset and scan buttons for normal FM operation, and of course volume control. The separate transmitter comes with audio and microphone jack ports and is also powered by two AAA batteries. It also has a DC port as an alternative power source option. Here&rsquo;s how it looks:</p>
+
+<!--more-->
+
+
+<p><img src="http://www.ckn.io/images/headsets.jpg"></p>
+
+<p>How it works is that you connect your audio source to either the transmitter or the headphones with an aux cable. If you go the transmitter way, to listen to the audio, you press the reset button then the scan button on the headphones. The headphones then receive the audio wireless from the transmitter. That&rsquo;s how I had been using the headphones until I got the HackRF One. What was taking place behind the scenes had to be investigated&hellip;naturally :).</p>
+
+<p>The wireless operation of the headsets provided the first clue. The pressing of the reset button followed by the scan button to get the audio from the transmitter meant that the communication was FM. It also followed that the frequency in use was lower than the normal FM frequency band as the audio was heard immediately after the first scan button press.</p>
+
+<p>It was then time to fire up the HackRF One and confirm this. I therefore opened <strong>gqrx</strong> and tuned to around 87.5MHz. The normal FM band is from 87.5 to 108MHz so I wanted to observe the frequencies just before 87.5MHz.
+What remained was to connect an audio source to the transmitter and observe what happened on the gqrx display. What was observed is a strong signal peaking at 86.5MHz as shown below:</p>
+
+<p><img src="http://www.ckn.io/images/transmitter_86_5.png"></p>
+
+<p>Tuning to that frequency and listening to the audio output confirmed that it was the audio from the transmitter being received.
+Further investigation revealed that the receiver had a frequency range from 84Mhz to 108MHz. The makers of the headsets used the fact that most recievers are tuned to only receive 87.5MHz as the lower end frequency. The 86.5MHz the headsets use is therefore not received on normal FM receivers otherwise anyone listening to FM radio could listen in.</p>
+
+<p><strong>This is where the fun begins</strong></p>
+
+<p>It was now time to open up the headphones and transmitter to see what the actual circuit boards looked like.
+The headphones&#8217; circuit board as expected is just a simple FM receiver that can be tuned to lower frequencies than normal FM receivers.
+The interesting circuit board is the one from the transmitter. Its input audio source is one of three options: an audio jack, a microphone jack, or an inbuilt microphone. The option to use is selected using a slide switch. The frequency it transmits on is controlled by a trimmer capacitor set in place using epoxy.</p>
+
+<p>The circuit board was relatively small in size so I separated it from its casing.
+I then fashioned a micro-usb power port by patching together the two power cables meant for the triple AAA batteries with the end of a female micro-usb cable.
+Finally I cleared away the epoxy on the trimmer capacitor to enable tuning of the transmit frequency :). This is how the end product looks like:</p>
+
+<p><img src="http://www.ckn.io/images/fm_transmitter.jpg" width="400"></p>
+
+<p>I had an old powerbank that had some issues so I decided to re-purpose it. I took out the rechargeable batteries patched them up to the end of a USB cable to fashion a portable battery pack. The charging circuit board would come in handy for recharging the batteries :).</p>
+
+<p>Here&rsquo;s the charging circuit board:</p>
+
+<p><img src="http://www.ckn.io/images/battery_charger.jpg" width="400"></p>
+
+<p>Here&rsquo;s the transmitter hooked up to the rechargeable batteries:</p>
+
+<p><img src="http://www.ckn.io/images/transmitter_and_battery.jpg" width="400"></p>
+
+<p><strong>Testing it out</strong></p>
+
+<p>With the transmitter hooked up to the batteries and gqrx running, it was time to test out tuning to different frequencies.
+Adjusting the transmit frequency by turning the trimmer capacitor with a small screw driver works as expected. Here&rsquo;s the frequency adjusted to 88.5MHz, which can be listened to on normal FM receivers.</p>
+
+<p><img src="http://www.ckn.io/images/transmitter_88_5.png"></p>
+
+<p>If we set the slide switch on the transmitter to microphone, the transmitter listens to sounds around it and transmits on the frequency we set. Its frequency response range is 20 - 20000Hz which is the human hearing range, making it optimized to capture human voice :).</p>
+
+<p>You can either use the internal mic on the circuit board or connect an external one to the mic jack to meet your specific needs.</p>
+
+<p>With the micro-usb power cable I added, you can power it using the rechargeable batteries, computer/phone USB ports or the normal USB chargers.
+The frequency can be tuned using the trimmer capacitor and listened to on a normal FM receiver, or tuned to frequencies below the FM band to prevent eavesdropping by everyone else.
+The range of the transmitter is about 30m, but this could easily be increased by having a retransmitter within range.
+The transmitter circuit board is small enough to be easily concealed. Creative ways can also be employed like placing it in a hard disk case as I&rsquo;ve done below :)</p>
+
+<p><img src="http://www.ckn.io/images/transmitter_case_open.jpg" width="200"> <img src="http://www.ckn.io/images/transmitter_case_closed.jpg" width="200"></p>
+
+<p><strong>Can it DOS?</strong></p>
+
+<p>Set the slide switch to audio and you can play audio from your preferred audio source (say your phone) using an aux cable to the frequency you tune the transmitter to. If that frequency is allocated to a radio station, then anyone tuned to that station within 30m listens to what you play (legal issues ensue). With its portable nature, you become a mobile radio station DOSer.</p>
+
+<p>The cost of the headsets is about 10 dollars and for that you can come up with some creative ways of making use of the transmitter. You can continue using the headphones independently with an aux cable or listening to FM radio.</p>
+
+<p>For now I plan on replacing the trimmer capacitor with a more flexible one, and hopefully interface it with a smartphone to provide an interface to control the frequency :).</p>
+
+<p>Till next time, happy hacking!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[GSM: Sniffing voice traffic]]></title>
+    <link href="http://www.ckn.io/blog/2016/01/25/gsm-sniffing-voice-traffic/"/>
+    <updated>2016-01-25T06:51:00+03:00</updated>
+    <id>http://www.ckn.io/blog/2016/01/25/gsm-sniffing-voice-traffic</id>
+    <content type="html"><![CDATA[<h4>I wrap up the GSM series with a walkthrough on how to decrypt voice traffic. Voice is the way most people interact on a telecommunications network and therefore a major componenent of GSM traffic. I&rsquo;ve explained a lot of the background on GSM communication in the previous posts so I&rsquo;ll get right to it.</h4>
+
+<!--more-->
+
+
+<h4>We will capture the traffic using the <strong>HackRF one</strong> and the call will take place between two Safaricom lines. The capture will take place on the downlink - that is the receiving end of the call. I&rsquo;ll use a Blackberry as the receiving device so that I can easily get the TMSI and Kc.</h4>
+
+<h2><strong>Capturing the traffic</strong></h2>
+
+<h4>I&rsquo;ll speed through a lot of these steps as they are similar to the <a href="https://www.ckn.io/blog/2015/11/29/gsm-sniffing-sms-traffic/" target="_blank"><strong>sniffing SMS traffic scenario</strong></a>. I&rsquo;ll use the  Absolute Radio Frequency Channel Number <a href="http://www.telecomabc.com/a/arfcn.html" target="_blank"><strong>ARFCN</strong></a> in specifying the radio channel. GSM uses ARFCNs to represent the various frequencies the BTS and mobile device communicate on. I&rsquo;ll use the ARFCN instead of the frequency in the commands I&rsquo;ll run for variety as I&rsquo;ve been using frequency in the previous posts.</h4>
+
+<h4>We begin by getting the ARFCN, TMSI and Kc from the Blackberry. On a Blackberry these are readily available from the engineering screen menu. The ARFCN is gotten by navigating to the <strong>Cell Identity</strong> submenu, the TMSI from the <strong>Mobile Identity</strong> submenu and finally the Kc from the <strong>SIM Browser</strong> submenu.</h4>
+
+<h4>The values I get are:</h4>
+
+<h4>ARFCN: <strong>17</strong></h4>
+
+<h4>TMSI: <strong>8D4812F8</strong></h4>
+
+<h4>Kc: <strong>239E4C213612C000</strong></h4>
+
+<h4>I use the airprobe_rtlsdr_capture module of <a href="https://github.com/ptrkrysik/gr-gsm" target="_blank"><strong>gr-gsm</strong></a> to capture the voice traffic. I begin the capture by running the following command:</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>airprobe_rtlsdr_capture.py -a <span class="m">17</span> -s <span class="m">1000000</span> -g <span class="m">40</span> -c voice_capture.cfile -T 150
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>-a</strong> is the ARFCN, <strong>-s</strong> the sample rate in Hz, <strong>-g</strong> the gain, <strong>-c</strong> the output file and <strong>-T</strong> the duration of our capture in seconds.</p>
+
+<h4>I then make a call while the capture is in progress.</h4>
+
+<h2><strong>Decoding BCCH</strong></h2>
+
+<h4>As explained in the previous post, in idle mode the phone has to listen on the BCCH to detect traffic to be sent to it.</h4>
+
+<h4>Our aim here is to identify what SDCCH (Standalone Dedicated Control Channel) is used for our call setup.</h4>
+
+<h4>We first start wireshark, monitor the loopback interface and then run the following command:</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>airprobe_decode.py -c voice_capture.cfile -s <span class="m">1000000</span> -a <span class="m">17</span> -m BCCH -t 0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4><strong>voice_capture.cfile</strong> is the file with the voice traffic we captured.</h4>
+
+<h4>We then search for traffic specific to our TMSI by searching for it in wireshark packet details.</h4>
+
+<h4>we look for the paging request and inspect the Immediate Assignment that follows:</h4>
+
+<p><img src="http://www.ckn.io/images/SDCCH_Search.png"></p>
+
+<h4>Note that it&rsquo;s <strong>SDCCH/8</strong>, <strong>Timeslot 1</strong>.</h4>
+
+<h1><strong>Decoding SDCCH</strong></h1>
+
+<h4>We now need to identify the ciphering mode the BTS tells the phone to use.</h4>
+
+<h4>We restart wireshark on the loopback interface and then run the following command specifying <strong>SDCCH8</strong> and <strong>Timeslot 1</strong>:</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>airprobe_decode.py -c voice_capture.cfile -s <span class="m">1000000</span> -a <span class="m">17</span> -m SDCCH8 -t 1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>We look for a Paging Response followed by a Ciphering Mode Command.</h4>
+
+<p><img src="http://www.ckn.io/images/ciphering_mode.png"></p>
+
+<h4>We see that the algorithm in use is <strong>A5/1</strong>.</h4>
+
+<h2><strong>Decoding TCH</strong></h2>
+
+<h4>TCH is the Traffic Channel in GSM and is used to carry voice traffic and data. It could either be full rate TCH/F or half rate TCH/H. You can read up more on it <a href="http://www.rfwireless-world.com/Terminology/GSM-traffic-channel-TCH-FS-HS.html" target="_blank"><strong>here</strong></a>.</h4>
+
+<h4>We now restart wireshark on the loopback interface and run the following command:</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>airprobe_decode.py -c voice_capture.cfile -s <span class="m">1000000</span> -a <span class="m">17</span> -m SDCCH8 -t <span class="m">1</span> -e <span class="m">1</span> -k 0x23,0x9E,0x4C,0x21,0x36,0x12,0xC0,0x00
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4><strong>-e 1</strong> specifies the algorithm <strong>A5/1</strong>, <strong>-k 0x23,0x9E,0x4C,0x21,0x36,0x12,0xC0,0x00</strong> specifies the <strong>Kc</strong>.</h4>
+
+<h4>On wireshark we first look for the Call Control Setup traffic and we can actually see the calling party number as below.</h4>
+
+<p><img src="http://www.ckn.io/images/cc_setup.png"></p>
+
+<h4>A bit down the capture we should see an Assignment command. We see that the voice call is assigned to Timeslot 7 and the Traffic Channel is full rate (TCH/F).</h4>
+
+<p><img src="http://www.ckn.io/images/call_assignment.png"></p>
+
+<h2><strong>Decoding the voice traffic</strong></h2>
+
+<h4>We can now finally decode the voice traffic by running the following command:</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>airprobe_decode.py -c voice_capture.cfile -s <span class="m">1000000</span> -a <span class="m">17</span> -m TCHF -t <span class="m">7</span> -e <span class="m">1</span> -k 0x23,0x9E,0x4C,0x21,0x36,0x12,0xC0,0x00 -d FR -o speech.au.gsm
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4><strong>-m TCHF</strong> specifies the traffic channel, <strong>-t 7</strong> the TCH/F timeslot, <strong>-d FR</strong> specifies the voice codec of the channel as full rate, and  <strong>speech.au.gsm</strong> specifies the output file.</h4>
+
+<h4><strong>speech.au.gsm</strong> contains the voice traffic. We convert it to an audio file using toast as follows:</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>toast -d speech.au.gsm
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>We will get a file called <strong>speech.au</strong> which we can play back and listen to the captured voice call :).</h4>
+
+<h2><strong>Alternative method</strong></h2>
+
+<h4>Alternatively one could use the mainstream airprobe modules instead of gr-gsm with the same results.</h4>
+
+<h4>The original modules had issues with the HackRF and later GNU Radio versions. I however did some patching and you can clone the patched version from my Github <a href="https://github.com/iamckn/airprobe" target="_blank"><strong>here</strong></a>.</h4>
+
+<h4>The equivalent commands for the whole process starting from decoding BCCH to decoding voice are:</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>./go.sh voice_capture.cfile <span class="m">64</span> 0B
+</span><span class='line'>./go.sh voice_capture.cfile <span class="m">64</span> 1S 239E4C213612C00001
+</span><span class='line'>./go.sh voice_capture.cfile <span class="m">64</span> 7T 239E4C213612C00001
+</span><span class='line'>toast -d speech.au.gsm
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>That concludes the GSM radio series for now.</h4>
+
+<h4>Till next time, happy hacking!</h4>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[GSM: Sniffing SMS traffic]]></title>
+    <link href="http://www.ckn.io/blog/2015/11/29/gsm-sniffing-sms-traffic/"/>
+    <updated>2015-11-29T10:14:48+03:00</updated>
+    <id>http://www.ckn.io/blog/2015/11/29/gsm-sniffing-sms-traffic</id>
+    <content type="html"><![CDATA[<h4>In the previous <a href="https://www.ckn.io/blog/2015/11/01/sniffing-gsm-traffic/" target="_blank"><strong>post</strong></a>, I explained how GSM traffic can be sniffed with the <a href="https://www.ckn.io/blog/2015/10/11/the-hackrf-one-first-steps/" target="_blank"><strong>HackRF One</strong></a>. GSM traffic carries a lot of information, from system information to the actual voice and data we are familiar with. The traffic that the normal user of a telecommunication network is concerned with is voice and data. With this in mind I&rsquo;ll do a two part series to demonstrate how voice and data can be sniffed using the HackRF. I start with SMS traffic which falls under the data category. Let&rsquo;s get right into it!</h4>
+
+<!--more-->
+
+
+<h4>I am going to send an SMS from a Safaricom line to an Orange line, capture the traffic over the <a href="https://en.wikipedia.org/wiki/Um_interface" target="_blank"><strong>Um (air) interface</strong></a> and decrypt the data to retrieve the SMS. I own both lines steering clear of the legality issue of decrypting other people&rsquo;s traffic.</h4>
+
+<h2><strong>Identifying the BTS</strong></h2>
+
+<h4>The specific point at which I&rsquo;ll capture the traffic is as it&rsquo;s being sent by the BTS to the Orange line. The technical term for this is the downlink. I therefore need to identify the BTS that my Orange line is connected to. A BTS is uniquely identified using an assigned cell identity (Cell ID). The cell identity combined with the <a href="https://en.wikipedia.org/wiki/Location_area_identity" target="_blank"><strong>location area identity (LAI)</strong></a> which uniquely identifies the country, mobile network and location area code is what we need to get. There are various ways to get this information such as the engineering menu on blackberries. The phone I am using is an android phone and there are several android apps that will give you this information. In my case I use the awesome <a href="https://github.com/SecUpwN/Android-IMSI-Catcher-Detector" target="_blank"><strong>Android IMSI Catcher Detector</strong></a>.</h4>
+
+<h4>Next we sniff the GSM frequencies our mobile operators use and identify the specific frequency the BTS is operating on. Follow the previous <a href="https://www.ckn.io/blog/2015/11/01/sniffing-gsm-traffic/" target="_blank"><strong>post</strong></a> on how to do this. We will accomplish this by searching the traffic being captured on wireshark for the LAI and Cell ID our phone is on until we have a match. In this case the frequency the Orange BTS was operating on is 949.2MHz.</h4>
+
+<h2><strong>Capturing SMS traffic</strong></h2>
+
+<h4>I&rsquo;ll use the airprobe_rtlsdr_capture module of <a href="https://github.com/ptrkrysik/gr-gsm" target="_blank"><strong>gr-gsm</strong></a> to capture the SMS traffic. I begin the capture using the following command:</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>airprobe_rtlsdr_capture.py -f <span class="m">949200000</span> -s <span class="m">1000000</span> -g <span class="m">40</span> -c capture.cfile -T 60
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>-f</strong> is the frequency in Hz, <strong>-s</strong> the sample rate in Hz, <strong>-g</strong> the gain, <strong>-c</strong> the output file and <strong>-T</strong> the duration of our capture in seconds.</p>
+
+<h4>I then send an SMS reading &ldquo;This is a demo of GSM decryption&rdquo; to the Orange line.</h4>
+
+<h2><strong>Getting the TMSI and Kc</strong></h2>
+
+<h4>We now have the traffic captured and saved in a file called <strong>capture.cfile</strong>. Before we get into the decryption process, we need some information specific to our SIM card.</h4>
+
+<h4>First we need the Temporary Mobile Subscriber Identity (<strong>TMSI</strong>). This is a random assigned identity assigned to the SIM when it connects to a BTS. Its purpose is to avoid the subscriber from being identified and tracked by eavesdroppers on the air interface as I am trying to do :).</h4>
+
+<h4>We will then need to get the <strong>Kc</strong>, which is the key used to encrypt the traffic between the phone and the BTS over the air. I will get into the details of how the <strong>Kc</strong> is calculated in a later post but for now you can read up on the <strong>A8</strong> algorithm.</h4>
+
+<h4>There are various ways to get the <strong>TMSI</strong> and <strong>Kc</strong>. These guides <a href="http://domonkos.tomcsanyi.net/?p=369" target="_blank"><strong>here</strong></a> and <a href="http://openbsc.osmocom.org/trac/wiki/A5_GSM_AT_tricks" target="_blank"><strong>here</strong></a> are great references.</h4>
+
+<h4>I used AT commands on a connected Samsung S3 mini as follows:</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>AT+CRSM<span class="o">=</span>176,28448,0,0,9
+</span><span class='line'>+CRSM: 144,0,0E10EAF30299F2C404
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>The <strong>Kc</strong> from the output is <strong>0E10EAF30299F2C4</strong></h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>AT+CRSM<span class="o">=</span>176,28542,0,0,11
+</span><span class='line'>+CRSM: 144,0,38256E5136F9702B5D0000
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>The <strong>TMSI</strong> from the output is <strong>38256E51</strong></h4>
+
+<h2><strong>Decoding BCCH</strong></h2>
+
+<h4>BCCH is the Broadcast Control Channel that the BTS uses to communicate system information messages to the mobile device on.</h4>
+
+<h4>In idle mode the phone has to listen on the BCCH to detect traffic to be sent to it.</h4>
+
+<h4>In this case the BTS sends two paging request messages which inform the phone of an incoming SMS.</h4>
+
+<h4>This will then be followed by an Immediate Assignment where an SDCCH is established for the SMS transfer.</h4>
+
+<h4>SDCCH is a Standalone Dedicated Control Channel used for most short transactions, including initial call setup step, registration and SMS transfer.</h4>
+
+<h4>We therefore need to identify what SDCCH is used for the SMS transfer.</h4>
+
+<h4>We first start wireshark and monitor the loopback interface and then run the following command:</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>airprobe_decode.py -c capture.cfile -s <span class="m">1000000</span> -f <span class="m">949200000</span> -m BCCH -t 0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4><strong>capture.cfile</strong> is the file with the traffic we captured earlier.</h4>
+
+<h4>We then search for traffic specific to our TMSI by searching for it in wireshark packet details.</h4>
+
+<p><img src="http://www.ckn.io/images/tmsi_search.png"></p>
+
+<h4>we look for the two paging requests and inspect the Immediate Assignment that follows:</h4>
+
+<p><img src="http://www.ckn.io/images/sdcch_channel.png"></p>
+
+<h4>Note that it&rsquo;s <strong>SDCCH/8</strong>, <strong>Timeslot 2</strong>.</h4>
+
+<h2><strong>Decoding SDCCH</strong></h2>
+
+<h4>We now need to identify the ciphering mode the BTS tells the phone to use.</h4>
+
+<h4>We restart wireshark on the loopback interface and then run the following command specifying <strong>SDCCH8</strong> and <strong>Timeslot 2</strong>:</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>airprobe_decode.py -c capture.cfile -s <span class="m">1000000</span> -f <span class="m">949200000</span> -m SDCCH8 -t 2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>We look for a Paging Response followed by a Ciphering Mode Command.</h4>
+
+<p><img src="http://www.ckn.io/images/cipher_mode.png"></p>
+
+<h4>We see that the algorithm in use is <strong>A5/1</strong> (more on this in a later post).</h4>
+
+<h2><strong>Decrypting the SMS traffic. Finally!</strong></h2>
+
+<h4>We confirm the most recently used <strong>Kc</strong> as shown earlier, then we restart wireshark on the loopback interface and run the following command:</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>airprobe_decode.py -c capture.cfile -s <span class="m">1000000</span> -f <span class="m">949200000</span> -m SDCCH8 -t <span class="m">2</span> -e <span class="m">1</span> -k 0x0E,0x10,0xEA,0xF3,0x02,0x99,0xF2,0xC4
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4><strong>-e 1</strong> specifies the algorithm <strong>A5/1</strong>, <strong>-k 0x0E,0x10,0xEA,0xF3,0x02,0x99,0xF2,0xC4</strong> specifies the <strong>Kc</strong>.</h4>
+
+<h4>On wireshark we look for the GSM SMS traffic and we can see the text of our SMS :).</h4>
+
+<p><img src="http://www.ckn.io/images/decrypted_sms.png"></p>
+
+<h2><strong>Wrapping up</strong></h2>
+
+<h4>If you&rsquo;ve followed through keenly you&rsquo;ll note that every variable is available readily from just sniffing the traffic except the <strong>Kc</strong>. Everything else is exchanged between the BTS and Mobile device, from the TMSI and BTS details to the data traffic though encrypted. The question becomes how do you get the <strong>Kc</strong> in use by another mobile device? The good people at <a href="https://srlabs.de/decrypting_gsm/" target="_blank"><strong>SRLabs</strong></a> figured out how to crack the A5/1 encryption used and created a tool called <strong>Kraken</strong> and 2TB rainbow tables to find the <strong>Kc</strong>.</h4>
+
+<h4>They also automated a lot of the steps in this post making decryption of gsm voice and data almost trivial.</h4>
+
+<h4>In the next post I&rsquo;ll demonstrate how to decrypt voice traffic :) as I continue explaining GSM communication.</h4>
+
+<h4>Till then, happy hacking.</h4>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Sniffing GSM Traffic]]></title>
+    <link href="http://www.ckn.io/blog/2015/11/01/sniffing-gsm-traffic/"/>
+    <updated>2015-11-01T09:30:27+03:00</updated>
+    <id>http://www.ckn.io/blog/2015/11/01/sniffing-gsm-traffic</id>
+    <content type="html"><![CDATA[<h4>I have been playing around with the HackRF for the past couple of weeks and progressively exploring the Radio Frequency spectrum. In this post I&rsquo;ll take you through how to sniff GSM traffic. I&rsquo;ll be specifically monitoring the <a href="https://en.wikipedia.org/wiki/Um_interface" target="_blank"><strong>Um interface</strong></a>. This in the air interface between the Mobile Station (MS) and the Base Transceiver Station (BTS). The MS in this case will be the mobile phone while the BTS is what the phone connects to on the Mobile network. The BTS is usually hosted on towers which you can spot in various locations. Here is what a typical one looks like.</h4>
+
+<!--more-->
+
+
+<p><img src="http://www.ckn.io/images/BTS.jpg" width="400"></p>
+
+<h4>We first ensure that our HackRF is well set up as detailed in <a href="https://www.ckn.io/blog/2015/10/11/the-hackrf-one-first-steps/" target="_blank"><strong>this earlier post</strong></a>.</h4>
+
+<h4>This setup is tailored to Archlinux but other linux distros closely follow the same process.</h4>
+
+<h4>Next we install <a href="https://github.com/ptrkrysik/gr-gsm" target="_blank"><strong>gr-gsm</strong></a> which consists of gnuradio blocks and tools for receiving GSM transmissions.</h4>
+
+<h3><strong><em>Setting up gr-gsm</em></strong></h3>
+
+<h4>Install libosmocore libraries</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>yaourt -S libosmocore    
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Install gr-gsm</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone https://github.com/ptrkrysik/gr-gsm
+</span><span class='line'><span class="nb">cd </span>gr-gsm
+</span><span class='line'>mkdir build
+</span><span class='line'><span class="nb">cd </span>build
+</span><span class='line'>cmake ..
+</span><span class='line'>make
+</span><span class='line'>sudo make install
+</span><span class='line'>sudo ldconfig
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Add the path of the gr-gsm blocks to gnuradio</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>nano ~/.gnuradio/config.conf     
+</span><span class='line'>  <span class="o">[</span>grc<span class="o">]</span>
+</span><span class='line'>  <span class="nv">local_blocks_path</span><span class="o">=</span>/usr/local/share/gnuradio/grc/blocks
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Move gr-gsm library and python modules to correct location (depends on your environment).</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo mv /usr/local/lib/python2.7/site-packages/grgsm /usr/lib/python2.7/site-packages/
+</span><span class='line'>sudo mv /usr/local/lib/libgnuradio-grgsm.so /usr/lib/
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Next we will set up kalibrate-hackrf which we will use to find what GSM frequencies to sniff on.</h4>
+
+<h3><strong><em>Setting up kalibrate-hackrf</em></strong></h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone https://github.com/scateu/kalibrate-hackrf.git
+</span><span class='line'><span class="nb">cd </span>kalibrate-hackrf
+</span><span class='line'>./bootstrap
+</span><span class='line'>./configure
+</span><span class='line'>make
+</span><span class='line'>sudo make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><strong><em>Finding GSM frequencies</em></strong></h3>
+
+<h4>With our prerequisites done, the next step is to find GSM frequencies to listen on. First we consult <a href="http://www.worldtimezone.com/gsm.html" target="_blank"><strong>this site</strong></a> to identify GSM bands used by our local providers.</h4>
+
+<p><img src="http://www.ckn.io/images/gsm_bands.png"></p>
+
+<h4>Let&rsquo;s concentrate on the 900MHz band for now.</h4>
+
+<h4>We use kalibrate-hackrf (kal) to find the frequencies as below:</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>kal -s GSM900 -g <span class="m">40</span> -l 40
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4><strong>-s</strong> is the band to scan, <strong>-g</strong> is the baseband gain and <strong>-l</strong> the interface gain</h4>
+
+<h4>Let it run for a minute or so and you should get output similar to:</h4>
+
+<p><img src="http://www.ckn.io/images/kal.png"></p>
+
+<h3><strong><em>Sniffing!</em></strong></h3>
+
+<h4>Let us now use gqrx to confirm the frequencies by tuning in to the first one. In this case <strong>936.4MHz</strong></h4>
+
+<p><img src="http://www.ckn.io/images/gqrx_gsm.png"></p>
+
+<h4>We can see that the activity is centered around <strong>936.8MHz</strong> so we adjust accordingly and use that as the frequency.</h4>
+
+<h4>We now start capturing gsm traffic using gr-gsm :). What we do is launch gnuradio companion and open <strong>the airprobe_rtlsdr.grc</strong> block that is part of gr-gsm and run it.</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gnuradio-companion airprobe_rtlsdr.grc
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Tune to <strong>936.8MHz</strong> and if all went well we should get data streaming through the console window.</h4>
+
+<p><img src="http://www.ckn.io/images/gr_gsm_traffic.png"></p>
+
+<h4>We finally launch wireshark and monitor the loopback interface to see the decoded traffic :)</h4>
+
+<h4>Here is a sample showing BTS Location details.</h4>
+
+<p><img src="http://www.ckn.io/images/gsm_wireshark.png"></p>
+
+<h4>So what next after sniffing the traffic?</h4>
+
+<h4>In subsequent posts I&rsquo;ll explain and show how to interpret the decoded traffic as I explain how GSM communication takes place.</h4>
+
+<h4>From there I&rsquo;ll demonstrate how to decrypt the traffic. That is where it gets really interesting as we start reading SMS&rsquo;s, listening to calls and so on :).</h4>
+
+<h4>Till then, happy hacking.</h4>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Christian ~ 127.0.0.1]]></title>
+    <link href="http://www.ckn.io/blog/2015/10/17/christian/"/>
+    <updated>2015-10-17T11:40:08+03:00</updated>
+    <id>http://www.ckn.io/blog/2015/10/17/christian</id>
+    <content type="html"><![CDATA[<h1>who are you?</h1>
+
+<h4>I am a passionate Information Security enthusiast. I specialize in Digital Forensics and Incident Response (DFIR). Research and artifacts analysis are the cause of my sleepless nights. I have a keen interest in PC and mobile device malware, I am therefore always tinkering with VMs and mobile phones.</h4>
+
+<!--more-->
+
+
+<h1>what&rsquo;s your setup like?</h1>
+
+<h4>As is the norm with geeks, i have a few toys i play around with to facilitate my research.</h4>
+
+<blockquote><h4>HP S2031a 20&#8221; LCD Monitor</h4>
+
+<h4>HP Compaq LE2002x 20&#8221; LED monitor</h4>
+
+<h4>Dell Inspiron 15­5558 Notebook</h4>
+
+<h4>HP Envy 15&#8221; laptop</h4>
+
+<h4>Rubber Ducky Deluxe</h4>
+
+<h4>Teensy 3.1</h4>
+
+<h4>TP LInk MR3020 Portable Wireless Router</h4>
+
+<h4>TP link TLWN722N USB WiFI adapter</h4>
+
+<h4>Nexus 5 2013 (Black) and USB OTG cables</h4>
+
+<h4>Intel Galileo Board (Gen 2)</h4></blockquote>
+
+<p><img src="http://www.ckn.io/images/christian_setup.jpg" width="500" height="100"></p>
+
+<h4>The Dell laptop is my daily driver and it runs kali linux. It has an Intel Core i5­5200U processor clocking 2.2.Ghz x 4, 4GB Nvidia GeForce 920M graphics card, 8 GB ram and 1TB of storage.</h4>
+
+<h4>The HP Envy 15 is my research laptop, running Ubuntu desktop, it has an Intel core i7 4700MQ processor clocking 2.4Ghz x 8, 16GB RAM and 1TB of Storage.</h4>
+
+<h4>I use Kali as my primary OS because of the flexibility and the tools it comes with. The Ubuntu OS comes in very handy with research, development and the analysis that i do. I also run a windows VM for my documentation needs.</h4>
+
+<h4>My phone runs Kali nethunter with BRO IDS to keep track of traffic in and out of my phone.</h4>
+
+<h4>My interest in other fields have grown over the past few years and I have slowly incorporated Wireless and HID gadgets and resources for my research, hence some of the toys I have. It is always interesting to see how different infosec disciplines integrate and complement each other to achieve a predefined set of objectives.</h4>
+
+<h1>what tools do you run?</h1>
+
+<h4>The tools i run usually depend on the type of activity i am performing. The bare minimum is Santoku and REMnux for malware analysis, Kali linux for the usual infosec stuff, Security Onion for network traffic analysis, and Windows for forensic analysis and documentation.</h4>
+
+<h1>What&rsquo;s your dream setup</h1>
+
+<h4>My dream setup would be three 27 inch LED monitors side by side and a powerful enough CPU for decent 50­60 fps gaming and infosec research, a multicoloured  LED backlit keyboard and gaming mouse. As for the infosec toys, a quadcopter drone bundled with a WiFi pineapple, camera module and goggles, would do it for me. I hope Santa is gonna read this blog lol.</h4>
+
+<hr />
+
+<blockquote><h4>Follow Christian on twitter <a href="https://twitter.com/xtian_kisutsa" target="_blank"><strong>@xtian_kisutsa</strong></a> to keep up with what he&rsquo;s up to.</h4></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The HackRF One: First steps]]></title>
+    <link href="http://www.ckn.io/blog/2015/10/11/the-hackrf-one-first-steps/"/>
+    <updated>2015-10-11T20:18:10+03:00</updated>
+    <id>http://www.ckn.io/blog/2015/10/11/the-hackrf-one-first-steps</id>
+    <content type="html"><![CDATA[<h4>The wireless world is an area I&rsquo;ve been interested in for a long time. From the the more common applications such as Wi-Fi, bluetooth and FM to the lesser explored such as radar, satellite and GSM, radio frequency is an area I plan to explore extensively. How awesome is the concept of <a href="https://en.wikipedia.org/wiki/Electromagnetic_pulse" target="_blank"><strong>electromagnetic pulses</strong></a> in this age that is driven by electromagnetism. I digress so let me get back on track, there will be several more posts to explore the possibilities.</h4>
+
+<!--more-->
+
+
+<h4>I recently acquired the awesome <a href="https://greatscottgadgets.com/hackrf/" target="_blank"><strong>HackRF One</strong></a>, a Software Defined Radio peripheral capable of transmission or reception of radio signals from 1 MHz to 6 GHz. I added the <a href="http://www.nooelec.com/store/ham-it-up.html" target="_blank"><strong>Ham It Up v1.3 - RF Upconverter</strong></a> to boost performance in the lower frequency ranges. A telescopic antenna and various connectors complete the setup.</h4>
+
+<h2>The Hardware</h2>
+
+<h4><strong>The HackRF One, telescopic antenna (ANT 500), some connectors and a Ham It Up v1.3 - RF Upconverter</strong></h4>
+
+<p><img src="http://www.ckn.io/images/hackrf_hardware.JPG"></p>
+
+<h2>Software setup</h2>
+
+<h4>I did my setup on archlinux but it should be just as easy on other OS&rsquo;s. Here are the instructions from the <a href="https://github.com/mossmann/hackrf/wiki/Operating-System-Tips" target="_blank"><strong>HackRF Github wiki page</strong></a>.</h4>
+
+<h4>On my system I followed the following steps:</h4>
+
+<h3><strong><em>Installation of various software</em></strong></h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo pacman -S hackrf gnuradio-osmosdr gnuradio gnuradio-companion gqrx
+</span><span class='line'>yaourt -S gr-fosphor-git
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><strong><em>Creation of udev rules to allow access to the HackRF</em></strong></h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo nano /etc/udev/rules.d/52-hackrf.rules
+</span><span class='line'>  ATTR<span class="o">{</span>idVendor<span class="o">}==</span><span class="s2">&quot;1d50&quot;</span>, ATTR<span class="o">{</span>idProduct<span class="o">}==</span><span class="s2">&quot;6089&quot;</span>, SYMLINK+<span class="o">=</span><span class="s2">&quot;hackrf-one-%k&quot;</span>, <span class="nv">MODE</span><span class="o">=</span><span class="s2">&quot;660&quot;</span>, TAG+<span class="o">=</span><span class="s2">&quot;uaccess&quot;</span>
+</span><span class='line'>  ATTR<span class="o">{</span>idVendor<span class="o">}==</span><span class="s2">&quot;1fc9&quot;</span>, ATTR<span class="o">{</span>idProduct<span class="o">}==</span><span class="s2">&quot;000c&quot;</span>, SYMLINK+<span class="o">=</span><span class="s2">&quot;hackrf-dfu-%k&quot;</span>, <span class="nv">MODE</span><span class="o">=</span><span class="s2">&quot;660&quot;</span>, TAG+<span class="o">=</span><span class="s2">&quot;uaccess&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><strong><em>Testing the HackRF</em></strong></h3>
+
+<h4>Plug in the HackRF and run</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>hackrf_info
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>You should get output similar to:</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Found HackRF board 0:
+</span><span class='line'>USB descriptor string: 000000000000000014d463dc2f45a7e1
+</span><span class='line'>Board ID Number: <span class="m">2</span> <span class="o">(</span>HackRF One<span class="o">)</span>
+</span><span class='line'>Firmware Version: 2015.07.2
+</span><span class='line'>Part ID Number: 0xa000cb3c 0x0069435b
+</span><span class='line'>Serial Number: 0x00000000 0x00000000 0x14d463dc 0x2f45a7e1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>If you get an error, recheck your udev rules and ensure the HackRF USB connection is ok.</h4>
+
+<h3><strong><em>Updating the SPI Flash Firmware</em></strong></h3>
+
+<h4>Download the latest firmware <a href="https://github.com/mossmann/hackrf/releases/tag/v2015.07.2" target="_blank"><strong>here</strong></a>.</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>wget https://github.com/mossmann/hackrf/releases/download/v2015.07.2/hackrf-2015.07.2.zip
+</span><span class='line'>unzip hackrf-2015.07.2.zip
+</span><span class='line'><span class="nb">cd </span>hackrf-2015.07.2/firmware-bin/
+</span><span class='line'>hackrf_spiflash -w hackrf_one_usb_rom_to_ram.bin
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><strong><em>Updating the CPLD</em></strong></h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> ..
+</span><span class='line'>hackrf_cpldjtag -x firmware/cpld/sgpio_if/default.xsvf
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Press the reset button, then run the <strong>hackrf_info</strong> command and confirm the firmware updated successfully.</h4>
+
+<h4>We are then ready to try the &ldquo;Hello World&rdquo; of Software Defined Radio, implementing an FM receiver.</h4>
+
+<h2>An FM Receiver</h2>
+
+<h4>We will use the gnuradio-companion for this.</h4>
+
+<h4>Download and save this <a href="https://raw.githubusercontent.com/rrobotics/hackrf-tests/master/fm_radio/fm_radio_rx.grc" target="_blank"><strong>file</strong></a>, then open it using gnuradio from the terminal.</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gnuradio-companion fm_radio_rx.grc
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>You can then tune in to your preferred radio frequency and listen in.</h4>
+
+<p><img src="http://www.ckn.io/images/fm_receiver.png"></p>
+
+<h4>With that out of the way, you can try building the FM receiver yourself using the gnuradio-companion.</h4>
+
+<h4>With the HackRF&rsquo;s transmission capability, an FM transmitter can also be implemented. I won&rsquo;t say I haven&rsquo;t thought of jamming certain frequencies in the vicinity, but that would be illegal, wouldn&rsquo;t it :)?</h4>
+
+<h4>In the next post, I&rsquo;ll show how to sniff gsm traffic.</h4>
+
+<h4>Till then, happy hacking :).</h4>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Saints and Outlaws]]></title>
+    <link href="http://www.ckn.io/blog/2015/10/04/saints-and-outlaws/"/>
+    <updated>2015-10-04T09:06:09+03:00</updated>
+    <id>http://www.ckn.io/blog/2015/10/04/saints-and-outlaws</id>
+    <content type="html"><![CDATA[<h4>I have been teaching a class on Network Security at mlab and one student asked what the state of cyber-security in the country was. In this post I explain the current state and the outlook over the coming years.</h4>
+
+<!--more-->
+
+
+<h2>Saints</h2>
+
+<h4>Let&rsquo;s get right to it, we are in a state where a majority of businesses are in a sorry state information security wise. On the other side we have hackers with the capacity to bring these businesses to their knees should they choose to.</h4>
+
+<h4>This is where the businesses get lucky. They are surviving potential ruin through the good will of these hackers. We are in a state where we have these &lsquo;saints&rsquo; trying to fix the situation, but as is usually the case, the people who need their help the most instead choose to either ignore or wage wars against them.</h4>
+
+<h4>So why would otherwise reasonable people go against the very people who are trying to help them and trample all over their advice? As with everything esle related to the human person, it boils down to pride and self-interest.</h4>
+
+<h4>We have the IT managers and other information security personnel desperate to hold on to their jobs. Anyone who attempts to cast doubt on their competence, as they see it, is the enemy. The thought of admitting that they need help in securing their systems to their employers scares them to death (in some cases it&rsquo;s business owners not wanting to look bad to their clients). This myopic view has them preferring to have their systems breached and then papering over the cracks and their bosses/clients will be none the wiser. In effect what we&rsquo;re left with are vilified saints, insulated business owners/clients and IT personnel/business owners protecting their interests.</h4>
+
+<h4>Next we have the group that is driven by pride. They are often business owners who just cannot admit something is not right. They are more dangerous and detrimental to their businesses than the previous group. Most of them suffer from the Dunning-Kruger effect which Wikipedia describes as:</h4>
+
+<blockquote><h2>The Dunning–Kruger effect is a cognitive bias wherein relatively unskilled individuals suffer from illusory superiority, mistakenly assessing their ability to be much higher than is accurate.</h2></blockquote>
+
+<h4>They will come out guns blazing should they be challenged and there is no convincing them otherwise.</h4>
+
+<h4>Let me demonstrate an actual case I&rsquo;ve dealt with:</h4>
+
+<blockquote><h4><strong>Me</strong>: Your wireless network uses an extremely weak password. You should change it to a more complex one to make your network more secure.</h4>
+
+<h4><strong>Business owner</strong>: I know we have a weak password and that&rsquo;s how we like it. If someone tries to hack us, I&rsquo;ll use those tools and hack them back.</h4>
+
+<h4><strong>Me</strong>: Have a pleasant day.</h4></blockquote>
+
+<h4>Denying the obvious with whatever they can come up with is a speciality they master. Unfortunately for them, this is usually their undoing when their businesses suffer irreperable damage.</h4>
+
+<h2>Outlaws</h2>
+
+<h4><del>Winter is coming</del> The landscape is changing, we&rsquo;re headed into an era of highly skilled individuals with time on their hands. We have students entering the IT field in droves. We have been having an influx of young and ambitious technical proficient people spurred on by several tech incubators over the past few years. The number of tech start-ups entering the market grows by the day.</h4>
+
+<h4>A lot of these start-ups will fail, a lot of these skilled people ripe with ambition will lack jobs.</h4>
+
+<h4>The low hanging fruit of inscecure businesses will be ripe for their picking. They will then probably hone their skills and move on to more advanced attacks. I see us entering an era of outlaws and the tipping point is on the horizon.</h4>
+
+<h4>Hell hath no fury like a <del>woman</del> hacker scorned. Businesses have been surviving thus far because they haven&rsquo;t offended the wrong people. One of these days a business will mess with the wrong hacker. We are teetering on the edge of a major local breach, one that cannot be covered up. The saints need backing before an age of outlaws overruns them.</h4>
+
+<h2>The fix</h2>
+
+<h4>The same things that make the state of information security so precarious are the same ones that if employed appropriately can salvage it.</h4>
+
+<h4>Hackers too are driven by self interest and pride and that&rsquo;s all businesses need to offer them to keep them on their side. Offering bounty programs to people who discover vulnerabilities is an easy and effective way to accomplish this.</h4>
+
+<h4>Hackers love recognition and appreciation of their skills, offer them this and they&rsquo;ll be your first line of defence. They&rsquo;ll even notify you of imminent threats as they arise.</h4>
+
+<h4>Deride them and they may spend the rest of their days trying to get back at you, just ask <a href="http://gizmodo.com/why-sony-keeps-getting-hacked-1667259233" target="_blank"><strong>Sony</strong></a>.</h4>
+
+<h4>The exponentially growing number of young skilled hackers getting into the field with time to burn will need an outlet. They will have to be jointly supported by both businesses and established professionals in creation of opportunities and in mentorship.</h4>
+
+<h4>With that, the saints will have every chance of winning the war.</h4>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The BRO Chronicles 2]]></title>
+    <link href="http://www.ckn.io/blog/2015/09/17/the-bro-chronicles-2/"/>
+    <updated>2015-09-17T20:54:07+03:00</updated>
+    <id>http://www.ckn.io/blog/2015/09/17/the-bro-chronicles-2</id>
+    <content type="html"><![CDATA[<h4>In part one I analysed the data communication that takes place on a phone over a one hour period. Read the post <a href="https://www.ckn.io/blog/2015/09/06/the-bro-chronicles-1/" target="_blank"><strong>here</strong></a> for details and background info.</h4>
+
+<h4>Here, I go further and analyse what happens over a twelve hour period of normal phone usage. I ran <a href="https://www.bro.org/" target="_blank"><strong>BRO</strong></a> on my phone from <code>6:40am</code> to <code>6:40pm</code> and ensured that data was on and WIFI off the whole time.</h4>
+
+<!--more-->
+
+
+<h4>Let me start with figures of some standout statistics.</h4>
+
+<blockquote><h4>The phone communicated with <code>233</code> unique IPs from diverse parts of the globe over that period.</h4></blockquote>
+
+<h4>I broke this down further to specific ports of interest. Note that my IP was <code>105.52.174.7</code> during that period.</h4>
+
+<h2>Port 21 : FTP</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">Unique</span> <span class="nx">IPs</span> <span class="o">:</span> <span class="mi">2</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Source</span>            <span class="nx">Destination</span>
+</span><span class='line'><span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>       <span class="mf">158.69</span><span class="p">.</span><span class="mf">128.126</span>
+</span><span class='line'><span class="mf">180.97</span><span class="p">.</span><span class="mf">106.37</span>      <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Why my phone wanted to connect to <code>158.69.128.126</code> on FTP raises some interesting questions.</h4>
+
+<h2>Port 22 : SSH</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">Unique</span> <span class="nx">IPs</span> <span class="o">:</span> <span class="mi">6</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Source</span>            <span class="nx">Destination</span>
+</span><span class='line'><span class="mf">180.97</span><span class="p">.</span><span class="mf">106.36</span>      <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>
+</span><span class='line'><span class="mf">218.65</span><span class="p">.</span><span class="mf">30.23</span>       <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>
+</span><span class='line'><span class="mf">42.116</span><span class="p">.</span><span class="mf">163.127</span>     <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">65.123</span>       <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>
+</span><span class='line'><span class="mf">89.248</span><span class="p">.</span><span class="mf">168.28</span>      <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>
+</span><span class='line'><span class="mf">94.102</span><span class="p">.</span><span class="mf">49.102</span>      <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Port 23 : Telnet</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">Unique</span> <span class="nx">IPs</span> <span class="o">:</span> <span class="mi">24</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Source</span>            <span class="nx">Destination</span>
+</span><span class='line'><span class="mf">101.29</span><span class="p">.</span><span class="mf">2.192</span>       <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span> <span class="mi">23</span>
+</span><span class='line'><span class="mf">106.115</span><span class="p">.</span><span class="mf">98.232</span>     <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span> <span class="mi">23</span>
+</span><span class='line'><span class="mf">110.195</span><span class="p">.</span><span class="mf">77.199</span>     <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span> <span class="mi">23</span>
+</span><span class='line'><span class="nx">and</span> <span class="mi">21</span> <span class="nx">others</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>That translates to an average of two telnet connection attempts per hour from unique IPs!</h4>
+
+<h2>Summary of some other ports of interest</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">Port</span>       <span class="nx">Unique</span> <span class="nx">IPs</span>  
+</span><span class='line'><span class="mi">53</span>            <span class="mi">24</span>
+</span><span class='line'><span class="mi">25</span>            <span class="mi">1</span>
+</span><span class='line'><span class="mi">80</span>            <span class="mi">129</span>
+</span><span class='line'><span class="mi">123</span>           <span class="mi">26</span>
+</span><span class='line'><span class="mi">443</span>           <span class="mi">218</span>
+</span><span class='line'><span class="mi">993</span>           <span class="mi">4</span>
+</span><span class='line'><span class="mi">995</span>           <span class="mi">1</span>
+</span><span class='line'><span class="mi">1900</span>          <span class="mi">3</span>
+</span><span class='line'><span class="mi">5060</span>          <span class="mi">1</span>
+</span><span class='line'><span class="mi">5222</span>          <span class="mi">51</span>
+</span><span class='line'><span class="mi">5228</span>          <span class="mi">7</span>
+</span><span class='line'><span class="mi">8080</span>          <span class="mi">4</span>
+</span><span class='line'><span class="mi">8996</span>          <span class="mi">1</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>These results immediately direct our attention to internet wide scanning. This has slowly become a growing phenomenon over the past two years and has been aided by the release of extremely fast scanning tools. We have <a href="https://zmap.io/" target="_blank"><strong>zmap</strong></a> created and maintained by a team from the University of Michigan which can scan the entire IPv4 space in under 5 minutes with a ten gigabit ethernet connection. Masscan, created by Robert Graham of Errata Security is fast enough to do the same in under <a href="http://blog.erratasec.com/2013/09/masscan-entire-internet-in-3-minutes.html" target="_blank"><strong>3 minutes</strong></a>!</h4>
+
+<h4>Internet wide scanning is being used a lot by researchers to investigate vulnerabilities and do various internet wide studies. A case in point is that several internet wide scans were done targeting the heartbleed vulnerability within 48 hours of disclosure. A more recent case is this week&rsquo;s <a href="https://zmap.io/synful/" target="_blank"><strong>synful attack scan</strong></a> done by the zmap team on September 15, 2015.</h4>
+
+<h4><a href="https://www.shodan.io/" target="_blank"><strong>Shodan</strong></a> does regular internet wide scans and hosts the data on their site which is made available to the public in an interactive way.</h4>
+
+<h4>The University of Michigan team (same one that maintains zmap) also does daily scans and hosts the raw data on the <a href="https://www.scans.io/" target="_blank"><strong>scans.io</strong></a> site. They also host scans done by other researchers such as the Rapid7 team which does various scans regularly.</h4>
+
+<h4>The flip side of this is that a lot more people do these scans with malicious intent. They&rsquo;re always on the lookout for vulnerable systems on the internet and their activity spikes every time a major vulnerable is released. They mostly hide behind <a href="https://en.wikipedia.org/wiki/Bulletproof_hosting" target="_blank"><strong>bulletproof hosting providers</strong></a> or run their scans from countries likely to be lenient, with China featuring prominently.</h4>
+
+<h4>Let me now relate the activity on my phone with internet wide scanning.</h4>
+
+<h2>Some known research scans I observed during that 12 hour period</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">IP</span>                 <span class="nx">Domain</span> <span class="nx">Name</span>
+</span><span class='line'><span class="mf">169.229</span><span class="p">.</span><span class="mf">3.90</span>       <span class="nx">researchscan0</span><span class="p">.</span><span class="nx">EECS</span><span class="p">.</span><span class="nx">Berkeley</span><span class="p">.</span><span class="nx">EDU</span>
+</span><span class='line'><span class="mf">216.218</span><span class="p">.</span><span class="mf">206.69</span>     <span class="nx">scan</span><span class="o">-</span><span class="mi">08</span><span class="p">.</span><span class="nx">shadowserver</span><span class="p">.</span><span class="nx">org</span>
+</span><span class='line'><span class="mf">74.82</span><span class="p">.</span><span class="mf">47.20</span>        <span class="nx">scan</span><span class="o">-</span><span class="mi">12</span><span class="nx">e</span><span class="p">.</span><span class="nx">shadowserver</span><span class="p">.</span><span class="nx">org</span>
+</span><span class='line'><span class="mf">184.105</span><span class="p">.</span><span class="mf">247.204</span>    <span class="nx">scan</span><span class="o">-</span><span class="mi">15</span><span class="nx">b</span><span class="p">.</span><span class="nx">shadowserver</span><span class="p">.</span><span class="nx">org</span>
+</span><span class='line'><span class="mf">74.82</span><span class="p">.</span><span class="mf">47.29</span>        <span class="nx">scan</span><span class="o">-</span><span class="mi">12</span><span class="nx">e</span><span class="p">.</span><span class="nx">shadowserver</span><span class="p">.</span><span class="nx">org</span>
+</span><span class='line'><span class="mf">188.138</span><span class="p">.</span><span class="mf">9.50</span>       <span class="nx">atlantic</span><span class="p">.</span><span class="nx">census</span><span class="p">.</span><span class="nx">shodan</span><span class="p">.</span><span class="nx">io</span>
+</span><span class='line'><span class="mf">93.120</span><span class="p">.</span><span class="mf">27.62</span>       <span class="nx">m247</span><span class="p">.</span><span class="nx">ro</span><span class="p">.</span><span class="nx">shodan</span><span class="p">.</span><span class="nx">io</span>
+</span><span class='line'><span class="mf">71.6</span><span class="p">.</span><span class="mf">167.142</span>       <span class="nx">census9</span><span class="p">.</span><span class="nx">shodan</span><span class="p">.</span><span class="nx">io</span>
+</span><span class='line'><span class="mf">71.6</span><span class="p">.</span><span class="mf">165.200</span>       <span class="nx">census12</span><span class="p">.</span><span class="nx">shodan</span><span class="p">.</span><span class="nx">io</span>
+</span><span class='line'><span class="mf">198.20</span><span class="p">.</span><span class="mf">70.114</span>      <span class="nx">census3</span><span class="p">.</span><span class="nx">shodan</span><span class="p">.</span><span class="nx">io</span>
+</span><span class='line'><span class="mf">188.138</span><span class="p">.</span><span class="mf">9.51</span>       <span class="nx">atlantic482</span><span class="p">.</span><span class="nx">serverprofi24</span><span class="p">.</span><span class="nx">de</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.198</span>       <span class="nx">icsresearch1</span><span class="p">.</span><span class="nx">plcscan</span><span class="p">.</span><span class="nx">org</span>
+</span><span class='line'><span class="mf">141.212</span><span class="p">.</span><span class="mf">122.181</span>    <span class="nx">researchscan436</span><span class="p">.</span><span class="nx">eecs</span><span class="p">.</span><span class="nx">umich</span><span class="p">.</span><span class="nx">edu</span>
+</span><span class='line'><span class="mf">141.212</span><span class="p">.</span><span class="mf">122.182</span>    <span class="nx">researchscan436</span><span class="p">.</span><span class="nx">eecs</span><span class="p">.</span><span class="nx">umich</span><span class="p">.</span><span class="nx">edu</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>And of course several scans from unknown actors</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">IP</span>                 <span class="nx">Country</span>
+</span><span class='line'><span class="mf">124.193</span><span class="p">.</span><span class="mf">141.130</span>    <span class="nx">China</span>
+</span><span class='line'><span class="mf">223.167</span><span class="p">.</span><span class="mf">14.33</span>      <span class="nx">China</span>
+</span><span class='line'><span class="mf">123.151</span><span class="p">.</span><span class="mf">149.222</span>    <span class="nx">China</span>
+</span><span class='line'><span class="mf">104.245</span><span class="p">.</span><span class="mf">101.253</span>    <span class="nx">US</span>
+</span><span class='line'><span class="mf">199.203</span><span class="p">.</span><span class="mf">59.120</span>     <span class="nx">Israel</span>
+</span><span class='line'><span class="mf">125.253</span><span class="p">.</span><span class="mf">126.75</span>     <span class="nx">Vietnam</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>       <span class="nx">Netherlands</span>
+</span><span class='line'><span class="mf">115.230</span><span class="p">.</span><span class="mf">124.164</span>    <span class="nx">China</span>
+</span><span class='line'><span class="mf">177.44</span><span class="p">.</span><span class="mf">69.36</span>       <span class="nx">Brazil</span>
+</span><span class='line'><span class="mf">119.235</span><span class="p">.</span><span class="mf">95.174</span>     <span class="nx">Fiji</span>
+</span><span class='line'><span class="mf">125.24</span><span class="p">.</span><span class="mf">223.93</span>      <span class="nx">Thailand</span>
+</span><span class='line'><span class="mf">220.134</span><span class="p">.</span><span class="mf">101.246</span>    <span class="nx">Taiwan</span>
+</span><span class='line'><span class="mf">37.145</span><span class="p">.</span><span class="mf">43.253</span>      <span class="nx">Russia</span>
+</span><span class='line'><span class="mf">95.59</span><span class="p">.</span><span class="mf">98.19</span>        <span class="nx">Kazakhstan</span>
+</span><span class='line'><span class="mf">91.236</span><span class="p">.</span><span class="mf">75.224</span>      <span class="nx">Polland</span>
+</span><span class='line'><span class="mf">46.10</span><span class="p">.</span><span class="mf">74.117</span>       <span class="nx">Bulgaria</span>
+</span><span class='line'><span class="mf">186.45</span><span class="p">.</span><span class="mf">49.254</span>      <span class="nx">Trinidad</span>
+</span><span class='line'><span class="mf">202.12</span><span class="p">.</span><span class="mf">81.138</span>      <span class="nx">India</span>
+</span><span class='line'><span class="mf">211.247</span><span class="p">.</span><span class="mf">102.117</span>    <span class="nx">South</span> <span class="nx">Korea</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>It is evident that every day, anything you put on the internet will be poked at unless you are behind some NAT network and/or have some form of firewall filtering traffic.</h4>
+
+<h4>The takeaway is that you really should keep your internet facing systems updated and with as good a security posture as possible. Watch out for newly released vulnerabilities and patch them as fast as possible. Past cases indicate that 48 hours later may already be too late.</h4>
+
+<h4>Implement defences on the edge of your network and monitor your logs regularly and diligently. Try out the awesome BRO IDS (I am not being paid to promote it incase you&rsquo;re wondering).</h4>
+
+<h4>Some of these scanners are extremely aggressive. To demonstrate just how aggressive, I leave you with this Netherlands IP that was scanning port numbers that have the digits 443.</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">Source</span> <span class="nx">IP</span>      <span class="nx">Destination</span> <span class="nx">IP</span>  <span class="nx">Destination</span> <span class="nx">Port</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">1443</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">2443</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">3443</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">4431</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">4435</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">4436</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">4438</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">4439</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">4443</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">5443</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">6443</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">7443</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">10443</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">11443</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">22443</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">33443</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">44310</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">44322</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">44366</span>
+</span><span class='line'><span class="mf">80.82</span><span class="p">.</span><span class="mf">70.238</span>   <span class="mf">105.52</span><span class="p">.</span><span class="mf">174.7</span>     <span class="mi">55443</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hackers Wanted!]]></title>
+    <link href="http://www.ckn.io/blog/2015/09/13/hackers-wanted/"/>
+    <updated>2015-09-13T11:31:27+03:00</updated>
+    <id>http://www.ckn.io/blog/2015/09/13/hackers-wanted</id>
+    <content type="html"><![CDATA[<h4>>Some expletives have been edited out&lt;</h4>
+
+<h4>>The catching of feelings is encouraged&lt;</h4>
+
+<h4>>Heavy Hip Hop references included&lt;</h4>
+
+<p>&nbsp;</p>
+
+<h4>>Begin Rant&lt;</h4>
+
+<!--more-->
+
+
+<p>&nbsp;</p>
+
+<h4>Early last year (2014), I started getting into information security. I have always had a passion for figuring out how things work and everything had been building up to my transition into the hacking profession. I was from a non-IT educational background but I had been working in IT for slightly over two years. The job was in a big firm with good pay and I was getting promoted yearly. I however wanted to get into hacking on a full time basis and I decided I&rsquo;d quit after 6 months which would coincide with the end of the financial year. I would also avoid having to do the yearly performance review :-). During the next 6 months, I studied the books I could find on information security, watched hacker conference talks and practiced on virtual environments. As scheduled I tendered in my resignation in June last year, maneuvered through having to go through counter-offer talks as I wasn&rsquo;t leaving for greener pastures, wrote a colourful farewell and became unemployed from the start of July. I unburdened myself of all debt by clearing my HELB loan and thus started my freelance infosec life.</h4>
+
+<h4>It&rsquo;s slightly over one year from then and I&rsquo;ve gotten to interact with the information security community in the country.</h4>
+
+<h4>This is where the rant begins.</h4>
+
+<h4>We really have a long way to go. I look back at the last two years and it is very clear that all that I have managed to do is mostly script kiddie nonsense interspersed with a hack here and there. I am not alone, this is the story of almost the entire information security community in the country. We are reduced to reproducing exploits/hacks that are recently discovered or have been out there for a while. The problem is that most of us seem content with it. If this is not arrested we risk falling into mediocrity, a bunch of elite reproducers.</h4>
+
+<h4>The issue is that we are not outliving our script kiddie phase. We are getting comfortable being the best of a poor pool. We are stagnating and slowing down to a crawl in our development. Remember when you were getting started? The verve and joy of discovery of a new world? Why are we letting that fire flicker away leaving behind ashes of passion extinguished.</h4>
+
+<h4>It saddens me that the next generation is looking up to us wowing and aaahhhing to our reproductions. They are the ones supposed to be in their script kiddie phase but we&rsquo;re lagging behind with them as one merry content family. Let&rsquo;s stop being content with going through the motions waiting for our next pay once we convince our bosses/clients that we are the >content omitted&lt;.</h4>
+
+<p>&nbsp;</p>
+
+<h4>This is what we need:</h4>
+
+<h4><strong>Hackers</strong>, as the post suggests. Let&rsquo;s be the ones that discover bugs and exploits. Let&rsquo;s be the ones that influence the opinion of decision makers. Let&rsquo;s have at least ten hackers within a year who can see what others cannot. I would love to have a situation where skilled hackers have to dumb down their conversations for a regular IT person to understand. We have so many unexplored areas just because there aren&rsquo;t exploits out there we can reproduce. Look at all this technology that gets introduced into our market, smart meters, digital TV and so on. We can&rsquo;t be lying around waiting for someone out there to come and explore the possibilities. Let&rsquo;s push the limits and not just ride into the sunset accepting &ldquo;good enough&rdquo; as our defining accomplishments.</h4>
+
+<h4><strong>Script kiddies</strong>. We need lots of them. I am not talking about the kind that seem devoid of imagination and require regular doses of spoon feeding. I am talking about the newbies and enthusiasts who have an understanding of the field. We need a pool that feeds off from the hackers. People that will become masters and outshine the teachers. We need people who  will get bored of just regurgitating stuff. We need them hungry and with a point to prove. Most importantly we need them to keep hackers on their toes and prevent them from settling.</h4>
+
+<h4><strong>Businessmen</strong>. The hacking profession needs financial backing, to go mainstream. We need successful businessmen in the profession. People who&rsquo;ll make bootloads of cash and excel. People who&rsquo;ll garner influence in elite circles. These will be a select few who with their credibility gain the necessary clout to open up the field. We need shrewd businessmen who&rsquo;ll keep touch with the community, eventually leading to opportunities for the high school kid that likes tinkering with systems, five years into the future. We need the Steve Jobs to the Wozniaks.</h4>
+
+<h4><strong>Hacking groups</strong>. For us to fully push the boundary of the impossible we need thriving hacker ecosystems. Hacker groups provide great environments to incubate and provide an outlet both for skilled and budding hackers. Look at groups like L0pht and what came out of the them. Look at SRLabs from Germany. Look at how much has changed since AfricaHackon came onto the scene.</h4>
+
+<h4><strong>Rebels and non-conformists</strong>. These can fall in all of the previous groups. We need independent thinkers trying to disrupt the hacker scene. We need them for checks and balances and to arrest complacency and entitlement along the way. We need constructive critics questioning the status quo. I want someone to call this post a whole pile of >content omitted&lt; and write a rebuttal, hehe.</h4>
+
+<h4>When it&rsquo;s all said and done, it boils down to individual decisions and commitment.</h4>
+
+<h4>There are people happy just being good enough in stable employment&hellip;Contribute to the hacking society and rock on.</h4>
+
+<h4>There are people a lot more concerned about how high their pay cheque is than the thrill of the hack&hellip;Make that money and rock on.</h4>
+
+<h4>There are those that die for the art so that they can give back&hellip;Rock on but don&rsquo;t get lost along the way. This is how Jay-Z put it in &ldquo;Moment of Clarity&rdquo; (Ignore my musical taste):</h4>
+
+<blockquote><h4>I dumbed down for my audience to double my dollars</h4>
+
+<h4>They criticized me for it, yet they all yell &ldquo;holla&rdquo;</h4>
+
+<h4>If skills sold, truth be told, I&rsquo;d probably be</h4>
+
+<h4>Lyrically Talib Kweli</h4>
+
+<h4>Truthfully I wanna rhyme like Common Sense</h4>
+
+<h4>But I did 5 mill&#8217; - I ain&rsquo;t been rhyming like Common since</h4>
+
+<h4>We as rappers must decide what&rsquo;s most important</h4>
+
+<h4>And I can&rsquo;t help the poor if I&rsquo;m one of them</h4>
+
+<h4>So I got rich and gave back, to me that&rsquo;s the win/win</h4>
+
+<h4>So next time you see the homey and his rims spin</h4>
+
+<h4>Just know my mind is working just like them</h4></blockquote>
+
+<h4>And more recently J. Cole in &ldquo;Let Nas down&rdquo;:</h4>
+
+<blockquote><h4>I always believed in the bigger picture</h4>
+
+<h4>If I could get them niggas to listen outside my core then I can open a door</h4>
+
+<h4>Reintroduce &lsquo;em to honesty, show &#8216;em that they need more</h4>
+
+<h4>The difference between the pretenders and the Kendrick Lamars</h4>
+
+<h4>And so, I took the fall like the son of the Lord</h4>
+
+<h4>On the cross, dyin&#8217; for that fake shit you niggas bought</h4>
+
+<h4>For the past decade, if I should pass please let this be my last essay</h4>
+
+<h4>Therefore I write from the heart</h4>
+
+<h4>Apologies to OG&rsquo;s for sacrificin&#8217; my art</h4>
+
+<h4>But I&rsquo;m here for a greater purpose, I knew right from the start</h4>
+
+<h4>I&rsquo;m just a man of the people, not above but equal</h4>
+
+<h4>And for the greater good I walk amongst the evil</h4></blockquote>
+
+<h4>All is not doom and gloom. I know a few people who aren&rsquo;t comfortable just being good enough. People who in a year or so will probably be doing extra-ordinary things.</h4>
+
+<h4>We have AfricaHackon changing the landscape with bootcamps in institutions where the new crop is being properly introduced into the field.</h4>
+
+<h4>I am also sure we have people out there doing their thing away from the limelight. One case is a guy I met at iHub during the second AfricaHackon conference. A hobbyist hardware hacker who has done some awesome hardware reverse engineering stuff. Unfortunately I didn&rsquo;t get his number so if whoever it is reads this post, get in touch.</h4>
+
+<h4>I end with one of my favourite quotes:</h4>
+
+<blockquote><h2>The difficult we do immediately; the impossible takes a little longer</h2></blockquote>
+
+<p>&nbsp;</p>
+
+<h4>>End Rant&lt;</h4>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The BRO Chronicles 1]]></title>
+    <link href="http://www.ckn.io/blog/2015/09/06/the-bro-chronicles-1/"/>
+    <updated>2015-09-06T08:56:06+03:00</updated>
+    <id>http://www.ckn.io/blog/2015/09/06/the-bro-chronicles-1</id>
+    <content type="html"><![CDATA[<h4>I was having a random conversation with <a href="https://twitter.com/xtian_kisutsa" target="_blank"><strong>Christian</strong></a> - one indefatigable hacker (I&rsquo;ll be using the word hacker for infosec people henceforth. I find political correctness a bit tedious). The conversation was based around Kali Nethunter and all the cool stuff that can be done with it. The discussion was revolving around &ldquo;man in the middle attacks&rdquo; and I suggested that having <a href="https://www.bro.org/" target="_blank"><strong>BRO</strong></a> running on Nethunter would be awesome. This got him excited and true to his nature, he couldn&rsquo;t rest till he&rsquo;d attempted it. Long story short, he did some amazing work and had it running soon afterwards complete with a detailed &ldquo;how to&rdquo; guide. Here&rsquo;s a link to the <a href="http://t.co/Iz992aMCL5" target="_blank"><strong>guide</strong></a>.</h4>
+
+<!--more-->
+
+
+<h4>With bro running on a phone, a world of exploration is opened up. You now have an enterprise level IDS running on your phone :). I hope you see where this is headed. What do you do with an IDS on your phone? You obviously investigate what your phone communicates with.</h4>
+
+<h4>What interested me most was the rmnet0 interface on android. This is the interface assigned to your data connection. It gets assigned a public IP by your telecommunications provider so no NAT issues.</h4>
+
+<h1>The set up</h1>
+
+<h4>This Saturday afternoon I decided to see what my phone communicates to over a one hour period while connected to the mobile data network.</h4>
+
+<h4>This is how I set up things:</h4>
+
+<blockquote><h4>Nethunter running on a Nexus 5 with Android 5.1</h4>
+
+<h4>BRO running in standalone mode monitoring rmnet0</h4>
+
+<h4>Mobile data connection on the Safaricom network</h4>
+
+<h4>ADB connection to a laptop</h4>
+
+<h4>shodan-cli to investigate IPs</h4></blockquote>
+
+<h4>Once everything was in place I used the phone as I would normally for about 10 minutes or so - browsed a bit and opened a few apps such as Twitter and Facebook. After that I left it idle for about an hour.</h4>
+
+<h1>Results and Analysis</h1>
+
+<h4>It was then time to process and analyse the results. Nethunter runs in a chroot environment so I transferred the BRO logs to the sdcard then to my laptop, that&rsquo;s where adb comes in handy.</h4>
+
+<h4>Lets start with the ports and IPs that were most active during both normal usage of the phone and when it was idle.</h4>
+
+<h2>Idle</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'> <span class="nx">Ports</span>        <span class="o">|</span> <span class="nx">Sources</span>                   <span class="o">|</span> <span class="nx">Destinations</span>              <span class="o">|</span>
+</span><span class='line'> <span class="mi">443</span>    <span class="mf">38.5</span><span class="o">%</span> <span class="o">|</span> <span class="mf">105.57</span><span class="p">.</span><span class="mf">36.93</span><span class="err">#</span><span class="mi">1</span>      <span class="mf">99.0</span><span class="o">%</span> <span class="o">|</span> <span class="mf">196.201</span><span class="p">.</span><span class="mf">216.21</span><span class="err">#</span><span class="mi">2</span>    <span class="mf">20.0</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">53</span>     <span class="mf">25.5</span><span class="o">%</span> <span class="o">|</span> <span class="mf">196.201</span><span class="p">.</span><span class="mf">216.4</span><span class="err">#</span><span class="mi">3</span>      <span class="mf">0.5</span><span class="o">%</span> <span class="o">|</span> <span class="mf">216.58</span><span class="p">.</span><span class="mf">223.10</span><span class="err">#</span><span class="mi">4</span>     <span class="mf">10.0</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">123</span>    <span class="mf">24.0</span><span class="o">%</span> <span class="o">|</span> <span class="mf">66.196</span><span class="p">.</span><span class="mf">116.132</span><span class="err">#</span><span class="mi">5</span>     <span class="mf">0.5</span><span class="o">%</span> <span class="o">|</span> <span class="mf">196.49</span><span class="p">.</span><span class="mf">6.67</span><span class="err">#</span><span class="mi">6</span>        <span class="mf">9.0</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">993</span>     <span class="mf">3.0</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">196.201</span><span class="p">.</span><span class="mf">218.15</span><span class="err">#</span><span class="mi">7</span>     <span class="mf">6.5</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">80</span>      <span class="mf">3.0</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">197.12</span><span class="p">.</span><span class="mf">0.14</span><span class="err">#</span><span class="mi">8</span>        <span class="mf">5.0</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">995</span>     <span class="mf">1.5</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">196.25</span><span class="p">.</span><span class="mf">1.5</span><span class="err">#</span><span class="mi">9</span>         <span class="mf">5.0</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">8996</span>    <span class="mf">1.0</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">197.84</span><span class="p">.</span><span class="mf">150.123</span><span class="err">#</span><span class="mi">10</span>    <span class="mf">3.5</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">5228</span>    <span class="mf">1.0</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">199.16</span><span class="p">.</span><span class="mf">156.199</span><span class="err">#</span><span class="mi">11</span>    <span class="mf">3.0</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">3</span>       <span class="mf">1.0</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">62.210</span><span class="p">.</span><span class="mf">87.71</span><span class="err">#</span><span class="mi">12</span>      <span class="mf">3.0</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">55602</span>   <span class="mf">0.5</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">216.58</span><span class="p">.</span><span class="mf">223.14</span><span class="err">#</span><span class="mi">13</span>     <span class="mf">2.0</span><span class="o">%</span> <span class="o">|</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Normal use</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'> <span class="nx">Ports</span>        <span class="o">|</span> <span class="nx">Sources</span>                   <span class="o">|</span> <span class="nx">Destinations</span>              <span class="o">|</span>
+</span><span class='line'> <span class="mi">80</span>     <span class="mf">67.7</span><span class="o">%</span> <span class="o">|</span> <span class="mf">105.161</span><span class="p">.</span><span class="mf">166.138</span><span class="err">#</span><span class="mi">1</span>   <span class="mf">99.9</span><span class="o">%</span> <span class="o">|</span> <span class="mf">196.201</span><span class="p">.</span><span class="mf">217.7</span><span class="err">#</span><span class="mi">2</span>     <span class="mf">14.6</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">53</span>     <span class="mf">15.8</span><span class="o">%</span> <span class="o">|</span> <span class="mf">66.196</span><span class="p">.</span><span class="mf">116.132</span><span class="err">#</span><span class="mi">3</span>     <span class="mf">0.1</span><span class="o">%</span> <span class="o">|</span> <span class="mf">173.241</span><span class="p">.</span><span class="mf">248.221</span><span class="err">#</span><span class="mi">4</span>   <span class="mf">11.4</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">443</span>    <span class="mf">15.0</span><span class="o">%</span> <span class="o">|</span> <span class="mf">174.37</span><span class="p">.</span><span class="mf">231.85</span><span class="err">#</span><span class="mi">5</span>      <span class="mf">0.0</span><span class="o">%</span> <span class="o">|</span> <span class="mf">173.241</span><span class="p">.</span><span class="mf">248.220</span><span class="err">#</span><span class="mi">6</span>    <span class="mf">5.2</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">993</span>     <span class="mf">0.4</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">94.31</span><span class="p">.</span><span class="mf">29.96</span><span class="err">#</span><span class="mi">7</span>        <span class="mf">3.2</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">995</span>     <span class="mf">0.3</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">198.232</span><span class="p">.</span><span class="mf">124.225</span><span class="err">#</span><span class="mi">8</span>    <span class="mf">2.5</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">8996</span>    <span class="mf">0.2</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">192.0</span><span class="p">.</span><span class="mf">77.2</span><span class="err">#</span><span class="mi">9</span>         <span class="mf">1.7</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">3</span>       <span class="mf">0.1</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">31.13</span><span class="p">.</span><span class="mf">75.8</span><span class="err">#</span><span class="mi">10</span>        <span class="mf">1.7</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">5228</span>    <span class="mf">0.1</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">46.228</span><span class="p">.</span><span class="mf">164.11</span><span class="err">#</span><span class="mi">11</span>     <span class="mf">1.6</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">123</span>     <span class="mf">0.1</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">95.172</span><span class="p">.</span><span class="mf">94.57</span><span class="err">#</span><span class="mi">12</span>      <span class="mf">1.5</span><span class="o">%</span> <span class="o">|</span>
+</span><span class='line'> <span class="mi">57553</span>   <span class="mf">0.0</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">46.228</span><span class="p">.</span><span class="mf">164.13</span><span class="err">#</span><span class="mi">13</span>     <span class="mf">1.4</span><span class="o">%</span> <span class="o">|</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>As expected most traffic is either HTTP (80), HTTPS (443) or DNS (53). NTP traffic (123) also features prominently when the phone is idle.</h4>
+
+<h4>Of interest is that we can confirm Safaricom uses their own DNS servers, in this case <code>196.201.216.21</code>, <code>196.201.218.15</code> and <code>196.201.217.7</code>. An OpenDNS server <code>208.67.222.222</code> was also queried once so they probably have OpenDNS as an option.</h4>
+
+<h4>The ntp servers were distributed among African countries, Angola - <code>196.223.19.3</code>, Tunisia - <code>197.12.0.14</code>, SA - <code>197.84.150.123</code> and so on. We can therefore safely say they use the africa.pool.ntp.org pool.</h4>
+
+<h4>Then comes the interesting bit, there were some Safaricom IPs communicating with the phone on some weird ports, one case is <code>196.201.216.4</code>, Shodan reveals port <code>500</code> and <code>4500</code> open on whatever is running on that IP. Let&rsquo;s leave Safaricom for now and look at the other traffic.</h4>
+
+<h4>The BRO logs are pretty detailed and therefore I needed some way to clean them up to do my own analysis. I therefore wrote a bash script to do some filtering.</h4>
+
+<h4>I then used Shodan-cli to get information of every unique IP and save the output. Here is the script for anyone interested.</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Enter the name of the connection log: &quot;</span>
+</span><span class='line'><span class="nb">read </span>LOG
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Getting details from shodan&quot;</span>
+</span><span class='line'><span class="sb">`</span>sed -e <span class="s1">&#39;/^#/d&#39;</span> <span class="nv">$LOG</span> <span class="p">|</span> cut -f <span class="m">5</span> <span class="p">|</span> sort -u &gt; filtered<span class="sb">`</span>
+</span><span class='line'>touch output
+</span><span class='line'>
+</span><span class='line'><span class="k">while</span> <span class="nb">read</span> -r line<span class="p">;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="nb">echo</span> <span class="nv">$line</span>
+</span><span class='line'>  <span class="sb">`</span>sudo shodan host <span class="nv">$line</span> &gt;&gt; output<span class="sb">`</span>
+</span><span class='line'>  <span class="nb">echo</span> <span class="s2">&quot;&quot;</span>&gt;**&gt; output
+</span><span class='line'><span class="k">done</span> &lt; <span class="s2">&quot;filtered&quot;</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Done! Output saved to output&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">exit </span><span class="m">0</span>     
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>I am going to cut right to the chase as this post is getting too long. The world is being taken over by analytics, advertising and digital content companies!</h4>
+
+<h4>Let me just list a few of the companies that communicated with my phone over that one hour period, remember I left it idle most of that time. Here we go</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Mediamath.com         Mixpane.com         Criteo.com
+</span><span class='line'>Fastly Inc            AOL                 AppNexus
+</span><span class='line'>Akamai                Chango              Trapad
+</span><span class='line'>Exelate.com           Openx.com           Adtech.de
+</span><span class='line'>Lijit.com             Crashlytics.com     Pubmatic
+</span><span class='line'>ACNielson             Amazon              ...and several others
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>I usually am not worried about companies using analytics for their marketing purposes but this time something spooked me.</h4>
+
+<h4>Several of these servers are vulnerable to the <a href="https://weakdh.org/" target="_blank"><strong>logjam attack</strong></a> and even more worryingly some are vulnerable to heartbleed. It would therefore not be far-fetched to assume they&rsquo;ve already been compromised or they will be. With all the traffic going on between my phone and these servers, I had hoped they&rsquo;d have their security figured out. It&rsquo;s often said that third parties are some of the most promising targets for hackers and you can see exactly why here.</h4>
+
+<h1>Conclusion</h1>
+
+<h4>That was a long post so let&rsquo;s wrap it up.</h4>
+
+<h4>There were some peculiar IPs that I&rsquo;ll be investigating in subsequent BRO chronicles. Other random titbits include the discovery that several Instagram servers communicating with my phone are also vulnerable to the logjam attack, Yahoo mail is particularly noisy traffic wise and so on.</h4>
+
+<h4>When going through all that analytics and ad based traffic I remembered a quote by Jeffrey Hammerbacher, one of Facebook&rsquo;s first 100 employees. I therefore aptly end this post with his quote:</h4>
+
+<blockquote><h2>The best minds of my generation are thinking about how to make people click ads. That sucks.</h2></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Learning to hack]]></title>
+    <link href="http://www.ckn.io/blog/2015/08/25/learning-to-hack/"/>
+    <updated>2015-08-25T14:27:24+03:00</updated>
+    <id>http://www.ckn.io/blog/2015/08/25/learning-to-hack</id>
+    <content type="html"><![CDATA[<h4>Becoming a skilled hacker or the politically correct &ldquo;information security specialist&rdquo; doesn&rsquo;t have a straightforward defined path. Here I will try to layout what constitutes a good way to go about it.</h4>
+
+<!--more-->
+
+
+<h1>Bits and Pieces - Digital Logic</h1>
+
+<h4>Everything starts here. Every computer process is just sequences of simple logic operations.</h4>
+
+<h4>Learn about AND, OR, XOR and so on. Go through the full course material if you&rsquo;re already being taught this in school. If not, don&rsquo;t skim through this, dedicate enough time to it. This is interesting stuff for the hacker mind so it shouldn&rsquo;t be too taxing.</h4>
+
+<h4>Ideally take it deeper to the circuit level implementations. Study NAND gates and so on. If you&rsquo;re so inclined go even further to diodes and transistors. With this you&rsquo;ll be primed for the next area - Assembly Language.</h4>
+
+<h1>POP POP RET - Assembly Language</h1>
+
+<h4>A lot of people will avoid Assembly due to the false impression that it&rsquo;s very complex. It really isn&rsquo;t, infact it&rsquo;s a lot more fun and rewarding. If you took time on your digital logic and you aren&rsquo;t afraid of a bit of math, this will be a lot easier to grasp.</h4>
+
+<h4>You&rsquo;ll get to learn how the processor runs at a low level. You&rsquo;ll get to learn about instructions, registers and programming logic. Once you&rsquo;ve got this figured out, higher level languages will be a breeze. You&rsquo;ll get to understand how your programs interact with different hardware. Best of all you&rsquo;ll spare yourself the agony of trying to figure it out when you try your hand at things like exploit development, reverse engineering and hardware hacking.</h4>
+
+<h4>There are free emulators out there that will help you along the process and make the experience fulfilling. Try lighting some LEDs or programming some hardware. Once you&rsquo;re done with this, you&rsquo;ll be able to hold your own any in almost any information security field you decide to pursue.</h4>
+
+<h1>PCAP or it never happened - The Network</h1>
+
+<h4>Next you need to learn how devices and services communicate. Start from the basics and build up from there. Study the OSI model, network devices and related services. Learn as much as you can about IPv4, IPv6, subnetting, routing, switching, DNS, DHCP and so on. From there move on to network security and the various attacks and countermeasures. Master the theory behind attacks such as MAC flooding, DNS and DHCP hijacks and so on. Learn about common defenses and network setups, Firewalls, IPS&rsquo;s and IDS&rsquo;s, DMZ&rsquo;s, VLANS, VPNS and so on.</h4>
+
+<h4>A straightforward way would be to go through the Cisco Network Certification material, you can even get yourself certified along the way :)</h4>
+
+<h1>The Box - *nix</h1>
+
+<h4>You need a system that is powerful and flexible. This is where linux and the other variants of the *nix family come in. If you&rsquo;re just beginning, set up a virtual machine or dual boot your computer. I would suggest you begin with the latest stable version of Ubuntu to get yourself going and make the transition from Windows smooth. Learn how to set it up and how to do various tasks on the system. Learn about various commands and how to automate process using scripts. All this is still at a high level so the learning curve is still manageable. Once you&rsquo;re comfortable, you can transition to using it as your primary OS.</h4>
+
+<h4>Next dive into the guts of the system. Learn about the building blocks of the system and how everything fits in together. One way is to build your linux system from the ground up. Distros like ArchLinux and Gentoo that require you to build from an initial shell interface are an option you can use in the learning proces. The Arch Wiki for one is amazingly comprehensive and structured for both the beginner and the advanced user.</h4>
+
+<h4>Kali Linux then comes in. Once you understand Linux well enough, you can let the good people at Offensive Security do the work for you. Kali Linux is a powerful and well built system that will give you access to tools that you&rsquo;ll use a lot in your information security work.</h4>
+
+<h1>Explore the world - The organisation</h1>
+
+<h4>The real world is made up of people and the decisions they make. It is therefore highly important that you understand how they operate in various environments.</h4>
+
+<h4>I therefore suggest that you find a way of working in an organisation and experience how information security is approached. Intern as a system admin or whatever position that allows you to interact with systems and people in IT departments. Learn the common practices and errors that are made along the way. Get an internal perspective so that your thought process takes into account what goes into building and setting up systems.</h4>
+
+<h4>You don&rsquo;t want to gain temporary access to a network and start wondering how a domain controller ties in to the network.</h4>
+
+<h4>Being part of an organisation also will give you insight into the behaviour of various people in the organistation. Understanding how everyone from the tech savvy to the management react to various situations will come in handy as you progess.</h4>
+
+<h1>Tying up the pieces</h1>
+
+<h4>There are a lot of areas you can focus your attention on along your information security journey and that is up to you. Experiment, change, adapt, and tweak what you need to.</h4>
+
+<h4>Some things will remain throughout though.</h4>
+
+<h4>You will need to be creative to see beyond the black and white.</h4>
+
+<h4>You&rsquo;ll need passion to take you through hours of research and reading through RFCs&hellip;hehe.</h4>
+
+<h4>You&rsquo;ll need some code to live by or you may get lost along the way.</h4>
+
+<h4>Being a hacker isn&rsquo;t about writing the most complicated exploit, it is about figuring out elegant solutions to some problem - easy or challenging.</h4>
+
+<h4>In the end it&rsquo;s about the thrill of discovery and creation.</h4>
+
+<h4>I leave you with this book by James Gleick that I believe every information security person should read at least once <a href="http://www.amazon.com/The-Information-History-Theory-Flood/dp/1400096235">http://www.amazon.com/The-Information-History-Theory-Flood/dp/1400096235</a></h4>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AfricaHackon - Be part of the story]]></title>
+    <link href="http://www.ckn.io/blog/2015/05/17/africahackon-be-part-of-the-story/"/>
+    <updated>2015-05-17T08:42:08+03:00</updated>
+    <id>http://www.ckn.io/blog/2015/05/17/africahackon-be-part-of-the-story</id>
+    <content type="html"><![CDATA[<h4>I first heard of AfricaHackon at my previous job where I was working in IT. A colleague and friend told me about a conference about information security that would be held at our building. This was early last year. Being in charge of the network, I would be assisting in setting up internet access for the conference. Now when you&rsquo;re incharge of the network and you hear you&rsquo;ll be giving access to your network to a room full of the best &ldquo;hackers&rdquo; in the country, you get a bit nervous. I use the word &ldquo;hackers&rdquo; in quotes because that&rsquo;s where I&rsquo;d like to start.</h4>
+
+<!--more-->
+
+
+<p><img src="http://www.ckn.io/images/africahackon_logo.jpg"></p>
+
+<h1>The hacker mindset</h1>
+
+<h4>The word hacker has long been desecrated. People immediately picture this antisocial person that is out to break into their computers and steal their data and do other equally nefarious acts.</h4>
+
+<h4>But they are wrong, hacking is an art form, practised by people who push the boundaries of innovation. It&rsquo;s about having bulbs lighting up in your head as you figure out some new way to make something work. About discovering ways to make things work more efficiently.</h4>
+
+<h4>It&rsquo;s about finding ways to use things in a way even their creator never imagined.</h4>
+
+<h4>It is about tweaking the firing timing of your spark plugs to make your engine add a bit of power, for car enthusiasts.</h4>
+
+<h4>It&rsquo;s about creating a new masterpiece in a way that has never been attempted, for painters.</h4>
+
+<h4>It&rsquo;s about building that robot using random materials, for the hardware enthusiasts.</h4>
+
+<h4>It&rsquo;s about automating your lights, and electrical gadgets, for the electrical and electronics people.</h4>
+
+<h4>There&rsquo;s a little bit of hacking in everyone of us. As you try to piece together that jigsaw puzzle, fill in that crossword, finish that sudoku. We do it all the time.</h4>
+
+<h4>If one sentence can sum up what a hacker is, it would be this:</h4>
+
+<blockquote><h2>A hacker is a person who enjoys the intellectual challenge of creatively circumventing limitations.</h2></blockquote>
+
+<h1>Back to AfricaHackon</h1>
+
+<h4>That day I did end up turning off all the wireless networks that I felt weren&rsquo;t secure enough&hellip;hehe. But I shouldn&rsquo;t have been worried, these were the good type of hackers. They are the ones that help keep you secure. They help you protect yourself from people who would like to steal your private data. They help your company adopt practices that make it hard for the bad guys. They assist you incase you&rsquo;ve undergone an attack.</h4>
+
+<h4>They are some of the brightest minds you&rsquo;ll meet, some help the biggest companies in the country and Africa keep their information secure. Some are still learning. They are drawn from diverse fields and they are on a mission.</h4>
+
+<h4>They want to protect your information, they want to help your bank keep your accounts safe from prying eyes. They want to ensure you can access the internet and make your calls without someone monitoring or listening in.</h4>
+
+<h4>The first phase of this is to build capacity. They are conducting training sessions to train students and spark their interest in the field of information security. They are bringing awareness to companies and the general public on the way to approach security of their systems and data. They plan on building a culture of information security awareness, and to bring up the right skills in the untapped growing generation of brilliant students.</h4>
+
+<h1>The second AfricaHackon conference</h1>
+
+<h4>Another avenue is conferences. This July the 31st, they will be hosting the second AfricaHackon conference. Having attended the last one, take it from me that it&rsquo;s a unique experience that should not be missed.</h4>
+
+<h4>Come watch as these brilliant minds take you through real life happenings in the world of information security. Watch them show how the bad guys can attack your systems and then how to defend against them.</h4>
+
+<h4>This is no ordinary conference. No long boring powerpoints, but interactive demonstrations.</h4>
+
+<h4>I am sure there are some of you who have discovered some interesting ways someone can use all this technology around us. How someone can break into a system. It may only be an idea, but that&rsquo;s all it takes. The AfricaHackon team is more than happy to help you explore and develop it.</h4>
+
+<h4>The AfricaHackon team wants you to come make a presentation at this conference. You&rsquo;ll get to be mentored by the best minds in the field.</h4>
+
+<h4>The silver lining is you&rsquo;ll get to present your ideas to some of the biggest companies in the country who&rsquo;ll be in attendance. You&rsquo;ll get to interact with them first hand and have genuine discussions. In attendance will also be major international and local media houses.</h4>
+
+<h4>The ball is in your court.</h4>
+
+<h2>Submit your papers and ideas to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#x69;&#x6e;&#102;&#111;&#x40;&#65;&#102;&#x72;&#x69;&#x63;&#97;&#72;&#x61;&#99;&#107;&#x6f;&#x6e;&#46;&#x63;&#111;&#x6d;">&#105;&#x6e;&#x66;&#111;&#64;&#x41;&#102;&#114;&#x69;&#x63;&#x61;&#x48;&#x61;&#99;&#107;&#111;&#110;&#x2e;&#x63;&#111;&#109;</a> before 30th of May.</h2>
+
+<blockquote><h4>Read this <a href="http://sylviamunyisia.blogspot.com/2015/05/call-for-papers.html" target="_blank"><strong>page</strong></a> by Sylvia that explains the call for papers very well.</h4>
+
+<h4>Also feel free to interact with the team on social media through <a href="https://twitter.com/AfricaHackon" target="_blank"><strong>twitter</strong></a> and <a href="https://www.facebook.com/AfricaHackon" target="_blank"><strong>facebook</strong></a>.</h4>
+
+<h4>And visit the <a href="http://www.AfricaHackon.com/" target="_blank"><strong>AfricaHackon site</strong></a> for past presentations and to keep yourself updated.</h4></blockquote>
+
+<h4>Be part of the story.</h4>
+
+<h4>And remember, everybody needs a hacker :)</h4>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Crypto magic - homomorphic encryption]]></title>
+    <link href="http://www.ckn.io/blog/2015/05/11/crypto-magic-homomorphic-encryption/"/>
+    <updated>2015-05-11T13:45:52+03:00</updated>
+    <id>http://www.ckn.io/blog/2015/05/11/crypto-magic-homomorphic-encryption</id>
+    <content type="html"><![CDATA[<h4>Could Google do your search without knowing what it was looking for? Could your hospital provide you with information regarding your health records without knowing what you asked?</h4>
+
+<!--more-->
+
+
+<h4>Can data be encrypted in such a way that computation can be done on it without decrypting it first?</h4>
+
+<h4>Yes it can! This is what homomorphic encryption is all about.</h4>
+
+<h4>Our exploration of crypto magic continues :)</h4>
+
+<h4>Let&rsquo;s start with two scenarios</h4>
+
+<h1>scenario 1: encrypted search</h1>
+
+<h4>First, I am not talking about searching over secure protocols like https. What I am referring to is where your search term is in encrypted form before it reaches the search engine (say Google). Google therefore doesn&rsquo;t know what you want to search for.</h4>
+
+<h4>After Google receives your encrypted search term, it searches for it in an encrypted database. The results it gets are also encrypted which are then passed on to you. You can then privately decrypt them :). You&rsquo;ll note that Google never knew what you were looking for nor what results were returned. No decryption occured at any point before you received the results.</h4>
+
+<h1>scenario 2: secure cloud processing</h1>
+
+<h4>Would it not be nice to have some powerful hosting provider do complex computation on your data without them ever knowing the contents? A case would be like your bank having a cloud provider hosting its data. The bank would encrypt the data before uploading it, so the cloud provider never sees the plain version. The bank would then be able to perform complex computation on the encrypted data using the cloud providers powerful processing power without it ever been decrypted. The bank could also be able to request information from the encrypted data using encrypted queries. The returned answers would also be in encrypted form which only the bank can decrypt. And again no decryption takes place at the cloud provider.</h4>
+
+<h1>How can this be done?</h1>
+
+<h4>This concept was first proposed over 30 years ago by Rivest, Adleman and Dertouzos and is referred to homomorphic encryption (They also suggested it was probably impossible).</h4>
+
+<h4>Let&rsquo;s say you have x and y. if you multiply the encrypted version of x and the encrypted version of y and the answer is the same as if you multiplied their plain values and encrypted the answer, then the process is said to be homomorphic with respect to multiplication.</h4>
+
+<h4>Any computer algorithm is a series of arithmetic steps so if we can get a process that is homomorphic with respect to both addition and multiplication, any computing application would be possible on encrypted data.</h4>
+
+<h1>Has it been achieved?</h1>
+
+<h4>Over the past three decades, partial solutions have been discovered.</h4>
+
+<h4>However, it is not until 2009 that Craig Gentry developed a fully homomorphic system. Unfortunately it requires lots and lots of computational power. For instance, an encrypted Google search would multiply the computation time to 1 trillion times that of a normal one :(.</h4>
+
+<h4>The good news is that the theoretical barrier was broken and with lots of work a practical solution may be found :).</h4>
+
+<blockquote><h4>For anyone willing to give it a go, <a href="http://www.i-programmer.info/news/112-theory/2330-darpa-spends-20-million-on-homomorphic-encryption.html" target="_blank"><strong>DARPA is offering $20 million</strong></a> if you can come up with a scheme that only takes 100,000 times as long as unencrypted calculations :).</h4></blockquote>
+
+<h4>And we may well be on our way there, three MIT scientists developed a system that emulates fully homomorphic encryption for most of the functions of the SQL databases used in many applications. It computes only with encrypted data and takes just 15% to 26% more computing time.</h4>
+
+<h4>The project is called CryptDB and you can check it out <a href="https://github.com/CryptDB/cryptdb" target="_blank"><strong>here</strong></a>.</h4>
+
+<h4>The application of this in information security does not even need explaining :)</h4>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Crypto magic - zero knowledge]]></title>
+    <link href="http://www.ckn.io/blog/2015/05/05/crypto-magic-zero-knowledge/"/>
+    <updated>2015-05-05T09:23:11+03:00</updated>
+    <id>http://www.ckn.io/blog/2015/05/05/crypto-magic-zero-knowledge</id>
+    <content type="html"><![CDATA[<h4>There are some applications of cryptography that can only be classified as magical. It is only fitting that my first crypto post begins with one of them - zero knowledge proofs.</h4>
+
+<h4>I will try and explain it without all the rather complicated mathematical stuff.</h4>
+
+<!--more-->
+
+
+<p><img src="http://www.ckn.io/images/Zero-Knowledge.png" width="200" height="200"></p>
+
+<h4>Let&rsquo;s start with a simple definition.</h4>
+
+<blockquote><h4>This is where one party (called the Prover) convinces a second party (called the Verifier) that they know the answer to some question. The catch is that the Verifier never gains any knowledge of what the actual answer is.</h4></blockquote>
+
+<h4>I&rsquo;ll start with a crude example to explain further (don&rsquo;t worry, I&rsquo;ll give a detailed one later).</h4>
+
+<h4>Let&rsquo;s say I want to sell a super secret formula about how to cure a disease to a powerful company. A problem arises where the company needs proof that I indeed know the super secret formula yet I cannot tell them what it is (my payday depends on it). The company should gain no information of what the super secret formula is from my proof, so I cannot let them test it. In the real world we would use a third party to hold both the payment and formula, and do some independent tests of the formula, but where&rsquo;s the magic in that :). In any case I don&rsquo;t trust anybody with the formula till I get paid. And so arises our dilemma.</h4>
+
+<h1>So, are zero knowledge proofs possible? Can I have my cake and eat it?</h1>
+
+<h4>The answer is yes and let me explain with the detailed example I promised :).</h4>
+
+<h4>Let&rsquo;s say I have two identical balls, one is red and one is blue. I want to prove to a color blind guy that they are of different colors.</h4>
+
+<h4>What I&rsquo;ll do is ask him to hold one ball in each hand so that he has a red ball in one hand and a blue one in the other. I can tell the color of each but he cannot (color blindness). Next I tell him to put his hands behind his back so that I cannot see them. Then he can decide whether to switch the balls or not to. After which he shows me what ball he&rsquo;s holding in each hand. He then asks me to tell him if he switched them or not. I obviously will get the answer correct as I know what color he was holding in each hand before.</h4>
+
+<h4>Now here is the interesting part, the only way I can tell whether he switched the balls behind his back is if they are of different colors. So I easily prove to him they are of different colors if I consistently can tell if he switched them (which I can). I will have to get the answer correct a number of times to convince him am not guessing (Probability and Maths come in which I promised to avoid in this post). He is color blind, so at the end of it all he still doesn&rsquo;t get to know which ball is red and which one is blue. And so the zero knowledge proof is complete. I prove that the balls are of different colors while he gains no knowledge at all which of them is blue and which is red.</h4>
+
+<h1>Can this be applied in the information Security world?</h1>
+
+<h4>Yes it can :)</h4>
+
+<h4>Let&rsquo;s say I want to authenticate with a server. I however don&rsquo;t want to reveal my password to the server. I just want to prove to the server that I know the password to be authenticated. I also don&rsquo;t want the server to gain any knowledge of what my password is. In the real world, the server stores passwords in a hashed form. You send over your plain password and the server calculates its hash value and compares it with what it has stored. This fails our zero knowledge proof as the server still sees your password before conversion. So we need a different implementation. I will explain it in detail in a different post - there&rsquo;s mathematics involved and I want to avoid information overload here :).</h4>
+
+<h2>I&rsquo;ll leave you with the following fun zero knowledge proofs for now.</h2>
+
+<hr />
+
+<h4>See how a person can prove to another that they know the solution to a sudoku puzzle without actually reavealing the solution. Check it out <a href="http://www.wisdom.weizmann.ac.il/~naor/PAPERS/SUDOKU_DEMO/" target="_blank"><strong>here</strong></a>.</h4>
+
+<hr />
+
+<h4>Also check out this cool explanation with a modified version of <a href="http://pages.cs.wisc.edu/~mkowalcz/628.pdf" target="_blank"><strong>Ali Baba and the forty thieves</strong></a>.</h4>
+
+<hr />
+
+<h4>In part two of Crypto Magic, I&rsquo;ll talk about homomorphic encryption :).</h4>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Bright]]></title>
+    <link href="http://www.ckn.io/blog/2015/04/27/bright/"/>
+    <updated>2015-04-27T08:01:00+03:00</updated>
+    <id>http://www.ckn.io/blog/2015/04/27/bright</id>
+    <content type="html"><![CDATA[<h1>who are you?</h1>
+
+<h4>Bright Gameli Mawudor is my name. Friends in the infosec world called me ~ze3D~. A passionate information security engineer with a love for system exploitation, gleaning information from all corners of the web about a target, and social engineering using all possible methods.</h4>
+
+<!--more-->
+
+
+<h1>what&rsquo;s your setup like?</h1>
+
+<h4>My laptop is an 8GB memory Samsung Series 9 13.3&#8221; HD+ cruising on an Intel® Core™ i5-3317U CPU @ 1.70GHz × 4 with Intel® Ivybridge Mobile for graphics and 128 SSD storage. It&rsquo;s pretty thin and lightweight.</h4>
+
+<h4>External Storage space for me is a total of 2 Terabytes, 10GB Dropbox and 15GB on Google Drive, which is something I find very convenient.</h4>
+
+<h4>I am running Kali linux as my primary OS and dual boot Windows 8 on the side when needed. Kali has all the tools I need for my infosec work and experiments. I also import tools from various sources.</h4>
+
+<h4>I have a Nexus 5 phone and a Nexus 7 Generation 2 tab. I run <a href="http://www.nethunter.com/" target="_blank"><strong>Kali Nethunter</strong></a> on both, although I recently misplaced the Nexus 7. Kali Nethunter running on Android 5.0 makes it just the kind of phone to have in terms of the all purpose features.</h4>
+
+<h4>I have a lot of interest in Wireless Networks which is one of the areas in my PhD research. For that matter, I&rsquo;ve got a WiFi Pineapple Mark V Tactical Bundle 6800 with a 9dBi Dipole Antenna and a magnetic Base. The many features included in the WiFi Pineapple are beyond description. It makes wireless pentesting very easy if one understands the basics involved.</h4>
+
+<h4>I have a <a href="http://hakshop.myshopify.com/collections/usb-rubber-ducky/products/usb-rubber-ducky-deluxe?variant=353378649" target="_blank"><strong>USB Rubber Ducky Deluxe</strong></a> that I use for Red Teaming assessments and other pentests when needed. It helps a lot in grabbing passwords when close to a target&rsquo;s machine, and also for any other function that would take long to type manually.</h4>
+
+<p><img src="http://www.ckn.io/images/bright_setup.jpg" width="500" height="100"></p>
+
+<h1>what tools do you run?</h1>
+
+<h4>For now, Kali linux does the job on the Samsung Series 9 with it having most of the tools that I need. I clone a lot of scripts from github to complement the ones already included in the Kali linux collection. The collection keeps growing by the day. The Nexus 5 having Kali NetHunter is good enough due to its dynamic nature as I mostly like porting scripts to it from the Samsung laptop.</h4>
+
+<h1>What&rsquo;s your dream setup</h1>
+
+<h4>Anyone in the infosec field will keep dreaming for faster equipment no matter how much they have.</h4>
+
+<h4>It&rsquo;ll be great to have some of the toys from the <a href="http://hakshop.myshopify.com/" target="_blank"><strong>HAK5 shop</strong></a> which include some radio stuff and the THROWING STAR LAN. It would also be great to have a good Rainbow table collection on an external hard drive, a <a href="https://www.pwnieexpress.com/product/pwn-plug-r3penetration-testing-device/" target="_blank"><strong>Pwn-plug</strong></a> for future pentests and a powerful blade server to host all my goodies.</h4>
+
+<hr />
+
+<blockquote><h4>Follow Bright on twitter <a href="https://twitter.com/BRIGHTZEED" target="_blank"><strong>@brightzeed</strong></a> for lots more infosec stuff :)</h4></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Jade]]></title>
+    <link href="http://www.ckn.io/blog/2015/04/20/jade/"/>
+    <updated>2015-04-20T06:34:17+03:00</updated>
+    <id>http://www.ckn.io/blog/2015/04/20/jade</id>
+    <content type="html"><![CDATA[<h1>who are you?</h1>
+
+<h4>I am Jade Solomon, an Infosec/Code machine, I dedicate a lot of sleepless nights to Reverse Engineering, GSM/Mobile technology and Exploit Development.</h4>
+
+<!--more-->
+
+
+<h1>what&rsquo;s your setup like?</h1>
+
+<h4>Well, my main playground is a MacBook late 2008 edition, running Yosemite 10.10. It has 8GB RAM, a superb Samsung 256GB SSD drive, and Nvidia GeForce Card.</h4>
+
+<h4>Next is a CR-48 Chromebook, the first ever chromebook to be released. It has 1GB of RAM, a 16GB SSD, and a dual processor with GSM Modem capability, so no need for other internet sources like Wi-Fi and so on. It&rsquo;s not a power hog so the battery does 7hrs (this works so well for me). It&rsquo;s 11 inches and weighs 780mg making it really portable and super light. It runs my own OS Typhon v2.0 Beta with GSM attack tools, IDA Pro with Hex Ray (all plus 14 custom plugins I have picked up from github and two of my own).</h4>
+
+<h4>My phone is a Phantom Z running Android that I am replacing this week with the BlackBerry Z. The Phantom has 8 cores, 2.0ghz speed and 2GB Ram. It runs on stock ROM which I&rsquo;ve rooted. I am on this (the phantom and stock rom) because it&rsquo;s the only phone I have seen with the capability of detecting SMS payloads in the form of SI/SL with binary(malware) injected into it.</h4>
+
+<h4>I own a gaming rig though not yet fully setup. It consists of a 128GB SSD drive, 500GB HDD, 8GB RAM (wanted 16 but&hellip;le sigh) and a 4GB Nvidia Geforce dedicated VRAM. The setup lacks a good motherboard so it&rsquo;s not yet complete.</h4>
+
+<h4>I also have a kindle (keyboard version). It&rsquo;s battery life is beyond amazing (last around 2/3 months) and has unlimited 3G (coolest thing ever).</h4>
+
+<h4>In my arsenal I have two BTS&rsquo;s - or rather SDRs that I have moded to BTS&rsquo;s, a borrowed USRP N200 , calypso devices - Motorola C139s (I have 4 of these, others I&rsquo;ve overloaded and exploded). I also have an RTL-SDR which has a superb range of 2.5MHz to 1900MHz, various antennae and an alpha card that is on the way :).</h4>
+
+<h4>And oh, I have AWEI earphones, best friend EVER!</h4>
+
+<p><img src="http://www.ckn.io/images/jade_setup.jpg" width="500" height="100"></p>
+
+<h1>what tools do you run?</h1>
+
+<h4>Ha! TYPHON (my baby&hellip; my OS). This has nearly everything custom.</h4>
+
+<h4>I run a custom version of OpenBTS - which can inject exploits to baseband level, SIM attack kits and Binary SMS vxsploit (a custom exploit dev kit).</h4>
+
+<h4>It also has RF tools (such as OsmocomBB), RTL-SDR tools, Kalibrate, nano (a must), Terminator, BackBox tools repo, IDA PRO 6.7 full with Hex Ray Debugger and Decompilers.</h4>
+
+<h4>I also have a tool I cannot really disclose, but for fun&rsquo;s sake let me explain what it does. After exploiting the BaseBand/SIM of the victim and injecting a persistent bot on your SIM control via CnC with Mapping, I get STK takeover, Network level takeover and control&hellip; aheem.</h4>
+
+<h4>On Yosemite I run IDA Pro, Android Studio Tools (ndk), Photoshop/Illustrator, ITUNES (music), VMWARE Fusion, Eclipse, Netbeans (JavaCard), iTerm , Qemu, MAMP Pro, Sublime for text editing, GCC from MacPorts and so on.</h4>
+
+<h1>What&rsquo;s your dream setup</h1>
+
+<h4>Hahaha, I guess I can&rsquo;t really pull mine off, why? Possibly because it&rsquo;s out of this world&hellip; but I do want a BladeRF :), maybe an Alienware mx15 or a MacBook Pro 15&#8221; with Retina Display.</h4>
+
+<hr />
+
+<blockquote><h4>Check out Jade&rsquo;s site <a href="http://0x7678.com">http://0x7678.com</a> and blog <a href="http://blog.0x7678.com">http://blog.0x7678.com</a> for some cool stuff :)</h4></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ck]]></title>
+    <link href="http://www.ckn.io/blog/2015/03/14/ck-the-setup/"/>
+    <updated>2015-03-14T19:46:34+03:00</updated>
+    <id>http://www.ckn.io/blog/2015/03/14/ck-the-setup</id>
+    <content type="html"><![CDATA[<h1>who are you?</h1>
+
+<h4>I am an information security engineer with main interests in cryptography (specifically cryptanalysis) and network security.</h4>
+
+<!--more-->
+
+
+<h1>what&rsquo;s your setup like?</h1>
+
+<h4>I use an acer c720p Chromebook as my main laptop. I tinkered with it, got rid of the chrome OS and replaced it with archlinux. It&rsquo;s a nifty little machine that is light and portable. It has a 32GB SSD and about 7 hours of battery life which I love. The processor and ram are not as high as I&rsquo;d like but it does the job.</h4>
+
+<h4>For the heavy lifting I have a Samsung laptop which I dual boot Kali Linux and Windows. It&rsquo;s a core i5 with 6GB ram and Nvidia graphics card, not one of the high end ones though :(. It also has a 750GB hard drive which comes in handy for stuff such as virtual machines and large wordlists.</h4>
+
+<h4>I also have a raspberry pi model B. I play around with it and use it for experiments and diverse projects. Right now it has Kali Linux on it.</h4>
+
+<h4>My phone is a Nexus 5 - awesome phone! It serves all my needs and more. I have set up Nethunter on it and it comes in handy in remote testing and exploitation :). I see it remaining as my phone for a long time.</h4>
+
+<h4>I read a lot and have a Kindle Paperwhite 2. Next to my phone, it&rsquo;s the device I take almost everywhere with me. Its battery lasts forever and the reading experience is amazing whatever the lighting conditions.</h4>
+
+<h4>I also have some interest in photography and own a Nikon P520 camera. It serves my casual needs adequately and the zoom - 42x - is awesome!</h4>
+
+<h4>For storage I have two external drives - 2TB and 500GB. This complements the 750GB on the Samsung laptop. I also have lots of online storage, starting with 1TB Google Drive space - which I got free for two years from the Chromebook purchase :).</h4>
+
+<h4>The rest of my setup includes miscellaneous devices such as wireless cards, switches and so on.</h4>
+
+<p><img src="http://www.ckn.io/images/ck_setup.jpg" width="500" height="100"></p>
+
+<h1>what tools do you run?</h1>
+
+<h4>On the acer, I only configure the tools that I use regularly. These are a few crypto and network security tools. I tailor them to my needs to keep my archlinux installation minimal and fast. I do most of my scripting on it, mainly python and shell using sublime text (which i highly recommend) as my editor. I add other tools as they become necessary, on archlinux this is mostly seamless. I&rsquo;ve added the blackarch and archassault repos which host a wealth of security tools.</h4>
+
+<h4>As the Samsung laptop has a full Kali Installation, I use it when I need to do automated testing and require speed. I also use it when I need to do GPU password cracking. I also run my VMS on it. I have Windows on it too for games, testing and so on.</h4>
+
+<h4>The Nexus has Nethunter on it, which I use mostly to run network assessment tools.</h4>
+
+<h1>What&rsquo;s your dream setup</h1>
+
+<h4>Ideally I&rsquo;d like to have one light, fast, and extremely powerful laptop. Something like; 1TB SSD, 16GB ram and at least 8 hours battery life and of course powerful processor and graphics card.</h4>
+
+<h4>Next I&rsquo;d love to setup a multi-GPU cluster machine. Something like <a href="http://arstechnica.com/security/2012/12/25-gpu-cluster-cracks-every-standard-windows-password-in-6-hours/" target="_blank"><strong>this 25-GPU cluster monster</strong></a>. Can i dream :)?</h4>
+
+<h4>I am very happy with my Nexus 5 so am good there.</h4>
+
+<h4>Finally, I hope and plan to setup a fully equipped lab with lots of automation. It&rsquo;ll have very high speed internet and cutting edge technology. I have an interest in communication protocols and technology and it will have a plethora of relevant testing devices. This includes oftware defined radio devices, antennas, the whole nine yards :). Of course it&rsquo;ll have powerful processing machines&hellip;hey, crypto is resource intensive. The lab will basically be used for research and lots of fun!</h4>
+]]></content>
+  </entry>
+  
+</feed>

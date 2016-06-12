@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>The HackRF One: First steps - the poetry of (in)security</title>
+  <meta name="author" content="ck">
+
+   
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.ckn.io/blog/2015/10/11/the-hackrf-one-first-steps">
+  <link href="/favicon.png" rel="icon">
+  <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="the poetry of (in)security" type="application/atom+xml">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/js/modernizr-2.0.js"></script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <script src="/js/application.js"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-55596013-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+    
+        <li ><a href="/whoami.html">whoami</a></li>
+    
+        <li ><a href="/index.html">home</a></li>
+    
+        <li ><a href="/category.html">category</a></li>
+    
+        <li ><a href="/blog/archives/index.html">archive</a></li>
+    
+</ul>
+
+<ul class="nav pull-right">
+    
+    <li><a href="http://github.com/iamckn" title="Github Profile"><i class="icon-github-sign social-navbar"></i></a></li>
+    
+    
+    
+    
+    <li><a href="http://twitter.com/iamckn" title="Twitter Profile"><i class="icon-twitter-sign social-navbar"></i></a></li>
+    
+    
+    
+    
+
+    
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+      <div class="row-fluid">
+        <div id="content">
+          <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+  <div class="jumbotron">
+    The HackRF One: First steps
+      <h5>
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2015-10-11T20:18:10+03:00" pubdate data-updated="true">Oct 11, 2015</time></h5>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
+      <h4>The wireless world is an area I&rsquo;ve been interested in for a long time. From the the more common applications such as Wi-Fi, bluetooth and FM to the lesser explored such as radar, satellite and GSM, radio frequency is an area I plan to explore extensively. How awesome is the concept of <a href="https://en.wikipedia.org/wiki/Electromagnetic_pulse" target="_blank"><strong>electromagnetic pulses</strong></a> in this age that is driven by electromagnetism. I digress so let me get back on track, there will be several more posts to explore the possibilities.</h4>
+
+<!--more-->
+
+
+<h4>I recently acquired the awesome <a href="https://greatscottgadgets.com/hackrf/" target="_blank"><strong>HackRF One</strong></a>, a Software Defined Radio peripheral capable of transmission or reception of radio signals from 1 MHz to 6 GHz. I added the <a href="http://www.nooelec.com/store/ham-it-up.html" target="_blank"><strong>Ham It Up v1.3 - RF Upconverter</strong></a> to boost performance in the lower frequency ranges. A telescopic antenna and various connectors complete the setup.</h4>
+
+<h2>The Hardware</h2>
+
+<h4><strong>The HackRF One, telescopic antenna (ANT 500), some connectors and a Ham It Up v1.3 - RF Upconverter</strong></h4>
+
+<p><img src="/images/hackrf_hardware.JPG"></p>
+
+<h2>Software setup</h2>
+
+<h4>I did my setup on archlinux but it should be just as easy on other OS&rsquo;s. Here are the instructions from the <a href="https://github.com/mossmann/hackrf/wiki/Operating-System-Tips" target="_blank"><strong>HackRF Github wiki page</strong></a>.</h4>
+
+<h4>On my system I followed the following steps:</h4>
+
+<h3><strong><em>Installation of various software</em></strong></h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo pacman -S hackrf gnuradio-osmosdr gnuradio gnuradio-companion gqrx
+</span><span class='line'>yaourt -S gr-fosphor-git
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><strong><em>Creation of udev rules to allow access to the HackRF</em></strong></h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo nano /etc/udev/rules.d/52-hackrf.rules
+</span><span class='line'>  ATTR<span class="o">{</span>idVendor<span class="o">}==</span><span class="s2">&quot;1d50&quot;</span>, ATTR<span class="o">{</span>idProduct<span class="o">}==</span><span class="s2">&quot;6089&quot;</span>, SYMLINK+<span class="o">=</span><span class="s2">&quot;hackrf-one-%k&quot;</span>, <span class="nv">MODE</span><span class="o">=</span><span class="s2">&quot;660&quot;</span>, TAG+<span class="o">=</span><span class="s2">&quot;uaccess&quot;</span>
+</span><span class='line'>  ATTR<span class="o">{</span>idVendor<span class="o">}==</span><span class="s2">&quot;1fc9&quot;</span>, ATTR<span class="o">{</span>idProduct<span class="o">}==</span><span class="s2">&quot;000c&quot;</span>, SYMLINK+<span class="o">=</span><span class="s2">&quot;hackrf-dfu-%k&quot;</span>, <span class="nv">MODE</span><span class="o">=</span><span class="s2">&quot;660&quot;</span>, TAG+<span class="o">=</span><span class="s2">&quot;uaccess&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><strong><em>Testing the HackRF</em></strong></h3>
+
+<h4>Plug in the HackRF and run</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>hackrf_info
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>You should get output similar to:</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Found HackRF board 0:
+</span><span class='line'>USB descriptor string: 000000000000000014d463dc2f45a7e1
+</span><span class='line'>Board ID Number: <span class="m">2</span> <span class="o">(</span>HackRF One<span class="o">)</span>
+</span><span class='line'>Firmware Version: 2015.07.2
+</span><span class='line'>Part ID Number: 0xa000cb3c 0x0069435b
+</span><span class='line'>Serial Number: 0x00000000 0x00000000 0x14d463dc 0x2f45a7e1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>If you get an error, recheck your udev rules and ensure the HackRF USB connection is ok.</h4>
+
+<h3><strong><em>Updating the SPI Flash Firmware</em></strong></h3>
+
+<h4>Download the latest firmware <a href="https://github.com/mossmann/hackrf/releases/tag/v2015.07.2" target="_blank"><strong>here</strong></a>.</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>wget https://github.com/mossmann/hackrf/releases/download/v2015.07.2/hackrf-2015.07.2.zip
+</span><span class='line'>unzip hackrf-2015.07.2.zip
+</span><span class='line'><span class="nb">cd </span>hackrf-2015.07.2/firmware-bin/
+</span><span class='line'>hackrf_spiflash -w hackrf_one_usb_rom_to_ram.bin
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><strong><em>Updating the CPLD</em></strong></h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> ..
+</span><span class='line'>hackrf_cpldjtag -x firmware/cpld/sgpio_if/default.xsvf
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Press the reset button, then run the <strong>hackrf_info</strong> command and confirm the firmware updated successfully.</h4>
+
+<h4>We are then ready to try the &ldquo;Hello World&rdquo; of Software Defined Radio, implementing an FM receiver.</h4>
+
+<h2>An FM Receiver</h2>
+
+<h4>We will use the gnuradio-companion for this.</h4>
+
+<h4>Download and save this <a href="https://raw.githubusercontent.com/rrobotics/hackrf-tests/master/fm_radio/fm_radio_rx.grc" target="_blank"><strong>file</strong></a>, then open it using gnuradio from the terminal.</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gnuradio-companion fm_radio_rx.grc
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>You can then tune in to your preferred radio frequency and listen in.</h4>
+
+<p><img src="/images/fm_receiver.png"></p>
+
+<h4>With that out of the way, you can try building the FM receiver yourself using the gnuradio-companion.</h4>
+
+<h4>With the HackRF&rsquo;s transmission capability, an FM transmitter can also be implemented. I won&rsquo;t say I haven&rsquo;t thought of jamming certain frequencies in the vicinity, but that would be illegal, wouldn&rsquo;t it :)?</h4>
+
+<h4>In the next post, I&rsquo;ll show how to sniff gsm traffic.</h4>
+
+<h4>Till then, happy hacking :).</h4>
+
+    </div>
+  </div>
+
+
+  <footer>
+    <hr>
+    <div class="row-fluid">
+      <div class="span12">
+        <p class="meta">
+          
+            <a class="basic-alignment left" href="/blog/2015/10/04/saints-and-outlaws/" title="Previous Post: Saints and Outlaws">&laquo; Saints and Outlaws</a>
+          
+          
+            <span><<<<+>>>></span>
+            <a class="basic-alignment right" href="/blog/2015/10/17/christian/" title="Next Post: Christian ~ 127.0.0.1">Christian ~ 127.0.0.1 &raquo;</a>
+          
+        </p>
+      </div>
+    </div>
+  </footer>
+</article>
+
+</div>
+
+
+
+
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
+  <span class="credit">The difficult we do immediately; the impossible takes a little longer</span>
+</p>
+
+
+        </footer>
+      </div>
+  </div>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

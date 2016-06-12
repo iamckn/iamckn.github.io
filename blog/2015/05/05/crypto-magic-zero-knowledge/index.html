@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Crypto magic - zero knowledge - the poetry of (in)security</title>
+  <meta name="author" content="ck">
+
+   
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.ckn.io/blog/2015/05/05/crypto-magic-zero-knowledge">
+  <link href="/favicon.png" rel="icon">
+  <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="the poetry of (in)security" type="application/atom+xml">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/js/modernizr-2.0.js"></script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <script src="/js/application.js"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-55596013-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+    
+        <li ><a href="/whoami.html">whoami</a></li>
+    
+        <li ><a href="/index.html">home</a></li>
+    
+        <li ><a href="/category.html">category</a></li>
+    
+        <li ><a href="/blog/archives/index.html">archive</a></li>
+    
+</ul>
+
+<ul class="nav pull-right">
+    
+    <li><a href="http://github.com/iamckn" title="Github Profile"><i class="icon-github-sign social-navbar"></i></a></li>
+    
+    
+    
+    
+    <li><a href="http://twitter.com/iamckn" title="Twitter Profile"><i class="icon-twitter-sign social-navbar"></i></a></li>
+    
+    
+    
+    
+
+    
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+      <div class="row-fluid">
+        <div id="content">
+          <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+  <div class="jumbotron">
+    Crypto magic - zero knowledge
+      <h5>
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2015-05-05T09:23:11+03:00" pubdate data-updated="true">May 05, 2015</time></h5>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
+      <h4>There are some applications of cryptography that can only be classified as magical. It is only fitting that my first crypto post begins with one of them - zero knowledge proofs.</h4>
+
+<h4>I will try and explain it without all the rather complicated mathematical stuff.</h4>
+
+<!--more-->
+
+
+<p><img src="/images/Zero-Knowledge.png" width="200" height="200"></p>
+
+<h4>Let&rsquo;s start with a simple definition.</h4>
+
+<blockquote><h4>This is where one party (called the Prover) convinces a second party (called the Verifier) that they know the answer to some question. The catch is that the Verifier never gains any knowledge of what the actual answer is.</h4></blockquote>
+
+<h4>I&rsquo;ll start with a crude example to explain further (don&rsquo;t worry, I&rsquo;ll give a detailed one later).</h4>
+
+<h4>Let&rsquo;s say I want to sell a super secret formula about how to cure a disease to a powerful company. A problem arises where the company needs proof that I indeed know the super secret formula yet I cannot tell them what it is (my payday depends on it). The company should gain no information of what the super secret formula is from my proof, so I cannot let them test it. In the real world we would use a third party to hold both the payment and formula, and do some independent tests of the formula, but where&rsquo;s the magic in that :). In any case I don&rsquo;t trust anybody with the formula till I get paid. And so arises our dilemma.</h4>
+
+<h1>So, are zero knowledge proofs possible? Can I have my cake and eat it?</h1>
+
+<h4>The answer is yes and let me explain with the detailed example I promised :).</h4>
+
+<h4>Let&rsquo;s say I have two identical balls, one is red and one is blue. I want to prove to a color blind guy that they are of different colors.</h4>
+
+<h4>What I&rsquo;ll do is ask him to hold one ball in each hand so that he has a red ball in one hand and a blue one in the other. I can tell the color of each but he cannot (color blindness). Next I tell him to put his hands behind his back so that I cannot see them. Then he can decide whether to switch the balls or not to. After which he shows me what ball he&rsquo;s holding in each hand. He then asks me to tell him if he switched them or not. I obviously will get the answer correct as I know what color he was holding in each hand before.</h4>
+
+<h4>Now here is the interesting part, the only way I can tell whether he switched the balls behind his back is if they are of different colors. So I easily prove to him they are of different colors if I consistently can tell if he switched them (which I can). I will have to get the answer correct a number of times to convince him am not guessing (Probability and Maths come in which I promised to avoid in this post). He is color blind, so at the end of it all he still doesn&rsquo;t get to know which ball is red and which one is blue. And so the zero knowledge proof is complete. I prove that the balls are of different colors while he gains no knowledge at all which of them is blue and which is red.</h4>
+
+<h1>Can this be applied in the information Security world?</h1>
+
+<h4>Yes it can :)</h4>
+
+<h4>Let&rsquo;s say I want to authenticate with a server. I however don&rsquo;t want to reveal my password to the server. I just want to prove to the server that I know the password to be authenticated. I also don&rsquo;t want the server to gain any knowledge of what my password is. In the real world, the server stores passwords in a hashed form. You send over your plain password and the server calculates its hash value and compares it with what it has stored. This fails our zero knowledge proof as the server still sees your password before conversion. So we need a different implementation. I will explain it in detail in a different post - there&rsquo;s mathematics involved and I want to avoid information overload here :).</h4>
+
+<h2>I&rsquo;ll leave you with the following fun zero knowledge proofs for now.</h2>
+
+<hr />
+
+<h4>See how a person can prove to another that they know the solution to a sudoku puzzle without actually reavealing the solution. Check it out <a href="http://www.wisdom.weizmann.ac.il/~naor/PAPERS/SUDOKU_DEMO/" target="_blank"><strong>here</strong></a>.</h4>
+
+<hr />
+
+<h4>Also check out this cool explanation with a modified version of <a href="http://pages.cs.wisc.edu/~mkowalcz/628.pdf" target="_blank"><strong>Ali Baba and the forty thieves</strong></a>.</h4>
+
+<hr />
+
+<h4>In part two of Crypto Magic, I&rsquo;ll talk about homomorphic encryption :).</h4>
+
+    </div>
+  </div>
+
+
+  <footer>
+    <hr>
+    <div class="row-fluid">
+      <div class="span12">
+        <p class="meta">
+          
+            <a class="basic-alignment left" href="/blog/2015/04/27/bright/" title="Previous Post: Bright">&laquo; Bright</a>
+          
+          
+            <span><<<<+>>>></span>
+            <a class="basic-alignment right" href="/blog/2015/05/11/crypto-magic-homomorphic-encryption/" title="Next Post: Crypto magic - homomorphic encryption">Crypto magic - homomorphic encryption &raquo;</a>
+          
+        </p>
+      </div>
+    </div>
+  </footer>
+</article>
+
+</div>
+
+
+
+
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
+  <span class="credit">The difficult we do immediately; the impossible takes a little longer</span>
+</p>
+
+
+        </footer>
+      </div>
+  </div>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
