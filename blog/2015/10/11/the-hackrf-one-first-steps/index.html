@@ -117,24 +117,22 @@
 </header>
   <div class="row-fluid">
     <div class="span12">
-      <h4>The wireless world is an area I&rsquo;ve been interested in for a long time. From the the more common applications such as Wi-Fi, bluetooth and FM to the lesser explored such as radar, satellite and GSM, radio frequency is an area I plan to explore extensively. How awesome is the concept of <a href="https://en.wikipedia.org/wiki/Electromagnetic_pulse" target="_blank"><strong>electromagnetic pulses</strong></a> in this age that is driven by electromagnetism. I digress so let me get back on track, there will be several more posts to explore the possibilities.</h4>
+      <p>The wireless world is an area I&rsquo;ve been interested in for a long time. From the the more common applications such as Wi-Fi, bluetooth and FM to the lesser explored such as radar, satellite and GSM, radio frequency is an area I plan to explore extensively. How awesome is the concept of <a href="https://en.wikipedia.org/wiki/Electromagnetic_pulse" target="_blank"><strong>electromagnetic pulses</strong></a> in this age that is driven by electromagnetism. I digress so let me get back on track, there will be several more posts to explore the possibilities.</p>
 
 <!--more-->
 
 
-<h4>I recently acquired the awesome <a href="https://greatscottgadgets.com/hackrf/" target="_blank"><strong>HackRF One</strong></a>, a Software Defined Radio peripheral capable of transmission or reception of radio signals from 1 MHz to 6 GHz. I added the <a href="http://www.nooelec.com/store/ham-it-up.html" target="_blank"><strong>Ham It Up v1.3 - RF Upconverter</strong></a> to boost performance in the lower frequency ranges. A telescopic antenna and various connectors complete the setup.</h4>
+<p>I recently acquired the awesome <a href="https://greatscottgadgets.com/hackrf/" target="_blank"><strong>HackRF One</strong></a>, a Software Defined Radio peripheral capable of transmission or reception of radio signals from 1 MHz to 6 GHz. I added the <a href="http://www.nooelec.com/store/ham-it-up.html" target="_blank"><strong>Ham It Up v1.3 - RF Upconverter</strong></a> to boost performance in the lower frequency ranges. A telescopic antenna and various connectors complete the setup.</p>
 
 <h2>The Hardware</h2>
 
-<h4><strong>The HackRF One, telescopic antenna (ANT 500), some connectors and a Ham It Up v1.3 - RF Upconverter</strong></h4>
-
-<p><img src="/images/hackrf_hardware.JPG"></p>
+<p><strong>The HackRF One, telescopic antenna (ANT 500), some connectors and a Ham It Up v1.3 - RF Upconverter</strong>
+<img src="/images/hackrf_hardware.JPG"></p>
 
 <h2>Software setup</h2>
 
-<h4>I did my setup on archlinux but it should be just as easy on other OS&rsquo;s. Here are the instructions from the <a href="https://github.com/mossmann/hackrf/wiki/Operating-System-Tips" target="_blank"><strong>HackRF Github wiki page</strong></a>.</h4>
-
-<h4>On my system I followed the following steps:</h4>
+<p>I did my setup on archlinux but it should be just as easy on other OS&rsquo;s. Here are the instructions from the <a href="https://github.com/mossmann/hackrf/wiki/Operating-System-Tips" target="_blank"><strong>HackRF Github wiki page</strong></a>.
+On my system I followed the following steps:</p>
 
 <h3><strong><em>Installation of various software</em></strong></h3>
 
@@ -158,14 +156,14 @@
 
 <h3><strong><em>Testing the HackRF</em></strong></h3>
 
-<h4>Plug in the HackRF and run</h4>
+<p>Plug in the HackRF and run</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>hackrf_info
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h4>You should get output similar to:</h4>
+<p>You should get output similar to:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -182,11 +180,11 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h4>If you get an error, recheck your udev rules and ensure the HackRF USB connection is ok.</h4>
+<p>If you get an error, recheck your udev rules and ensure the HackRF USB connection is ok.</p>
 
 <h3><strong><em>Updating the SPI Flash Firmware</em></strong></h3>
 
-<h4>Download the latest firmware <a href="https://github.com/mossmann/hackrf/releases/tag/v2015.07.2" target="_blank"><strong>here</strong></a>.</h4>
+<p>Download the latest firmware <a href="https://github.com/mossmann/hackrf/releases/tag/v2015.07.2" target="_blank"><strong>here</strong></a>.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -208,32 +206,26 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h4>Press the reset button, then run the <strong>hackrf_info</strong> command and confirm the firmware updated successfully.</h4>
-
-<h4>We are then ready to try the &ldquo;Hello World&rdquo; of Software Defined Radio, implementing an FM receiver.</h4>
+<p>Press the reset button, then run the <strong>hackrf_info</strong> command and confirm the firmware updated successfully.
+We are then ready to try the &ldquo;Hello World&rdquo; of Software Defined Radio, implementing an FM receiver.</p>
 
 <h2>An FM Receiver</h2>
 
-<h4>We will use the gnuradio-companion for this.</h4>
-
-<h4>Download and save this <a href="https://raw.githubusercontent.com/rrobotics/hackrf-tests/master/fm_radio/fm_radio_rx.grc" target="_blank"><strong>file</strong></a>, then open it using gnuradio from the terminal.</h4>
+<p>We will use the gnuradio-companion for this.
+Download and save this <a href="https://raw.githubusercontent.com/rrobotics/hackrf-tests/master/fm_radio/fm_radio_rx.grc" target="_blank"><strong>file</strong></a>, then open it using gnuradio from the terminal.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>gnuradio-companion fm_radio_rx.grc
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h4>You can then tune in to your preferred radio frequency and listen in.</h4>
+<p>You can then tune in to your preferred radio frequency and listen in.
+<img src="/images/fm_receiver.png"></p>
 
-<p><img src="/images/fm_receiver.png"></p>
-
-<h4>With that out of the way, you can try building the FM receiver yourself using the gnuradio-companion.</h4>
-
-<h4>With the HackRF&rsquo;s transmission capability, an FM transmitter can also be implemented. I won&rsquo;t say I haven&rsquo;t thought of jamming certain frequencies in the vicinity, but that would be illegal, wouldn&rsquo;t it :)?</h4>
-
-<h4>In the next post, I&rsquo;ll show how to sniff gsm traffic.</h4>
-
-<h4>Till then, happy hacking :).</h4>
+<p>With that out of the way, you can try building the FM receiver yourself using the gnuradio-companion.
+With the HackRF&rsquo;s transmission capability, an FM transmitter can also be implemented. I won&rsquo;t say I haven&rsquo;t thought of jamming certain frequencies in the vicinity, but that would be illegal, wouldn&rsquo;t it :)?
+In the next post, I&rsquo;ll show how to sniff gsm traffic.
+Till then, happy hacking :).</p>
 
     </div>
   </div>

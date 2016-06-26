@@ -4,7 +4,7 @@
   <title><![CDATA[Category: radio | The poetry of (in)security]]></title>
   <link href="http://www.ckn.io/blog/categories/radio/atom.xml" rel="self"/>
   <link href="http://www.ckn.io/"/>
-  <updated>2016-06-26T12:00:56+03:00</updated>
+  <updated>2016-06-26T15:09:22+03:00</updated>
   <id>http://www.ckn.io/</id>
   <author>
     <name><![CDATA[ck]]></name>
@@ -94,114 +94,106 @@ The transmitter circuit board is small enough to be easily concealed. Creative w
     <link href="http://www.ckn.io/blog/2016/01/25/gsm-sniffing-voice-traffic/"/>
     <updated>2016-01-25T06:51:00+03:00</updated>
     <id>http://www.ckn.io/blog/2016/01/25/gsm-sniffing-voice-traffic</id>
-    <content type="html"><![CDATA[<h4>I wrap up the GSM series with a walkthrough on how to decrypt voice traffic. Voice is the way most people interact on a telecommunications network and therefore a major componenent of GSM traffic. I&rsquo;ve explained a lot of the background on GSM communication in the previous posts so I&rsquo;ll get right to it.</h4>
+    <content type="html"><![CDATA[<p>I wrap up the GSM series with a walkthrough on how to decrypt voice traffic. Voice is the way most people interact on a telecommunications network and therefore a major componenent of GSM traffic. I&rsquo;ve explained a lot of the background on GSM communication in the previous posts so I&rsquo;ll get right to it.</p>
 
 <!--more-->
 
 
-<h4>We will capture the traffic using the <strong>HackRF one</strong> and the call will take place between two Safaricom lines. The capture will take place on the downlink - that is the receiving end of the call. I&rsquo;ll use a Blackberry as the receiving device so that I can easily get the TMSI and Kc.</h4>
+<p>We will capture the traffic using the <strong>HackRF one</strong> and the call will take place between two Safaricom lines. The capture will take place on the downlink - that is the receiving end of the call. I&rsquo;ll use a Blackberry as the receiving device so that I can easily get the TMSI and Kc.</p>
 
 <h2><strong>Capturing the traffic</strong></h2>
 
-<h4>I&rsquo;ll speed through a lot of these steps as they are similar to the <a href="https://www.ckn.io/blog/2015/11/29/gsm-sniffing-sms-traffic/" target="_blank"><strong>sniffing SMS traffic scenario</strong></a>. I&rsquo;ll use the  Absolute Radio Frequency Channel Number <a href="http://www.telecomabc.com/a/arfcn.html" target="_blank"><strong>ARFCN</strong></a> in specifying the radio channel. GSM uses ARFCNs to represent the various frequencies the BTS and mobile device communicate on. I&rsquo;ll use the ARFCN instead of the frequency in the commands I&rsquo;ll run for variety as I&rsquo;ve been using frequency in the previous posts.</h4>
+<p>I&rsquo;ll speed through a lot of these steps as they are similar to the <a href="https://www.ckn.io/blog/2015/11/29/gsm-sniffing-sms-traffic/" target="_blank"><strong>sniffing SMS traffic scenario</strong></a>. I&rsquo;ll use the  Absolute Radio Frequency Channel Number <a href="http://www.telecomabc.com/a/arfcn.html" target="_blank"><strong>ARFCN</strong></a> in specifying the radio channel. GSM uses ARFCNs to represent the various frequencies the BTS and mobile device communicate on. I&rsquo;ll use the ARFCN instead of the frequency in the commands I&rsquo;ll run for variety as I&rsquo;ve been using frequency in the previous posts.
+We begin by getting the ARFCN, TMSI and Kc from the Blackberry. On a Blackberry these are readily available from the engineering screen menu. The ARFCN is gotten by navigating to the <strong>Cell Identity</strong> submenu, the TMSI from the <strong>Mobile Identity</strong> submenu and finally the Kc from the <strong>SIM Browser</strong> submenu.</p>
 
-<h4>We begin by getting the ARFCN, TMSI and Kc from the Blackberry. On a Blackberry these are readily available from the engineering screen menu. The ARFCN is gotten by navigating to the <strong>Cell Identity</strong> submenu, the TMSI from the <strong>Mobile Identity</strong> submenu and finally the Kc from the <strong>SIM Browser</strong> submenu.</h4>
+<p>The values I get are:</p>
 
-<h4>The values I get are:</h4>
+<p>ARFCN: <strong>17</strong>
+TMSI: <strong>8D4812F8</strong>
+Kc: <strong>239E4C213612C000</strong></p>
 
-<h4>ARFCN: <strong>17</strong></h4>
-
-<h4>TMSI: <strong>8D4812F8</strong></h4>
-
-<h4>Kc: <strong>239E4C213612C000</strong></h4>
-
-<h4>I use the airprobe_rtlsdr_capture module of <a href="https://github.com/ptrkrysik/gr-gsm" target="_blank"><strong>gr-gsm</strong></a> to capture the voice traffic. I begin the capture by running the following command:</h4>
+<p>I use the airprobe_rtlsdr_capture module of <a href="https://github.com/ptrkrysik/gr-gsm" target="_blank"><strong>gr-gsm</strong></a> to capture the voice traffic. I begin the capture by running the following command:</p>
 
 <pre><code class="bash">airprobe_rtlsdr_capture.py -a 17 -s 1000000 -g 40 -c voice_capture.cfile -T 150
 </code></pre>
 
 <p><strong>-a</strong> is the ARFCN, <strong>-s</strong> the sample rate in Hz, <strong>-g</strong> the gain, <strong>-c</strong> the output file and <strong>-T</strong> the duration of our capture in seconds.</p>
 
-<h4>I then make a call while the capture is in progress.</h4>
+<p>I then make a call while the capture is in progress.</p>
 
 <h2><strong>Decoding BCCH</strong></h2>
 
-<h4>As explained in the previous post, in idle mode the phone has to listen on the BCCH to detect traffic to be sent to it.</h4>
+<p>As explained in the previous post, in idle mode the phone has to listen on the BCCH to detect traffic to be sent to it.
+Our aim here is to identify what SDCCH (Standalone Dedicated Control Channel) is used for our call setup.</p>
 
-<h4>Our aim here is to identify what SDCCH (Standalone Dedicated Control Channel) is used for our call setup.</h4>
-
-<h4>We first start wireshark, monitor the loopback interface and then run the following command:</h4>
+<p>We first start wireshark, monitor the loopback interface and then run the following command:</p>
 
 <pre><code class="bash">airprobe_decode.py -c voice_capture.cfile -s 1000000 -a 17 -m BCCH -t 0
 </code></pre>
 
-<h4><strong>voice_capture.cfile</strong> is the file with the voice traffic we captured.</h4>
-
-<h4>We then search for traffic specific to our TMSI by searching for it in wireshark packet details.</h4>
-
-<h4>we look for the paging request and inspect the Immediate Assignment that follows:</h4>
+<p><strong>voice_capture.cfile</strong> is the file with the voice traffic we captured.
+We then search for traffic specific to our TMSI by searching for it in wireshark packet details.
+we look for the paging request and inspect the Immediate Assignment that follows:</p>
 
 <p><img src="/images/SDCCH_Search.png"></p>
 
-<h4>Note that it&rsquo;s <strong>SDCCH/8</strong>, <strong>Timeslot 1</strong>.</h4>
+<p>Note that it&rsquo;s <strong>SDCCH/8</strong>, <strong>Timeslot 1</strong>.</p>
 
 <h1><strong>Decoding SDCCH</strong></h1>
 
-<h4>We now need to identify the ciphering mode the BTS tells the phone to use.</h4>
-
-<h4>We restart wireshark on the loopback interface and then run the following command specifying <strong>SDCCH8</strong> and <strong>Timeslot 1</strong>:</h4>
+<p>We now need to identify the ciphering mode the BTS tells the phone to use.
+We restart wireshark on the loopback interface and then run the following command specifying <strong>SDCCH8</strong> and <strong>Timeslot 1</strong>:</p>
 
 <pre><code class="bash">airprobe_decode.py -c voice_capture.cfile -s 1000000 -a 17 -m SDCCH8 -t 1
 </code></pre>
 
-<h4>We look for a Paging Response followed by a Ciphering Mode Command.</h4>
+<p>We look for a Paging Response followed by a Ciphering Mode Command.</p>
 
 <p><img src="/images/ciphering_mode.png"></p>
 
-<h4>We see that the algorithm in use is <strong>A5/1</strong>.</h4>
+<p>We see that the algorithm in use is <strong>A5/1</strong>.</p>
 
 <h2><strong>Decoding TCH</strong></h2>
 
-<h4>TCH is the Traffic Channel in GSM and is used to carry voice traffic and data. It could either be full rate TCH/F or half rate TCH/H. You can read up more on it <a href="http://www.rfwireless-world.com/Terminology/GSM-traffic-channel-TCH-FS-HS.html" target="_blank"><strong>here</strong></a>.</h4>
+<p>TCH is the Traffic Channel in GSM and is used to carry voice traffic and data. It could either be full rate TCH/F or half rate TCH/H. You can read up more on it <a href="http://www.rfwireless-world.com/Terminology/GSM-traffic-channel-TCH-FS-HS.html" target="_blank"><strong>here</strong></a>.</p>
 
-<h4>We now restart wireshark on the loopback interface and run the following command:</h4>
+<p>We now restart wireshark on the loopback interface and run the following command:</p>
 
 <pre><code class="bash">airprobe_decode.py -c voice_capture.cfile -s 1000000 -a 17 -m SDCCH8 -t 1 -e 1 -k 0x23,0x9E,0x4C,0x21,0x36,0x12,0xC0,0x00
 </code></pre>
 
-<h4><strong>-e 1</strong> specifies the algorithm <strong>A5/1</strong>, <strong>-k 0x23,0x9E,0x4C,0x21,0x36,0x12,0xC0,0x00</strong> specifies the <strong>Kc</strong>.</h4>
+<p><strong>-e 1</strong> specifies the algorithm <strong>A5/1</strong>, <strong>-k 0x23,0x9E,0x4C,0x21,0x36,0x12,0xC0,0x00</strong> specifies the <strong>Kc</strong>.</p>
 
-<h4>On wireshark we first look for the Call Control Setup traffic and we can actually see the calling party number as below.</h4>
+<p>On wireshark we first look for the Call Control Setup traffic and we can actually see the calling party number as below.</p>
 
 <p><img src="/images/cc_setup.png"></p>
 
-<h4>A bit down the capture we should see an Assignment command. We see that the voice call is assigned to Timeslot 7 and the Traffic Channel is full rate (TCH/F).</h4>
+<p>A bit down the capture we should see an Assignment command. We see that the voice call is assigned to Timeslot 7 and the Traffic Channel is full rate (TCH/F).</p>
 
 <p><img src="/images/call_assignment.png"></p>
 
 <h2><strong>Decoding the voice traffic</strong></h2>
 
-<h4>We can now finally decode the voice traffic by running the following command:</h4>
+<p>We can now finally decode the voice traffic by running the following command:</p>
 
 <pre><code class="bash">airprobe_decode.py -c voice_capture.cfile -s 1000000 -a 17 -m TCHF -t 7 -e 1 -k 0x23,0x9E,0x4C,0x21,0x36,0x12,0xC0,0x00 -d FR -o speech.au.gsm
 </code></pre>
 
-<h4><strong>-m TCHF</strong> specifies the traffic channel, <strong>-t 7</strong> the TCH/F timeslot, <strong>-d FR</strong> specifies the voice codec of the channel as full rate, and  <strong>speech.au.gsm</strong> specifies the output file.</h4>
+<p><strong>-m TCHF</strong> specifies the traffic channel, <strong>-t 7</strong> the TCH/F timeslot, <strong>-d FR</strong> specifies the voice codec of the channel as full rate, and  <strong>speech.au.gsm</strong> specifies the output file.</p>
 
-<h4><strong>speech.au.gsm</strong> contains the voice traffic. We convert it to an audio file using toast as follows:</h4>
+<p><strong>speech.au.gsm</strong> contains the voice traffic. We convert it to an audio file using toast as follows:</p>
 
 <pre><code class="bash">toast -d speech.au.gsm
 </code></pre>
 
-<h4>We will get a file called <strong>speech.au</strong> which we can play back and listen to the captured voice call :).</h4>
+<p>We will get a file called <strong>speech.au</strong> which we can play back and listen to the captured voice call :).</p>
 
 <h2><strong>Alternative method</strong></h2>
 
-<h4>Alternatively one could use the mainstream airprobe modules instead of gr-gsm with the same results.</h4>
+<p>Alternatively one could use the mainstream airprobe modules instead of gr-gsm with the same results.
+The original modules had issues with the HackRF and later GNU Radio versions. I however did some patching and you can clone the patched version from my Github <a href="https://github.com/iamckn/airprobe" target="_blank"><strong>here</strong></a>.</p>
 
-<h4>The original modules had issues with the HackRF and later GNU Radio versions. I however did some patching and you can clone the patched version from my Github <a href="https://github.com/iamckn/airprobe" target="_blank"><strong>here</strong></a>.</h4>
-
-<h4>The equivalent commands for the whole process starting from decoding BCCH to decoding voice are:</h4>
+<p>The equivalent commands for the whole process starting from decoding BCCH to decoding voice are:</p>
 
 <pre><code class="bash">./go.sh voice_capture.cfile 64 0B
 ./go.sh voice_capture.cfile 64 1S 239E4C213612C00001
@@ -209,9 +201,8 @@ The transmitter circuit board is small enough to be easily concealed. Creative w
 toast -d speech.au.gsm 
 </code></pre>
 
-<h4>That concludes the GSM radio series for now.</h4>
-
-<h4>Till next time, happy hacking!</h4>
+<p>That concludes the GSM radio series for now.
+Till next time, happy hacking!</p>
 ]]></content>
   </entry>
   
@@ -220,122 +211,107 @@ toast -d speech.au.gsm
     <link href="http://www.ckn.io/blog/2015/11/29/gsm-sniffing-sms-traffic/"/>
     <updated>2015-11-29T10:14:48+03:00</updated>
     <id>http://www.ckn.io/blog/2015/11/29/gsm-sniffing-sms-traffic</id>
-    <content type="html"><![CDATA[<h4>In the previous <a href="https://www.ckn.io/blog/2015/11/01/sniffing-gsm-traffic/" target="_blank"><strong>post</strong></a>, I explained how GSM traffic can be sniffed with the <a href="https://www.ckn.io/blog/2015/10/11/the-hackrf-one-first-steps/" target="_blank"><strong>HackRF One</strong></a>. GSM traffic carries a lot of information, from system information to the actual voice and data we are familiar with. The traffic that the normal user of a telecommunication network is concerned with is voice and data. With this in mind I&rsquo;ll do a two part series to demonstrate how voice and data can be sniffed using the HackRF. I start with SMS traffic which falls under the data category. Let&rsquo;s get right into it!</h4>
+    <content type="html"><![CDATA[<p>In the previous <a href="https://www.ckn.io/blog/2015/11/01/sniffing-gsm-traffic/" target="_blank"><strong>post</strong></a>, I explained how GSM traffic can be sniffed with the <a href="https://www.ckn.io/blog/2015/10/11/the-hackrf-one-first-steps/" target="_blank"><strong>HackRF One</strong></a>. GSM traffic carries a lot of information, from system information to the actual voice and data we are familiar with. The traffic that the normal user of a telecommunication network is concerned with is voice and data. With this in mind I&rsquo;ll do a two part series to demonstrate how voice and data can be sniffed using the HackRF. I start with SMS traffic which falls under the data category. Let&rsquo;s get right into it!</p>
 
 <!--more-->
 
 
-<h4>I am going to send an SMS from a Safaricom line to an Orange line, capture the traffic over the <a href="https://en.wikipedia.org/wiki/Um_interface" target="_blank"><strong>Um (air) interface</strong></a> and decrypt the data to retrieve the SMS. I own both lines steering clear of the legality issue of decrypting other people&rsquo;s traffic.</h4>
+<p>I am going to send an SMS from a Safaricom line to an Orange line, capture the traffic over the <a href="https://en.wikipedia.org/wiki/Um_interface" target="_blank"><strong>Um (air) interface</strong></a> and decrypt the data to retrieve the SMS. I own both lines steering clear of the legality issue of decrypting other people&rsquo;s traffic.</p>
 
 <h2><strong>Identifying the BTS</strong></h2>
 
-<h4>The specific point at which I&rsquo;ll capture the traffic is as it&rsquo;s being sent by the BTS to the Orange line. The technical term for this is the downlink. I therefore need to identify the BTS that my Orange line is connected to. A BTS is uniquely identified using an assigned cell identity (Cell ID). The cell identity combined with the <a href="https://en.wikipedia.org/wiki/Location_area_identity" target="_blank"><strong>location area identity (LAI)</strong></a> which uniquely identifies the country, mobile network and location area code is what we need to get. There are various ways to get this information such as the engineering menu on blackberries. The phone I am using is an android phone and there are several android apps that will give you this information. In my case I use the awesome <a href="https://github.com/SecUpwN/Android-IMSI-Catcher-Detector" target="_blank"><strong>Android IMSI Catcher Detector</strong></a>.</h4>
-
-<h4>Next we sniff the GSM frequencies our mobile operators use and identify the specific frequency the BTS is operating on. Follow the previous <a href="https://www.ckn.io/blog/2015/11/01/sniffing-gsm-traffic/" target="_blank"><strong>post</strong></a> on how to do this. We will accomplish this by searching the traffic being captured on wireshark for the LAI and Cell ID our phone is on until we have a match. In this case the frequency the Orange BTS was operating on is 949.2MHz.</h4>
+<p>The specific point at which I&rsquo;ll capture the traffic is as it&rsquo;s being sent by the BTS to the Orange line. The technical term for this is the downlink. I therefore need to identify the BTS that my Orange line is connected to. A BTS is uniquely identified using an assigned cell identity (Cell ID). The cell identity combined with the <a href="https://en.wikipedia.org/wiki/Location_area_identity" target="_blank"><strong>location area identity (LAI)</strong></a> which uniquely identifies the country, mobile network and location area code is what we need to get. There are various ways to get this information such as the engineering menu on blackberries. The phone I am using is an android phone and there are several android apps that will give you this information. In my case I use the awesome <a href="https://github.com/SecUpwN/Android-IMSI-Catcher-Detector" target="_blank"><strong>Android IMSI Catcher Detector</strong></a>.
+Next we sniff the GSM frequencies our mobile operators use and identify the specific frequency the BTS is operating on. Follow the previous <a href="https://www.ckn.io/blog/2015/11/01/sniffing-gsm-traffic/" target="_blank"><strong>post</strong></a> on how to do this. We will accomplish this by searching the traffic being captured on wireshark for the LAI and Cell ID our phone is on until we have a match. In this case the frequency the Orange BTS was operating on is 949.2MHz.</p>
 
 <h2><strong>Capturing SMS traffic</strong></h2>
 
-<h4>I&rsquo;ll use the airprobe_rtlsdr_capture module of <a href="https://github.com/ptrkrysik/gr-gsm" target="_blank"><strong>gr-gsm</strong></a> to capture the SMS traffic. I begin the capture using the following command:</h4>
+<p>I&rsquo;ll use the airprobe_rtlsdr_capture module of <a href="https://github.com/ptrkrysik/gr-gsm" target="_blank"><strong>gr-gsm</strong></a> to capture the SMS traffic. I begin the capture using the following command:</p>
 
 <pre><code class="bash">airprobe_rtlsdr_capture.py -f 949200000 -s 1000000 -g 40 -c capture.cfile -T 60
 </code></pre>
 
 <p><strong>-f</strong> is the frequency in Hz, <strong>-s</strong> the sample rate in Hz, <strong>-g</strong> the gain, <strong>-c</strong> the output file and <strong>-T</strong> the duration of our capture in seconds.</p>
 
-<h4>I then send an SMS reading &ldquo;This is a demo of GSM decryption&rdquo; to the Orange line.</h4>
+<p>I then send an SMS reading &ldquo;This is a demo of GSM decryption&rdquo; to the Orange line.</p>
 
 <h2><strong>Getting the TMSI and Kc</strong></h2>
 
-<h4>We now have the traffic captured and saved in a file called <strong>capture.cfile</strong>. Before we get into the decryption process, we need some information specific to our SIM card.</h4>
-
-<h4>First we need the Temporary Mobile Subscriber Identity (<strong>TMSI</strong>). This is a random assigned identity assigned to the SIM when it connects to a BTS. Its purpose is to avoid the subscriber from being identified and tracked by eavesdroppers on the air interface as I am trying to do :).</h4>
-
-<h4>We will then need to get the <strong>Kc</strong>, which is the key used to encrypt the traffic between the phone and the BTS over the air. I will get into the details of how the <strong>Kc</strong> is calculated in a later post but for now you can read up on the <strong>A8</strong> algorithm.</h4>
-
-<h4>There are various ways to get the <strong>TMSI</strong> and <strong>Kc</strong>. These guides <a href="http://domonkos.tomcsanyi.net/?p=369" target="_blank"><strong>here</strong></a> and <a href="http://openbsc.osmocom.org/trac/wiki/A5_GSM_AT_tricks" target="_blank"><strong>here</strong></a> are great references.</h4>
-
-<h4>I used AT commands on a connected Samsung S3 mini as follows:</h4>
+<p>We now have the traffic captured and saved in a file called <strong>capture.cfile</strong>. Before we get into the decryption process, we need some information specific to our SIM card.
+First we need the Temporary Mobile Subscriber Identity (<strong>TMSI</strong>). This is a random assigned identity assigned to the SIM when it connects to a BTS. Its purpose is to avoid the subscriber from being identified and tracked by eavesdroppers on the air interface as I am trying to do :).
+We will then need to get the <strong>Kc</strong>, which is the key used to encrypt the traffic between the phone and the BTS over the air. I will get into the details of how the <strong>Kc</strong> is calculated in a later post but for now you can read up on the <strong>A8</strong> algorithm.
+There are various ways to get the <strong>TMSI</strong> and <strong>Kc</strong>. These guides <a href="http://domonkos.tomcsanyi.net/?p=369" target="_blank"><strong>here</strong></a> and <a href="http://openbsc.osmocom.org/trac/wiki/A5_GSM_AT_tricks" target="_blank"><strong>here</strong></a> are great references.
+I used AT commands on a connected Samsung S3 mini as follows:</p>
 
 <pre><code class="bash">AT+CRSM=176,28448,0,0,9
 +CRSM: 144,0,0E10EAF30299F2C404
 </code></pre>
 
-<h4>The <strong>Kc</strong> from the output is <strong>0E10EAF30299F2C4</strong></h4>
+<p>The <strong>Kc</strong> from the output is <strong>0E10EAF30299F2C4</strong></p>
 
 <pre><code class="bash">AT+CRSM=176,28542,0,0,11
 +CRSM: 144,0,38256E5136F9702B5D0000
 </code></pre>
 
-<h4>The <strong>TMSI</strong> from the output is <strong>38256E51</strong></h4>
+<p>The <strong>TMSI</strong> from the output is <strong>38256E51</strong></p>
 
 <h2><strong>Decoding BCCH</strong></h2>
 
-<h4>BCCH is the Broadcast Control Channel that the BTS uses to communicate system information messages to the mobile device on.</h4>
-
-<h4>In idle mode the phone has to listen on the BCCH to detect traffic to be sent to it.</h4>
-
-<h4>In this case the BTS sends two paging request messages which inform the phone of an incoming SMS.</h4>
-
-<h4>This will then be followed by an Immediate Assignment where an SDCCH is established for the SMS transfer.</h4>
-
-<h4>SDCCH is a Standalone Dedicated Control Channel used for most short transactions, including initial call setup step, registration and SMS transfer.</h4>
-
-<h4>We therefore need to identify what SDCCH is used for the SMS transfer.</h4>
-
-<h4>We first start wireshark and monitor the loopback interface and then run the following command:</h4>
+<p>BCCH is the Broadcast Control Channel that the BTS uses to communicate system information messages to the mobile device on.
+In idle mode the phone has to listen on the BCCH to detect traffic to be sent to it.
+In this case the BTS sends two paging request messages which inform the phone of an incoming SMS.
+This will then be followed by an Immediate Assignment where an SDCCH is established for the SMS transfer.
+SDCCH is a Standalone Dedicated Control Channel used for most short transactions, including initial call setup step, registration and SMS transfer.
+We therefore need to identify what SDCCH is used for the SMS transfer.
+We first start wireshark and monitor the loopback interface and then run the following command:</p>
 
 <pre><code class="bash">airprobe_decode.py -c capture.cfile -s 1000000 -f 949200000 -m BCCH -t 0
 </code></pre>
 
-<h4><strong>capture.cfile</strong> is the file with the traffic we captured earlier.</h4>
-
-<h4>We then search for traffic specific to our TMSI by searching for it in wireshark packet details.</h4>
+<p><strong>capture.cfile</strong> is the file with the traffic we captured earlier.
+We then search for traffic specific to our TMSI by searching for it in wireshark packet details.</p>
 
 <p><img src="/images/tmsi_search.png"></p>
 
-<h4>we look for the two paging requests and inspect the Immediate Assignment that follows:</h4>
+<p>we look for the two paging requests and inspect the Immediate Assignment that follows:</p>
 
 <p><img src="/images/sdcch_channel.png"></p>
 
-<h4>Note that it&rsquo;s <strong>SDCCH/8</strong>, <strong>Timeslot 2</strong>.</h4>
+<p>Note that it&rsquo;s <strong>SDCCH/8</strong>, <strong>Timeslot 2</strong>.</p>
 
 <h2><strong>Decoding SDCCH</strong></h2>
 
-<h4>We now need to identify the ciphering mode the BTS tells the phone to use.</h4>
-
-<h4>We restart wireshark on the loopback interface and then run the following command specifying <strong>SDCCH8</strong> and <strong>Timeslot 2</strong>:</h4>
+<p>We now need to identify the ciphering mode the BTS tells the phone to use.
+We restart wireshark on the loopback interface and then run the following command specifying <strong>SDCCH8</strong> and <strong>Timeslot 2</strong>:</p>
 
 <pre><code class="bash">airprobe_decode.py -c capture.cfile -s 1000000 -f 949200000 -m SDCCH8 -t 2
 </code></pre>
 
-<h4>We look for a Paging Response followed by a Ciphering Mode Command.</h4>
+<p>We look for a Paging Response followed by a Ciphering Mode Command.</p>
 
 <p><img src="/images/cipher_mode.png"></p>
 
-<h4>We see that the algorithm in use is <strong>A5/1</strong> (more on this in a later post).</h4>
+<p>We see that the algorithm in use is <strong>A5/1</strong> (more on this in a later post).</p>
 
 <h2><strong>Decrypting the SMS traffic. Finally!</strong></h2>
 
-<h4>We confirm the most recently used <strong>Kc</strong> as shown earlier, then we restart wireshark on the loopback interface and run the following command:</h4>
+<p>We confirm the most recently used <strong>Kc</strong> as shown earlier, then we restart wireshark on the loopback interface and run the following command:</p>
 
 <pre><code class="bash">airprobe_decode.py -c capture.cfile -s 1000000 -f 949200000 -m SDCCH8 -t 2 -e 1 -k 0x0E,0x10,0xEA,0xF3,0x02,0x99,0xF2,0xC4
 </code></pre>
 
-<h4><strong>-e 1</strong> specifies the algorithm <strong>A5/1</strong>, <strong>-k 0x0E,0x10,0xEA,0xF3,0x02,0x99,0xF2,0xC4</strong> specifies the <strong>Kc</strong>.</h4>
+<p><strong>-e 1</strong> specifies the algorithm <strong>A5/1</strong>, <strong>-k 0x0E,0x10,0xEA,0xF3,0x02,0x99,0xF2,0xC4</strong> specifies the <strong>Kc</strong>.</p>
 
-<h4>On wireshark we look for the GSM SMS traffic and we can see the text of our SMS :).</h4>
+<p>On wireshark we look for the GSM SMS traffic and we can see the text of our SMS :).</p>
 
 <p><img src="/images/decrypted_sms.png"></p>
 
 <h2><strong>Wrapping up</strong></h2>
 
-<h4>If you&rsquo;ve followed through keenly you&rsquo;ll note that every variable is available readily from just sniffing the traffic except the <strong>Kc</strong>. Everything else is exchanged between the BTS and Mobile device, from the TMSI and BTS details to the data traffic though encrypted. The question becomes how do you get the <strong>Kc</strong> in use by another mobile device? The good people at <a href="https://srlabs.de/decrypting_gsm/" target="_blank"><strong>SRLabs</strong></a> figured out how to crack the A5/1 encryption used and created a tool called <strong>Kraken</strong> and 2TB rainbow tables to find the <strong>Kc</strong>.</h4>
+<p>If you&rsquo;ve followed through keenly you&rsquo;ll note that every variable is available readily from just sniffing the traffic except the <strong>Kc</strong>. Everything else is exchanged between the BTS and Mobile device, from the TMSI and BTS details to the data traffic though encrypted. The question becomes how do you get the <strong>Kc</strong> in use by another mobile device? The good people at <a href="https://srlabs.de/decrypting_gsm/" target="_blank"><strong>SRLabs</strong></a> figured out how to crack the A5/1 encryption used and created a tool called <strong>Kraken</strong> and 2TB rainbow tables to find the <strong>Kc</strong>.
+They also automated a lot of the steps in this post making decryption of gsm voice and data almost trivial.</p>
 
-<h4>They also automated a lot of the steps in this post making decryption of gsm voice and data almost trivial.</h4>
-
-<h4>In the next post I&rsquo;ll demonstrate how to decrypt voice traffic :) as I continue explaining GSM communication.</h4>
-
-<h4>Till then, happy hacking.</h4>
+<p>In the next post I&rsquo;ll demonstrate how to decrypt voice traffic :) as I continue explaining GSM communication.
+Till then, happy hacking.</p>
 ]]></content>
   </entry>
   
@@ -344,29 +320,27 @@ toast -d speech.au.gsm
     <link href="http://www.ckn.io/blog/2015/11/01/sniffing-gsm-traffic/"/>
     <updated>2015-11-01T09:30:27+03:00</updated>
     <id>http://www.ckn.io/blog/2015/11/01/sniffing-gsm-traffic</id>
-    <content type="html"><![CDATA[<h4>I have been playing around with the HackRF for the past couple of weeks and progressively exploring the Radio Frequency spectrum. In this post I&rsquo;ll take you through how to sniff GSM traffic. I&rsquo;ll be specifically monitoring the <a href="https://en.wikipedia.org/wiki/Um_interface" target="_blank"><strong>Um interface</strong></a>. This in the air interface between the Mobile Station (MS) and the Base Transceiver Station (BTS). The MS in this case will be the mobile phone while the BTS is what the phone connects to on the Mobile network. The BTS is usually hosted on towers which you can spot in various locations. Here is what a typical one looks like.</h4>
+    <content type="html"><![CDATA[<p>I have been playing around with the HackRF for the past couple of weeks and progressively exploring the Radio Frequency spectrum. In this post I&rsquo;ll take you through how to sniff GSM traffic. I&rsquo;ll be specifically monitoring the <a href="https://en.wikipedia.org/wiki/Um_interface" target="_blank"><strong>Um interface</strong></a>. This in the air interface between the Mobile Station (MS) and the Base Transceiver Station (BTS). The MS in this case will be the mobile phone while the BTS is what the phone connects to on the Mobile network. The BTS is usually hosted on towers which you can spot in various locations. Here is what a typical one looks like.</p>
 
 <!--more-->
 
 
 <p><img src="/images/BTS.jpg" width="400"></p>
 
-<h4>We first ensure that our HackRF is well set up as detailed in <a href="https://www.ckn.io/blog/2015/10/11/the-hackrf-one-first-steps/" target="_blank"><strong>this earlier post</strong></a>.</h4>
-
-<h4>This setup is tailored to Archlinux but other linux distros closely follow the same process.</h4>
-
-<h4>Next we install <a href="https://github.com/ptrkrysik/gr-gsm" target="_blank"><strong>gr-gsm</strong></a> which consists of gnuradio blocks and tools for receiving GSM transmissions.</h4>
+<p>We first ensure that our HackRF is well set up as detailed in <a href="https://www.ckn.io/blog/2015/10/11/the-hackrf-one-first-steps/" target="_blank"><strong>this earlier post</strong></a>.
+This setup is tailored to Archlinux but other linux distros closely follow the same process.
+Next we install <a href="https://github.com/ptrkrysik/gr-gsm" target="_blank"><strong>gr-gsm</strong></a> which consists of gnuradio blocks and tools for receiving GSM transmissions.</p>
 
 <h3><strong><em>Setting up gr-gsm</em></strong></h3>
 
-<h4>Install libosmocore libraries</h4>
+<p>Install libosmocore libraries
+<code>bash
+yaourt -S libosmocore   
+</code></p>
 
-<pre><code class="bash">yaourt -S libosmocore   
-</code></pre>
-
-<h4>Install gr-gsm</h4>
-
-<pre><code class="bash">git clone https://github.com/ptrkrysik/gr-gsm
+<p>Install gr-gsm
+<code>bash
+git clone https://github.com/ptrkrysik/gr-gsm
 cd gr-gsm
 mkdir build
 cd build
@@ -374,22 +348,22 @@ cmake ..
 make
 sudo make install
 sudo ldconfig
-</code></pre>
+</code></p>
 
-<h4>Add the path of the gr-gsm blocks to gnuradio</h4>
-
-<pre><code class="bash">nano ~/.gnuradio/config.conf    
+<p>Add the path of the gr-gsm blocks to gnuradio
+<code>bash
+nano ~/.gnuradio/config.conf    
     [grc]
     local_blocks_path=/usr/local/share/gnuradio/grc/blocks
-</code></pre>
+</code></p>
 
-<h4>Move gr-gsm library and python modules to correct location (depends on your environment).</h4>
-
-<pre><code class="bash">sudo mv /usr/local/lib/python2.7/site-packages/grgsm /usr/lib/python2.7/site-packages/
+<p>Move gr-gsm library and python modules to correct location (depends on your environment).
+<code>bash
+sudo mv /usr/local/lib/python2.7/site-packages/grgsm /usr/lib/python2.7/site-packages/
 sudo mv /usr/local/lib/libgnuradio-grgsm.so /usr/lib/
-</code></pre>
+</code></p>
 
-<h4>Next we will set up kalibrate-hackrf which we will use to find what GSM frequencies to sniff on.</h4>
+<p>Next we will set up kalibrate-hackrf which we will use to find what GSM frequencies to sniff on.</p>
 
 <h3><strong><em>Setting up kalibrate-hackrf</em></strong></h3>
 
@@ -403,53 +377,46 @@ sudo make install
 
 <h3><strong><em>Finding GSM frequencies</em></strong></h3>
 
-<h4>With our prerequisites done, the next step is to find GSM frequencies to listen on. First we consult <a href="http://www.worldtimezone.com/gsm.html" target="_blank"><strong>this site</strong></a> to identify GSM bands used by our local providers.</h4>
+<p>With our prerequisites done, the next step is to find GSM frequencies to listen on. First we consult <a href="http://www.worldtimezone.com/gsm.html" target="_blank"><strong>this site</strong></a> to identify GSM bands used by our local providers.</p>
 
 <p><img src="/images/gsm_bands.png"></p>
 
-<h4>Let&rsquo;s concentrate on the 900MHz band for now.</h4>
-
-<h4>We use kalibrate-hackrf (kal) to find the frequencies as below:</h4>
+<p>Let&rsquo;s concentrate on the 900MHz band for now.
+We use kalibrate-hackrf (kal) to find the frequencies as below:</p>
 
 <pre><code class="bash">kal -s GSM900 -g 40 -l 40
 </code></pre>
 
-<h4><strong>-s</strong> is the band to scan, <strong>-g</strong> is the baseband gain and <strong>-l</strong> the interface gain</h4>
-
-<h4>Let it run for a minute or so and you should get output similar to:</h4>
+<p><strong>-s</strong> is the band to scan, <strong>-g</strong> is the baseband gain and <strong>-l</strong> the interface gain
+Let it run for a minute or so and you should get output similar to:</p>
 
 <p><img src="/images/kal.png"></p>
 
 <h3><strong><em>Sniffing!</em></strong></h3>
 
-<h4>Let us now use gqrx to confirm the frequencies by tuning in to the first one. In this case <strong>936.4MHz</strong></h4>
+<p>Let us now use gqrx to confirm the frequencies by tuning in to the first one. In this case <strong>936.4MHz</strong></p>
 
 <p><img src="/images/gqrx_gsm.png"></p>
 
-<h4>We can see that the activity is centered around <strong>936.8MHz</strong> so we adjust accordingly and use that as the frequency.</h4>
-
-<h4>We now start capturing gsm traffic using gr-gsm :). What we do is launch gnuradio companion and open <strong>the airprobe_rtlsdr.grc</strong> block that is part of gr-gsm and run it.</h4>
+<p>We can see that the activity is centered around <strong>936.8MHz</strong> so we adjust accordingly and use that as the frequency.
+We now start capturing gsm traffic using gr-gsm :). What we do is launch gnuradio companion and open <strong>the airprobe_rtlsdr.grc</strong> block that is part of gr-gsm and run it.</p>
 
 <pre><code class="bash">gnuradio-companion airprobe_rtlsdr.grc
 </code></pre>
 
-<h4>Tune to <strong>936.8MHz</strong> and if all went well we should get data streaming through the console window.</h4>
+<p>Tune to <strong>936.8MHz</strong> and if all went well we should get data streaming through the console window.</p>
 
 <p><img src="/images/gr_gsm_traffic.png"></p>
 
-<h4>We finally launch wireshark and monitor the loopback interface to see the decoded traffic :)</h4>
-
-<h4>Here is a sample showing BTS Location details.</h4>
+<p>We finally launch wireshark and monitor the loopback interface to see the decoded traffic :)
+Here is a sample showing BTS Location details.</p>
 
 <p><img src="/images/gsm_wireshark.png"></p>
 
-<h4>So what next after sniffing the traffic?</h4>
-
-<h4>In subsequent posts I&rsquo;ll explain and show how to interpret the decoded traffic as I explain how GSM communication takes place.</h4>
-
-<h4>From there I&rsquo;ll demonstrate how to decrypt the traffic. That is where it gets really interesting as we start reading SMS&rsquo;s, listening to calls and so on :).</h4>
-
-<h4>Till then, happy hacking.</h4>
+<p>So what next after sniffing the traffic?
+In subsequent posts I&rsquo;ll explain and show how to interpret the decoded traffic as I explain how GSM communication takes place.
+From there I&rsquo;ll demonstrate how to decrypt the traffic. That is where it gets really interesting as we start reading SMS&rsquo;s, listening to calls and so on :).
+Till then, happy hacking.</p>
 ]]></content>
   </entry>
   
@@ -458,24 +425,22 @@ sudo make install
     <link href="http://www.ckn.io/blog/2015/10/11/the-hackrf-one-first-steps/"/>
     <updated>2015-10-11T20:18:10+03:00</updated>
     <id>http://www.ckn.io/blog/2015/10/11/the-hackrf-one-first-steps</id>
-    <content type="html"><![CDATA[<h4>The wireless world is an area I&rsquo;ve been interested in for a long time. From the the more common applications such as Wi-Fi, bluetooth and FM to the lesser explored such as radar, satellite and GSM, radio frequency is an area I plan to explore extensively. How awesome is the concept of <a href="https://en.wikipedia.org/wiki/Electromagnetic_pulse" target="_blank"><strong>electromagnetic pulses</strong></a> in this age that is driven by electromagnetism. I digress so let me get back on track, there will be several more posts to explore the possibilities.</h4>
+    <content type="html"><![CDATA[<p>The wireless world is an area I&rsquo;ve been interested in for a long time. From the the more common applications such as Wi-Fi, bluetooth and FM to the lesser explored such as radar, satellite and GSM, radio frequency is an area I plan to explore extensively. How awesome is the concept of <a href="https://en.wikipedia.org/wiki/Electromagnetic_pulse" target="_blank"><strong>electromagnetic pulses</strong></a> in this age that is driven by electromagnetism. I digress so let me get back on track, there will be several more posts to explore the possibilities.</p>
 
 <!--more-->
 
 
-<h4>I recently acquired the awesome <a href="https://greatscottgadgets.com/hackrf/" target="_blank"><strong>HackRF One</strong></a>, a Software Defined Radio peripheral capable of transmission or reception of radio signals from 1 MHz to 6 GHz. I added the <a href="http://www.nooelec.com/store/ham-it-up.html" target="_blank"><strong>Ham It Up v1.3 - RF Upconverter</strong></a> to boost performance in the lower frequency ranges. A telescopic antenna and various connectors complete the setup.</h4>
+<p>I recently acquired the awesome <a href="https://greatscottgadgets.com/hackrf/" target="_blank"><strong>HackRF One</strong></a>, a Software Defined Radio peripheral capable of transmission or reception of radio signals from 1 MHz to 6 GHz. I added the <a href="http://www.nooelec.com/store/ham-it-up.html" target="_blank"><strong>Ham It Up v1.3 - RF Upconverter</strong></a> to boost performance in the lower frequency ranges. A telescopic antenna and various connectors complete the setup.</p>
 
 <h2>The Hardware</h2>
 
-<h4><strong>The HackRF One, telescopic antenna (ANT 500), some connectors and a Ham It Up v1.3 - RF Upconverter</strong></h4>
-
-<p><img src="/images/hackrf_hardware.JPG"></p>
+<p><strong>The HackRF One, telescopic antenna (ANT 500), some connectors and a Ham It Up v1.3 - RF Upconverter</strong>
+<img src="/images/hackrf_hardware.JPG"></p>
 
 <h2>Software setup</h2>
 
-<h4>I did my setup on archlinux but it should be just as easy on other OS&rsquo;s. Here are the instructions from the <a href="https://github.com/mossmann/hackrf/wiki/Operating-System-Tips" target="_blank"><strong>HackRF Github wiki page</strong></a>.</h4>
-
-<h4>On my system I followed the following steps:</h4>
+<p>I did my setup on archlinux but it should be just as easy on other OS&rsquo;s. Here are the instructions from the <a href="https://github.com/mossmann/hackrf/wiki/Operating-System-Tips" target="_blank"><strong>HackRF Github wiki page</strong></a>.
+On my system I followed the following steps:</p>
 
 <h3><strong><em>Installation of various software</em></strong></h3>
 
@@ -492,32 +457,30 @@ yaourt -S gr-fosphor-git
 
 <h3><strong><em>Testing the HackRF</em></strong></h3>
 
-<h4>Plug in the HackRF and run</h4>
-
-<pre><code class="bash">hackrf_info
-</code></pre>
-
-<h4>You should get output similar to:</h4>
-
-<pre><code class="bash">Found HackRF board 0:
+<p>Plug in the HackRF and run
+<code>bash
+hackrf_info
+</code>
+You should get output similar to:
+<code>bash
+Found HackRF board 0:
 USB descriptor string: 000000000000000014d463dc2f45a7e1
 Board ID Number: 2 (HackRF One)
 Firmware Version: 2015.07.2
 Part ID Number: 0xa000cb3c 0x0069435b
 Serial Number: 0x00000000 0x00000000 0x14d463dc 0x2f45a7e1
-</code></pre>
-
-<h4>If you get an error, recheck your udev rules and ensure the HackRF USB connection is ok.</h4>
+</code>
+If you get an error, recheck your udev rules and ensure the HackRF USB connection is ok.</p>
 
 <h3><strong><em>Updating the SPI Flash Firmware</em></strong></h3>
 
-<h4>Download the latest firmware <a href="https://github.com/mossmann/hackrf/releases/tag/v2015.07.2" target="_blank"><strong>here</strong></a>.</h4>
-
-<pre><code class="bash">wget https://github.com/mossmann/hackrf/releases/download/v2015.07.2/hackrf-2015.07.2.zip
-unzip hackrf-2015.07.2.zip 
+<p>Download the latest firmware <a href="https://github.com/mossmann/hackrf/releases/tag/v2015.07.2" target="_blank"><strong>here</strong></a>.
+<code>bash
+wget https://github.com/mossmann/hackrf/releases/download/v2015.07.2/hackrf-2015.07.2.zip
+unzip hackrf-2015.07.2.zip
 cd hackrf-2015.07.2/firmware-bin/
 hackrf_spiflash -w hackrf_one_usb_rom_to_ram.bin
-</code></pre>
+</code></p>
 
 <h3><strong><em>Updating the CPLD</em></strong></h3>
 
@@ -525,30 +488,23 @@ hackrf_spiflash -w hackrf_one_usb_rom_to_ram.bin
 hackrf_cpldjtag -x firmware/cpld/sgpio_if/default.xsvf
 </code></pre>
 
-<h4>Press the reset button, then run the <strong>hackrf_info</strong> command and confirm the firmware updated successfully.</h4>
-
-<h4>We are then ready to try the &ldquo;Hello World&rdquo; of Software Defined Radio, implementing an FM receiver.</h4>
+<p>Press the reset button, then run the <strong>hackrf_info</strong> command and confirm the firmware updated successfully.
+We are then ready to try the &ldquo;Hello World&rdquo; of Software Defined Radio, implementing an FM receiver.</p>
 
 <h2>An FM Receiver</h2>
 
-<h4>We will use the gnuradio-companion for this.</h4>
+<p>We will use the gnuradio-companion for this.
+Download and save this <a href="https://raw.githubusercontent.com/rrobotics/hackrf-tests/master/fm_radio/fm_radio_rx.grc" target="_blank"><strong>file</strong></a>, then open it using gnuradio from the terminal.
+<code>bash
+gnuradio-companion fm_radio_rx.grc
+</code>
+You can then tune in to your preferred radio frequency and listen in.
+<img src="/images/fm_receiver.png"></p>
 
-<h4>Download and save this <a href="https://raw.githubusercontent.com/rrobotics/hackrf-tests/master/fm_radio/fm_radio_rx.grc" target="_blank"><strong>file</strong></a>, then open it using gnuradio from the terminal.</h4>
-
-<pre><code class="bash">gnuradio-companion fm_radio_rx.grc
-</code></pre>
-
-<h4>You can then tune in to your preferred radio frequency and listen in.</h4>
-
-<p><img src="/images/fm_receiver.png"></p>
-
-<h4>With that out of the way, you can try building the FM receiver yourself using the gnuradio-companion.</h4>
-
-<h4>With the HackRF&rsquo;s transmission capability, an FM transmitter can also be implemented. I won&rsquo;t say I haven&rsquo;t thought of jamming certain frequencies in the vicinity, but that would be illegal, wouldn&rsquo;t it :)?</h4>
-
-<h4>In the next post, I&rsquo;ll show how to sniff gsm traffic.</h4>
-
-<h4>Till then, happy hacking :).</h4>
+<p>With that out of the way, you can try building the FM receiver yourself using the gnuradio-companion.
+With the HackRF&rsquo;s transmission capability, an FM transmitter can also be implemented. I won&rsquo;t say I haven&rsquo;t thought of jamming certain frequencies in the vicinity, but that would be illegal, wouldn&rsquo;t it :)?
+In the next post, I&rsquo;ll show how to sniff gsm traffic.
+Till then, happy hacking :).</p>
 ]]></content>
   </entry>
   

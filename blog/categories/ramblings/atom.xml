@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ramblings | The poetry of (in)security]]></title>
   <link href="http://www.ckn.io/blog/categories/ramblings/atom.xml" rel="self"/>
   <link href="http://www.ckn.io/"/>
-  <updated>2016-06-26T12:00:56+03:00</updated>
+  <updated>2016-06-26T15:09:22+03:00</updated>
   <id>http://www.ckn.io/</id>
   <author>
     <name><![CDATA[ck]]></name>
@@ -18,60 +18,46 @@
     <link href="http://www.ckn.io/blog/2015/10/04/saints-and-outlaws/"/>
     <updated>2015-10-04T09:06:09+03:00</updated>
     <id>http://www.ckn.io/blog/2015/10/04/saints-and-outlaws</id>
-    <content type="html"><![CDATA[<h4>I have been teaching a class on Network Security at mlab and one student asked what the state of cyber-security in the country was. In this post I explain the current state and the outlook over the coming years.</h4>
+    <content type="html"><![CDATA[<p>I have been teaching a class on Network Security at mlab and one student asked what the state of cyber-security in the country was. In this post I explain the current state and the outlook over the coming years.</p>
 
 <!--more-->
 
 
 <h2>Saints</h2>
 
-<h4>Let&rsquo;s get right to it, we are in a state where a majority of businesses are in a sorry state information security wise. On the other side we have hackers with the capacity to bring these businesses to their knees should they choose to.</h4>
+<p>Let&rsquo;s get right to it, we are in a state where a majority of businesses are in a sorry state information security wise. On the other side we have hackers with the capacity to bring these businesses to their knees should they choose to.
+This is where the businesses get lucky. They are surviving potential ruin through the good will of these hackers. We are in a state where we have these &lsquo;saints&rsquo; trying to fix the situation, but as is usually the case, the people who need their help the most instead choose to either ignore or wage wars against them.
+So why would otherwise reasonable people go against the very people who are trying to help them and trample all over their advice? As with everything esle related to the human person, it boils down to pride and self-interest.
+We have the IT managers and other information security personnel desperate to hold on to their jobs. Anyone who attempts to cast doubt on their competence, as they see it, is the enemy. The thought of admitting that they need help in securing their systems to their employers scares them to death (in some cases it&rsquo;s business owners not wanting to look bad to their clients). This myopic view has them preferring to have their systems breached and then papering over the cracks and their bosses/clients will be none the wiser. In effect what we&rsquo;re left with are vilified saints, insulated business owners/clients and IT personnel/business owners protecting their interests.
+Next we have the group that is driven by pride. They are often business owners who just cannot admit something is not right. They are more dangerous and detrimental to their businesses than the previous group. Most of them suffer from the Dunning-Kruger effect which Wikipedia describes as:</p>
 
-<h4>This is where the businesses get lucky. They are surviving potential ruin through the good will of these hackers. We are in a state where we have these &lsquo;saints&rsquo; trying to fix the situation, but as is usually the case, the people who need their help the most instead choose to either ignore or wage wars against them.</h4>
+<blockquote><h4>The Dunning–Kruger effect is a cognitive bias wherein relatively unskilled individuals suffer from illusory superiority, mistakenly assessing their ability to be much higher than is accurate.</h4></blockquote>
 
-<h4>So why would otherwise reasonable people go against the very people who are trying to help them and trample all over their advice? As with everything esle related to the human person, it boils down to pride and self-interest.</h4>
+<p>They will come out guns blazing should they be challenged and there is no convincing them otherwise.</p>
 
-<h4>We have the IT managers and other information security personnel desperate to hold on to their jobs. Anyone who attempts to cast doubt on their competence, as they see it, is the enemy. The thought of admitting that they need help in securing their systems to their employers scares them to death (in some cases it&rsquo;s business owners not wanting to look bad to their clients). This myopic view has them preferring to have their systems breached and then papering over the cracks and their bosses/clients will be none the wiser. In effect what we&rsquo;re left with are vilified saints, insulated business owners/clients and IT personnel/business owners protecting their interests.</h4>
-
-<h4>Next we have the group that is driven by pride. They are often business owners who just cannot admit something is not right. They are more dangerous and detrimental to their businesses than the previous group. Most of them suffer from the Dunning-Kruger effect which Wikipedia describes as:</h4>
-
-<blockquote><h2>The Dunning–Kruger effect is a cognitive bias wherein relatively unskilled individuals suffer from illusory superiority, mistakenly assessing their ability to be much higher than is accurate.</h2></blockquote>
-
-<h4>They will come out guns blazing should they be challenged and there is no convincing them otherwise.</h4>
-
-<h4>Let me demonstrate an actual case I&rsquo;ve dealt with:</h4>
+<p>Let me demonstrate an actual case I&rsquo;ve dealt with:</p>
 
 <blockquote><h4><strong>Me</strong>: Your wireless network uses an extremely weak password. You should change it to a more complex one to make your network more secure.</h4>
 
-<h4><strong>Business owner</strong>: I know we have a weak password and that&rsquo;s how we like it. If someone tries to hack us, I&rsquo;ll use those tools and hack them back.</h4>
+<h4><strong>Business owner</strong>: I know we have a weak password and that&rsquo;s how we like it. If someone tries to hack us, I&rsquo;ll use those tools and hack them back.</h4></blockquote>
 
-<h4><strong>Me</strong>: Have a pleasant day.</h4></blockquote>
-
-<h4>Denying the obvious with whatever they can come up with is a speciality they master. Unfortunately for them, this is usually their undoing when their businesses suffer irreperable damage.</h4>
+<p>Denying the obvious with whatever they can come up with is a speciality they master. Unfortunately for them, this is usually their undoing when their businesses suffer irreperable damage.</p>
 
 <h2>Outlaws</h2>
 
-<h4><del>Winter is coming</del> The landscape is changing, we&rsquo;re headed into an era of highly skilled individuals with time on their hands. We have students entering the IT field in droves. We have been having an influx of young and ambitious technical proficient people spurred on by several tech incubators over the past few years. The number of tech start-ups entering the market grows by the day.</h4>
-
-<h4>A lot of these start-ups will fail, a lot of these skilled people ripe with ambition will lack jobs.</h4>
-
-<h4>The low hanging fruit of inscecure businesses will be ripe for their picking. They will then probably hone their skills and move on to more advanced attacks. I see us entering an era of outlaws and the tipping point is on the horizon.</h4>
-
-<h4>Hell hath no fury like a <del>woman</del> hacker scorned. Businesses have been surviving thus far because they haven&rsquo;t offended the wrong people. One of these days a business will mess with the wrong hacker. We are teetering on the edge of a major local breach, one that cannot be covered up. The saints need backing before an age of outlaws overruns them.</h4>
+<p><del>Winter is coming</del> The landscape is changing, we&rsquo;re headed into an era of highly skilled individuals with time on their hands. We have students entering the IT field in droves. We have been having an influx of young and ambitious technical proficient people spurred on by several tech incubators over the past few years. The number of tech start-ups entering the market grows by the day.
+A lot of these start-ups will fail, a lot of these skilled people ripe with ambition will lack jobs.
+The low hanging fruit of inscecure businesses will be ripe for their picking. They will then probably hone their skills and move on to more advanced attacks. I see us entering an era of outlaws and the tipping point is on the horizon.
+Hell hath no fury like a <del>woman</del> hacker scorned. Businesses have been surviving thus far because they haven&rsquo;t offended the wrong people. One of these days a business will mess with the wrong hacker. We are teetering on the edge of a major local breach, one that cannot be covered up. The saints need backing before an age of outlaws overruns them.</p>
 
 <h2>The fix</h2>
 
-<h4>The same things that make the state of information security so precarious are the same ones that if employed appropriately can salvage it.</h4>
-
-<h4>Hackers too are driven by self interest and pride and that&rsquo;s all businesses need to offer them to keep them on their side. Offering bounty programs to people who discover vulnerabilities is an easy and effective way to accomplish this.</h4>
-
-<h4>Hackers love recognition and appreciation of their skills, offer them this and they&rsquo;ll be your first line of defence. They&rsquo;ll even notify you of imminent threats as they arise.</h4>
-
-<h4>Deride them and they may spend the rest of their days trying to get back at you, just ask <a href="http://gizmodo.com/why-sony-keeps-getting-hacked-1667259233" target="_blank"><strong>Sony</strong></a>.</h4>
-
-<h4>The exponentially growing number of young skilled hackers getting into the field with time to burn will need an outlet. They will have to be jointly supported by both businesses and established professionals in creation of opportunities and in mentorship.</h4>
-
-<h4>With that, the saints will have every chance of winning the war.</h4>
+<p>The same things that make the state of information security so precarious are the same ones that if employed appropriately can salvage it.
+Hackers too are driven by self interest and pride and that&rsquo;s all businesses need to offer them to keep them on their side. Offering bounty programs to people who discover vulnerabilities is an easy and effective way to accomplish this.
+Hackers love recognition and appreciation of their skills, offer them this and they&rsquo;ll be your first line of defence. They&rsquo;ll even notify you of imminent threats as they arise.
+Deride them and they may spend the rest of their days trying to get back at you, just ask <a href="http://gizmodo.com/why-sony-keeps-getting-hacked-1667259233" target="_blank"><strong>Sony</strong></a>.
+The exponentially growing number of young skilled hackers getting into the field with time to burn will need an outlet. They will have to be jointly supported by both businesses and established professionals in creation of opportunities and in mentorship.
+With that, the saints will have every chance of winning the war.</p>
 ]]></content>
   </entry>
   
@@ -93,43 +79,36 @@
 <!--more-->
 
 
-<p>&nbsp;</p>
+<p>&nbsp;<br/>
+Early last year (2014), I started getting into information security. I have always had a passion for figuring out how things work and everything had been building up to my transition into the hacking profession. I was from a non-IT educational background but I had been working in IT for slightly over two years. The job was in a big firm with good pay and I was getting promoted yearly. I however wanted to get into hacking on a full time basis and I decided I&rsquo;d quit after 6 months which would coincide with the end of the financial year. I would also avoid having to do the yearly performance review :-). During the next 6 months, I studied the books I could find on information security, watched hacker conference talks and practiced on virtual environments. As scheduled I tendered in my resignation in June last year, maneuvered through having to go through counter-offer talks as I wasn&rsquo;t leaving for greener pastures, wrote a colourful farewell and became unemployed from the start of July. Thus started my freelance infosec life.</p>
 
-<h4>Early last year (2014), I started getting into information security. I have always had a passion for figuring out how things work and everything had been building up to my transition into the hacking profession. I was from a non-IT educational background but I had been working in IT for slightly over two years. The job was in a big firm with good pay and I was getting promoted yearly. I however wanted to get into hacking on a full time basis and I decided I&rsquo;d quit after 6 months which would coincide with the end of the financial year. I would also avoid having to do the yearly performance review :-). During the next 6 months, I studied the books I could find on information security, watched hacker conference talks and practiced on virtual environments. As scheduled I tendered in my resignation in June last year, maneuvered through having to go through counter-offer talks as I wasn&rsquo;t leaving for greener pastures, wrote a colourful farewell and became unemployed from the start of July. I unburdened myself of all debt by clearing my HELB loan and thus started my freelance infosec life.</h4>
+<p>It&rsquo;s slightly over one year from then and I&rsquo;ve gotten to interact with the information security community in the country.</p>
 
-<h4>It&rsquo;s slightly over one year from then and I&rsquo;ve gotten to interact with the information security community in the country.</h4>
+<p>This is where the rant begins.</p>
 
-<h4>This is where the rant begins.</h4>
+<p>We really have a long way to go. I look back at the last two years and it is very clear that all that I have managed to do is mostly script kiddie nonsense interspersed with a hack here and there. I am not alone, this is the story of almost the entire information security community in the country. We are reduced to reproducing exploits/hacks that are recently discovered or have been out there for a while. The problem is that most of us seem content with it. If this is not arrested we risk falling into mediocrity, a bunch of elite reproducers.
+The issue is that we are not outliving our script kiddie phase. We are getting comfortable being the best of a poor pool. We are stagnating and slowing down to a crawl in our development. Remember when you were getting started? The verve and joy of discovery of a new world? Why are we letting that fire flicker away leaving behind ashes of passion extinguished.
+It saddens me that the next generation is looking up to us wowing and aaahhhing to our reproductions. They are the ones supposed to be in their script kiddie phase but we&rsquo;re lagging behind with them as one merry content family. Let&rsquo;s stop being content with going through the motions waiting for our next pay once we convince our bosses/clients that we are the >content omitted&lt;.
+&nbsp;<br/>
+This is what we need:</p>
 
-<h4>We really have a long way to go. I look back at the last two years and it is very clear that all that I have managed to do is mostly script kiddie nonsense interspersed with a hack here and there. I am not alone, this is the story of almost the entire information security community in the country. We are reduced to reproducing exploits/hacks that are recently discovered or have been out there for a while. The problem is that most of us seem content with it. If this is not arrested we risk falling into mediocrity, a bunch of elite reproducers.</h4>
+<p><strong>Hackers</strong>, as the post suggests. Let&rsquo;s be the ones that discover bugs and exploits. Let&rsquo;s be the ones that influence the opinion of decision makers. Let&rsquo;s have at least ten hackers within a year who can see what others cannot. I would love to have a situation where skilled hackers have to dumb down their conversations for a regular IT person to understand. We have so many unexplored areas just because there aren&rsquo;t exploits out there we can reproduce. Look at all this technology that gets introduced into our market, smart meters, digital TV and so on. We can&rsquo;t be lying around waiting for someone out there to come and explore the possibilities. Let&rsquo;s push the limits and not just ride into the sunset accepting &ldquo;good enough&rdquo; as our defining accomplishments.</p>
 
-<h4>The issue is that we are not outliving our script kiddie phase. We are getting comfortable being the best of a poor pool. We are stagnating and slowing down to a crawl in our development. Remember when you were getting started? The verve and joy of discovery of a new world? Why are we letting that fire flicker away leaving behind ashes of passion extinguished.</h4>
+<p><strong>Script kiddies</strong>. We need lots of them. I am not talking about the kind that seem devoid of imagination and require regular doses of spoon feeding. I am talking about the newbies and enthusiasts who have an understanding of the field. We need a pool that feeds off from the hackers. People that will become masters and outshine the teachers. We need people who  will get bored of just regurgitating stuff. We need them hungry and with a point to prove. Most importantly we need them to keep hackers on their toes and prevent them from settling.</p>
 
-<h4>It saddens me that the next generation is looking up to us wowing and aaahhhing to our reproductions. They are the ones supposed to be in their script kiddie phase but we&rsquo;re lagging behind with them as one merry content family. Let&rsquo;s stop being content with going through the motions waiting for our next pay once we convince our bosses/clients that we are the >content omitted&lt;.</h4>
+<p><strong>Businessmen</strong>. The hacking profession needs financial backing, to go mainstream. We need successful businessmen in the profession. People who&rsquo;ll make bootloads of cash and excel. People who&rsquo;ll garner influence in elite circles. These will be a select few who with their credibility gain the necessary clout to open up the field. We need shrewd businessmen who&rsquo;ll keep touch with the community, eventually leading to opportunities for the high school kid that likes tinkering with systems, five years into the future. We need the Steve Jobs to the Wozniaks.</p>
 
-<p>&nbsp;</p>
+<p><strong>Hacking groups</strong>. For us to fully push the boundary of the impossible we need thriving hacker ecosystems. Hacker groups provide great environments to incubate and provide an outlet both for skilled and budding hackers. Look at groups like L0pht and what came out of the them. Look at SRLabs from Germany. Look at how much has changed since AfricaHackon came onto the scene.</p>
 
-<h4>This is what we need:</h4>
+<p><strong>Rebels and non-conformists</strong>. These can fall in all of the previous groups. We need independent thinkers trying to disrupt the hacker scene. We need them for checks and balances and to arrest complacency and entitlement along the way. We need constructive critics questioning the status quo. I want someone to call this post a whole pile of >content omitted&lt; and write a rebuttal, hehe.</p>
 
-<h4><strong>Hackers</strong>, as the post suggests. Let&rsquo;s be the ones that discover bugs and exploits. Let&rsquo;s be the ones that influence the opinion of decision makers. Let&rsquo;s have at least ten hackers within a year who can see what others cannot. I would love to have a situation where skilled hackers have to dumb down their conversations for a regular IT person to understand. We have so many unexplored areas just because there aren&rsquo;t exploits out there we can reproduce. Look at all this technology that gets introduced into our market, smart meters, digital TV and so on. We can&rsquo;t be lying around waiting for someone out there to come and explore the possibilities. Let&rsquo;s push the limits and not just ride into the sunset accepting &ldquo;good enough&rdquo; as our defining accomplishments.</h4>
+<p>When it&rsquo;s all said and done, it boils down to individual decisions and commitment.
+There are people happy just being good enough in stable employment&hellip;Contribute to the hacking society and rock on.
+There are people a lot more concerned about how high their pay cheque is than the thrill of the hack&hellip;Make that money and rock on.
+There are those that die for the art so that they can give back&hellip;Rock on but don&rsquo;t get lost along the way. This is how Jay-Z put it in &ldquo;Moment of Clarity&rdquo;:
+&nbsp;</p>
 
-<h4><strong>Script kiddies</strong>. We need lots of them. I am not talking about the kind that seem devoid of imagination and require regular doses of spoon feeding. I am talking about the newbies and enthusiasts who have an understanding of the field. We need a pool that feeds off from the hackers. People that will become masters and outshine the teachers. We need people who  will get bored of just regurgitating stuff. We need them hungry and with a point to prove. Most importantly we need them to keep hackers on their toes and prevent them from settling.</h4>
-
-<h4><strong>Businessmen</strong>. The hacking profession needs financial backing, to go mainstream. We need successful businessmen in the profession. People who&rsquo;ll make bootloads of cash and excel. People who&rsquo;ll garner influence in elite circles. These will be a select few who with their credibility gain the necessary clout to open up the field. We need shrewd businessmen who&rsquo;ll keep touch with the community, eventually leading to opportunities for the high school kid that likes tinkering with systems, five years into the future. We need the Steve Jobs to the Wozniaks.</h4>
-
-<h4><strong>Hacking groups</strong>. For us to fully push the boundary of the impossible we need thriving hacker ecosystems. Hacker groups provide great environments to incubate and provide an outlet both for skilled and budding hackers. Look at groups like L0pht and what came out of the them. Look at SRLabs from Germany. Look at how much has changed since AfricaHackon came onto the scene.</h4>
-
-<h4><strong>Rebels and non-conformists</strong>. These can fall in all of the previous groups. We need independent thinkers trying to disrupt the hacker scene. We need them for checks and balances and to arrest complacency and entitlement along the way. We need constructive critics questioning the status quo. I want someone to call this post a whole pile of >content omitted&lt; and write a rebuttal, hehe.</h4>
-
-<h4>When it&rsquo;s all said and done, it boils down to individual decisions and commitment.</h4>
-
-<h4>There are people happy just being good enough in stable employment&hellip;Contribute to the hacking society and rock on.</h4>
-
-<h4>There are people a lot more concerned about how high their pay cheque is than the thrill of the hack&hellip;Make that money and rock on.</h4>
-
-<h4>There are those that die for the art so that they can give back&hellip;Rock on but don&rsquo;t get lost along the way. This is how Jay-Z put it in &ldquo;Moment of Clarity&rdquo; (Ignore my musical taste):</h4>
-
-<blockquote><h4>I dumbed down for my audience to double my dollars</h4>
+<h4>I dumbed down for my audience to double my dollars</h4>
 
 <h4>They criticized me for it, yet they all yell &ldquo;holla&rdquo;</h4>
 
@@ -149,11 +128,12 @@
 
 <h4>So next time you see the homey and his rims spin</h4>
 
-<h4>Just know my mind is working just like them</h4></blockquote>
+<h4>Just know my mind is working just like them</h4>
 
-<h4>And more recently J. Cole in &ldquo;Let Nas down&rdquo;:</h4>
+<p>And more recently J. Cole in &ldquo;Let Nas down&rdquo;:
+&nbsp;</p>
 
-<blockquote><h4>I always believed in the bigger picture</h4>
+<h4>I always believed in the bigger picture</h4>
 
 <h4>If I could get them niggas to listen outside my core then I can open a door</h4>
 
@@ -175,15 +155,12 @@
 
 <h4>I&rsquo;m just a man of the people, not above but equal</h4>
 
-<h4>And for the greater good I walk amongst the evil</h4></blockquote>
+<h4>And for the greater good I walk amongst the evil</h4>
 
-<h4>All is not doom and gloom. I know a few people who aren&rsquo;t comfortable just being good enough. People who in a year or so will probably be doing extra-ordinary things.</h4>
-
-<h4>We have AfricaHackon changing the landscape with bootcamps in institutions where the new crop is being properly introduced into the field.</h4>
-
-<h4>I am also sure we have people out there doing their thing away from the limelight. One case is a guy I met at iHub during the second AfricaHackon conference. A hobbyist hardware hacker who has done some awesome hardware reverse engineering stuff. Unfortunately I didn&rsquo;t get his number so if whoever it is reads this post, get in touch.</h4>
-
-<h4>I end with one of my favourite quotes:</h4>
+<p>All is not doom and gloom. I know a few people who aren&rsquo;t comfortable just being good enough. People who in a year or so will probably be doing extra-ordinary things.
+We have AfricaHackon changing the landscape with bootcamps in institutions where the new crop is being properly introduced into the field.
+I am also sure we have people out there doing their thing away from the limelight. One case is a guy I met at iHub during the second AfricaHackon conference. A hobbyist hardware hacker who has done some awesome hardware reverse engineering stuff. Unfortunately I didn&rsquo;t get his number so if whoever it is reads this post, get in touch.
+I end with one of my favourite quotes:</p>
 
 <blockquote><h2>The difficult we do immediately; the impossible takes a little longer</h2></blockquote>
 
@@ -198,68 +175,53 @@
     <link href="http://www.ckn.io/blog/2015/08/25/learning-to-hack/"/>
     <updated>2015-08-25T14:27:24+03:00</updated>
     <id>http://www.ckn.io/blog/2015/08/25/learning-to-hack</id>
-    <content type="html"><![CDATA[<h4>Becoming a skilled hacker or the politically correct &ldquo;information security specialist&rdquo; doesn&rsquo;t have a straightforward defined path. Here I will try to layout what constitutes a good way to go about it.</h4>
+    <content type="html"><![CDATA[<p>Becoming a skilled hacker or the politically correct &ldquo;information security specialist&rdquo; doesn&rsquo;t have a straightforward defined path. Here I will try to layout what constitutes a good way to go about it.</p>
 
 <!--more-->
 
 
 <h1>Bits and Pieces - Digital Logic</h1>
 
-<h4>Everything starts here. Every computer process is just sequences of simple logic operations.</h4>
-
-<h4>Learn about AND, OR, XOR and so on. Go through the full course material if you&rsquo;re already being taught this in school. If not, don&rsquo;t skim through this, dedicate enough time to it. This is interesting stuff for the hacker mind so it shouldn&rsquo;t be too taxing.</h4>
-
-<h4>Ideally take it deeper to the circuit level implementations. Study NAND gates and so on. If you&rsquo;re so inclined go even further to diodes and transistors. With this you&rsquo;ll be primed for the next area - Assembly Language.</h4>
+<p>Everything starts here. Every computer process is just sequences of simple logic operations.
+Learn about AND, OR, XOR and so on. Go through the full course material if you&rsquo;re already being taught this in school. If not, don&rsquo;t skim through this, dedicate enough time to it. This is interesting stuff for the hacker mind so it shouldn&rsquo;t be too taxing.
+Ideally take it deeper to the circuit level implementations. Study NAND gates and so on. If you&rsquo;re so inclined go even further to diodes and transistors. With this you&rsquo;ll be primed for the next area - Assembly Language.</p>
 
 <h1>POP POP RET - Assembly Language</h1>
 
-<h4>A lot of people will avoid Assembly due to the false impression that it&rsquo;s very complex. It really isn&rsquo;t, infact it&rsquo;s a lot more fun and rewarding. If you took time on your digital logic and you aren&rsquo;t afraid of a bit of math, this will be a lot easier to grasp.</h4>
-
-<h4>You&rsquo;ll get to learn how the processor runs at a low level. You&rsquo;ll get to learn about instructions, registers and programming logic. Once you&rsquo;ve got this figured out, higher level languages will be a breeze. You&rsquo;ll get to understand how your programs interact with different hardware. Best of all you&rsquo;ll spare yourself the agony of trying to figure it out when you try your hand at things like exploit development, reverse engineering and hardware hacking.</h4>
-
-<h4>There are free emulators out there that will help you along the process and make the experience fulfilling. Try lighting some LEDs or programming some hardware. Once you&rsquo;re done with this, you&rsquo;ll be able to hold your own any in almost any information security field you decide to pursue.</h4>
+<p>A lot of people will avoid Assembly due to the false impression that it&rsquo;s very complex. It really isn&rsquo;t, infact it&rsquo;s a lot more fun and rewarding. If you took time on your digital logic and you aren&rsquo;t afraid of a bit of math, this will be a lot easier to grasp.
+You&rsquo;ll get to learn how the processor runs at a low level. You&rsquo;ll get to learn about instructions, registers and programming logic. Once you&rsquo;ve got this figured out, higher level languages will be a breeze. You&rsquo;ll get to understand how your programs interact with different hardware. Best of all you&rsquo;ll spare yourself the agony of trying to figure it out when you try your hand at things like exploit development, reverse engineering and hardware hacking.
+There are free emulators out there that will help you along the process and make the experience fulfilling. Try lighting some LEDs or programming some hardware. Once you&rsquo;re done with this, you&rsquo;ll be able to hold your own any in almost any information security field you decide to pursue.</p>
 
 <h1>PCAP or it never happened - The Network</h1>
 
-<h4>Next you need to learn how devices and services communicate. Start from the basics and build up from there. Study the OSI model, network devices and related services. Learn as much as you can about IPv4, IPv6, subnetting, routing, switching, DNS, DHCP and so on. From there move on to network security and the various attacks and countermeasures. Master the theory behind attacks such as MAC flooding, DNS and DHCP hijacks and so on. Learn about common defenses and network setups, Firewalls, IPS&rsquo;s and IDS&rsquo;s, DMZ&rsquo;s, VLANS, VPNS and so on.</h4>
-
-<h4>A straightforward way would be to go through the Cisco Network Certification material, you can even get yourself certified along the way :)</h4>
+<p>Next you need to learn how devices and services communicate. Start from the basics and build up from there. Study the OSI model, network devices and related services. Learn as much as you can about IPv4, IPv6, subnetting, routing, switching, DNS, DHCP and so on. From there move on to network security and the various attacks and countermeasures. Master the theory behind attacks such as MAC flooding, DNS and DHCP hijacks and so on. Learn about common defenses and network setups, Firewalls, IPS&rsquo;s and IDS&rsquo;s, DMZ&rsquo;s, VLANS, VPNS and so on.
+A straightforward way would be to go through the Cisco Network Certification material, you can even get yourself certified along the way :)</p>
 
 <h1>The Box - *nix</h1>
 
-<h4>You need a system that is powerful and flexible. This is where linux and the other variants of the *nix family come in. If you&rsquo;re just beginning, set up a virtual machine or dual boot your computer. I would suggest you begin with the latest stable version of Ubuntu to get yourself going and make the transition from Windows smooth. Learn how to set it up and how to do various tasks on the system. Learn about various commands and how to automate process using scripts. All this is still at a high level so the learning curve is still manageable. Once you&rsquo;re comfortable, you can transition to using it as your primary OS.</h4>
-
-<h4>Next dive into the guts of the system. Learn about the building blocks of the system and how everything fits in together. One way is to build your linux system from the ground up. Distros like ArchLinux and Gentoo that require you to build from an initial shell interface are an option you can use in the learning proces. The Arch Wiki for one is amazingly comprehensive and structured for both the beginner and the advanced user.</h4>
-
-<h4>Kali Linux then comes in. Once you understand Linux well enough, you can let the good people at Offensive Security do the work for you. Kali Linux is a powerful and well built system that will give you access to tools that you&rsquo;ll use a lot in your information security work.</h4>
+<p>You need a system that is powerful and flexible. This is where linux and the other variants of the *nix family come in. If you&rsquo;re just beginning, set up a virtual machine or dual boot your computer. I would suggest you begin with the latest stable version of Ubuntu to get yourself going and make the transition from Windows smooth. Learn how to set it up and how to do various tasks on the system. Learn about various commands and how to automate process using scripts. All this is still at a high level so the learning curve is still manageable. Once you&rsquo;re comfortable, you can transition to using it as your primary OS.
+Next dive into the guts of the system. Learn about the building blocks of the system and how everything fits in together. One way is to build your linux system from the ground up. Distros like ArchLinux and Gentoo that require you to build from an initial shell interface are an option you can use in the learning proces. The Arch Wiki for one is amazingly comprehensive and structured for both the beginner and the advanced user.
+Kali Linux then comes in. Once you understand Linux well enough, you can let the good people at Offensive Security do the work for you. Kali Linux is a powerful and well built system that will give you access to tools that you&rsquo;ll use a lot in your information security work.</p>
 
 <h1>Explore the world - The organisation</h1>
 
-<h4>The real world is made up of people and the decisions they make. It is therefore highly important that you understand how they operate in various environments.</h4>
-
-<h4>I therefore suggest that you find a way of working in an organisation and experience how information security is approached. Intern as a system admin or whatever position that allows you to interact with systems and people in IT departments. Learn the common practices and errors that are made along the way. Get an internal perspective so that your thought process takes into account what goes into building and setting up systems.</h4>
-
-<h4>You don&rsquo;t want to gain temporary access to a network and start wondering how a domain controller ties in to the network.</h4>
-
-<h4>Being part of an organisation also will give you insight into the behaviour of various people in the organistation. Understanding how everyone from the tech savvy to the management react to various situations will come in handy as you progess.</h4>
+<p>The real world is made up of people and the decisions they make. It is therefore highly important that you understand how they operate in various environments.
+I therefore suggest that you find a way of working in an organisation and experience how information security is approached. Intern as a system admin or whatever position that allows you to interact with systems and people in IT departments. Learn the common practices and errors that are made along the way. Get an internal perspective so that your thought process takes into account what goes into building and setting up systems.
+You don&rsquo;t want to gain temporary access to a network and start wondering how a domain controller ties in to the network.
+Being part of an organisation also will give you insight into the behaviour of various people in the organistation. Understanding how everyone from the tech savvy to the management react to various situations will come in handy as you progess.</p>
 
 <h1>Tying up the pieces</h1>
 
-<h4>There are a lot of areas you can focus your attention on along your information security journey and that is up to you. Experiment, change, adapt, and tweak what you need to.</h4>
+<p>There are a lot of areas you can focus your attention on along your information security journey and that is up to you. Experiment, change, adapt, and tweak what you need to.
+Some things will remain throughout though.
+You will need to be creative to see beyond the black and white.
+You&rsquo;ll need passion to take you through hours of research and reading through RFCs&hellip;hehe.
+You&rsquo;ll need some code to live by or you may get lost along the way.</p>
 
-<h4>Some things will remain throughout though.</h4>
+<p>Being a hacker isn&rsquo;t about writing the most complicated exploit, it is about figuring out elegant solutions to some problem - easy or challenging.
+In the end it&rsquo;s about the thrill of discovery and creation.</p>
 
-<h4>You will need to be creative to see beyond the black and white.</h4>
-
-<h4>You&rsquo;ll need passion to take you through hours of research and reading through RFCs&hellip;hehe.</h4>
-
-<h4>You&rsquo;ll need some code to live by or you may get lost along the way.</h4>
-
-<h4>Being a hacker isn&rsquo;t about writing the most complicated exploit, it is about figuring out elegant solutions to some problem - easy or challenging.</h4>
-
-<h4>In the end it&rsquo;s about the thrill of discovery and creation.</h4>
-
-<h4>I leave you with this book by James Gleick that I believe every information security person should read at least once <a href="http://www.amazon.com/The-Information-History-Theory-Flood/dp/1400096235">http://www.amazon.com/The-Information-History-Theory-Flood/dp/1400096235</a></h4>
+<p>I leave you with this book by James Gleick that I believe every information security person should read at least once <a href="http://www.amazon.com/The-Information-History-Theory-Flood/dp/1400096235">http://www.amazon.com/The-Information-History-Theory-Flood/dp/1400096235</a></p>
 ]]></content>
   </entry>
   
@@ -268,7 +230,7 @@
     <link href="http://www.ckn.io/blog/2015/05/17/africahackon-be-part-of-the-story/"/>
     <updated>2015-05-17T08:42:08+03:00</updated>
     <id>http://www.ckn.io/blog/2015/05/17/africahackon-be-part-of-the-story</id>
-    <content type="html"><![CDATA[<h4>I first heard of AfricaHackon at my previous job where I was working in IT. A colleague and friend told me about a conference about information security that would be held at our building. This was early last year. Being in charge of the network, I would be assisting in setting up internet access for the conference. Now when you&rsquo;re incharge of the network and you hear you&rsquo;ll be giving access to your network to a room full of the best &ldquo;hackers&rdquo; in the country, you get a bit nervous. I use the word &ldquo;hackers&rdquo; in quotes because that&rsquo;s where I&rsquo;d like to start.</h4>
+    <content type="html"><![CDATA[<p>I first heard of AfricaHackon at my previous job where I was working in IT. A colleague and friend told me about a conference about information security that would be held at our building. This was early last year. Being in charge of the network, I would be assisting in setting up internet access for the conference. Now when you&rsquo;re incharge of the network and you hear you&rsquo;ll be giving access to your network to a room full of the best &ldquo;hackers&rdquo; in the country, you get a bit nervous. I use the word &ldquo;hackers&rdquo; in quotes because that&rsquo;s where I&rsquo;d like to start.</p>
 
 <!--more-->
 
@@ -277,63 +239,46 @@
 
 <h1>The hacker mindset</h1>
 
-<h4>The word hacker has long been desecrated. People immediately picture this antisocial person that is out to break into their computers and steal their data and do other equally nefarious acts.</h4>
+<p>The word hacker has long been desecrated. People immediately picture this antisocial person that is out to break into their computers and steal their data and do other equally nefarious acts.
+But they are wrong, hacking is an art form, practised by people who push the boundaries of innovation. It&rsquo;s about having bulbs lighting up in your head as you figure out some new way to make something work. About discovering ways to make things work more efficiently.
+It&rsquo;s about finding ways to use things in a way even their creator never imagined.
+It is about tweaking the firing timing of your spark plugs to make your engine add a bit of power, for car enthusiasts.
+It&rsquo;s about creating a new masterpiece in a way that has never been attempted, for painters.
+It&rsquo;s about building that robot using random materials, for the hardware enthusiasts.
+It&rsquo;s about automating your lights, and electrical gadgets, for the electrical and electronics people.</p>
 
-<h4>But they are wrong, hacking is an art form, practised by people who push the boundaries of innovation. It&rsquo;s about having bulbs lighting up in your head as you figure out some new way to make something work. About discovering ways to make things work more efficiently.</h4>
-
-<h4>It&rsquo;s about finding ways to use things in a way even their creator never imagined.</h4>
-
-<h4>It is about tweaking the firing timing of your spark plugs to make your engine add a bit of power, for car enthusiasts.</h4>
-
-<h4>It&rsquo;s about creating a new masterpiece in a way that has never been attempted, for painters.</h4>
-
-<h4>It&rsquo;s about building that robot using random materials, for the hardware enthusiasts.</h4>
-
-<h4>It&rsquo;s about automating your lights, and electrical gadgets, for the electrical and electronics people.</h4>
-
-<h4>There&rsquo;s a little bit of hacking in everyone of us. As you try to piece together that jigsaw puzzle, fill in that crossword, finish that sudoku. We do it all the time.</h4>
-
-<h4>If one sentence can sum up what a hacker is, it would be this:</h4>
+<p>There&rsquo;s a little bit of hacking in everyone of us. As you try to piece together that jigsaw puzzle, fill in that crossword, finish that sudoku. We do it all the time.
+If one sentence can sum up what a hacker is, it would be this:</p>
 
 <blockquote><h2>A hacker is a person who enjoys the intellectual challenge of creatively circumventing limitations.</h2></blockquote>
 
 <h1>Back to AfricaHackon</h1>
 
-<h4>That day I did end up turning off all the wireless networks that I felt weren&rsquo;t secure enough&hellip;hehe. But I shouldn&rsquo;t have been worried, these were the good type of hackers. They are the ones that help keep you secure. They help you protect yourself from people who would like to steal your private data. They help your company adopt practices that make it hard for the bad guys. They assist you incase you&rsquo;ve undergone an attack.</h4>
-
-<h4>They are some of the brightest minds you&rsquo;ll meet, some help the biggest companies in the country and Africa keep their information secure. Some are still learning. They are drawn from diverse fields and they are on a mission.</h4>
-
-<h4>They want to protect your information, they want to help your bank keep your accounts safe from prying eyes. They want to ensure you can access the internet and make your calls without someone monitoring or listening in.</h4>
-
-<h4>The first phase of this is to build capacity. They are conducting training sessions to train students and spark their interest in the field of information security. They are bringing awareness to companies and the general public on the way to approach security of their systems and data. They plan on building a culture of information security awareness, and to bring up the right skills in the untapped growing generation of brilliant students.</h4>
+<p>That day I did end up turning off all the wireless networks that I felt weren&rsquo;t secure enough&hellip;hehe. But I shouldn&rsquo;t have been worried, these were the good type of hackers. They are the ones that help keep you secure. They help you protect yourself from people who would like to steal your private data. They help your company adopt practices that make it hard for the bad guys. They assist you incase you&rsquo;ve undergone an attack.
+They are some of the brightest minds you&rsquo;ll meet, some help the biggest companies in the country and Africa keep their information secure. Some are still learning. They are drawn from diverse fields and they are on a mission.
+They want to protect your information, they want to help your bank keep your accounts safe from prying eyes. They want to ensure you can access the internet and make your calls without someone monitoring or listening in.
+The first phase of this is to build capacity. They are conducting training sessions to train students and spark their interest in the field of information security. They are bringing awareness to companies and the general public on the way to approach security of their systems and data. They plan on building a culture of information security awareness, and to bring up the right skills in the untapped growing generation of brilliant students.</p>
 
 <h1>The second AfricaHackon conference</h1>
 
-<h4>Another avenue is conferences. This July the 31st, they will be hosting the second AfricaHackon conference. Having attended the last one, take it from me that it&rsquo;s a unique experience that should not be missed.</h4>
+<p>Another avenue is conferences. This July the 31st, they will be hosting the second AfricaHackon conference. Having attended the last one, take it from me that it&rsquo;s a unique experience that should not be missed.
+Come watch as these brilliant minds take you through real life happenings in the world of information security. Watch them show how the bad guys can attack your systems and then how to defend against them.
+This is no ordinary conference. No long boring powerpoints, but interactive demonstrations.
+I am sure there are some of you who have discovered some interesting ways someone can use all this technology around us. How someone can break into a system. It may only be an idea, but that&rsquo;s all it takes. The AfricaHackon team is more than happy to help you explore and develop it.
+The AfricaHackon team wants you to come make a presentation at this conference. You&rsquo;ll get to be mentored by the best minds in the field.
+The silver lining is you&rsquo;ll get to present your ideas to some of the biggest companies in the country who&rsquo;ll be in attendance. You&rsquo;ll get to interact with them first hand and have genuine discussions. In attendance will also be major international and local media houses.
+The ball is in your court.</p>
 
-<h4>Come watch as these brilliant minds take you through real life happenings in the world of information security. Watch them show how the bad guys can attack your systems and then how to defend against them.</h4>
+<h2>Submit your papers and ideas to <a href="&#x6d;&#x61;&#105;&#108;&#116;&#x6f;&#58;&#x69;&#x6e;&#102;&#111;&#x40;&#65;&#102;&#114;&#x69;&#x63;&#x61;&#x48;&#x61;&#99;&#x6b;&#x6f;&#x6e;&#x2e;&#99;&#x6f;&#109;">&#x69;&#x6e;&#102;&#111;&#64;&#65;&#102;&#114;&#105;&#99;&#97;&#x48;&#97;&#99;&#107;&#111;&#110;&#46;&#x63;&#x6f;&#109;</a> before 30th of May.</h2>
 
-<h4>This is no ordinary conference. No long boring powerpoints, but interactive demonstrations.</h4>
-
-<h4>I am sure there are some of you who have discovered some interesting ways someone can use all this technology around us. How someone can break into a system. It may only be an idea, but that&rsquo;s all it takes. The AfricaHackon team is more than happy to help you explore and develop it.</h4>
-
-<h4>The AfricaHackon team wants you to come make a presentation at this conference. You&rsquo;ll get to be mentored by the best minds in the field.</h4>
-
-<h4>The silver lining is you&rsquo;ll get to present your ideas to some of the biggest companies in the country who&rsquo;ll be in attendance. You&rsquo;ll get to interact with them first hand and have genuine discussions. In attendance will also be major international and local media houses.</h4>
-
-<h4>The ball is in your court.</h4>
-
-<h2>Submit your papers and ideas to <a href="&#109;&#x61;&#x69;&#108;&#116;&#111;&#x3a;&#105;&#x6e;&#102;&#x6f;&#64;&#65;&#102;&#x72;&#x69;&#99;&#x61;&#72;&#x61;&#x63;&#107;&#x6f;&#110;&#46;&#99;&#x6f;&#109;">&#105;&#x6e;&#102;&#111;&#x40;&#x41;&#102;&#x72;&#x69;&#99;&#x61;&#72;&#97;&#99;&#107;&#111;&#x6e;&#x2e;&#x63;&#x6f;&#x6d;</a> before 30th of May.</h2>
-
-<blockquote><h4>Read this <a href="http://sylviamunyisia.blogspot.com/2015/05/call-for-papers.html" target="_blank"><strong>page</strong></a> by Sylvia that explains the call for papers very well.</h4>
+<h4>Read this <a href="http://sylviamunyisia.blogspot.com/2015/05/call-for-papers.html" target="_blank"><strong>page</strong></a> by Sylvia that explains the call for papers very well.</h4>
 
 <h4>Also feel free to interact with the team on social media through <a href="https://twitter.com/AfricaHackon" target="_blank"><strong>twitter</strong></a> and <a href="https://www.facebook.com/AfricaHackon" target="_blank"><strong>facebook</strong></a>.</h4>
 
-<h4>And visit the <a href="http://www.AfricaHackon.com/" target="_blank"><strong>AfricaHackon site</strong></a> for past presentations and to keep yourself updated.</h4></blockquote>
+<h4>Visit the <a href="http://www.AfricaHackon.com/" target="_blank"><strong>AfricaHackon site</strong></a> for past presentations and to keep yourself updated.</h4>
 
-<h4>Be part of the story.</h4>
-
-<h4>And remember, everybody needs a hacker :)</h4>
+<p>Be part of the story.
+And remember, everybody needs a hacker :)</p>
 ]]></content>
   </entry>
   

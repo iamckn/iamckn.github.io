@@ -4,7 +4,7 @@
   <title><![CDATA[Category: the setup | The poetry of (in)security]]></title>
   <link href="http://www.ckn.io/blog/categories/the-setup/atom.xml" rel="self"/>
   <link href="http://www.ckn.io/"/>
-  <updated>2016-06-26T12:00:56+03:00</updated>
+  <updated>2016-06-26T15:09:22+03:00</updated>
   <id>http://www.ckn.io/</id>
   <author>
     <name><![CDATA[ck]]></name>
@@ -20,14 +20,14 @@
     <id>http://www.ckn.io/blog/2015/10/17/christian</id>
     <content type="html"><![CDATA[<h1>who are you?</h1>
 
-<h4>I am a passionate Information Security enthusiast. I specialize in Digital Forensics and Incident Response (DFIR). Research and artifacts analysis are the cause of my sleepless nights. I have a keen interest in PC and mobile device malware, I am therefore always tinkering with VMs and mobile phones.</h4>
+<p>I am a passionate Information Security enthusiast. I specialize in Digital Forensics and Incident Response (DFIR). Research and artifacts analysis are the cause of my sleepless nights. I have a keen interest in PC and mobile device malware, I am therefore always tinkering with VMs and mobile phones.</p>
 
 <!--more-->
 
 
 <h1>what&rsquo;s your setup like?</h1>
 
-<h4>As is the norm with geeks, i have a few toys i play around with to facilitate my research.</h4>
+<p>As is the norm with geeks, i have a few toys i play around with to facilitate my research.</p>
 
 <blockquote><h4>HP S2031a 20&#8221; LCD Monitor</h4>
 
@@ -51,23 +51,21 @@
 
 <p><img src="/images/christian_setup.jpg" width="500" height="100"></p>
 
-<h4>The Dell laptop is my daily driver and it runs kali linux. It has an Intel Core i5­5200U processor clocking 2.2.Ghz x 4, 4GB Nvidia GeForce 920M graphics card, 8 GB ram and 1TB of storage.</h4>
+<p>The Dell laptop is my daily driver and it runs kali linux. It has an Intel Core i5­5200U processor clocking 2.2.Ghz x 4, 4GB Nvidia GeForce 920M graphics card, 8 GB ram and 1TB of storage.
+The HP Envy 15 is my research laptop, running Ubuntu desktop, it has an Intel core i7 4700MQ processor clocking 2.4Ghz x 8, 16GB RAM and 1TB of Storage.</p>
 
-<h4>The HP Envy 15 is my research laptop, running Ubuntu desktop, it has an Intel core i7 4700MQ processor clocking 2.4Ghz x 8, 16GB RAM and 1TB of Storage.</h4>
+<p>I use Kali as my primary OS because of the flexibility and the tools it comes with. The Ubuntu OS comes in very handy with research, development and the analysis that i do. I also run a windows VM for my documentation needs.
+My phone runs Kali nethunter with BRO IDS to keep track of traffic in and out of my phone.</p>
 
-<h4>I use Kali as my primary OS because of the flexibility and the tools it comes with. The Ubuntu OS comes in very handy with research, development and the analysis that i do. I also run a windows VM for my documentation needs.</h4>
-
-<h4>My phone runs Kali nethunter with BRO IDS to keep track of traffic in and out of my phone.</h4>
-
-<h4>My interest in other fields have grown over the past few years and I have slowly incorporated Wireless and HID gadgets and resources for my research, hence some of the toys I have. It is always interesting to see how different infosec disciplines integrate and complement each other to achieve a predefined set of objectives.</h4>
+<p>My interest in other fields have grown over the past few years and I have slowly incorporated Wireless and HID gadgets and resources for my research, hence some of the toys I have. It is always interesting to see how different infosec disciplines integrate and complement each other to achieve a predefined set of objectives.</p>
 
 <h1>what tools do you run?</h1>
 
-<h4>The tools i run usually depend on the type of activity i am performing. The bare minimum is Santoku and REMnux for malware analysis, Kali linux for the usual infosec stuff, Security Onion for network traffic analysis, and Windows for forensic analysis and documentation.</h4>
+<p>The tools i run usually depend on the type of activity i am performing. The bare minimum is Santoku and REMnux for malware analysis, Kali linux for the usual infosec stuff, Security Onion for network traffic analysis, and Windows for forensic analysis and documentation.</p>
 
 <h1>What&rsquo;s your dream setup</h1>
 
-<h4>My dream setup would be three 27 inch LED monitors side by side and a powerful enough CPU for decent 50­60 fps gaming and infosec research, a multicoloured  LED backlit keyboard and gaming mouse. As for the infosec toys, a quadcopter drone bundled with a WiFi pineapple, camera module and goggles, would do it for me. I hope Santa is gonna read this blog lol.</h4>
+<p>My dream setup would be three 27 inch LED monitors side by side and a powerful enough CPU for decent 50­60 fps gaming and infosec research, a multicoloured  LED backlit keyboard and gaming mouse. As for the infosec toys, a quadcopter drone bundled with a WiFi pineapple, camera module and goggles, would do it for me. I hope Santa is gonna read this blog lol.</p>
 
 <hr />
 
@@ -82,36 +80,35 @@
     <id>http://www.ckn.io/blog/2015/04/27/bright</id>
     <content type="html"><![CDATA[<h1>who are you?</h1>
 
-<h4>Bright Gameli Mawudor is my name. Friends in the infosec world called me ~ze3D~. A passionate information security engineer with a love for system exploitation, gleaning information from all corners of the web about a target, and social engineering using all possible methods.</h4>
+<p>Bright Gameli Mawudor is my name. Friends in the infosec world call me ~ze3D~. A passionate information security engineer with a love for system exploitation, gleaning information from all corners of the web about a target, and social engineering using all possible methods.</p>
 
 <!--more-->
 
 
 <h1>what&rsquo;s your setup like?</h1>
 
-<h4>My laptop is an 8GB memory Samsung Series 9 13.3&#8221; HD+ cruising on an Intel® Core™ i5-3317U CPU @ 1.70GHz × 4 with Intel® Ivybridge Mobile for graphics and 128 SSD storage. It&rsquo;s pretty thin and lightweight.</h4>
+<p>My laptop is an 8GB memory Samsung Series 9 13.3&#8221; HD+ cruising on an Intel® Core™ i5-3317U CPU @ 1.70GHz × 4 with Intel® Ivybridge Mobile for graphics and 128 SSD storage. It&rsquo;s pretty thin and lightweight.</p>
 
-<h4>External Storage space for me is a total of 2 Terabytes, 10GB Dropbox and 15GB on Google Drive, which is something I find very convenient.</h4>
+<p>External Storage space for me is a total of 2 Terabytes, 10GB Dropbox and 15GB on Google Drive, which is something I find very convenient.</p>
 
-<h4>I am running Kali linux as my primary OS and dual boot Windows 8 on the side when needed. Kali has all the tools I need for my infosec work and experiments. I also import tools from various sources.</h4>
+<p>I am running Kali linux as my primary OS and dual boot Windows 8 on the side when needed. Kali has all the tools I need for my infosec work and experiments. I also import tools from various sources.</p>
 
-<h4>I have a Nexus 5 phone and a Nexus 7 Generation 2 tab. I run <a href="http://www.nethunter.com/" target="_blank"><strong>Kali Nethunter</strong></a> on both, although I recently misplaced the Nexus 7. Kali Nethunter running on Android 5.0 makes it just the kind of phone to have in terms of the all purpose features.</h4>
+<p>I have a Nexus 5 phone and a Nexus 7 Generation 2 tab. I run <a href="http://www.nethunter.com/" target="_blank"><strong>Kali Nethunter</strong></a> on both, although I recently misplaced the Nexus 7. Kali Nethunter running on Android 5.0 makes it just the kind of phone to have in terms of the all purpose features.</p>
 
-<h4>I have a lot of interest in Wireless Networks which is one of the areas in my PhD research. For that matter, I&rsquo;ve got a WiFi Pineapple Mark V Tactical Bundle 6800 with a 9dBi Dipole Antenna and a magnetic Base. The many features included in the WiFi Pineapple are beyond description. It makes wireless pentesting very easy if one understands the basics involved.</h4>
+<p>I have a lot of interest in Wireless Networks which is one of the areas in my PhD research. For that matter, I&rsquo;ve got a WiFi Pineapple Mark V Tactical Bundle 6800 with a 9dBi Dipole Antenna and a magnetic Base. The many features included in the WiFi Pineapple are beyond description. It makes wireless pentesting very easy if one understands the basics involved.</p>
 
-<h4>I have a <a href="http://hakshop.myshopify.com/collections/usb-rubber-ducky/products/usb-rubber-ducky-deluxe?variant=353378649" target="_blank"><strong>USB Rubber Ducky Deluxe</strong></a> that I use for Red Teaming assessments and other pentests when needed. It helps a lot in grabbing passwords when close to a target&rsquo;s machine, and also for any other function that would take long to type manually.</h4>
+<p>I have a <a href="http://hakshop.myshopify.com/collections/usb-rubber-ducky/products/usb-rubber-ducky-deluxe?variant=353378649" target="_blank"><strong>USB Rubber Ducky Deluxe</strong></a> that I use for Red Teaming assessments and other pentests when needed. It helps a lot in grabbing passwords when close to a target&rsquo;s machine, and also for any other function that would take long to type manually.</p>
 
 <p><img src="/images/bright_setup.jpg" width="500" height="100"></p>
 
 <h1>what tools do you run?</h1>
 
-<h4>For now, Kali linux does the job on the Samsung Series 9 with it having most of the tools that I need. I clone a lot of scripts from github to complement the ones already included in the Kali linux collection. The collection keeps growing by the day. The Nexus 5 having Kali NetHunter is good enough due to its dynamic nature as I mostly like porting scripts to it from the Samsung laptop.</h4>
+<p>For now, Kali linux does the job on the Samsung Series 9 with it having most of the tools that I need. I clone a lot of scripts from github to complement the ones already included in the Kali linux collection. The collection keeps growing by the day. The Nexus 5 having Kali NetHunter is good enough due to its dynamic nature as I mostly like porting scripts to it from the Samsung laptop.</p>
 
 <h1>What&rsquo;s your dream setup</h1>
 
-<h4>Anyone in the infosec field will keep dreaming for faster equipment no matter how much they have.</h4>
-
-<h4>It&rsquo;ll be great to have some of the toys from the <a href="http://hakshop.myshopify.com/" target="_blank"><strong>HAK5 shop</strong></a> which include some radio stuff and the THROWING STAR LAN. It would also be great to have a good Rainbow table collection on an external hard drive, a <a href="https://www.pwnieexpress.com/product/pwn-plug-r3penetration-testing-device/" target="_blank"><strong>Pwn-plug</strong></a> for future pentests and a powerful blade server to host all my goodies.</h4>
+<p>Anyone in the infosec field will keep dreaming for faster equipment no matter how much they have.
+It&rsquo;ll be great to have some of the toys from the <a href="http://hakshop.myshopify.com/" target="_blank"><strong>HAK5 shop</strong></a> which include some radio stuff and the THROWING STAR LAN. It would also be great to have a good Rainbow table collection on an external hard drive, a <a href="https://www.pwnieexpress.com/product/pwn-plug-r3penetration-testing-device/" target="_blank"><strong>Pwn-plug</strong></a> for future pentests and a powerful blade server to host all my goodies.</p>
 
 <hr />
 
@@ -126,44 +123,41 @@
     <id>http://www.ckn.io/blog/2015/04/20/jade</id>
     <content type="html"><![CDATA[<h1>who are you?</h1>
 
-<h4>I am Jade Solomon, an Infosec/Code machine, I dedicate a lot of sleepless nights to Reverse Engineering, GSM/Mobile technology and Exploit Development.</h4>
+<p>I am Jade Solomon, an Infosec/Code machine, I dedicate a lot of sleepless nights to Reverse Engineering, GSM/Mobile technology and Exploit Development.</p>
 
 <!--more-->
 
 
 <h1>what&rsquo;s your setup like?</h1>
 
-<h4>Well, my main playground is a MacBook late 2008 edition, running Yosemite 10.10. It has 8GB RAM, a superb Samsung 256GB SSD drive, and Nvidia GeForce Card.</h4>
+<p>Well, my main playground is a MacBook late 2008 edition, running Yosemite 10.10. It has 8GB RAM, a superb Samsung 256GB SSD drive, and Nvidia GeForce Card.</p>
 
-<h4>Next is a CR-48 Chromebook, the first ever chromebook to be released. It has 1GB of RAM, a 16GB SSD, and a dual processor with GSM Modem capability, so no need for other internet sources like Wi-Fi and so on. It&rsquo;s not a power hog so the battery does 7hrs (this works so well for me). It&rsquo;s 11 inches and weighs 780mg making it really portable and super light. It runs my own OS Typhon v2.0 Beta with GSM attack tools, IDA Pro with Hex Ray (all plus 14 custom plugins I have picked up from github and two of my own).</h4>
+<p>Next is a CR-48 Chromebook, the first ever chromebook to be released. It has 1GB of RAM, a 16GB SSD, and a dual processor with GSM Modem capability, so no need for other internet sources like Wi-Fi and so on. It&rsquo;s not a power hog so the battery does 7hrs (this works so well for me). It&rsquo;s 11 inches and weighs 780mg making it really portable and super light. It runs my own OS Typhon v2.0 Beta with GSM attack tools, IDA Pro with Hex Ray (all plus 14 custom plugins I have picked up from github and two of my own).</p>
 
-<h4>My phone is a Phantom Z running Android that I am replacing this week with the BlackBerry Z. The Phantom has 8 cores, 2.0ghz speed and 2GB Ram. It runs on stock ROM which I&rsquo;ve rooted. I am on this (the phantom and stock rom) because it&rsquo;s the only phone I have seen with the capability of detecting SMS payloads in the form of SI/SL with binary(malware) injected into it.</h4>
+<p>My phone is a Phantom Z running Android that I am replacing this week with the BlackBerry Z. The Phantom has 8 cores, 2.0ghz speed and 2GB Ram. It runs on stock ROM which I&rsquo;ve rooted. I am on this (the phantom and stock rom) because it&rsquo;s the only phone I have seen with the capability of detecting SMS payloads in the form of SI/SL with binary(malware) injected into it.</p>
 
-<h4>I own a gaming rig though not yet fully setup. It consists of a 128GB SSD drive, 500GB HDD, 8GB RAM (wanted 16 but&hellip;le sigh) and a 4GB Nvidia Geforce dedicated VRAM. The setup lacks a good motherboard so it&rsquo;s not yet complete.</h4>
+<p>I own a gaming rig though not yet fully setup. It consists of a 128GB SSD drive, 500GB HDD, 8GB RAM (wanted 16 but&hellip;le sigh) and a 4GB Nvidia Geforce dedicated VRAM. The setup lacks a good motherboard so it&rsquo;s not yet complete.</p>
 
-<h4>I also have a kindle (keyboard version). It&rsquo;s battery life is beyond amazing (last around 2/3 months) and has unlimited 3G (coolest thing ever).</h4>
+<p>I also have a kindle (keyboard version). It&rsquo;s battery life is beyond amazing (last around 2/3 months) and has unlimited 3G (coolest thing ever).</p>
 
-<h4>In my arsenal I have two BTS&rsquo;s - or rather SDRs that I have moded to BTS&rsquo;s, a borrowed USRP N200 , calypso devices - Motorola C139s (I have 4 of these, others I&rsquo;ve overloaded and exploded). I also have an RTL-SDR which has a superb range of 2.5MHz to 1900MHz, various antennae and an alpha card that is on the way :).</h4>
+<p>In my arsenal I have two BTS&rsquo;s - or rather SDRs that I have moded to BTS&rsquo;s, a borrowed USRP N200 , calypso devices - Motorola C139s (I have 4 of these, others I&rsquo;ve overloaded and exploded). I also have an RTL-SDR which has a superb range of 2.5MHz to 1900MHz, various antennae and an alpha card that is on the way :).</p>
 
-<h4>And oh, I have AWEI earphones, best friend EVER!</h4>
+<p>And oh, I have AWEI earphones, best friend EVER!</p>
 
 <p><img src="/images/jade_setup.jpg" width="500" height="100"></p>
 
 <h1>what tools do you run?</h1>
 
-<h4>Ha! TYPHON (my baby&hellip; my OS). This has nearly everything custom.</h4>
+<p>Ha! TYPHON (my baby&hellip; my OS). This has nearly everything custom.
+I run a custom version of OpenBTS - which can inject exploits to baseband level, SIM attack kits and Binary SMS vxsploit (a custom exploit dev kit).
+It also has RF tools (such as OsmocomBB), RTL-SDR tools, Kalibrate, nano (a must), Terminator, BackBox tools repo, IDA PRO 6.7 full with Hex Ray Debugger and Decompilers.
+I also have a tool I cannot really disclose, but for fun&rsquo;s sake let me explain what it does. After exploiting the BaseBand/SIM of the victim and injecting a persistent bot on your SIM control via CnC with Mapping, I get STK takeover, Network level takeover and control&hellip; aheem.</p>
 
-<h4>I run a custom version of OpenBTS - which can inject exploits to baseband level, SIM attack kits and Binary SMS vxsploit (a custom exploit dev kit).</h4>
-
-<h4>It also has RF tools (such as OsmocomBB), RTL-SDR tools, Kalibrate, nano (a must), Terminator, BackBox tools repo, IDA PRO 6.7 full with Hex Ray Debugger and Decompilers.</h4>
-
-<h4>I also have a tool I cannot really disclose, but for fun&rsquo;s sake let me explain what it does. After exploiting the BaseBand/SIM of the victim and injecting a persistent bot on your SIM control via CnC with Mapping, I get STK takeover, Network level takeover and control&hellip; aheem.</h4>
-
-<h4>On Yosemite I run IDA Pro, Android Studio Tools (ndk), Photoshop/Illustrator, ITUNES (music), VMWARE Fusion, Eclipse, Netbeans (JavaCard), iTerm , Qemu, MAMP Pro, Sublime for text editing, GCC from MacPorts and so on.</h4>
+<p>On Yosemite I run IDA Pro, Android Studio Tools (ndk), Photoshop/Illustrator, ITUNES (music), VMWARE Fusion, Eclipse, Netbeans (JavaCard), iTerm , Qemu, MAMP Pro, Sublime for text editing, GCC from MacPorts and so on.</p>
 
 <h1>What&rsquo;s your dream setup</h1>
 
-<h4>Hahaha, I guess I can&rsquo;t really pull mine off, why? Possibly because it&rsquo;s out of this world&hellip; but I do want a BladeRF :), maybe an Alienware mx15 or a MacBook Pro 15&#8221; with Retina Display.</h4>
+<p>Hahaha, I guess I can&rsquo;t really pull mine off, why? Possibly because it&rsquo;s out of this world&hellip; but I do want a BladeRF :), maybe an Alienware mx15 or a MacBook Pro 15&#8221; with Retina Display.</p>
 
 <hr />
 
@@ -178,48 +172,48 @@
     <id>http://www.ckn.io/blog/2015/03/14/ck-the-setup</id>
     <content type="html"><![CDATA[<h1>who are you?</h1>
 
-<h4>I am an information security engineer with main interests in cryptography (specifically cryptanalysis) and network security.</h4>
+<p>I am an information security engineer with main interests in network security, hardware and radio frequency.</p>
 
 <!--more-->
 
 
 <h1>what&rsquo;s your setup like?</h1>
 
-<h4>I use an acer c720p Chromebook as my main laptop. I tinkered with it, got rid of the chrome OS and replaced it with archlinux. It&rsquo;s a nifty little machine that is light and portable. It has a 32GB SSD and about 7 hours of battery life which I love. The processor and ram are not as high as I&rsquo;d like but it does the job.</h4>
+<p>I use an acer c720p Chromebook as my main laptop. I tinkered with it, got rid of the chrome OS and replaced it with archlinux. It&rsquo;s a nifty little machine that is light and portable. It has a 32GB SSD and about 7 hours of battery life which I love. The processor and ram are not as high as I&rsquo;d like but it does the job.</p>
 
-<h4>For the heavy lifting I have a Samsung laptop which I dual boot Kali Linux and Windows. It&rsquo;s a core i5 with 6GB ram and Nvidia graphics card, not one of the high end ones though :(. It also has a 750GB hard drive which comes in handy for stuff such as virtual machines and large wordlists.</h4>
+<p>For the heavy lifting I have a Samsung laptop which I dual boot Kali Linux and Windows. It&rsquo;s a core i5 with 6GB ram and Nvidia graphics card, not one of the high end ones though :(. It also has a 750GB hard drive which comes in handy for stuff such as virtual machines and large wordlists.</p>
 
-<h4>I also have a raspberry pi model B. I play around with it and use it for experiments and diverse projects. Right now it has Kali Linux on it.</h4>
+<p>I also have a raspberry pi model B. I play around with it and use it for experiments and diverse projects. Right now it has Kali Linux on it.</p>
 
-<h4>My phone is a Nexus 5 - awesome phone! It serves all my needs and more. I have set up Nethunter on it and it comes in handy in remote testing and exploitation :). I see it remaining as my phone for a long time.</h4>
+<p>My phone is a Nexus 5 - awesome phone! It serves all my needs and more. I have set up Nethunter on it and it comes in handy in remote testing and exploitation :). I see it remaining as my phone for a long time.</p>
 
-<h4>I read a lot and have a Kindle Paperwhite 2. Next to my phone, it&rsquo;s the device I take almost everywhere with me. Its battery lasts forever and the reading experience is amazing whatever the lighting conditions.</h4>
+<p>I read a lot and have a Kindle Paperwhite 2. Next to my phone, it&rsquo;s the device I take almost everywhere with me. Its battery lasts forever and the reading experience is amazing whatever the lighting conditions.</p>
 
-<h4>I also have some interest in photography and own a Nikon P520 camera. It serves my casual needs adequately and the zoom - 42x - is awesome!</h4>
+<p>I also have some interest in photography and own a Nikon P520 camera. It serves my casual needs adequately and the zoom - 42x - is awesome!</p>
 
-<h4>For storage I have two external drives - 2TB and 500GB. This complements the 750GB on the Samsung laptop. I also have lots of online storage, starting with 1TB Google Drive space - which I got free for two years from the Chromebook purchase :).</h4>
+<p>For storage I have two external drives - 2TB and 500GB. This complements the 750GB on the Samsung laptop. I also have lots of online storage, starting with 1TB Google Drive space - which I got free for two years from the Chromebook purchase :).</p>
 
-<h4>The rest of my setup includes miscellaneous devices such as wireless cards, switches and so on.</h4>
+<p>The rest of my setup includes miscellaneous devices such as wireless cards, switches and so on.</p>
 
 <p><img src="/images/ck_setup.jpg" width="500" height="100"></p>
 
 <h1>what tools do you run?</h1>
 
-<h4>On the acer, I only configure the tools that I use regularly. These are a few crypto and network security tools. I tailor them to my needs to keep my archlinux installation minimal and fast. I do most of my scripting on it, mainly python and shell using sublime text (which i highly recommend) as my editor. I add other tools as they become necessary, on archlinux this is mostly seamless. I&rsquo;ve added the blackarch and archassault repos which host a wealth of security tools.</h4>
+<p>On the acer, I only configure the tools that I use regularly. These are a few crypto and network security tools. I tailor them to my needs to keep my archlinux installation minimal and fast. I do most of my scripting on it, mainly python and shell using sublime text (which i highly recommend) as my editor. I add other tools as they become necessary, on archlinux this is mostly seamless. I&rsquo;ve added the blackarch and archassault repos which host a wealth of security tools.</p>
 
-<h4>As the Samsung laptop has a full Kali Installation, I use it when I need to do automated testing and require speed. I also use it when I need to do GPU password cracking. I also run my VMS on it. I have Windows on it too for games, testing and so on.</h4>
+<p>As the Samsung laptop has a full Kali Installation, I use it when I need to do automated testing and require speed. I also use it when I need to do GPU password cracking. I also run my VMS on it. I have Windows on it too for games, testing and so on.</p>
 
-<h4>The Nexus has Nethunter on it, which I use mostly to run network assessment tools.</h4>
+<p>The Nexus has Nethunter on it, which I use mostly to run network assessment tools.</p>
 
 <h1>What&rsquo;s your dream setup</h1>
 
-<h4>Ideally I&rsquo;d like to have one light, fast, and extremely powerful laptop. Something like; 1TB SSD, 16GB ram and at least 8 hours battery life and of course powerful processor and graphics card.</h4>
+<p>Ideally I&rsquo;d like to have one light, fast, and extremely powerful laptop. Something like; 1TB SSD, 16GB ram and at least 8 hours battery life and of course powerful processor and graphics card.</p>
 
-<h4>Next I&rsquo;d love to setup a multi-GPU cluster machine. Something like <a href="http://arstechnica.com/security/2012/12/25-gpu-cluster-cracks-every-standard-windows-password-in-6-hours/" target="_blank"><strong>this 25-GPU cluster monster</strong></a>. Can i dream :)?</h4>
+<p>Next I&rsquo;d love to setup a multi-GPU cluster machine. Something like <a href="http://arstechnica.com/security/2012/12/25-gpu-cluster-cracks-every-standard-windows-password-in-6-hours/" target="_blank"><strong>this 25-GPU cluster monster</strong></a>. Can i dream :)?</p>
 
-<h4>I am very happy with my Nexus 5 so am good there.</h4>
+<p>I am very happy with my Nexus 5 so am good there.</p>
 
-<h4>Finally, I hope and plan to setup a fully equipped lab with lots of automation. It&rsquo;ll have very high speed internet and cutting edge technology. I have an interest in communication protocols and technology and it will have a plethora of relevant testing devices. This includes oftware defined radio devices, antennas, the whole nine yards :). Of course it&rsquo;ll have powerful processing machines&hellip;hey, crypto is resource intensive. The lab will basically be used for research and lots of fun!</h4>
+<p>Finally, I hope and plan to setup a fully equipped lab with lots of automation. It&rsquo;ll have very high speed internet and cutting edge technology. I have an interest in communication protocols and technology and it will have a plethora of relevant testing devices. This includes software defined radio devices, antennas, the whole nine yards :). Of course it&rsquo;ll have powerful processing machines. The lab will basically be used for research and lots of fun!</p>
 ]]></content>
   </entry>
   

@@ -117,18 +117,17 @@
 </header>
   <div class="row-fluid">
     <div class="span12">
-      <h4>In part one I analysed the data communication that takes place on a phone over a one hour period. Read the post <a href="https://www.ckn.io/blog/2015/09/06/the-bro-chronicles-1/" target="_blank"><strong>here</strong></a> for details and background info.</h4>
-
-<h4>Here, I go further and analyse what happens over a twelve hour period of normal phone usage. I ran <a href="https://www.bro.org/" target="_blank"><strong>BRO</strong></a> on my phone from <code>6:40am</code> to <code>6:40pm</code> and ensured that data was on and WIFI off the whole time.</h4>
+      <p>In part one I analysed the data communication that takes place on a phone over a one hour period. Read the post <a href="https://www.ckn.io/blog/2015/09/06/the-bro-chronicles-1/" target="_blank"><strong>here</strong></a> for details and background info.
+Here, I go further and analyse what happens over a twelve hour period of normal phone usage. I ran <a href="https://www.bro.org/" target="_blank"><strong>BRO</strong></a> on my phone from <code>6:40am</code> to <code>6:40pm</code> and ensured that data was on and WIFI off the whole time.</p>
 
 <!--more-->
 
 
-<h4>Let me start with figures of some standout statistics.</h4>
+<p>Let me start with figures of some standout statistics.</p>
 
 <blockquote><h4>The phone communicated with <code>233</code> unique IPs from diverse parts of the globe over that period.</h4></blockquote>
 
-<h4>I broke this down further to specific ports of interest. Note that my IP was <code>105.52.174.7</code> during that period.</h4>
+<p>I broke this down further to specific ports of interest. Note that my IP was <code>105.52.174.7</code> during that period.</p>
 
 <h2>Port 21 : FTP</h2>
 
@@ -145,7 +144,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h4>Why my phone wanted to connect to <code>158.69.128.126</code> on FTP raises some interesting questions.</h4>
+<p>Why my phone wanted to connect to <code>158.69.128.126</code> on FTP raises some interesting questions.</p>
 
 <h2>Port 22 : SSH</h2>
 
@@ -189,7 +188,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h4>That translates to an average of two telnet connection attempts per hour from unique IPs!</h4>
+<p>That translates to an average of two telnet connection attempts per hour from unique IPs!</p>
 
 <h2>Summary of some other ports of interest</h2>
 
@@ -224,17 +223,12 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h4>These results immediately direct our attention to internet wide scanning. This has slowly become a growing phenomenon over the past two years and has been aided by the release of extremely fast scanning tools. We have <a href="https://zmap.io/" target="_blank"><strong>zmap</strong></a> created and maintained by a team from the University of Michigan which can scan the entire IPv4 space in under 5 minutes with a ten gigabit ethernet connection. Masscan, created by Robert Graham of Errata Security is fast enough to do the same in under <a href="http://blog.erratasec.com/2013/09/masscan-entire-internet-in-3-minutes.html" target="_blank"><strong>3 minutes</strong></a>!</h4>
-
-<h4>Internet wide scanning is being used a lot by researchers to investigate vulnerabilities and do various internet wide studies. A case in point is that several internet wide scans were done targeting the heartbleed vulnerability within 48 hours of disclosure. A more recent case is this week&rsquo;s <a href="https://zmap.io/synful/" target="_blank"><strong>synful attack scan</strong></a> done by the zmap team on September 15, 2015.</h4>
-
-<h4><a href="https://www.shodan.io/" target="_blank"><strong>Shodan</strong></a> does regular internet wide scans and hosts the data on their site which is made available to the public in an interactive way.</h4>
-
-<h4>The University of Michigan team (same one that maintains zmap) also does daily scans and hosts the raw data on the <a href="https://www.scans.io/" target="_blank"><strong>scans.io</strong></a> site. They also host scans done by other researchers such as the Rapid7 team which does various scans regularly.</h4>
-
-<h4>The flip side of this is that a lot more people do these scans with malicious intent. They&rsquo;re always on the lookout for vulnerable systems on the internet and their activity spikes every time a major vulnerable is released. They mostly hide behind <a href="https://en.wikipedia.org/wiki/Bulletproof_hosting" target="_blank"><strong>bulletproof hosting providers</strong></a> or run their scans from countries likely to be lenient, with China featuring prominently.</h4>
-
-<h4>Let me now relate the activity on my phone with internet wide scanning.</h4>
+<p>These results immediately direct our attention to internet wide scanning. This has slowly become a growing phenomenon over the past two years and has been aided by the release of extremely fast scanning tools. We have <a href="https://zmap.io/" target="_blank"><strong>zmap</strong></a> created and maintained by a team from the University of Michigan which can scan the entire IPv4 space in under 5 minutes with a ten gigabit ethernet connection. Masscan, created by Robert Graham of Errata Security is fast enough to do the same in under <a href="http://blog.erratasec.com/2013/09/masscan-entire-internet-in-3-minutes.html" target="_blank"><strong>3 minutes</strong></a>!
+Internet wide scanning is being used a lot by researchers to investigate vulnerabilities and do various internet wide studies. A case in point is that several internet wide scans were done targeting the heartbleed vulnerability within 48 hours of disclosure. A more recent case is this week&rsquo;s <a href="https://zmap.io/synful/" target="_blank"><strong>synful attack scan</strong></a> done by the zmap team on September 15, 2015.
+<a href="https://www.shodan.io/" target="_blank"><strong>Shodan</strong></a> does regular internet wide scans and hosts the data on their site which is made available to the public in an interactive way.
+The University of Michigan team (same one that maintains zmap) also does daily scans and hosts the raw data on the <a href="https://www.scans.io/" target="_blank"><strong>scans.io</strong></a> site. They also host scans done by other researchers such as the Rapid7 team which does various scans regularly.
+The flip side of this is that a lot more people do these scans with malicious intent. They&rsquo;re always on the lookout for vulnerable systems on the internet and their activity spikes every time a major vulnerable is released. They mostly hide behind <a href="https://en.wikipedia.org/wiki/Bulletproof_hosting" target="_blank"><strong>bulletproof hosting providers</strong></a> or run their scans from countries likely to be lenient, with China featuring prominently.
+Let me now relate the activity on my phone with internet wide scanning.</p>
 
 <h2>Some known research scans I observed during that 12 hour period</h2>
 
@@ -316,13 +310,10 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h4>It is evident that every day, anything you put on the internet will be poked at unless you are behind some NAT network and/or have some form of firewall filtering traffic.</h4>
-
-<h4>The takeaway is that you really should keep your internet facing systems updated and with as good a security posture as possible. Watch out for newly released vulnerabilities and patch them as fast as possible. Past cases indicate that 48 hours later may already be too late.</h4>
-
-<h4>Implement defences on the edge of your network and monitor your logs regularly and diligently. Try out the awesome BRO IDS (I am not being paid to promote it incase you&rsquo;re wondering).</h4>
-
-<h4>Some of these scanners are extremely aggressive. To demonstrate just how aggressive, I leave you with this Netherlands IP that was scanning port numbers that have the digits 443.</h4>
+<p>It is evident that every day, anything you put on the internet will be poked at unless you are behind some NAT network and/or have some form of firewall filtering traffic.
+The takeaway is that you really should keep your internet facing systems updated and with as good a security posture as possible. Watch out for newly released vulnerabilities and patch them as fast as possible. Past cases indicate that 48 hours later may already be too late.
+Implement defences on the edge of your network and monitor your logs regularly and diligently. Try out the awesome BRO IDS (I am not being paid to promote it incase you&rsquo;re wondering).
+Some of these scanners are extremely aggressive. To demonstrate just how aggressive, I leave you with this Netherlands IP that was scanning port numbers that have the digits 443.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
