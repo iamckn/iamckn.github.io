@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "navigate"
+title: "Navigate"
 date: 2015-08-29 08:50
 comments: true
 sharing: true

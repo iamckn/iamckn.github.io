@@ -5,15 +5,15 @@ date: 2015-09-17 20:54:07 +0300
 comments: true
 categories: ["the network project"]
 ---
-####In part one I analysed the data communication that takes place on a phone over a one hour period. Read the post <a href="https://www.ckn.io/blog/2015/09/06/the-bro-chronicles-1/" target="_blank">**here**</a> for details and background info. 
-####Here, I go further and analyse what happens over a twelve hour period of normal phone usage. I ran <a href="https://www.bro.org/" target="_blank">**BRO**</a> on my phone from `6:40am` to `6:40pm` and ensured that data was on and WIFI off the whole time.
+In part one I analysed the data communication that takes place on a phone over a one hour period. Read the post <a href="https://www.ckn.io/blog/2015/09/06/the-bro-chronicles-1/" target="_blank">**here**</a> for details and background info. 
+Here, I go further and analyse what happens over a twelve hour period of normal phone usage. I ran <a href="https://www.bro.org/" target="_blank">**BRO**</a> on my phone from `6:40am` to `6:40pm` and ensured that data was on and WIFI off the whole time.
 
 <!--more-->
 
-####Let me start with figures of some standout statistics.
+Let me start with figures of some standout statistics.
 >####The phone communicated with `233` unique IPs from diverse parts of the globe over that period.
 
-####I broke this down further to specific ports of interest. Note that my IP was `105.52.174.7` during that period.
+I broke this down further to specific ports of interest. Note that my IP was `105.52.174.7` during that period.
 
 ##Port 21 : FTP
 ```javascript
@@ -23,7 +23,7 @@ categories: ["the network project"]
 	105.52.174.7 		158.69.128.126
 	180.97.106.37		105.52.174.7
 ```
-####Why my phone wanted to connect to `158.69.128.126` on FTP raises some interesting questions.
+Why my phone wanted to connect to `158.69.128.126` on FTP raises some interesting questions.
 
 ##Port 22 : SSH
 ```javascript
@@ -48,7 +48,7 @@ categories: ["the network project"]
 	110.195.77.199 	105.52.174.7 23
 	and 21 others
 ```
-####That translates to an average of two telnet connection attempts per hour from unique IPs!
+That translates to an average of two telnet connection attempts per hour from unique IPs!
 
 ##Summary of some other ports of interest
 ```javascript
@@ -67,12 +67,12 @@ categories: ["the network project"]
 	8080 			4
 	8996 			1
 ```
-####These results immediately direct our attention to internet wide scanning. This has slowly become a growing phenomenon over the past two years and has been aided by the release of extremely fast scanning tools. We have <a href="https://zmap.io/" target="_blank">**zmap**</a> created and maintained by a team from the University of Michigan which can scan the entire IPv4 space in under 5 minutes with a ten gigabit ethernet connection. Masscan, created by Robert Graham of Errata Security is fast enough to do the same in under <a href="http://blog.erratasec.com/2013/09/masscan-entire-internet-in-3-minutes.html" target="_blank">**3 minutes**</a>!
-####Internet wide scanning is being used a lot by researchers to investigate vulnerabilities and do various internet wide studies. A case in point is that several internet wide scans were done targeting the heartbleed vulnerability within 48 hours of disclosure. A more recent case is this week's <a href="https://zmap.io/synful/" target="_blank">**synful attack scan**</a> done by the zmap team on September 15, 2015.
-####<a href="https://www.shodan.io/" target="_blank">**Shodan**</a> does regular internet wide scans and hosts the data on their site which is made available to the public in an interactive way.
-####The University of Michigan team (same one that maintains zmap) also does daily scans and hosts the raw data on the <a href="https://www.scans.io/" target="_blank">**scans.io**</a> site. They also host scans done by other researchers such as the Rapid7 team which does various scans regularly.
-####The flip side of this is that a lot more people do these scans with malicious intent. They're always on the lookout for vulnerable systems on the internet and their activity spikes every time a major vulnerable is released. They mostly hide behind <a href="https://en.wikipedia.org/wiki/Bulletproof_hosting" target="_blank">**bulletproof hosting providers**</a> or run their scans from countries likely to be lenient, with China featuring prominently.
-####Let me now relate the activity on my phone with internet wide scanning.
+These results immediately direct our attention to internet wide scanning. This has slowly become a growing phenomenon over the past two years and has been aided by the release of extremely fast scanning tools. We have <a href="https://zmap.io/" target="_blank">**zmap**</a> created and maintained by a team from the University of Michigan which can scan the entire IPv4 space in under 5 minutes with a ten gigabit ethernet connection. Masscan, created by Robert Graham of Errata Security is fast enough to do the same in under <a href="http://blog.erratasec.com/2013/09/masscan-entire-internet-in-3-minutes.html" target="_blank">**3 minutes**</a>!
+Internet wide scanning is being used a lot by researchers to investigate vulnerabilities and do various internet wide studies. A case in point is that several internet wide scans were done targeting the heartbleed vulnerability within 48 hours of disclosure. A more recent case is this week's <a href="https://zmap.io/synful/" target="_blank">**synful attack scan**</a> done by the zmap team on September 15, 2015.
+<a href="https://www.shodan.io/" target="_blank">**Shodan**</a> does regular internet wide scans and hosts the data on their site which is made available to the public in an interactive way.
+The University of Michigan team (same one that maintains zmap) also does daily scans and hosts the raw data on the <a href="https://www.scans.io/" target="_blank">**scans.io**</a> site. They also host scans done by other researchers such as the Rapid7 team which does various scans regularly.
+The flip side of this is that a lot more people do these scans with malicious intent. They're always on the lookout for vulnerable systems on the internet and their activity spikes every time a major vulnerable is released. They mostly hide behind <a href="https://en.wikipedia.org/wiki/Bulletproof_hosting" target="_blank">**bulletproof hosting providers**</a> or run their scans from countries likely to be lenient, with China featuring prominently.
+Let me now relate the activity on my phone with internet wide scanning.
 
 ##Some known research scans I observed during that 12 hour period
 ```javascript
@@ -115,10 +115,10 @@ categories: ["the network project"]
 	202.12.81.138		India
 	211.247.102.117	South Korea
 ```
-####It is evident that every day, anything you put on the internet will be poked at unless you are behind some NAT network and/or have some form of firewall filtering traffic. 
-####The takeaway is that you really should keep your internet facing systems updated and with as good a security posture as possible. Watch out for newly released vulnerabilities and patch them as fast as possible. Past cases indicate that 48 hours later may already be too late. 
-####Implement defences on the edge of your network and monitor your logs regularly and diligently. Try out the awesome BRO IDS (I am not being paid to promote it incase you're wondering).
-####Some of these scanners are extremely aggressive. To demonstrate just how aggressive, I leave you with this Netherlands IP that was scanning port numbers that have the digits 443.
+It is evident that every day, anything you put on the internet will be poked at unless you are behind some NAT network and/or have some form of firewall filtering traffic. 
+The takeaway is that you really should keep your internet facing systems updated and with as good a security posture as possible. Watch out for newly released vulnerabilities and patch them as fast as possible. Past cases indicate that 48 hours later may already be too late. 
+Implement defences on the edge of your network and monitor your logs regularly and diligently. Try out the awesome BRO IDS (I am not being paid to promote it incase you're wondering).
+Some of these scanners are extremely aggressive. To demonstrate just how aggressive, I leave you with this Netherlands IP that was scanning port numbers that have the digits 443.
 ```javascript
 	Source IP 		Destination IP 	Destination Port
 	80.82.70.238 	105.52.174.7 	1443
