@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://www.ckn.io/blog/2017/11/12/vpns-an-opsec-primer/</loc>
+<lastmod>2017-11-12T12:05:24+03:00</lastmod>
+</url>
+<url>
 <loc>http://www.ckn.io/blog/2017/06/28/the-2017-africahackon-conference-badge/</loc>
 <lastmod>2017-06-28T18:30:35+03:00</lastmod>
 </url>
@@ -111,6 +115,12 @@
 <loc>http://www.ckn.io/blog/categories/hardware/</loc>
 </url>
 <url>
+<loc>http://www.ckn.io/blog/categories/vpn/</loc>
+</url>
+<url>
 <loc>http://www.ckn.io/2/</loc>
+</url>
+<url>
+<loc>http://www.ckn.io/3/</loc>
 </url>
 </urlset>
