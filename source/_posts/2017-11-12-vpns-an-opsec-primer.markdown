@@ -112,4 +112,7 @@ Here are some useful links related to this post.
 
 * My go to network diagram tool https://www.draw.io/
 
+
+A typical VPN connection using Wireguard follows next.
+
 Till next time, happy hacking!
