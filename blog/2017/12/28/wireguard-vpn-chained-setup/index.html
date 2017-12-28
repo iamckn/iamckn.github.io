@@ -128,7 +128,7 @@
 
 <p><img src="/images/chained_vpn.png"></p>
 
-<p>Here&rsquo;s how our set up will look like:</p>
+<p>Here&rsquo;s how our setup will look like:</p>
 
 <ul>
 <li>An ubuntu 16.04 (x64) VPS as our first VPN server which we will refer to as the middleman (VPN Gateway One as shown in the diagram above).</li>
@@ -185,7 +185,7 @@
 </span><span class='line'><span class="c">#Move into the middleman folder</span>
 </span><span class='line'><span class="nb">cd </span>chained-wireguard-ansible/middleman/
 </span><span class='line'>
-</span><span class='line'><span class="c">#Edit the hosts file in that directory to change the IP to your middleman VPS</span>
+</span><span class='line'><span class="c">#Edit the hosts file in that directory to change the IP to that of your middleman VPS</span>
 </span><span class='line'>
 </span><span class='line'><span class="c">#Begin the installation process by running</span>
 </span><span class='line'>ansible-playbook wireguard.yml -u root -k -i hosts
@@ -199,7 +199,7 @@
 
 <h1>2. Install Wireguard on the gate.</h1>
 
-<p>The installation process is similar with the process as below.</p>
+<p>The installation process is as below.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -222,7 +222,7 @@
 </span><span class='line'><span class="c">#Move into the gate folder</span>
 </span><span class='line'><span class="nb">cd </span>chained-wireguard-ansible/gate/
 </span><span class='line'>
-</span><span class='line'><span class="c">#Edit the hosts file in that directory to change the IP to your gate VPS</span>
+</span><span class='line'><span class="c">#Edit the hosts file in that directory to change the IP to that of your gate VPS</span>
 </span><span class='line'>
 </span><span class='line'><span class="c">#Begin the installation process by running</span>
 </span><span class='line'>ansible-playbook wireguard.yml -u root -k -i hosts
@@ -477,6 +477,9 @@
           
             <a class="basic-alignment left" href="/blog/2017/11/14/wireguard-vpn-typical-setup/" title="Previous Post: Wireguard VPN: Typical Setup">&laquo; Wireguard VPN: Typical Setup</a>
           
+          
+            <span><<<<+>>>></span>
+            <a class="basic-alignment right" href="/blog/2017/12/28/wireguard-vpn-portable-raspberry-pi-setup/" title="Next Post: Wireguard VPN: Portable Raspberry Pi Setup">Wireguard VPN: Portable Raspberry Pi Setup &raquo;</a>
           
         </p>
       </div>
