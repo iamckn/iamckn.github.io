@@ -140,6 +140,24 @@
 
 <p>Hopefully you too have been sold so let&rsquo;s get into the set up process.</p>
 
+<h1>Set up details</h1>
+
+<p>We will be setting up the typical VPN connection described in the previous post.</p>
+
+<p><img src="/images/typical_vpn.png"></p>
+
+<p>Here&rsquo;s how our set up will look like:</p>
+
+<ul>
+<li>An ubuntu 16.04 (x64) VPS as our VPN server (Gateway).</li>
+<li>The internet facing interface on the server is eth0.</li>
+<li>An ubuntu 16.04 (x64) computer as the client.</li>
+<li>We will use 10.200.200.1/24 as the VPN server interface IP.</li>
+<li>We will use 10.200.200.2/24 as the VPN client interface IP.</li>
+<li>Unbound DNS resolver for added security.</li>
+</ul>
+
+
 <h1>Set up steps</h1>
 
 <ol>
@@ -152,24 +170,6 @@
 <li>Configure DNS.</li>
 <li>Set up Wireguard on clients.</li>
 </ol>
-
-
-<h1>Set up details</h1>
-
-<p>We will be setting up the typical VPN connection described in the previous post.</p>
-
-<p><img src="/images/typical_vpn.png"></p>
-
-<p>Here&rsquo;s how are set up will look like:</p>
-
-<ul>
-<li>An ubuntu 16.04 (x64) VPS as our VPN server (Gateway).</li>
-<li>The internet facing interface on the server is eth0.</li>
-<li>An ubuntu 16.04 (x64) computer as the client.</li>
-<li>We will use 10.200.200.1/24 as the VPN server interface IP.</li>
-<li>We will use 10.200.200.2/24 as the VPN client interface IP.</li>
-<li>Unbound DNS resolver for added security.</li>
-</ul>
 
 
 <h1>1. Install WireGuard on the VPN server</h1>
@@ -709,6 +709,9 @@ I therefore automated the whole process using <a href="https://www.ansible.com/"
           
             <a class="basic-alignment left" href="/blog/2017/11/12/vpns-an-opsec-primer/" title="Previous Post: VPNs! An OPSEC Primer">&laquo; VPNs! An OPSEC Primer</a>
           
+          
+            <span><<<<+>>>></span>
+            <a class="basic-alignment right" href="/blog/2017/12/28/wireguard-vpn-chained-setup/" title="Next Post: Wireguard VPN: Chained Setup">Wireguard VPN: Chained Setup &raquo;</a>
           
         </p>
       </div>

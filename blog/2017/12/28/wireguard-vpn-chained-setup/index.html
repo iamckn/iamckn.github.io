@@ -1,0 +1,536 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Wireguard VPN: Chained Setup - The poetry of (in)security</title>
+  <meta name="author" content="ck">
+
+   
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.ckn.io/blog/2017/12/28/wireguard-vpn-chained-setup">
+  <link href="/favicon.png" rel="icon">
+  <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="The poetry of (in)security" type="application/atom+xml">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/js/modernizr-2.0.js"></script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <script src="/js/application.js"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-55596013-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+    
+        <li ><a href="/whoami.html">whoami</a></li>
+    
+        <li ><a href="/index.html">home</a></li>
+    
+        <li ><a href="/category.html">category</a></li>
+    
+        <li ><a href="/blog/archives/index.html">archive</a></li>
+    
+</ul>
+
+<ul class="nav pull-right">
+    
+    <li><a href="http://github.com/iamckn" title="Github Profile"><i class="icon-github-sign social-navbar"></i></a></li>
+    
+    
+    
+    
+    <li><a href="http://twitter.com/iamckn" title="Twitter Profile"><i class="icon-twitter-sign social-navbar"></i></a></li>
+    
+    
+    
+    
+
+    
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+      <div class="row-fluid">
+        <div id="content">
+          <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+  <div class="jumbotron">
+    Wireguard VPN: Chained Setup
+      <h5>
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2017-12-28T07:33:38+03:00" pubdate data-updated="true">Dec 28, 2017</time></h5>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
+      <p>Moving on from my previous <a href="https://www.ckn.io/blog/2017/11/14/wireguard-vpn-typical-setup/" target="_blank"><strong>post</strong></a> about setting up a typical Wireguard VPN connection, let&rsquo;s go through how to do a chained setup. I will show how to do both the typical chained Wireguard VPN connection and the one with selective routing as described in my earlier post <a href="https://www.ckn.io/blog/2017/11/12/vpns-an-opsec-primer/" target="_blank"><strong>here</strong></a></p>
+
+<!--more-->
+
+
+<h1>Set up details</h1>
+
+<p>Let us start with the typical Wireguard VPN chained connection.</p>
+
+<p><img src="/images/chained_vpn.png"></p>
+
+<p>Here&rsquo;s how our set up will look like:</p>
+
+<ul>
+<li>An ubuntu 16.04 (x64) VPS as our first VPN server which we will refer to as the middleman (VPN Gateway One as shown in the diagram above).</li>
+<li>An ubuntu 16.04 (x64) VPS as our second VPN server which we will refer to as the gate (VPN Gateway Two as shown in the diagram above).</li>
+<li>An ubuntu 16.04 (x64) computer as the client.</li>
+<li>The internet facing interface on both VPN servers is eth0.</li>
+<li>We will use the 10.200.200.0/24 subnet for the network between the client and the middleman.</li>
+<li>We will use the 10.100.100.0/24 subnet for the network between the middleman and the gate.</li>
+<li>We will use 10.200.200.1/24 as the middleman client facing interface (wg0) IP.</li>
+<li>We will use 10.200.200.2/24 as the VPN client interface (vpn0) IP .</li>
+<li>We will use 10.100.100.1/24 as the gate VPN interface (wg0) IP.</li>
+<li>We will use 10.100.100.2/24 as the middleman gate facing interface (gate0) IP.</li>
+<li>Unbound DNS resolver for added security.</li>
+</ul>
+
+
+<h1>Set up steps</h1>
+
+<ol>
+<li>Install Wireguard on the middleman.</li>
+<li>Install Wireguard on the gate.</li>
+<li>Set up a Wireguard VPN tunnel between the client and the middleman.</li>
+<li>Set up a Wireguard VPN tunnel between the middleman and the gate.</li>
+<li>Configure policy routing on the middleman to route traffic from the client to the gate.</li>
+<li>Update the middleman gate facing interface (gate0) to allow all traffic from the gate to be allowed in the tunnel.</li>
+<li>Confirm everything works as desired by doing a traceroute to the internet from the client.</li>
+</ol>
+
+
+<h1>1. Install Wireguard on the middleman.</h1>
+
+<p>I already went into the specifics of a typical Wirguard VPN setup in my previous post, so I&rsquo;ll not go into the details here.</p>
+
+<p>I have shared ansible scripts on <a href="https://github.com/iamckn/chained-wireguard-ansible" target="_blank"><strong>Github</strong></a> for the automation so I&rsquo;ll just run through the process here.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#Clone the repo on the client</span>
+</span><span class='line'>git clone https://github.com/iamckn/chained-wireguard-ansible
+</span><span class='line'>
+</span><span class='line'><span class="c">#Move into the middleman folder</span>
+</span><span class='line'><span class="nb">cd </span>chained-wireguard-ansible/middleman/
+</span><span class='line'>
+</span><span class='line'><span class="c">#Edit the hosts file in that directory to change the IP to your middleman VPS</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">#Begin the installation process by running</span>
+</span><span class='line'>ansible-playbook wireguard.yml -u root -k -i hosts
+</span><span class='line'>
+</span><span class='line'><span class="c">#If you&#39;re using an SSH key for authentication run this instead</span>
+</span><span class='line'>ansible-playbook wireguard.yml -u root -i hosts
+</span><span class='line'>
+</span><span class='line'><span class="c">#Give it a few minutes and the server set up will be complete.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>2. Install Wireguard on the gate.</h1>
+
+<p>The installation process is similar with the process as below.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#Clone the repo on the client</span>
+</span><span class='line'>git clone https://github.com/iamckn/chained-wireguard-ansible
+</span><span class='line'>
+</span><span class='line'><span class="c">#Move into the gate folder</span>
+</span><span class='line'><span class="nb">cd </span>chained-wireguard-ansible/gate/
+</span><span class='line'>
+</span><span class='line'><span class="c">#Edit the hosts file in that directory to change the IP to your gate VPS</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">#Begin the installation process by running</span>
+</span><span class='line'>ansible-playbook wireguard.yml -u root -k -i hosts
+</span><span class='line'>
+</span><span class='line'><span class="c">#If you&#39;re using an SSH key for authentication run this instead</span>
+</span><span class='line'>ansible-playbook wireguard.yml -u root -i hosts
+</span><span class='line'>
+</span><span class='line'><span class="c">#Give it a few minutes and the server set up will be complete.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>3. Set up a Wireguard VPN tunnel between the client and the middleman.</h1>
+
+<p>We then set up Wireguard on our client.</p>
+
+<p>We begin by installing wireguard on the client depending on what platform we&rsquo;re on.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>add-apt-repository ppa:wireguard/wireguard
+</span><span class='line'>apt-get update
+</span><span class='line'>apt-get install wireguard-dkms wireguard-tools linux-headers-<span class="k">$(</span>uname -r<span class="k">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you are on Kali Linux, you may have to install <strong>resolvconf</strong> if you don&rsquo;t have it already.</p>
+
+<p>Our Wireguard client config was generated during the middleman install process. The file is named <strong>wg0.conf</strong> and is in the home folder of the middleman. Use scp or whatever other method you prefer to copy it to your client.</p>
+
+<p>I&rsquo;ll rename mine to <strong>vpn0.conf</strong> and move it to <strong>/etc/wireguard/vpn0.conf</strong>.</p>
+
+<p>We finally bring up our VPN interface by running the command:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo wg-quick up vpn0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We have our Wireguard VPN tunnel in place.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>vpn0      Link encap:UNSPEC  HWaddr 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00
+</span><span class='line'>          inet addr:10.200.200.2  P-t-P:10.200.200.2  Mask:255.255.255.255
+</span><span class='line'>          UP POINTOPOINT RUNNING NOARP  MTU:1420  Metric:1
+</span><span class='line'>          RX packets:110 errors:0 dropped:0 overruns:0 frame:0
+</span><span class='line'>          TX packets:241 errors:0 dropped:0 overruns:0 carrier:0
+</span><span class='line'>          collisions:0 txqueuelen:1
+</span><span class='line'>          RX bytes:46064 <span class="o">(</span>46.0 KB<span class="o">)</span>  TX bytes:51540 <span class="o">(</span>51.5 KB<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You should now have a secure VPN connection in place. You can confirm this by checking your IP on sites such as <a href="https://whoer.net/.">https://whoer.net/.</a> Your public IP should be that of the middleman.</p>
+
+<h1>4. Set up a Wireguard VPN tunnel between the middleman and the gate.</h1>
+
+<p>As it stands we have set up a standard VPN connection between the client and the middleman. The next step is now to set up a Wireguard VPN tunnel between the middleman and the gate.</p>
+
+<p>In our scenario the gate will act as the server and the middleman as the client in that tunnel.</p>
+
+<p>During the gate install process, a file named <strong>gate0.conf</strong> was generated and you should find it in the home directory of the gate. Copy it to the middleman using scp.</p>
+
+<p>Move the file to <strong>/etc/wireguard/gate0.conf</strong> on the middleman.</p>
+
+<p>Bring up the VPN interface by running the command:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>wg-quick up gate0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We now have our Wireguard VPN tunnel between the middleman and the gate in place.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gate0     Link encap:UNSPEC  HWaddr 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00
+</span><span class='line'>          inet addr:10.100.100.2  P-t-P:10.100.100.2  Mask:255.255.255.255
+</span><span class='line'>          UP POINTOPOINT RUNNING NOARP  MTU:1420  Metric:1
+</span><span class='line'>          RX packets:1 errors:0 dropped:0 overruns:0 frame:0
+</span><span class='line'>          TX packets:2 errors:0 dropped:0 overruns:0 carrier:0
+</span><span class='line'>          collisions:0 txqueuelen:1
+</span><span class='line'>          RX bytes:92 <span class="o">(</span>92.0 B<span class="o">)</span>  TX bytes:180 <span class="o">(</span>180.0 B<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>5. Configure policy routing on the middleman to route traffic from the client to the gate.</h1>
+
+<p>We now have all the tunnels in place but traffic from the client will still go out to the internet through the middleman.</p>
+
+<p>Normally all we need to do is modify our routes on the middleman to route traffic from the client to the gate. Wireguard however, using the <strong>wg-quick</strong> tool employs a variant of Rule-based routing using <a href="https://www.linux.org/docs/man8/tc-fw.html" target="_blank"><strong>fwmark</strong></a>.</p>
+
+<p>We are therefore going to configure policy routing to ensure traffic from the client is passed on to the gate by the middleman.</p>
+
+<p>Do the configuration on the middleman as follows:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">echo</span> <span class="s2">&quot;1 middleman&quot;</span> &gt;&gt; /etc/iproute2/rt_tables
+</span><span class='line'>ip route add 0.0.0.0/0 dev gate0 table middleman
+</span><span class='line'>ip rule add from 10.200.200.0/24 lookup middleman
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>6. Update the middleman gate facing interface (gate0) to allow all traffic from the gate to be allowed in the tunnel.</h1>
+
+<p>Next we need to allow all traffic coming from the gate to be allowed through the tunnel between the middleman and the gate. This is necessary to allow internet traffic that will be passed through the tunnel. Wireguard interfaces are strict in inspecting the origin of traffic that can be allowed to participate in the encrypted tunnel.</p>
+
+<p>On the middleman run the following command:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>wg <span class="nb">set </span>gate0 peer &lt;peer_public_key&gt; allowed-ips 0.0.0.0/0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that the <strong>peer_public_key</strong> in the command above can be gotten by running <em>wg show</em> on the middleman and checking the peer key on the <strong>gate0</strong> interface.</p>
+
+<h1>7. Confirm everything works as desired by doing a traceroute to the internet from the client.</h1>
+
+<p>Before celebration, do various tests to confirm traffic from your client is going out through the gate and not the middleman.</p>
+
+<p>Below is a traceroute to 4.2.2.2 confirming my traffic passess through the middleman and goes out through the gate to the internet.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>traceroute to 4.2.2.2 <span class="o">(</span>4.2.2.2<span class="o">)</span>, <span class="m">30</span> hops max, <span class="m">60</span> byte packets
+</span><span class='line'> <span class="m">1</span>  10.200.200.1 <span class="o">(</span>10.200.200.1<span class="o">)</span>  257.422 ms  258.769 ms  258.783 ms
+</span><span class='line'> <span class="m">2</span>  10.100.100.1 <span class="o">(</span>10.100.100.1<span class="o">)</span>  258.772 ms  258.752 ms  258.878 ms
+</span><span class='line'> 3    104.131.0.253 <span class="o">(</span>104.131.0.253<span class="o">)</span>  258.877 ms 104.131.0.254 <span class="o">(</span>104.131.0.254<span class="o">)</span>  259.595 ms  260.021 ms
+</span><span class='line'> <span class="m">4</span>  138.197.251.20 <span class="o">(</span>138.197.251.20<span class="o">)</span>  260.028 ms 138.197.251.26 <span class="o">(</span>138.197.251.26<span class="o">)</span>  260.029 ms 138.197.248.36 <span class="o">(</span>138.197.248.36<span class="o">)</span>  260.005 ms
+</span><span class='line'> <span class="m">5</span>  138.197.244.20 <span class="o">(</span>138.197.244.20<span class="o">)</span>  260.430 ms 138.197.244.28 <span class="o">(</span>138.197.244.28<span class="o">)</span>  260.841 ms  261.134 ms
+</span><span class='line'> <span class="m">6</span>  * * lag-103.ear4.Newark1.Level3.net <span class="o">(</span>4.14.218.29<span class="o">)</span>  259.196 ms
+</span><span class='line'> <span class="m">7</span>  * * *
+</span><span class='line'> <span class="m">8</span>  b.resolvers.Level3.net <span class="o">(</span>4.2.2.2<span class="o">)</span>  259.679 ms  260.234 ms  260.117 ms
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Notice that <strong>10.200.200.1</strong> is the the middleman client facing interface IP and <strong>10.100.100.1</strong> is the gate VPN interface IP.</p>
+
+<p>Don&rsquo;t forget to confirm your public IP on sites such as <a href="https://whoer.net/">https://whoer.net/</a> and run a DNS leak test on <a href="http://dnsleak.com/.">http://dnsleak.com/.</a></p>
+
+<p>We are done!</p>
+
+<h1>Selective Routing</h1>
+
+<p>What if we want to allow only certain traffic to go out to the internet through the gate and all the rest to go out through the middleman? The scenario is as below:</p>
+
+<p><img src="/images/chained_selective.png"></p>
+
+<p>Let&rsquo;s put an example scenario to test. We want all our internet traffic to go out through the middleman and not be forwarded to the gate. We however desire to have an exception for traffic to 4.2.2.2, which we want to go out through the gate.</p>
+
+<p>The only thing we will need to do is modify the policy routes we set up on the middleman as follows:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#Delete the route that forwarded all traffic to the gate</span>
+</span><span class='line'>ip route del 0.0.0.0/0 dev gate0 table middleman
+</span><span class='line'>
+</span><span class='line'><span class="c">#Add a route to forward 4.2.2.2 to the gate</span>
+</span><span class='line'>ip route add 4.2.2.2/32 dev gate0 table middleman
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Doing traceroute tests should confirm our results.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#Normal internet traffic</span>
+</span><span class='line'>traceroute to 8.8.8.8 <span class="o">(</span>8.8.8.8<span class="o">)</span>, <span class="m">30</span> hops max, <span class="m">60</span> byte packets
+</span><span class='line'> <span class="m">1</span>  10.200.200.1 <span class="o">(</span>10.200.200.1<span class="o">)</span>  256.786 ms  257.063 ms  257.094 ms
+</span><span class='line'> <span class="m">2</span>  104.131.0.253 <span class="o">(</span>104.131.0.253<span class="o">)</span>  257.827 ms 104.131.0.254 <span class="o">(</span>104.131.0.254<span class="o">)</span>  257.830 ms  258.201 ms
+</span><span class='line'> <span class="m">3</span>  138.197.248.52 <span class="o">(</span>138.197.248.52<span class="o">)</span>  258.208 ms  258.196 ms 138.197.248.32 <span class="o">(</span>138.197.248.32<span class="o">)</span>  259.771 ms
+</span><span class='line'> <span class="m">4</span>  138.197.244.34 <span class="o">(</span>138.197.244.34<span class="o">)</span>  259.040 ms  259.439 ms 138.197.244.32 <span class="o">(</span>138.197.244.32<span class="o">)</span>  259.409 ms
+</span><span class='line'> <span class="m">5</span>  72.14.194.62 <span class="o">(</span>72.14.194.62<span class="o">)</span>  259.692 ms  260.107 ms 162.243.191.255 <span class="o">(</span>162.243.191.255<span class="o">)</span>  260.110 ms
+</span><span class='line'> <span class="m">6</span>  * * *
+</span><span class='line'> <span class="m">7</span>  108.170.238.197 <span class="o">(</span>108.170.238.197<span class="o">)</span>  258.633 ms 108.170.238.195 <span class="o">(</span>108.170.238.195<span class="o">)</span>  258.223 ms 108.170.235.179 <span class="o">(</span>108.170.235.179<span class="o">)</span>  258.646 ms
+</span><span class='line'> <span class="m">8</span>  google-public-dns-a.google.com <span class="o">(</span>8.8.8.8<span class="o">)</span>  259.006 ms  259.652 ms  259.583 ms
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that our traffic doesn&rsquo;t get routed through the gate interface (<strong>10.100.100.1</strong>).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#Traffic to 4.2.2.2 </span>
+</span><span class='line'>traceroute to 4.2.2.2 <span class="o">(</span>4.2.2.2<span class="o">)</span>, <span class="m">30</span> hops max, <span class="m">60</span> byte packets
+</span><span class='line'> <span class="m">1</span>  10.200.200.1 <span class="o">(</span>10.200.200.1<span class="o">)</span>  256.622 ms  256.789 ms  256.787 ms
+</span><span class='line'> <span class="m">2</span>  10.100.100.1 <span class="o">(</span>10.100.100.1<span class="o">)</span>  257.783 ms  258.323 ms  258.317 ms
+</span><span class='line'> <span class="m">3</span>  * * *
+</span><span class='line'> <span class="m">4</span>  * * *
+</span><span class='line'> <span class="m">5</span>  * * *
+</span><span class='line'> <span class="m">6</span>  * * *
+</span><span class='line'> <span class="m">7</span>  * * *
+</span><span class='line'> <span class="m">8</span>  b.resolvers.Level3.net <span class="o">(</span>4.2.2.2<span class="o">)</span>  259.457 ms  259.321 ms  259.270 ms
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that traffic to 4.2.2.2 gets routed through the gate interface (<strong>10.100.100.1</strong>).</p>
+
+<p>Modify the policy routes as need be to suit your needs.</p>
+
+<p>I&rsquo;ll wrap up the VPN series in the next post by showing how to set up a portable VPN solution on a Raspberry PI.</p>
+
+<p>Till then, happy hacking!</p>
+
+    </div>
+  </div>
+
+
+  <footer>
+    <hr>
+    <div class="row-fluid">
+      <div class="span12">
+        <p class="meta">
+          
+            <a class="basic-alignment left" href="/blog/2017/11/14/wireguard-vpn-typical-setup/" title="Previous Post: Wireguard VPN: Typical Setup">&laquo; Wireguard VPN: Typical Setup</a>
+          
+          
+        </p>
+      </div>
+    </div>
+  </footer>
+</article>
+
+</div>
+
+
+
+
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
+  <span class="credit">The difficult we do immediately; the impossible takes a little longer</span>
+</p>
+
+
+        </footer>
+      </div>
+  </div>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
