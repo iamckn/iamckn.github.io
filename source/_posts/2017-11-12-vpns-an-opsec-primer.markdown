@@ -32,7 +32,7 @@ This is usually the basic internet connection. The user connects to the network 
 * ISP can see all destination and source IP/port info between client and the internet
 * ISP can block or filter certain types of traffic
 
-As can be seen, the typical internet connection places almost or the control with the ISP.
+As can be seen, the typical internet connection places almost all the control with the ISP.
 
 # Typical VPN connection
 

@@ -25,6 +25,21 @@ Here are just a few of the reasons why Wireguard blows away the competition:
 
 Hopefully you too have been sold so let's get into the set up process.
 
+# Set up details
+
+We will be setting up the typical VPN connection described in the previous post.
+
+{% img /images/typical_vpn.png %}
+
+Here's how our set up will look like:
+
+* An ubuntu 16.04 (x64) VPS as our VPN server (Gateway).
+* The internet facing interface on the server is eth0.
+* An ubuntu 16.04 (x64) computer as the client.
+* We will use 10.200.200.1/24 as the VPN server interface IP.
+* We will use 10.200.200.2/24 as the VPN client interface IP.
+* Unbound DNS resolver for added security.
+
 # Set up steps
 
 1. Install WireGuard on the VPN server.
@@ -35,21 +50,6 @@ Hopefully you too have been sold so let's get into the set up process.
 6. Configure firewall rules on the server.
 7. Configure DNS.
 8. Set up Wireguard on clients.
-
-# Set up details
-
-We will be setting up the typical VPN connection described in the previous post.
-
-{% img /images/typical_vpn.png %}
-
-Here's how are set up will look like:
-
-* An ubuntu 16.04 (x64) VPS as our VPN server (Gateway).
-* The internet facing interface on the server is eth0.
-* An ubuntu 16.04 (x64) computer as the client.
-* We will use 10.200.200.1/24 as the VPN server interface IP.
-* We will use 10.200.200.2/24 as the VPN client interface IP.
-* Unbound DNS resolver for added security.
 
 # 1. Install WireGuard on the VPN server
 
