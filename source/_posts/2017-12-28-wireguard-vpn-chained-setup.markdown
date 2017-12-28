@@ -16,7 +16,7 @@ Let us start with the typical Wireguard VPN chained connection.
 
 {% img /images/chained_vpn.png %}
 
-Here's how our set up will look like:
+Here's how our setup will look like:
 
 * An ubuntu 16.04 (x64) VPS as our first VPN server which we will refer to as the middleman (VPN Gateway One as shown in the diagram above).
 * An ubuntu 16.04 (x64) VPS as our second VPN server which we will refer to as the gate (VPN Gateway Two as shown in the diagram above).
@@ -53,7 +53,7 @@ git clone https://github.com/iamckn/chained-wireguard-ansible
 #Move into the middleman folder
 cd chained-wireguard-ansible/middleman/
 
-#Edit the hosts file in that directory to change the IP to your middleman VPS
+#Edit the hosts file in that directory to change the IP to that of your middleman VPS
 
 #Begin the installation process by running
 ansible-playbook wireguard.yml -u root -k -i hosts
@@ -66,7 +66,7 @@ ansible-playbook wireguard.yml -u root -i hosts
 
 # 2. Install Wireguard on the gate.
 
-The installation process is similar with the process as below. 
+The installation process is as below. 
 
 ```bash
 #Clone the repo on the client
@@ -75,7 +75,7 @@ git clone https://github.com/iamckn/chained-wireguard-ansible
 #Move into the gate folder
 cd chained-wireguard-ansible/gate/
 
-#Edit the hosts file in that directory to change the IP to your gate VPS
+#Edit the hosts file in that directory to change the IP to that of your gate VPS
 
 #Begin the installation process by running
 ansible-playbook wireguard.yml -u root -k -i hosts
