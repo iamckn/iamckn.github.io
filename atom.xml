@@ -4,7 +4,7 @@
   <title><![CDATA[The poetry of (in)security]]></title>
   <link href="http://www.ckn.io/atom.xml" rel="self"/>
   <link href="http://www.ckn.io/"/>
-  <updated>2019-08-27T17:23:22+03:00</updated>
+  <updated>2019-08-27T18:11:11+03:00</updated>
   <id>http://www.ckn.io/</id>
   <author>
     <name><![CDATA[ck]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Exploiting the eques elf smart plug: Part four]]></title>
     <link href="http://www.ckn.io/blog/2019/08/27/exploiting-the-eques-elf-smart-plug-part-four/"/>
-    <updated>2019-08-27T07:10:52+03:00</updated>
+    <updated>2019-08-27T16:10:52+03:00</updated>
     <id>http://www.ckn.io/blog/2019/08/27/exploiting-the-eques-elf-smart-plug-part-four</id>
     <content type="html"><![CDATA[<p>In part three, we finally figured out how to remotely control the smart power plugs (turn them on or off). In this final part, we are going to see how inadequate security controls can be exploited for various purposes. We are also going to look at one more scenario where the smart power plugs have no internet access.</p>
 
@@ -136,9 +136,9 @@ Luckily, if enough of these defence measures are applied together, most attacker
   
   <entry>
     <title type="html"><![CDATA[Exploiting the eques elf smart plug: Part three]]></title>
-    <link href="http://www.ckn.io/blog/2019/08/26/exploiting-the-eques-elf-smart-plug-part-three/"/>
-    <updated>2019-08-26T11:53:09+03:00</updated>
-    <id>http://www.ckn.io/blog/2019/08/26/exploiting-the-eques-elf-smart-plug-part-three</id>
+    <link href="http://www.ckn.io/blog/2019/08/27/exploiting-the-eques-elf-smart-plug-part-three/"/>
+    <updated>2019-08-27T15:53:09+03:00</updated>
+    <id>http://www.ckn.io/blog/2019/08/27/exploiting-the-eques-elf-smart-plug-part-three</id>
     <content type="html"><![CDATA[<p>In part two, we figured out how to discover the smart plugs in a network and their details. We were also able to send remote commands to ikonkek2.com and query details about specific smart plugs. This was made possible by the discovery of a hardcoded aes key used to encrypt messages. We however still cannot turn a smart plug on or off remotely. So let&rsquo;s concentrate on that in this post.</p>
 
 <!--more-->
@@ -162,7 +162,7 @@ Luckily, if enough of these defence measures are applied together, most attacker
 
 <h1>Part two: More secret keys, hooks and a debugger</h1>
 
-<p>Turning the smart plug on or off happens over an xmpp chat (port 5222). The phone uses the username <span style="color:red">&ldquo;phone mac&#8221;<a href="&#x6d;&#x61;&#105;&#x6c;&#x74;&#x6f;&#58;&#101;&#x71;&#117;&#101;&#115;&#64;&#105;&#107;&#x6f;&#x6e;&#x6b;&#x65;&#x6e;&#107;&#50;&#x2e;&#x63;&#111;&#109;">&#101;&#113;&#x75;&#101;&#x73;&#x40;&#105;&#x6b;&#111;&#x6e;&#107;&#101;&#x6e;&#107;&#x32;&#x2e;&#99;&#x6f;&#x6d;</a></span> while the username of the smart plug is <span style="color:red">&#8220;device mac&rdquo;@ikonkek2.com</span>.</p>
+<p>Turning the smart plug on or off happens over an xmpp chat (port 5222). The phone uses the username <span style="color:red">&ldquo;phone mac&#8221;<a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#x3a;&#101;&#113;&#117;&#x65;&#x73;&#64;&#x69;&#x6b;&#x6f;&#x6e;&#x6b;&#x65;&#110;&#x6b;&#x32;&#46;&#x63;&#111;&#109;">&#101;&#113;&#x75;&#x65;&#x73;&#64;&#105;&#x6b;&#111;&#x6e;&#x6b;&#101;&#110;&#x6b;&#50;&#x2e;&#99;&#111;&#109;</a></span> while the username of the smart plug is <span style="color:red">&#8220;device mac&rdquo;@ikonkek2.com</span>.</p>
 
 <p>The messages exchanged look like this:</p>
 
@@ -255,7 +255,7 @@ Luckily, if enough of these defence measures are applied together, most attacker
 
 <p>Logcat message we had seen:</p>
 
-<blockquote><p>E XMPPUtil: sendEncodeMessage:wan_phone%88-c9-d0-da-xx-xxeques%Ki,,-sp6%<span style="color:red">f7HTEgDfZPLCyOqB4b2XZA==</span>%relay to <a href="&#109;&#97;&#105;&#108;&#x74;&#x6f;&#58;&#x64;&#99;&#45;&#52;&#102;&#45;&#50;&#50;&#45;&#x32;&#x35;&#45;&#120;&#x78;&#45;&#x78;&#120;&#x40;&#x69;&#x6b;&#x6f;&#x6e;&#107;&#101;&#107;&#50;&#x2e;&#99;&#x6f;&#109;">&#100;&#x63;&#x2d;&#52;&#x66;&#x2d;&#50;&#x32;&#x2d;&#x32;&#53;&#45;&#x78;&#120;&#45;&#x78;&#x78;&#64;&#x69;&#107;&#x6f;&#110;&#107;&#x65;&#107;&#50;&#x2e;&#x63;&#111;&#109;</a></p></blockquote>
+<blockquote><p>E XMPPUtil: sendEncodeMessage:wan_phone%88-c9-d0-da-xx-xxeques%Ki,,-sp6%<span style="color:red">f7HTEgDfZPLCyOqB4b2XZA==</span>%relay to <a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#x6f;&#58;&#100;&#x63;&#x2d;&#52;&#x66;&#x2d;&#50;&#x32;&#45;&#x32;&#x35;&#45;&#x78;&#120;&#45;&#120;&#120;&#64;&#x69;&#107;&#x6f;&#x6e;&#107;&#x65;&#x6b;&#x32;&#46;&#99;&#111;&#x6d;">&#100;&#99;&#x2d;&#x34;&#102;&#45;&#50;&#50;&#x2d;&#50;&#53;&#x2d;&#120;&#x78;&#x2d;&#120;&#x78;&#x40;&#105;&#107;&#x6f;&#x6e;&#x6b;&#x65;&#107;&#50;&#46;&#99;&#111;&#109;</a></p></blockquote>
 
 <p>What we see from hooking the SendEncodeMessage() function:</p>
 
@@ -504,7 +504,7 @@ address, the md5sum of the result is the final device specific key.</li>
 
 <hr />
 
-<p>With these details, we can use an xmpp client like pidgin to connect to the xmpp server (ikonkek2.com) using the username <span style="color:blue">&ldquo;phone macaddress&#8221;<a href="&#109;&#97;&#x69;&#x6c;&#x74;&#111;&#58;&#x65;&#x71;&#117;&#101;&#x73;&#64;&#105;&#107;&#111;&#x6e;&#x6b;&#101;&#107;&#50;&#x2e;&#99;&#111;&#109;">&#x65;&#113;&#x75;&#101;&#115;&#64;&#105;&#107;&#x6f;&#x6e;&#x6b;&#101;&#107;&#x32;&#x2e;&#99;&#x6f;&#x6d;</a></span>.</p>
+<p>With these details, we can use an xmpp client like pidgin to connect to the xmpp server (ikonkek2.com) using the username <span style="color:blue">&ldquo;phone macaddress&#8221;<a href="&#109;&#97;&#105;&#x6c;&#x74;&#111;&#x3a;&#x65;&#x71;&#x75;&#x65;&#x73;&#64;&#105;&#107;&#x6f;&#110;&#x6b;&#101;&#x6b;&#x32;&#x2e;&#99;&#111;&#109;">&#x65;&#x71;&#117;&#x65;&#x73;&#x40;&#x69;&#107;&#x6f;&#110;&#x6b;&#101;&#107;&#x32;&#x2e;&#x63;&#111;&#109;</a></span>.</p>
 
 <p>Next we generate the smart plug specific encryption key.</p>
 
@@ -512,7 +512,7 @@ address, the md5sum of the result is the final device specific key.</li>
 
 <p>Finally we encrypt the full message using the common encryption key.</p>
 
-<p>We will add the prefix <strong>encryption:</strong> to our encrypted message and send it to the device’s username <span style="color:blue">&ldquo;device <a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#111;&#x3a;&#x6d;&#97;&#x63;&#97;&#100;&#x64;&#x72;&#101;&#x73;&#x73;&#64;&#x69;&#107;&#x6f;&#110;&#x6b;&#101;&#107;&#x32;&#x2e;&#99;&#x6f;&#x6d;">&#x6d;&#97;&#99;&#97;&#x64;&#x64;&#114;&#101;&#x73;&#x73;&#x40;&#x69;&#x6b;&#x6f;&#110;&#107;&#101;&#x6b;&#50;&#x2e;&#x63;&#x6f;&#x6d;</a>&rdquo;</span> over xmpp.</p>
+<p>We will add the prefix <strong>encryption:</strong> to our encrypted message and send it to the device’s username <span style="color:blue">&ldquo;device <a href="&#x6d;&#97;&#105;&#108;&#x74;&#x6f;&#58;&#109;&#97;&#x63;&#97;&#100;&#x64;&#x72;&#x65;&#x73;&#x73;&#x40;&#105;&#107;&#x6f;&#110;&#x6b;&#101;&#107;&#x32;&#x2e;&#x63;&#111;&#109;">&#x6d;&#x61;&#99;&#x61;&#x64;&#x64;&#114;&#x65;&#x73;&#115;&#64;&#105;&#107;&#x6f;&#x6e;&#107;&#101;&#107;&#x32;&#x2e;&#x63;&#111;&#x6d;</a>&rdquo;</span> over xmpp.</p>
 
 <p>Note: The xmpp’s user passwords are just the same as the usernames.</p>
 
@@ -538,9 +538,9 @@ address, the md5sum of the result is the final device specific key.</li>
   
   <entry>
     <title type="html"><![CDATA[Exploiting the eques elf smart plug: Part two]]></title>
-    <link href="http://www.ckn.io/blog/2019/08/25/exploiting-the-eques-elf-smart-plug-part-two/"/>
-    <updated>2019-08-25T14:23:39+03:00</updated>
-    <id>http://www.ckn.io/blog/2019/08/25/exploiting-the-eques-elf-smart-plug-part-two</id>
+    <link href="http://www.ckn.io/blog/2019/08/27/exploiting-the-eques-elf-smart-plug-part-two/"/>
+    <updated>2019-08-27T14:23:39+03:00</updated>
+    <id>http://www.ckn.io/blog/2019/08/27/exploiting-the-eques-elf-smart-plug-part-two</id>
     <content type="html"><![CDATA[<p>In part one, we concentrated on analysing the network communication when one turns the smart power plug on or off from the app.
 We had noticed some form of encrypted/encoded communication happening on udp port 27431 between the smart plug and the app installed on the phone. We also noticed some form of encrypted/encoded communication on tcp ports 9123 and 5222(xmpp) between the app, smart plug and ikonkek2.com.</p>
 
@@ -788,9 +788,9 @@ Locale.ENGLISH).format(new Date(System.currentTimeMillis())) + &rdquo;%heart</sp
   
   <entry>
     <title type="html"><![CDATA[Exploiting the eques elf smart plug: Part one]]></title>
-    <link href="http://www.ckn.io/blog/2019/08/24/exploiting-the-eques-elf-smart-plug-part-one/"/>
-    <updated>2019-08-24T11:57:50+03:00</updated>
-    <id>http://www.ckn.io/blog/2019/08/24/exploiting-the-eques-elf-smart-plug-part-one</id>
+    <link href="http://www.ckn.io/blog/2019/08/27/exploiting-the-eques-elf-smart-plug-part-one/"/>
+    <updated>2019-08-27T11:57:50+03:00</updated>
+    <id>http://www.ckn.io/blog/2019/08/27/exploiting-the-eques-elf-smart-plug-part-one</id>
     <content type="html"><![CDATA[<p>I bought some smart power plugs and they were pretty awesome! These are the <a href="https://equeshome.com/products/elf-smart-plug" target="_blank"><strong>Eques Elf smart plugs.</strong></a> They can be controlled using an app through a connected Wi-Fi network, and remotely over the internet.</p>
 
 <p>Everything was going on well till I noticed some strange urls on my home network monitoring system. It turns out it was the smart plug constantly communicating with some external hosts.</p>
@@ -899,7 +899,7 @@ Locale.ENGLISH).format(new Date(System.currentTimeMillis())) + &rdquo;%heart</sp
 
 <p>When we turn the plug on or off from the app, an XMPP connection is initiated. The app first authenticates to the server using DIGEST-MD5 mechanism.</p>
 
-<p>The app then initiates and xmpp chat to <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#x6f;&#x3a;&#100;&#99;&#x2d;&#x34;&#102;&#45;&#50;&#50;&#x2d;&#50;&#x35;&#45;&#120;&#x78;&#x2d;&#120;&#x78;&#x40;&#x69;&#107;&#111;&#110;&#107;&#x65;&#x6b;&#x32;&#46;&#99;&#x6f;&#109;">&#x64;&#x63;&#45;&#52;&#102;&#45;&#50;&#50;&#45;&#50;&#x35;&#x2d;&#120;&#x78;&#x2d;&#x78;&#x78;&#64;&#105;&#x6b;&#111;&#110;&#x6b;&#101;&#x6b;&#50;&#x2e;&#x63;&#111;&#x6d;</a> using the username <span style="color:blue">d4-63-c6-8d-xx-xxeques@ikonkek2.com/android</span>. Note that <span style="color:blue">dc-4f-22-25-xx-xx</span> is the mac address of the smart plug while <span style="color:blue">d4-63-c6-8d-xx-xx</span> is the mac address of the phone running the app.</p>
+<p>The app then initiates and xmpp chat to <a href="&#109;&#97;&#x69;&#x6c;&#116;&#111;&#58;&#100;&#x63;&#x2d;&#x34;&#102;&#45;&#x32;&#x32;&#x2d;&#x32;&#x35;&#x2d;&#120;&#x78;&#45;&#x78;&#120;&#x40;&#x69;&#x6b;&#111;&#110;&#107;&#101;&#x6b;&#50;&#x2e;&#99;&#111;&#x6d;">&#100;&#99;&#x2d;&#x34;&#x66;&#x2d;&#x32;&#50;&#45;&#50;&#x35;&#45;&#120;&#x78;&#x2d;&#120;&#120;&#x40;&#x69;&#x6b;&#111;&#x6e;&#107;&#101;&#107;&#x32;&#46;&#x63;&#x6f;&#109;</a> using the username <span style="color:blue">d4-63-c6-8d-xx-xxeques@ikonkek2.com/android</span>. Note that <span style="color:blue">dc-4f-22-25-xx-xx</span> is the mac address of the smart plug while <span style="color:blue">d4-63-c6-8d-xx-xx</span> is the mac address of the phone running the app.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
