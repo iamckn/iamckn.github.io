@@ -4,7 +4,7 @@
   <title><![CDATA[The poetry of (in)security]]></title>
   <link href="http://www.ckn.io/atom.xml" rel="self"/>
   <link href="http://www.ckn.io/"/>
-  <updated>2017-12-28T20:28:49+03:00</updated>
+  <updated>2019-08-27T17:23:22+03:00</updated>
   <id>http://www.ckn.io/</id>
   <author>
     <name><![CDATA[ck]]></name>
@@ -12,6 +12,978 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Exploiting the eques elf smart plug: Part four]]></title>
+    <link href="http://www.ckn.io/blog/2019/08/27/exploiting-the-eques-elf-smart-plug-part-four/"/>
+    <updated>2019-08-27T07:10:52+03:00</updated>
+    <id>http://www.ckn.io/blog/2019/08/27/exploiting-the-eques-elf-smart-plug-part-four</id>
+    <content type="html"><![CDATA[<p>In part three, we finally figured out how to remotely control the smart power plugs (turn them on or off). In this final part, we are going to see how inadequate security controls can be exploited for various purposes. We are also going to look at one more scenario where the smart power plugs have no internet access.</p>
+
+<!--more-->
+
+
+<h1>Part four: Predictability, scanners and a hacker</h1>
+
+<p>As we have seen in most of the scenarios, all we need is the mac address of a smart power plug to be able to interact with it. So how do we figure out the mac address of a smart power plug if we&rsquo;re not on the same network?</p>
+
+<p>The thing is, mac addresses aren&rsquo;t really random.</p>
+
+<p><img src="http://www.ckn.io/images/mac_addresses.jpg"></p>
+
+<p>The first 6 hex bytes are allocated to an organization. The organization then determines the full mac address to allocate to their devices by using the last 6 hex bytes.</p>
+
+<p>Let us look at the mac addresses of two of my smart power plugs:</p>
+
+<p><span style="color:red">dc-4f-22-25-</span>0x-xx</p>
+
+<p><span style="color:red">dc-4f-22-25-</span>1x-xx</p>
+
+<p>We can use the first 6 hex bytes to identify the manufacturer:</p>
+
+<p><img src="http://www.ckn.io/images/espressif.png"></p>
+
+<p>We can see the manufacturer is Espressif, a company that develops bluetooth and Wi-Fi chips for IOT applications.</p>
+
+<p>In our case, we also see that we have an additional two hex bytes that are similar.</p>
+
+<p>We can therefore assume that a lot of the devices have the first eight hex bytes common.
+It is therefore straight forward to create a list that starts with those eight hex bytes (<span style="color:red">dc-4f-22-25-</span>). This will result in a list of 65536 mac addresses.</p>
+
+<p>Next step is to query the ikonkek2.com server for details about each of the mac addresses. We of course know if a mac address is valid, it’ll respond with its details.</p>
+
+<p>We just need to tweak our code to create our scanner then leave it running.</p>
+
+<p>So what did I find?</p>
+
+<p>After querying that range of mac addresses, I got 4149 responses with details about devices. Some of them look like bulbs from the names:</p>
+
+<p><img src="http://www.ckn.io/images/found.png"></p>
+
+<p>Remember that with just the mac address, we can also query for the email address of the device owner. And the results prove it:</p>
+
+<p><img src="http://www.ckn.io/images/emails.png"></p>
+
+<p>We can continue querying for additional details, including whether a device is on, how many devices are linked to an email and so on.</p>
+
+<hr />
+
+<p>So what Eques says about protecting this information:</p>
+
+<p><img src="http://www.ckn.io/images/privacy.png"></p>
+
+<p>We can see that there is a gap with their security measures. I therefore used the contact information on their website to ask about their disclosure process:</p>
+
+<p><img src="http://www.ckn.io/images/eques_disclosure.png"></p>
+
+<p>As of the writing of this post, a month has passed.</p>
+
+<p>I am still waiting&hellip;</p>
+
+<hr />
+
+<p>I am sure some of you have been wondering – Did I consider the scenario where the plugs were connected to a Wi-Fi network with no internet access?</p>
+
+<p>More so being that what started all this was trying to have full control of my devices, without them communicating to external servers.</p>
+
+<p>Turns out the smart plugs have a failover mode in case they cannot access the internet.
+What happens is that all communication happens directly between the phone and smart plug on the local network.
+The phone sends the query/commands to the plug’s IP address on the UDP port 27431, encrypted with the common encryption key.</p>
+
+<p>The commands start with the word (<span style="color:blue">lan_phone</span>) on the local network as opposed to (<span style="color:blue">wan_phone</span>) when going through ikonkek2.com.</p>
+
+<p>Everything happens over UDP port 27431 with no xmpp involved.</p>
+
+<p>It was therefore much easier to code this functionality and control the plugs as desired. Exploiting the devices while on the same network becomes a trivial affair:</p>
+
+<p>Here I check the status of a smart power plug, turn it off and on:</p>
+
+<p><img src="http://www.ckn.io/images/local.png"></p>
+
+<hr />
+
+<p>So what would have made my exploitation attempts more difficult?</p>
+
+<ul>
+<li>Obfuscate the app? - Would have slowed me down but dynamic analysis would still have worked.</li>
+<li>Use encrypted channels for all communication? - Would have slowed me further but dynamic analysis would still have worked.</li>
+<li>Avoid the use of hard-coded keys? - Would have slowed me further but dynamic analysis would still have worked.</li>
+<li>Use better authentication when querying details from the server? - Would have likely protected querying of device and user details from the server.</li>
+</ul>
+
+
+<p>A determined attacker is probably going to figure out a way to beat almost every defence measure.
+Luckily, if enough of these defence measures are applied together, most attackers will be kept out, or consider it not worth the investment of their time and resources.</p>
+
+<hr />
+
+<p>So what next?</p>
+
+<ul>
+<li>Follow up on the disclosure process.</li>
+<li>Continue hardware tear down.</li>
+<li>Investigate more devices :)</li>
+</ul>
+
+
+<p>The project files and code can be found <a href="https://github.com/iamckn/eques" target="_blank"><strong>here.</strong></a></p>
+
+<hr />
+
+<p>Till then, happy hacking!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Exploiting the eques elf smart plug: Part three]]></title>
+    <link href="http://www.ckn.io/blog/2019/08/26/exploiting-the-eques-elf-smart-plug-part-three/"/>
+    <updated>2019-08-26T11:53:09+03:00</updated>
+    <id>http://www.ckn.io/blog/2019/08/26/exploiting-the-eques-elf-smart-plug-part-three</id>
+    <content type="html"><![CDATA[<p>In part two, we figured out how to discover the smart plugs in a network and their details. We were also able to send remote commands to ikonkek2.com and query details about specific smart plugs. This was made possible by the discovery of a hardcoded aes key used to encrypt messages. We however still cannot turn a smart plug on or off remotely. So let&rsquo;s concentrate on that in this post.</p>
+
+<!--more-->
+
+
+<p>We currently can:</p>
+
+<ul>
+<li>Decrypt messages between the phone, smart plug and server during plug discovery and port 9123 communication.</li>
+<li>Discover any smart plug in the network and its details.</li>
+<li>Communicate with ikonkek2.com server and query various details about a smart plug.</li>
+</ul>
+
+
+<p>We cannot:</p>
+
+<ul>
+<li>Remotely control the smart plug – Turn it on or off.</li>
+</ul>
+
+
+<h1>Part two: More secret keys, hooks and a debugger</h1>
+
+<p>Turning the smart plug on or off happens over an xmpp chat (port 5222). The phone uses the username <span style="color:red">&ldquo;phone mac&#8221;<a href="&#x6d;&#x61;&#105;&#x6c;&#x74;&#x6f;&#58;&#101;&#x71;&#117;&#101;&#115;&#64;&#105;&#107;&#x6f;&#x6e;&#x6b;&#x65;&#x6e;&#107;&#50;&#x2e;&#x63;&#111;&#109;">&#101;&#113;&#x75;&#101;&#x73;&#x40;&#105;&#x6b;&#111;&#x6e;&#107;&#101;&#x6e;&#107;&#x32;&#x2e;&#99;&#x6f;&#x6d;</a></span> while the username of the smart plug is <span style="color:red">&#8220;device mac&rdquo;@ikonkek2.com</span>.</p>
+
+<p>The messages exchanged look like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="err">&quot;</span>encryption:88fL6ftH5a/VVZrG4oNejdQ9GajxiNsSbvgVs8aR9inGr6gePzDWTU8IMejrHRxbhrtt27ImZpCvsN9MXbi42RKt2aQ4NsN
+</span><span class='line'><span class="nv">EwNWwDj1OYLY</span><span class="o">=</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>Let’s continue our analysis the dynamic way. Let’s start by using Android’s logging capability - logcat.</p>
+
+<p>When we turn the plug on, this is what we observe on logcat:</p>
+
+<p><img src="http://www.ckn.io/images/relayopen.png"></p>
+
+<p>Clearer output:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>E XMPPUtil: sendEncodeMessage:wan_phone%88-c9-d0-da-xx-xxeques%Ki,,-sp6%f7HTEgDfZPLCyOqB4b2XZA<span class="o">==</span>%relay to dc-4f-22-25-xx-xx@ikonkek2.com
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">E</span> <span class="o">==</span>Main : com.kankunit.smartknorns.MainActivity<span class="nv">$ServiceChatManagerListener$1</span>@bba1c8b<span class="o">=======</span>wan_device%dc-4f-22-25-xx-xx%nopassword%open%1563100747%rack
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>When we turn the plug off</p>
+
+<p><img src="http://www.ckn.io/images/relayclose.png"></p>
+
+<p>Clearer output:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>XMPPUtil: sendEncodeMessage:wan_phone%88-c9-d0-da-xx-xxeques%Ki,,-sp6%1F6E1GyngNXKROGzGOmB4g<span class="o">==</span>%relay to dc-4f-22-25-xx-xx@ikonkek2.com
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">E</span> <span class="o">==</span>Main : com.kankunit.smartknorns.MainActivity<span class="nv">$ServiceChatManagerListener$1</span>@35ef906<span class="o">=======</span>wan_device%dc-4f-22-25-xx-xx%nopassword%close%1563100818%rack
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>We note that the function <span style="color:red">sendEncodeMessage</span> is called when sending the XMPP message.</p>
+
+<p>Let’s understand the process through dynamic analysis with Frida and GDB.</p>
+
+<p>We start by running our frida-server on the phone, attach to the app and trace the “open” function:</p>
+
+<p><span style="color:green">frida-trace -i &ldquo;open&rdquo; -U -f &ldquo;com.eques.plug&rdquo;</span></p>
+
+<p>We can see the app’s db is located at <strong>/data/user/0/com.eques.plug/databases/afinal.db</strong></p>
+
+<p><img src="http://www.ckn.io/images/db.png"></p>
+
+<p>We can extract the db and open it with sqlitebrowser and see what is stored:</p>
+
+<p><img src="http://www.ckn.io/images/ikonke_device.png"></p>
+
+<p>From the frida output we can also see the native library <span style="color:blue">libKonkeEncrypt.so</span> being opened when we turn the plug on or off.</p>
+
+<p><img src="http://www.ckn.io/images/konkeopen.png"></p>
+
+<hr />
+
+<p>To give us more control we’ll use the frida&rsquo;s scripting capability and its python bindings.</p>
+
+<p>We can start by writing a script that prints out all the arguments and return values when the <span style="color:red">sendEncodeMessage</span> function we discovered is called.</p>
+
+<p>When we turn on the plug:</p>
+
+<p><img src="http://www.ckn.io/images/sendEncode_open.png"></p>
+
+<p>When we turn off the plug:</p>
+
+<p><img src="http://www.ckn.io/images/sendEncode_close.png"></p>
+
+<p>The output looks like what we had seen earlier on logcat with the word open or close replaced with some encrypted/encoded data.</p>
+
+<p>Logcat message we had seen:</p>
+
+<blockquote><p>E XMPPUtil: sendEncodeMessage:wan_phone%88-c9-d0-da-xx-xxeques%Ki,,-sp6%<span style="color:red">f7HTEgDfZPLCyOqB4b2XZA==</span>%relay to <a href="&#109;&#97;&#105;&#108;&#x74;&#x6f;&#58;&#x64;&#99;&#45;&#52;&#102;&#45;&#50;&#50;&#45;&#x32;&#x35;&#45;&#120;&#x78;&#45;&#x78;&#120;&#x40;&#x69;&#x6b;&#x6f;&#x6e;&#107;&#101;&#107;&#50;&#x2e;&#99;&#x6f;&#109;">&#100;&#x63;&#x2d;&#52;&#x66;&#x2d;&#50;&#x32;&#x2d;&#x32;&#53;&#45;&#x78;&#120;&#45;&#x78;&#x78;&#64;&#x69;&#107;&#x6f;&#110;&#107;&#x65;&#107;&#50;&#x2e;&#x63;&#111;&#109;</a></p></blockquote>
+
+<p>What we see from hooking the SendEncodeMessage() function:</p>
+
+<blockquote><p>wan_phone%88-c9-d0-da-xx-xxeques%Ki,,-sp6%<span style="color:red">open</span>%relay</p></blockquote>
+
+<p>It looks like at some point, the words open (when turning on the plug) and close (when turning off the plug), have some encryption/encoding done to them.</p>
+
+<hr />
+
+<p>So let’s go back to the reversed apk and figure out what happens. What we discover is that a timestamp is inserted into the message then some encryption/encoding done.</p>
+
+<p>This is done by the function <span style="color:red">insertTimestampIntoMessage</span></p>
+
+<p><img src="http://www.ckn.io/images/timestamp.png"></p>
+
+<p>Let’s write another frida script to intercept and log this function:</p>
+
+<p><img src="http://www.ckn.io/images/sendEncode_timestamp.png"></p>
+
+<p>We can now confirm that indeed this is where the additional encryption/encoding is done. Also note <strong>arg3</strong> is set to true.</p>
+
+<p>If we again look at the <span style="color:red">insertTimestampIntoMessage</span> function Arg3 refers to the boolean value <strong>needNewEncode</strong>. When <strong>needNewEncode</strong> is set to true, the following operation is done:</p>
+
+<p><span style="color:green">cmd = EncryptUtil.newEncode(cmd.substring(1), deviceModel);</span></p>
+
+<p>Let’s write another frida script to hook the <span style="color:red">newEncode()</span> function.</p>
+
+<p><img src="http://www.ckn.io/images/newEncode.png"></p>
+
+<p>Here we see a timestamp is added to the word open and an encrypted/encoded result returned.</p>
+
+<hr />
+
+<p>Back to the reversed apk code we can see that <span style="color:red">newEncode()</span> uses <span style="color:red">KonkeEncrypt().encryptCmdString</span> to encrypt the command:</p>
+
+<p><img src="http://www.ckn.io/images/encryptcmdstring.png"></p>
+
+<p>Let’s write one more frida script to hook the <span style="color:red">encryptCmdString() </span> function:</p>
+
+<p><img src="http://www.ckn.io/images/konke_encrypt.png"></p>
+
+<p>This confirms, we&rsquo;re in the right path.</p>
+
+<p>From there we discover that the function is loaded from a native library called <span style="color:blue">KonkeEncrypt</span>:</p>
+
+<p><img src="http://www.ckn.io/images/konkeencrypt.png"></p>
+
+<p>The library is packaged with the apk in the <strong>lib/armeabi</strong> folder:</p>
+
+<p><img src="http://www.ckn.io/images/libKonke.png"></p>
+
+<hr />
+
+<p>Let&rsquo;s head back to Ghidra to see if we can figure out what exactly is happening during this encryption/encoding process.</p>
+
+<p>The steps are basically the same as before:</p>
+
+<p>We will open the <span style="color:blue">libKonkeEncrypt.so</span> file in Ghidra and then look for the <span style="color:red">encryptCmdString()</span> function.</p>
+
+<p><img src="http://www.ckn.io/images/encryptcmdghidra.png"></p>
+
+<p>We can get an idea of the flow from the function call graph:</p>
+
+<p><img src="http://www.ckn.io/images/encryptcmd_flow.png"></p>
+
+<hr />
+
+<p>Let’s see if we can see the library in action. For this we’re going to debug the <span style="color:red">libKonkeEncrypt.so</span> library using GEF (<a href="https://github.com/hugsy/gef">https://github.com/hugsy/gef</a>) – An enhanced version of GDB.</p>
+
+<p>First we’re going  to copy an arm gdbserver to the phone in the <strong>/data/local/tmp/</strong> directory.</p>
+
+<p>From an adb shell, we then start the gdbserver:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>/data/local/tmp/gdbserver :1337 --attach <span class="k">$(</span>ps <span class="p">|</span> grep com.eques.plug <span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then we forward the remote port to our host using adb:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>adb forward tcp:1337 tcp:1337
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then we start GEF for remote debugging:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gef-remote :1337
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>GEF first reads symbols from the phone’s libraries:</p>
+
+<p><img src="http://www.ckn.io/images/gef-remote.png"></p>
+
+<p>Once that is done, we let the app continue running:</p>
+
+<p><img src="http://www.ckn.io/images/gef-connected.png"></p>
+
+<p>When we turn the plug on or off from the app, we can see the <span style="color:blue">libKonkeEncrypt.so</span> library gets opened by the app:</p>
+
+<p><img src="http://www.ckn.io/images/gef-konke.png"></p>
+
+<p>By running the <span style="color:blue">info functions</span> gef command we can see the functions in our library of interest:</p>
+
+<p><img src="http://www.ckn.io/images/gef-konke-functions.png"></p>
+
+<hr />
+
+<p>From our earlier ghidra analysis, <span style="color:red">aes_set_key()</span> sets the final encryption key in hex which is then used by <span style="color:red">EncryptData256()</span> to encrypt the command. Let’s set breakpoints at these two function&rsquo;s addresses and then continue running the app:</p>
+
+<p><img src="http://www.ckn.io/images/gef-breaks.png"></p>
+
+<p>When we hit the <span style="color:red">EncryptData256()</span> break point we can inspect the registers, stack and function trace:</p>
+
+<p><span style="color:blue">Registers</span>:</p>
+
+<p><img src="http://www.ckn.io/images/gef-encrypt-registers.png"></p>
+
+<p><span style="color:blue">Stack</span>:</p>
+
+<p><img src="http://www.ckn.io/images/gef-encrypt-stack.png"></p>
+
+<p><span style="color:blue">Function Trace</span>:</p>
+
+<p><img src="http://www.ckn.io/images/gef-encrypt-trace.png"></p>
+
+<hr />
+
+<p>We do the same when we hit the <span style="color:red">aes_set_key()</span> breakpoint:</p>
+
+<p><span style="color:blue">Registers</span>:</p>
+
+<p><img src="http://www.ckn.io/images/gef-aes-registers.png"></p>
+
+<p><span style="color:blue">Stack</span>:</p>
+
+<p><img src="http://www.ckn.io/images/gef-aes-stack.png"></p>
+
+<p><span style="color:blue">Function Trace</span>:</p>
+
+<p><img src="http://www.ckn.io/images/gef-aes-trace.png"></p>
+
+<p>Stepping through the execution flow till the end, we eventually get our key stored in the r1 register:</p>
+
+<p><img src="http://www.ckn.io/images/gef-aes-r1.png"></p>
+
+<p>The key is: <span style="color:green">1c2f36737d07617a538f9f66659a2623</span>.</p>
+
+<hr />
+
+<p>We can convert it to hex and test it on some of our previously captured encrypted commands and confirm it is indeed the key:</p>
+
+<p><img src="http://www.ckn.io/images/konke_key_test.png"></p>
+
+<p>And it works!</p>
+
+<hr />
+
+<p>Almost there, but not quite yet.</p>
+
+<p>I tested the key against encrypted commands from other plugs, unfortunately it only worked for that one specific smart plug. We therefore need to figure out how the specific key for each smart power plug is generated.</p>
+
+<p>After some more code analysis and debugging, the following is the function flow when <span style="color:red">encryptCmdString()</span> is called:</p>
+
+<p>=> <span style="color:red">encryptCmdString()</span> calls <span style="color:red">EncryptData256()</span></p>
+
+<p>=>>>>> <span style="color:red">EncryptData256()</span> calls <span style="color:red">getKeyFromMethod2()</span></p>
+
+<p>=>>>>>>>>>>> <span style="color:red">getKeyFromMethod2()</span> calls <span style="color:red">cmd_string_parse()</span></p>
+
+<p>=>>>>>>>>>>> <span style="color:red">getKeyFromMethod2()</span> calls <span style="color:red">generateKey1FromString()</span></p>
+
+<p>=>>>>>>>>>>>>>>>>> <span style="color:red">generateKey1FromString()</span> calls <span style="color:red">generateKey2FromString()</span></p>
+
+<p>=>>>>>>>>>>> <span style="color:red">getKeyFromMethod2()</span> then calls <span style="color:red">dealKeyFromMethod2()</span></p>
+
+<p>=>>>>>>>>>>>>>>>>> <span style="color:red">dealKeyFromMethod2()</span> then returns the key</p>
+
+<p>We are going to concentrate on the <span style="color:red">getKeyFromMethod2()</span> function.
+First it calls <span style="color:red">cmd_string_parse()</span>. I spent a lot of time figuring out what it does, only to realise that all it does is remove the hyphens from the mac address with some fancy use of C pointers. So <strong>dc-4f-22-25-xx-xx</strong> would result in <strong>dc4f2225xxxx</strong>.</p>
+
+<p>Next let’s move to <span style="color:red">generateKey1FromString()</span>. We can either go the static way using Ghidra or the dynamic way using GEF. Let&rsquo;s go with GEF.</p>
+
+<p>We set breakpoints at <span style="color:red">generateKey1FromString()</span> and <span style="color:red">generateKey2FromString()</span> and then monitor the registers.</p>
+
+<p><img src="http://www.ckn.io/images/gef-remote-gen2.png"></p>
+
+<p>After some debugging we get what looks like a key: <span style="color:green">w5%45j!a,~j33in3lea^~rw2]ryxes8y</span> generated and stored in the r3 register.</p>
+
+<p>With this discovery we can go back to Ghidra and continue analysing the <span style="color:red">getKeyFromMethod2()</span> function.</p>
+
+<p>We notice that some manipulation is done on this key using the smart power plug&rsquo;s password:</p>
+
+<p><img src="http://www.ckn.io/images/keygen_devpass_or.png"></p>
+
+<p>What is happening is that the first 8 bytes of the key are bitwise OR’ed with the smart power plug&rsquo;s password. If the hex result of any of the bitwise ORs is 0x7e, it is replaced with 0x72. A quick python script can be written to reproduce this:</p>
+
+<p><img src="http://www.ckn.io/images/keygen_device_pass_script.png"></p>
+
+<p>The result is then passed on to <span style="color:red">dealKeyFromMethod2()</span> together with the parsed mac address (hyphens removed).</p>
+
+<p>The return value is what should be our final key!</p>
+
+<p>Analysing and cleaning up the code, I was able to figure out and reproduce the functionality.</p>
+
+<p>The key has some of its bytes replaced with some bytes from the mac address of the smart power plug. This is done in the following manner:</p>
+
+<ul>
+<li>The 15th byte of the key is replaced with the 6th byte of the mac address</li>
+<li>The 16th byte of the key is replaced with the 7th byte of the mac address</li>
+<li>The 19th byte of the key is replaced with the 8th byte of the mac address</li>
+<li>The 20th byte of the key is replaced with the 9th byte of the mac address</li>
+<li>The 21st byte of the key is replaced with the 10th byte of the mac address</li>
+<li>The 22nd byte of the key is replaced with the 11th byte of the mac address</li>
+</ul>
+
+
+<p>The md5sum is then calculated to create the final key.</p>
+
+<hr />
+
+<p>In summary, this is how the smart power plug specific key is generated:</p>
+
+<ul>
+<li><span style="color:red">cmd_string_parse()</span> removes hyphens from the mac address.</li>
+<li><span style="color:red">generateKey1FromString()</span> and <span style="color:red">generateKey2FromString()</span> are used to produce the key: <span style="color:green">w5%45j!a,~j33in3lea^~rw2]ryxes8y</span>.</li>
+<li><span style="color:red">getKeyFromMethod2()</span> bitwise ORs the first 8 bytes of the key with the device
+name/password.</li>
+<li><span style="color:red">dealKeyFromMethod2()</span> replaces some bytes of the key with some bytes of the mac
+address, the md5sum of the result is the final device specific key.</li>
+</ul>
+
+
+<p>I tested this against more than one smart power plug with successful decryptions.</p>
+
+<p>Now we have all we need to control any plug:</p>
+
+<ul>
+<li>The smart power plug’s mac address</li>
+<li>The smart power plug’s password</li>
+<li>The two encryption keys (one device specific and the other common to all smart power plugs)</li>
+</ul>
+
+
+<hr />
+
+<p>With these details, we can use an xmpp client like pidgin to connect to the xmpp server (ikonkek2.com) using the username <span style="color:blue">&ldquo;phone macaddress&#8221;<a href="&#109;&#97;&#x69;&#x6c;&#x74;&#111;&#58;&#x65;&#x71;&#117;&#101;&#x73;&#64;&#105;&#107;&#111;&#x6e;&#x6b;&#101;&#107;&#50;&#x2e;&#99;&#111;&#109;">&#x65;&#113;&#x75;&#101;&#115;&#64;&#105;&#107;&#x6f;&#x6e;&#x6b;&#101;&#107;&#x32;&#x2e;&#99;&#x6f;&#x6d;</a></span>.</p>
+
+<p>Next we generate the smart plug specific encryption key.</p>
+
+<p>We then use this key to encrypt either the <span style="color:blue">open&#8221;timestamp&#8221;</span> or <span style="color:blue">close&#8221;timestamp&#8221;</span> part of our command.</p>
+
+<p>Finally we encrypt the full message using the common encryption key.</p>
+
+<p>We will add the prefix <strong>encryption:</strong> to our encrypted message and send it to the device’s username <span style="color:blue">&ldquo;device <a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#111;&#x3a;&#x6d;&#97;&#x63;&#97;&#100;&#x64;&#x72;&#101;&#x73;&#x73;&#64;&#x69;&#107;&#x6f;&#110;&#x6b;&#101;&#107;&#x32;&#x2e;&#99;&#x6f;&#x6d;">&#x6d;&#97;&#99;&#97;&#x64;&#x64;&#114;&#101;&#x73;&#x73;&#x40;&#x69;&#x6b;&#x6f;&#110;&#107;&#101;&#x6b;&#50;&#x2e;&#x63;&#x6f;&#x6d;</a>&rdquo;</span> over xmpp.</p>
+
+<p>Note: The xmpp’s user passwords are just the same as the usernames.</p>
+
+<hr />
+
+<p>I automated the whole process of key generation, message formatting and encryption to output the message to be sent:</p>
+
+<p><img src="http://www.ckn.io/images/xmpp_commands.png"></p>
+
+<p>Next I just copy the message and send it using pidgin:</p>
+
+<p><img src="http://www.ckn.io/images/xmpp_control.png"></p>
+
+<p>And there we have it! We can now control the plug remotely even when it’s behind a NAT network.</p>
+
+<p>The frida scripts and exploit code can be found <a href="https://github.com/iamckn/eques" target="_blank"><strong>here.</strong></a></p>
+
+<hr />
+
+<p>In the final part, we will explore how this can be abused on a mass scale.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Exploiting the eques elf smart plug: Part two]]></title>
+    <link href="http://www.ckn.io/blog/2019/08/25/exploiting-the-eques-elf-smart-plug-part-two/"/>
+    <updated>2019-08-25T14:23:39+03:00</updated>
+    <id>http://www.ckn.io/blog/2019/08/25/exploiting-the-eques-elf-smart-plug-part-two</id>
+    <content type="html"><![CDATA[<p>In part one, we concentrated on analysing the network communication when one turns the smart power plug on or off from the app.
+We had noticed some form of encrypted/encoded communication happening on udp port 27431 between the smart plug and the app installed on the phone. We also noticed some form of encrypted/encoded communication on tcp ports 9123 and 5222(xmpp) between the app, smart plug and ikonkek2.com.</p>
+
+<!--more-->
+
+
+<h1>Part two: Not so secret keys, some assembly and a reverse engineer</h1>
+
+<p>Let’s reverse the apk to see if the code can tell us what type of encryption/encoding was happening.
+I have a preference for <a href="https://github.com/skylot/jadx" target="_blank"><strong>jadx-gui</strong></a> so that’s what I used.</p>
+
+<p>First let’s search for the domains we had seen in the network traffic.
+Searching for ikonke.us reveals the firmware download url. Note that it is http. This is under the <span style="color:red">UpdateFirmwareUtil</span> class. About 15 different downloads are listed indicating the app supports multiple devices.</p>
+
+<p><img src="http://www.ckn.io/images/firmware_url.png"></p>
+
+<p>We can also see various variables are mapped to their values in the <span style="color:red">com.kankunit.smartknorns.commonutil.CommonMap</span> file.</p>
+
+<p><img src="http://www.ckn.io/images/commonmap.png"></p>
+
+<p>This collaborates our earlier network traffic analysis related to port 9123 and XMPP(5222).
+We can now also conclude that ikonkek2.com hosts an Apache Mina server listening on ports 9123 and 50003, and an XMPP server listening on port 5222.</p>
+
+<hr />
+
+<p>We had earlier discovered that the app tries to discover the plug by sending some broadcast messages on port 27431. Let’s see if we can figure out what the exact messages are from the app.</p>
+
+<p>Searching for this in the code reveals the class <span style="color:red">com.kankunit.smartknorns.service.BaseUdpBroadcastService</span>.</p>
+
+<p><img src="http://www.ckn.io/images/udp_broadcast.png"></p>
+
+<p>The command sent is:</p>
+
+<p><span style="color:green">lan_phone%mac%nopassword%&ldquo; + new SimpleDateFormat(DateTransformer.DATE_FORMAT,
+Locale.ENGLISH).format(new Date(System.currentTimeMillis())) + &rdquo;%heart</span></p>
+
+<p>The sending method is <span style="color:red">PackageSendData</span>:</p>
+
+<p><span style="color:green">byte[] cmd_buf = BaseUdpBroadcastService.this.sj.PackageSendData(cmd, cmd.length());</span></p>
+
+<p>This method is from the class <span style="color:red">smartplug.JniC</span></p>
+
+<p><img src="http://www.ckn.io/images/PackageSendData.png"></p>
+
+<p>The method is called from the native library <span style="color:red">CommunSmartPlug-jni</span>.</p>
+
+<p>The library is packaged with the app in the <strong>lib/armeabi</strong> folder</p>
+
+<p><img src="http://www.ckn.io/images/libs.png"></p>
+
+<p>We can access the file by unzipping the apk and navigating to the <strong>lib/armeabi</strong> folder.</p>
+
+<p>Running the file command on it reveals it is a 32-bit ARM binary:</p>
+
+<p><img src="http://www.ckn.io/images/file_libComm.png"></p>
+
+<p>We can also run strings on it to gather more information. Sample output reveals we’re on the right path as we can see the string  <span style="color:red">PackageSendData</span> as part of the output.</p>
+
+<p><img src="http://www.ckn.io/images/strings_libComm.png"></p>
+
+<hr />
+
+<p>Time for Ghidra!</p>
+
+<p>We open the native library in Ghidra and start by looking at the Symbol Tree to locate our function:</p>
+
+<p><img src="http://www.ckn.io/images/ghidra_symbols.png"></p>
+
+<p>Displaying the call graph, we note it calls the function <span style="color:red">EncryptData256</span>, which in turn calls the functions <span style="color:red">aes_set_key</span> and <span style="color:red">aes_encrypt</span>:</p>
+
+<p><img src="http://www.ckn.io/images/senddata_call.png"></p>
+
+<p>Let’s start by analysing the <span style="color:red">EncryptData256</span> function:</p>
+
+<p><em>Before analysis</em></p>
+
+<p><img src="http://www.ckn.io/images/encrypt_raw.png"></p>
+
+<p><em>After analysis and some cleanup</em></p>
+
+<p><img src="http://www.ckn.io/images/encrypt_analysed.png"></p>
+
+<p>After some more analysis and cleaning up the code, we get to the following code snippet:</p>
+
+<p><img src="http://www.ckn.io/images/aes_key.png"></p>
+
+<p>We see the use of the the function <span style="color:red">get_key</span> to fetch the aes key in bytes, the function <span style="color:red">aes_set_key</span> then sets the encryption key in hex.</p>
+
+<p>The key is then used to encrypt the plaintext as below:</p>
+
+<p><img src="http://www.ckn.io/images/aes_encrypt.png"></p>
+
+<p>So what we need to find out is what the aes key is, we start by figuring out what the <span style="color:red">get_key</span> function does:</p>
+
+<p><img src="http://www.ckn.io/images/get_key.png"></p>
+
+<p>The function uses switch statements to set a character to each corresponding position in the key.</p>
+
+<p>We can therefore reconstruct the key manually or by using Ghidra&rsquo;s scripting functionality.</p>
+
+<p>The final key is: <span style="color:green">fdsl;mewrjope456fds4fbvfnjwaugfo</span></p>
+
+<p>Let’s confirm the key works!</p>
+
+<hr />
+
+<p>Remember the messages we’d seen being broadcast by the app on udp port 27431? Let’s try decrypt one.</p>
+
+<p>We first convert our key to hex then try decrypting one of the UDP messages we had captured:</p>
+
+<p><img src="http://www.ckn.io/images/decryption_test.png"></p>
+
+<p>Eureka! The key works!</p>
+
+<p>The decrypted command confirms the format of the UDP messages as earlier discovered:</p>
+
+<p><span style="color:green">lan_phone%mac%nopassword%&ldquo; + new SimpleDateFormat(DateTransformer.DATE_FORMAT,
+Locale.ENGLISH).format(new Date(System.currentTimeMillis())) + &rdquo;%heart</span></p>
+
+<hr />
+
+<p>Let’s try our first attack - Discovering all smarts plug connected to a network and their details.</p>
+
+<p>For this, we’re going to use go code to:</p>
+
+<ul>
+<li>Format the command and insert the current time as per the message specifications.</li>
+<li>Encrypt the message with the key.</li>
+<li>Send it to the broadcast address on UDP port 27431.</li>
+<li>Listen for responses.</li>
+<li>Decrypt the received messages.</li>
+</ul>
+
+
+<p>Once we run our custom discovery tool, we get responses from all the smart plugs in the network and various details such as IP, mac address, device name/password, status, hardware and software versions:</p>
+
+<p><img src="http://www.ckn.io/images/udp_plug_discovery.png"></p>
+
+<hr />
+
+<p>We had also seen network communication between the app and the server (ikonkek2.com) on port 9123. Let’s try see if we can figure it out.</p>
+
+<p>We can start with one of the first messages we saw:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>synchroFriends:QL+o4atMbQYvmyopU7DwqU3xXKYQt/MfZtNrDZlA4oayAvVY+XoCTChO1Q00I5lR
+</span><span class='line'>VRbu1j85/S6EtkuzlSnsNQ<span class="o">==</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We can look for this in our reversed apk:</p>
+
+<p><img src="http://www.ckn.io/images/synchro.png"></p>
+
+<p>What we see is that the <span style="color:red">minaEncode</span> method base64 encodes the output from the <span style="color:red">PackageSendData</span> method.</p>
+
+<p><img src="http://www.ckn.io/images/minaencode.png"></p>
+
+<p>This is the same method that is used to encrypt the UDP discovery messages. Good thing we already analysed that method and got the encryption key.</p>
+
+<p>By further analysing the reversed apk we see that the message format takes the form of:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;cleartext description of the action&gt;:&lt;EncryptUtil.minaEncode<span class="o">(</span>some message<span class="o">)</span>&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is clearly visible in the following snippet:</p>
+
+<p><img src="http://www.ckn.io/images/mina_Encode.png"></p>
+
+<hr />
+
+<h1>Decryption test</h1>
+
+<p>Let’s try decryption of some of the messages we had captured in the network traffic.</p>
+
+<p>Get device information</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>getDeviceInfo:8S6cW/8R2lxEiAF9Vq8maDQbEtAhNrSn1AO5aa9rV2fx7gFo+8WXHSEERZkoj0cI2kuhoJz/TMH4cOF0cH5luA<span class="o">==</span>
+</span><span class='line'>hEJJ9YjsfWTlB0j8h3xFVJSZPLiVeqXqwm2+VYc2hReeeuO61tEz+9XcaNZwJo3o7aPMxgJwsDDgFcH+HDwChklPvnRC5bPqrpHzLyZK9g0<span class="o">=</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://www.ckn.io/images/getDeviceInfo.png"></p>
+
+<hr />
+
+<p>Get device status</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>getDeviceStatus:8S6cW/8R2lxEiAF9Vq8maDQbEtAhNrSn1AO5aa9rV2eOvkUKU+0kgmaR7hkY2JLP
+</span><span class='line'>hEJJ9YjsfWTlB0j8h3xFVJSZPLiVeqXqwm2+VYc2hReUX1M+EvqrQUuw1Ag/eSc0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://www.ckn.io/images/getdevicestatus.png"></p>
+
+<hr />
+
+<h1>Running remote commands</h1>
+
+<p>Let’s try exploit this feature to perform remote query of various details about the smart plug from the ikonkek2.com server. We can do this from anywhere as long as we have an internet connection.</p>
+
+<p>We are again going to write some go code to:</p>
+
+<ul>
+<li>Create commands and format the messages.</li>
+<li>Encrypt the messages with the key.</li>
+<li>Send the messages to ikonkek2.com on port 9123.</li>
+<li>Listen for responses.</li>
+<li>Decrypt the received messages.</li>
+</ul>
+
+
+<p>All we need is the mac address of a smart plug</p>
+
+<p>Get device information:</p>
+
+<p><img src="http://www.ckn.io/images/deviceinfodemo.png"></p>
+
+<hr />
+
+<p>Get device status:</p>
+
+<p><img src="http://www.ckn.io/images/devicestatusdemo.png"></p>
+
+<hr />
+
+<p>Get email linked to the device:</p>
+
+<p><img src="http://www.ckn.io/images/deviceemailinfo.png"></p>
+
+<p>The project files and code can be found <a href="https://github.com/iamckn/eques" target="_blank"><strong>here.</strong></a></p>
+
+<hr />
+
+<p>In part three, we will try to remotely control the smart power plug (turn it on and off).</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Exploiting the eques elf smart plug: Part one]]></title>
+    <link href="http://www.ckn.io/blog/2019/08/24/exploiting-the-eques-elf-smart-plug-part-one/"/>
+    <updated>2019-08-24T11:57:50+03:00</updated>
+    <id>http://www.ckn.io/blog/2019/08/24/exploiting-the-eques-elf-smart-plug-part-one</id>
+    <content type="html"><![CDATA[<p>I bought some smart power plugs and they were pretty awesome! These are the <a href="https://equeshome.com/products/elf-smart-plug" target="_blank"><strong>Eques Elf smart plugs.</strong></a> They can be controlled using an app through a connected Wi-Fi network, and remotely over the internet.</p>
+
+<p>Everything was going on well till I noticed some strange urls on my home network monitoring system. It turns out it was the smart plug constantly communicating with some external hosts.</p>
+
+<!--more-->
+
+
+<p>My smart plugs were not in my full control! Our journey therefore begins. It was time to void some warranties, figure out what was going on, and hopefully gain full control of the plug.</p>
+
+<p>This is a walkthrough of the process I took and will be broken down into the following areas:</p>
+
+<ul>
+<li>Network traffic analysis</li>
+<li>Android app reversing</li>
+<li>Dynamic instrumentation</li>
+<li>Native library debugging</li>
+<li>Native library reversing</li>
+<li>Custom exploit tools/scripts</li>
+<li>Hardware teardown</li>
+</ul>
+
+
+<p>The end goal will be to:</p>
+
+<ul>
+<li>Gain full control of the smart plug</li>
+<li>Discover any security vulnerabilities</li>
+<li>Develop exploitation techniques and tools</li>
+</ul>
+
+
+<h1>Part One: The homesick elf, some packets and an analyst</h1>
+
+<p>I set up my network as below:</p>
+
+<p><img src="http://www.ckn.io/images/mirror_setup.png"></p>
+
+<p>The app and smart plug are connected to the same WIFI network. All traffic in the network is mirrored and sent to the Raspberry Pi, which has Zeek IDS set up. The logs are then analysed and visualised by a Graylog server.</p>
+
+<p>We will then run the app and analyse the traffic.</p>
+
+<p>First thing I noted were the following hosts communicating with the app:</p>
+
+<ul>
+<li><a href="https://cnctlife.com">https://cnctlife.com</a></li>
+<li><a href="http://ikonke.us/">http://ikonke.us/</a></li>
+<li><a href="https://ikonke.us:50003/">https://ikonke.us:50003/</a></li>
+<li><a href="https://router-a0-push.leancloud.cn">https://router-a0-push.leancloud.cn</a></li>
+<li><a href="http://ikonkek2.com:9123">http://ikonkek2.com:9123</a></li>
+<li><a href="http://ikonkek2.com:5222">http://ikonkek2.com:5222</a></li>
+</ul>
+
+
+<p>And the follwoing communicating with the smart plug:</p>
+
+<ul>
+<li><a href="http://ikonkek2.com:9123">http://ikonkek2.com:9123</a></li>
+<li><a href="http://ikonkek2.com:5222">http://ikonkek2.com:5222</a></li>
+</ul>
+
+
+<p>The first communication I noticed were repeated packets being sent to the broadcast address by the app on udp port 27431.</p>
+
+<p><img src="http://www.ckn.io/images/udp_27431_2.png"></p>
+
+<p>Following the udp stream, we can see that the data is sent repeatedly. The suspicion is that this is the plug discovery process by the app.</p>
+
+<p><img src="http://www.ckn.io/images/udp_27431.png"></p>
+
+<p>The app then starts communicating with ikonkek2.com on port 9123.</p>
+
+<p><img src="http://www.ckn.io/images/synchofriends.png"></p>
+
+<p>Some more of the sample data sent and the responses can be seen here:</p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>getDeviceInfo:8S6cW/8R2lxEiAF9Vq8maDQbEtAhNrSn1AO5aa9rV2fx7gFo+8WXHSEERZkoj0cI2kuhoJz/TMH4cOF0cH5luA<span class="o">==</span>
+</span><span class='line'>hEJJ9YjsfWTlB0j8h3xFVJSZPLiVeqXqwm2+VYc2hReeeuO61tEz+9XcaNZwJo3o7aPMxgJwsDDgFcH+HDwChklPvnRC5bPqrpHzLyZK9g0<span class="o">=</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>getDeviceStatus:8S6cW/8R2lxEiAF9Vq8maDQbEtAhNrSn1AO5aa9rV2eOvkUKU+0kgmaR7hkY2JLP
+</span><span class='line'>hEJJ9YjsfWTlB0j8h3xFVJSZPLiVeqXqwm2+VYc2hReUX1M+EvqrQUuw1Ag/eSc0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>moduleReport:z8gm9VQHmkywT3J7rp2SUFUpHUkb3JTG8b/dcozM8q6cW6fwp40tS9YByPwuCUYqa+G4gNtEuPfLOJqf+mBdXF2Zw0dUEZLUaDsUiJxTepM<span class="o">=</span>
+</span><span class='line'>.hEJJ9YjsfWTlB0j8h3xFVFUpHUkb3JTG8b/dcozM8q6cW6fwp40tS9YByPwuCUYqW/Aap48EIhkq+31whfFKne06Nhp1WmLYxu89+vi0sqk<span class="o">=</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>We will come to these messages later. For now note that port 9123 is commonly used by Apache Mina Servers.</p>
+
+<p>When we turn the plug on or off from the app, an XMPP connection is initiated. The app first authenticates to the server using DIGEST-MD5 mechanism.</p>
+
+<p>The app then initiates and xmpp chat to <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#x6f;&#x3a;&#100;&#99;&#x2d;&#x34;&#102;&#45;&#50;&#50;&#x2d;&#50;&#x35;&#45;&#120;&#x78;&#x2d;&#120;&#x78;&#x40;&#x69;&#107;&#111;&#110;&#107;&#x65;&#x6b;&#x32;&#46;&#99;&#x6f;&#109;">&#x64;&#x63;&#45;&#52;&#102;&#45;&#50;&#50;&#45;&#50;&#x35;&#x2d;&#120;&#x78;&#x2d;&#x78;&#x78;&#64;&#105;&#x6b;&#111;&#110;&#x6b;&#101;&#x6b;&#50;&#x2e;&#x63;&#111;&#x6d;</a> using the username <span style="color:blue">d4-63-c6-8d-xx-xxeques@ikonkek2.com/android</span>. Note that <span style="color:blue">dc-4f-22-25-xx-xx</span> is the mac address of the smart plug while <span style="color:blue">d4-63-c6-8d-xx-xx</span> is the mac address of the phone running the app.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>XMPP Protocol
+</span><span class='line'>    MESSAGE <span class="o">[</span><span class="nv">id</span><span class="o">=</span><span class="s2">&quot;26xzR-5&quot;</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;chat&quot;</span><span class="o">]</span>
+</span><span class='line'>        from: d4-63-c6-8d-xx-xxeques@ikonkek2.com/android
+</span><span class='line'>        id: 26xzR-5
+</span><span class='line'>        to: dc-4f-22-25-xx-xx@ikonkek2.com
+</span><span class='line'>        <span class="nb">type</span>: chat
+</span><span class='line'>        THREAD <span class="o">[</span><span class="nv">value</span><span class="o">=</span><span class="s2">&quot;bB3Fe0&quot;</span><span class="o">]</span>
+</span><span class='line'>        BODY <span class="o">[</span><span class="nv">value</span><span class="o">=</span><span class="s2">&quot;encryption:88fL6ftH5a/VVZrG4oNejdQ9GajxiNsSbvgVs8aR9inGr6gePzDWTU8IMejrHRxbhrtt27ImZpCvsN9MXbi42RKt2aQ4NsNEwNWwDj1OYLY=&quot;</span><span class="o">]</span>
+</span><span class='line'>            value: encryption:88fL6ftH5a/VVZrG4oNejdQ9GajxiNsSbvgVs8aR9inGr6gePzDWTU8IMejrHRxbhrtt27ImZpCvsN9MXbi42RKt2aQ4NsNEwNWwDj1OYLY<span class="o">=</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>The plug then responds to the message:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>XMPP Protocol
+</span><span class='line'>    MESSAGE <span class="o">[</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;chat&quot;</span><span class="o">]</span>
+</span><span class='line'>        from: dc-4f-22-25-xx-xx@ikonkek2.com/device
+</span><span class='line'>        to: d4-63-c6-8d-xx-xxeques@ikonkek2.com/android
+</span><span class='line'>        <span class="nb">type</span>: chat
+</span><span class='line'>        xml:lang: en
+</span><span class='line'>        BODY <span class="o">[</span><span class="nv">value</span><span class="o">=</span><span class="s2">&quot;encryption:z8gm9VQHmkywT3J7rp2SUFUpHUkb3JTG8b/dcozM8q5RCCP4wzJPMrgxjWeeFZicog7NzWKq9DncBNIGR530/Q==&quot;</span><span class="o">]</span>
+</span><span class='line'>            value: encryption:z8gm9VQHmkywT3J7rp2SUFUpHUkb3JTG8b/dcozM8q5RCCP4wzJPMrgxjWeeFZicog7NzWKq9DncBNIGR530/Q<span class="o">==</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that the chat messages start with the prefix <em>encryption:</em>.</p>
+
+<hr />
+
+<h1>What we know so far</h1>
+
+<ul>
+<li><p>The smart plug listens on UDP 27431. The app sends udp broadcast messages on this port to discover the plug and the ommunication looks encrypted/encoded.</p></li>
+<li><p>The app communicates with the host ikonkek2.com on ports:</p>
+
+<ul>
+<li><p>9123 (Apache Mina)</p>
+
+<p>  -> Communication looks partially encrypted/encoded and happens regularly.</p>
+
+<p>  -> Messages follow the format - <em>descriptive prefix</em>:<em>some encrypted/encoded message</em>.</p></li>
+<li><p>5222 (XMPP)</p>
+
+<p>  -> Communication is initiated when the plug is turned on/off from the app.</p>
+
+<p>  -> Communication looks to be through encrypted/encoded chat messages.</p>
+
+<p>  -> The username of the phone is based on the phone mac address with the word eques appended.</p>
+
+<p>  -> The username of the plug is just its mac address.</p>
+
+<p>  -> Authentication with the xmpp server (ikonkek2.com) is DIGEST-MD5.</p>
+
+<p>  -> XMPP Messages follow the format - <em>encryption</em>:<em>some encrypted/encoded message</em>.</p></li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+
+<p>In part two we are going to dig further by looking at the android application itself.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Wireguard VPN: Portable Raspberry Pi Setup]]></title>
@@ -2925,327 +3897,6 @@ I end with one of my favourite quotes:</p>
 <p>&nbsp;</p>
 
 <h4>>End Rant&lt;</h4>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The BRO Chronicles 1]]></title>
-    <link href="http://www.ckn.io/blog/2015/09/06/the-bro-chronicles-1/"/>
-    <updated>2015-09-06T08:56:06+03:00</updated>
-    <id>http://www.ckn.io/blog/2015/09/06/the-bro-chronicles-1</id>
-    <content type="html"><![CDATA[<p>I was having a random conversation with <a href="https://twitter.com/xtian_kisutsa" target="_blank"><strong>Christian</strong></a>. The conversation was based around Kali Nethunter and all the cool stuff that can be done with it. The discussion was revolving around &ldquo;man in the middle attacks&rdquo; and I suggested that having <a href="https://www.bro.org/" target="_blank"><strong>BRO</strong></a> running on Nethunter would be awesome. This got him excited and true to his nature, he couldn&rsquo;t rest till he&rsquo;d attempted it. Long story short, he did some amazing work and had it running soon afterwards complete with a detailed &ldquo;how to&rdquo; guide. Here&rsquo;s a link to the <a href="http://t.co/Iz992aMCL5" target="_blank"><strong>guide</strong></a>.</p>
-
-<!--more-->
-
-
-<p>With bro running on a phone, a world of exploration is opened up. You now have an enterprise level IDS running on your phone :). I hope you see where this is headed. What do you do with an IDS on your phone? You obviously investigate what your phone communicates with.
-What interested me most was the rmnet0 interface on android. This is the interface assigned to your data connection. It gets assigned a public IP by your telecommunications provider so no NAT issues.</p>
-
-<h1>The set up</h1>
-
-<p>This Saturday afternoon I decided to see what my phone communicates to over a one hour period while connected to the mobile data network.
-This is how I set up things:</p>
-
-<h4>>Nethunter running on a Nexus 5 with Android 5.1</h4>
-
-<h4>>BRO running in standalone mode monitoring rmnet0</h4>
-
-<h4>>Mobile data connection on the Safaricom network</h4>
-
-<h4>>ADB connection to a laptop</h4>
-
-<h4>>shodan-cli to investigate IPs</h4>
-
-<p>Once everything was in place I used the phone as I would normally for about 10 minutes or so - browsed a bit and opened a few apps such as Twitter and Facebook. After that I left it idle for about an hour.</p>
-
-<h1>Results and Analysis</h1>
-
-<p>It was then time to process and analyse the results. Nethunter runs in a chroot environment so I transferred the BRO logs to the sdcard then to my laptop, that&rsquo;s where adb comes in handy.
-Lets start with the ports and IPs that were most active during both normal usage of the phone and when it was idle.</p>
-
-<h2>Idle</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'> <span class="nx">Ports</span>        <span class="o">|</span> <span class="nx">Sources</span>                   <span class="o">|</span> <span class="nx">Destinations</span>              <span class="o">|</span>
-</span><span class='line'> <span class="mi">443</span>    <span class="mf">38.5</span><span class="o">%</span> <span class="o">|</span> <span class="mf">105.57</span><span class="p">.</span><span class="mf">36.93</span><span class="err">#</span><span class="mi">1</span>      <span class="mf">99.0</span><span class="o">%</span> <span class="o">|</span> <span class="mf">196.201</span><span class="p">.</span><span class="mf">216.21</span><span class="err">#</span><span class="mi">2</span>    <span class="mf">20.0</span><span class="o">%</span> <span class="o">|</span>
-</span><span class='line'> <span class="mi">53</span>     <span class="mf">25.5</span><span class="o">%</span> <span class="o">|</span> <span class="mf">196.201</span><span class="p">.</span><span class="mf">216.4</span><span class="err">#</span><span class="mi">3</span>      <span class="mf">0.5</span><span class="o">%</span> <span class="o">|</span> <span class="mf">216.58</span><span class="p">.</span><span class="mf">223.10</span><span class="err">#</span><span class="mi">4</span>     <span class="mf">10.0</span><span class="o">%</span> <span class="o">|</span>
-</span><span class='line'> <span class="mi">123</span>    <span class="mf">24.0</span><span class="o">%</span> <span class="o">|</span> <span class="mf">66.196</span><span class="p">.</span><span class="mf">116.132</span><span class="err">#</span><span class="mi">5</span>     <span class="mf">0.5</span><span class="o">%</span> <span class="o">|</span> <span class="mf">196.49</span><span class="p">.</span><span class="mf">6.67</span><span class="err">#</span><span class="mi">6</span>        <span class="mf">9.0</span><span class="o">%</span> <span class="o">|</span>
-</span><span class='line'> <span class="mi">993</span>     <span class="mf">3.0</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">196.201</span><span class="p">.</span><span class="mf">218.15</span><span class="err">#</span><span class="mi">7</span>     <span class="mf">6.5</span><span class="o">%</span> <span class="o">|</span>
-</span><span class='line'> <span class="mi">80</span>      <span class="mf">3.0</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">197.12</span><span class="p">.</span><span class="mf">0.14</span><span class="err">#</span><span class="mi">8</span>        <span class="mf">5.0</span><span class="o">%</span> <span class="o">|</span>
-</span><span class='line'> <span class="mi">995</span>     <span class="mf">1.5</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">196.25</span><span class="p">.</span><span class="mf">1.5</span><span class="err">#</span><span class="mi">9</span>         <span class="mf">5.0</span><span class="o">%</span> <span class="o">|</span>
-</span><span class='line'> <span class="mi">8996</span>    <span class="mf">1.0</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">197.84</span><span class="p">.</span><span class="mf">150.123</span><span class="err">#</span><span class="mi">10</span>    <span class="mf">3.5</span><span class="o">%</span> <span class="o">|</span>
-</span><span class='line'> <span class="mi">5228</span>    <span class="mf">1.0</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">199.16</span><span class="p">.</span><span class="mf">156.199</span><span class="err">#</span><span class="mi">11</span>    <span class="mf">3.0</span><span class="o">%</span> <span class="o">|</span>
-</span><span class='line'> <span class="mi">3</span>       <span class="mf">1.0</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">62.210</span><span class="p">.</span><span class="mf">87.71</span><span class="err">#</span><span class="mi">12</span>      <span class="mf">3.0</span><span class="o">%</span> <span class="o">|</span>
-</span><span class='line'> <span class="mi">55602</span>   <span class="mf">0.5</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">216.58</span><span class="p">.</span><span class="mf">223.14</span><span class="err">#</span><span class="mi">13</span>     <span class="mf">2.0</span><span class="o">%</span> <span class="o">|</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Normal use</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'> <span class="nx">Ports</span>        <span class="o">|</span> <span class="nx">Sources</span>                   <span class="o">|</span> <span class="nx">Destinations</span>              <span class="o">|</span>
-</span><span class='line'> <span class="mi">80</span>     <span class="mf">67.7</span><span class="o">%</span> <span class="o">|</span> <span class="mf">105.161</span><span class="p">.</span><span class="mf">166.138</span><span class="err">#</span><span class="mi">1</span>   <span class="mf">99.9</span><span class="o">%</span> <span class="o">|</span> <span class="mf">196.201</span><span class="p">.</span><span class="mf">217.7</span><span class="err">#</span><span class="mi">2</span>     <span class="mf">14.6</span><span class="o">%</span> <span class="o">|</span>
-</span><span class='line'> <span class="mi">53</span>     <span class="mf">15.8</span><span class="o">%</span> <span class="o">|</span> <span class="mf">66.196</span><span class="p">.</span><span class="mf">116.132</span><span class="err">#</span><span class="mi">3</span>     <span class="mf">0.1</span><span class="o">%</span> <span class="o">|</span> <span class="mf">173.241</span><span class="p">.</span><span class="mf">248.221</span><span class="err">#</span><span class="mi">4</span>   <span class="mf">11.4</span><span class="o">%</span> <span class="o">|</span>
-</span><span class='line'> <span class="mi">443</span>    <span class="mf">15.0</span><span class="o">%</span> <span class="o">|</span> <span class="mf">174.37</span><span class="p">.</span><span class="mf">231.85</span><span class="err">#</span><span class="mi">5</span>      <span class="mf">0.0</span><span class="o">%</span> <span class="o">|</span> <span class="mf">173.241</span><span class="p">.</span><span class="mf">248.220</span><span class="err">#</span><span class="mi">6</span>    <span class="mf">5.2</span><span class="o">%</span> <span class="o">|</span>
-</span><span class='line'> <span class="mi">993</span>     <span class="mf">0.4</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">94.31</span><span class="p">.</span><span class="mf">29.96</span><span class="err">#</span><span class="mi">7</span>        <span class="mf">3.2</span><span class="o">%</span> <span class="o">|</span>
-</span><span class='line'> <span class="mi">995</span>     <span class="mf">0.3</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">198.232</span><span class="p">.</span><span class="mf">124.225</span><span class="err">#</span><span class="mi">8</span>    <span class="mf">2.5</span><span class="o">%</span> <span class="o">|</span>
-</span><span class='line'> <span class="mi">8996</span>    <span class="mf">0.2</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">192.0</span><span class="p">.</span><span class="mf">77.2</span><span class="err">#</span><span class="mi">9</span>         <span class="mf">1.7</span><span class="o">%</span> <span class="o">|</span>
-</span><span class='line'> <span class="mi">3</span>       <span class="mf">0.1</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">31.13</span><span class="p">.</span><span class="mf">75.8</span><span class="err">#</span><span class="mi">10</span>        <span class="mf">1.7</span><span class="o">%</span> <span class="o">|</span>
-</span><span class='line'> <span class="mi">5228</span>    <span class="mf">0.1</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">46.228</span><span class="p">.</span><span class="mf">164.11</span><span class="err">#</span><span class="mi">11</span>     <span class="mf">1.6</span><span class="o">%</span> <span class="o">|</span>
-</span><span class='line'> <span class="mi">123</span>     <span class="mf">0.1</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">95.172</span><span class="p">.</span><span class="mf">94.57</span><span class="err">#</span><span class="mi">12</span>      <span class="mf">1.5</span><span class="o">%</span> <span class="o">|</span>
-</span><span class='line'> <span class="mi">57553</span>   <span class="mf">0.0</span><span class="o">%</span> <span class="o">|</span>                           <span class="o">|</span> <span class="mf">46.228</span><span class="p">.</span><span class="mf">164.13</span><span class="err">#</span><span class="mi">13</span>     <span class="mf">1.4</span><span class="o">%</span> <span class="o">|</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>As expected most traffic is either HTTP (80), HTTPS (443) or DNS (53). NTP traffic (123) also features prominently when the phone is idle.
-Of interest is that we can confirm Safaricom uses their own DNS servers, in this case <code>196.201.216.21</code>, <code>196.201.218.15</code> and <code>196.201.217.7</code>. An OpenDNS server <code>208.67.222.222</code> was also queried once so they probably have OpenDNS as an option.
-The ntp servers were distributed among African countries, Angola - <code>196.223.19.3</code>, Tunisia - <code>197.12.0.14</code>, SA - <code>197.84.150.123</code> and so on. We can therefore safely say they use the africa.pool.ntp.org pool.
-Then comes the interesting bit, there were some Safaricom IPs communicating with the phone on some weird ports, one case is <code>196.201.216.4</code>, Shodan reveals port <code>500</code> and <code>4500</code> open on whatever is running on that IP. Let&rsquo;s leave Safaricom for now and look at the other traffic.</p>
-
-<p>The BRO logs are pretty detailed and therefore I needed some way to clean them up to do my own analysis. I therefore wrote a bash script to do some filtering.
-I then used Shodan-cli to get information of every unique IP and save the output. Here is the script for anyone interested.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Enter the name of the connection log: &quot;</span>
-</span><span class='line'><span class="nb">read </span>LOG
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Getting details from shodan&quot;</span>
-</span><span class='line'><span class="sb">`</span>sed -e <span class="s1">&#39;/^#/d&#39;</span> <span class="nv">$LOG</span> <span class="p">|</span> cut -f <span class="m">5</span> <span class="p">|</span> sort -u &gt; filtered<span class="sb">`</span>
-</span><span class='line'>touch output
-</span><span class='line'>
-</span><span class='line'><span class="k">while</span> <span class="nb">read</span> -r line<span class="p">;</span> <span class="k">do</span>
-</span><span class='line'>  <span class="nb">echo</span> <span class="nv">$line</span>
-</span><span class='line'>  <span class="sb">`</span>sudo shodan host <span class="nv">$line</span> &gt;&gt; output<span class="sb">`</span>
-</span><span class='line'>  <span class="nb">echo</span> <span class="s2">&quot;&quot;</span>&gt;**&gt; output
-</span><span class='line'><span class="k">done</span> &lt; <span class="s2">&quot;filtered&quot;</span>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Done! Output saved to output&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">exit </span><span class="m">0</span>     
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I am going to cut right to the chase as this post is getting too long. The world is being taken over by analytics, advertising and digital content companies!
-Let me just list a few of the companies that communicated with my phone over that one hour period, remember I left it idle most of that time. Here we go</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>Mediamath.com         Mixpane.com         Criteo.com
-</span><span class='line'>Fastly Inc            AOL                 AppNexus
-</span><span class='line'>Akamai                Chango              Trapad
-</span><span class='line'>Exelate.com           Openx.com           Adtech.de
-</span><span class='line'>Lijit.com             Crashlytics.com     Pubmatic
-</span><span class='line'>ACNielson             Amazon              ...and several others
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I usually am not worried about companies using analytics for their marketing purposes but this time something spooked me.
-Several of these servers are vulnerable to the <a href="https://weakdh.org/" target="_blank"><strong>logjam attack</strong></a> and even more worryingly some are vulnerable to heartbleed. It would therefore not be far-fetched to assume they&rsquo;ve already been compromised or they will be. With all the traffic going on between my phone and these servers, I had hoped they&rsquo;d have their security figured out. It&rsquo;s often said that third parties are some of the most promising targets for hackers and you can see exactly why here.</p>
-
-<h1>Conclusion</h1>
-
-<p>That was a long post so let&rsquo;s wrap it up.
-There were some peculiar IPs that I&rsquo;ll be investigating in subsequent BRO chronicles. Other random titbits include the discovery that several Instagram servers communicating with my phone are also vulnerable to the logjam attack, Yahoo mail is particularly noisy traffic wise and so on.
-When going through all that analytics and ad based traffic I remembered a quote by Jeffrey Hammerbacher, one of Facebook&rsquo;s first 100 employees. I therefore aptly end this post with his quote:</p>
-
-<blockquote><h2>The best minds of my generation are thinking about how to make people click ads. That sucks.</h2></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Learning to hack]]></title>
-    <link href="http://www.ckn.io/blog/2015/08/25/learning-to-hack/"/>
-    <updated>2015-08-25T14:27:24+03:00</updated>
-    <id>http://www.ckn.io/blog/2015/08/25/learning-to-hack</id>
-    <content type="html"><![CDATA[<p>Becoming a skilled hacker or the politically correct &ldquo;information security specialist&rdquo; doesn&rsquo;t have a straightforward defined path. Here I will try to layout what constitutes a good way to go about it.</p>
-
-<!--more-->
-
-
-<h1>Bits and Pieces - Digital Logic</h1>
-
-<p>Everything starts here. Every computer process is just sequences of simple logic operations.
-Learn about AND, OR, XOR and so on. Go through the full course material if you&rsquo;re already being taught this in school. If not, don&rsquo;t skim through this, dedicate enough time to it. This is interesting stuff for the hacker mind so it shouldn&rsquo;t be too taxing.
-Ideally take it deeper to the circuit level implementations. Study NAND gates and so on. If you&rsquo;re so inclined go even further to diodes and transistors. With this you&rsquo;ll be primed for the next area - Assembly Language.</p>
-
-<h1>POP POP RET - Assembly Language</h1>
-
-<p>A lot of people will avoid Assembly due to the false impression that it&rsquo;s very complex. It really isn&rsquo;t, infact it&rsquo;s a lot more fun and rewarding. If you took time on your digital logic and you aren&rsquo;t afraid of a bit of math, this will be a lot easier to grasp.
-You&rsquo;ll get to learn how the processor runs at a low level. You&rsquo;ll get to learn about instructions, registers and programming logic. Once you&rsquo;ve got this figured out, higher level languages will be a breeze. You&rsquo;ll get to understand how your programs interact with different hardware. Best of all you&rsquo;ll spare yourself the agony of trying to figure it out when you try your hand at things like exploit development, reverse engineering and hardware hacking.
-There are free emulators out there that will help you along the process and make the experience fulfilling. Try lighting some LEDs or programming some hardware. Once you&rsquo;re done with this, you&rsquo;ll be able to hold your own any in almost any information security field you decide to pursue.</p>
-
-<h1>PCAP or it never happened - The Network</h1>
-
-<p>Next you need to learn how devices and services communicate. Start from the basics and build up from there. Study the OSI model, network devices and related services. Learn as much as you can about IPv4, IPv6, subnetting, routing, switching, DNS, DHCP and so on. From there move on to network security and the various attacks and countermeasures. Master the theory behind attacks such as MAC flooding, DNS and DHCP hijacks and so on. Learn about common defenses and network setups, Firewalls, IPS&rsquo;s and IDS&rsquo;s, DMZ&rsquo;s, VLANS, VPNS and so on.
-A straightforward way would be to go through the Cisco Network Certification material, you can even get yourself certified along the way :)</p>
-
-<h1>The Box - *nix</h1>
-
-<p>You need a system that is powerful and flexible. This is where linux and the other variants of the *nix family come in. If you&rsquo;re just beginning, set up a virtual machine or dual boot your computer. I would suggest you begin with the latest stable version of Ubuntu to get yourself going and make the transition from Windows smooth. Learn how to set it up and how to do various tasks on the system. Learn about various commands and how to automate process using scripts. All this is still at a high level so the learning curve is still manageable. Once you&rsquo;re comfortable, you can transition to using it as your primary OS.
-Next dive into the guts of the system. Learn about the building blocks of the system and how everything fits in together. One way is to build your linux system from the ground up. Distros like ArchLinux and Gentoo that require you to build from an initial shell interface are an option you can use in the learning proces. The Arch Wiki for one is amazingly comprehensive and structured for both the beginner and the advanced user.
-Kali Linux then comes in. Once you understand Linux well enough, you can let the good people at Offensive Security do the work for you. Kali Linux is a powerful and well built system that will give you access to tools that you&rsquo;ll use a lot in your information security work.</p>
-
-<h1>Explore the world - The organisation</h1>
-
-<p>The real world is made up of people and the decisions they make. It is therefore highly important that you understand how they operate in various environments.
-I therefore suggest that you find a way of working in an organisation and experience how information security is approached. Intern as a system admin or whatever position that allows you to interact with systems and people in IT departments. Learn the common practices and errors that are made along the way. Get an internal perspective so that your thought process takes into account what goes into building and setting up systems.
-You don&rsquo;t want to gain temporary access to a network and start wondering how a domain controller ties in to the network.
-Being part of an organisation also will give you insight into the behaviour of various people in the organistation. Understanding how everyone from the tech savvy to the management react to various situations will come in handy as you progess.</p>
-
-<h1>Tying up the pieces</h1>
-
-<p>There are a lot of areas you can focus your attention on along your information security journey and that is up to you. Experiment, change, adapt, and tweak what you need to.
-Some things will remain throughout though.
-You will need to be creative to see beyond the black and white.
-You&rsquo;ll need passion to take you through hours of research and reading through RFCs&hellip;hehe.
-You&rsquo;ll need some code to live by or you may get lost along the way.</p>
-
-<p>Being a hacker isn&rsquo;t about writing the most complicated exploit, it is about figuring out elegant solutions to some problem - easy or challenging.
-In the end it&rsquo;s about the thrill of discovery and creation.</p>
-
-<p>I leave you with this book by James Gleick that I believe every information security person should read at least once <a href="http://www.amazon.com/The-Information-History-Theory-Flood/dp/1400096235">http://www.amazon.com/The-Information-History-Theory-Flood/dp/1400096235</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AfricaHackon - Be part of the story]]></title>
-    <link href="http://www.ckn.io/blog/2015/05/17/africahackon-be-part-of-the-story/"/>
-    <updated>2015-05-17T08:42:08+03:00</updated>
-    <id>http://www.ckn.io/blog/2015/05/17/africahackon-be-part-of-the-story</id>
-    <content type="html"><![CDATA[<p>I first heard of AfricaHackon at my previous job where I was working in IT. A colleague and friend told me about a conference about information security that would be held at our building. This was early last year. Being in charge of the network, I would be assisting in setting up internet access for the conference. Now when you&rsquo;re incharge of the network and you hear you&rsquo;ll be giving access to your network to a room full of the best &ldquo;hackers&rdquo; in the country, you get a bit nervous. I use the word &ldquo;hackers&rdquo; in quotes because that&rsquo;s where I&rsquo;d like to start.</p>
-
-<!--more-->
-
-
-<p><img src="http://www.ckn.io/images/africahackon_logo.jpg"></p>
-
-<h1>The hacker mindset</h1>
-
-<p>The word hacker has long been desecrated. People immediately picture this antisocial person that is out to break into their computers and steal their data and do other equally nefarious acts.
-But they are wrong, hacking is an art form, practised by people who push the boundaries of innovation. It&rsquo;s about having bulbs lighting up in your head as you figure out some new way to make something work. About discovering ways to make things work more efficiently.
-It&rsquo;s about finding ways to use things in a way even their creator never imagined.
-It is about tweaking the firing timing of your spark plugs to make your engine add a bit of power, for car enthusiasts.
-It&rsquo;s about creating a new masterpiece in a way that has never been attempted, for painters.
-It&rsquo;s about building that robot using random materials, for the hardware enthusiasts.
-It&rsquo;s about automating your lights, and electrical gadgets, for the electrical and electronics people.</p>
-
-<p>There&rsquo;s a little bit of hacking in everyone of us. As you try to piece together that jigsaw puzzle, fill in that crossword, finish that sudoku. We do it all the time.
-If one sentence can sum up what a hacker is, it would be this:</p>
-
-<blockquote><h2>A hacker is a person who enjoys the intellectual challenge of creatively circumventing limitations.</h2></blockquote>
-
-<h1>Back to AfricaHackon</h1>
-
-<p>That day I did end up turning off all the wireless networks that I felt weren&rsquo;t secure enough&hellip;hehe. But I shouldn&rsquo;t have been worried, these were the good type of hackers. They are the ones that help keep you secure. They help you protect yourself from people who would like to steal your private data. They help your company adopt practices that make it hard for the bad guys. They assist you incase you&rsquo;ve undergone an attack.
-They are some of the brightest minds you&rsquo;ll meet, some help the biggest companies in the country and Africa keep their information secure. Some are still learning. They are drawn from diverse fields and they are on a mission.
-They want to protect your information, they want to help your bank keep your accounts safe from prying eyes. They want to ensure you can access the internet and make your calls without someone monitoring or listening in.
-The first phase of this is to build capacity. They are conducting training sessions to train students and spark their interest in the field of information security. They are bringing awareness to companies and the general public on the way to approach security of their systems and data. They plan on building a culture of information security awareness, and to bring up the right skills in the untapped growing generation of brilliant students.</p>
-
-<h1>The second AfricaHackon conference</h1>
-
-<p>Another avenue is conferences. This July the 31st, they will be hosting the second AfricaHackon conference. Having attended the last one, take it from me that it&rsquo;s a unique experience that should not be missed.
-Come watch as these brilliant minds take you through real life happenings in the world of information security. Watch them show how the bad guys can attack your systems and then how to defend against them.
-This is no ordinary conference. No long boring powerpoints, but interactive demonstrations.
-I am sure there are some of you who have discovered some interesting ways someone can use all this technology around us. How someone can break into a system. It may only be an idea, but that&rsquo;s all it takes. The AfricaHackon team is more than happy to help you explore and develop it.
-The AfricaHackon team wants you to come make a presentation at this conference. You&rsquo;ll get to be mentored by the best minds in the field.
-The silver lining is you&rsquo;ll get to present your ideas to some of the biggest companies in the country who&rsquo;ll be in attendance. You&rsquo;ll get to interact with them first hand and have genuine discussions. In attendance will also be major international and local media houses.
-The ball is in your court.</p>
-
-<h2>Submit your papers and ideas to <a href="&#x6d;&#97;&#x69;&#108;&#116;&#111;&#58;&#x69;&#x6e;&#102;&#111;&#64;&#65;&#x66;&#114;&#105;&#99;&#97;&#72;&#x61;&#99;&#107;&#111;&#x6e;&#x2e;&#x63;&#x6f;&#x6d;">&#105;&#110;&#x66;&#x6f;&#64;&#65;&#x66;&#x72;&#105;&#x63;&#97;&#72;&#97;&#99;&#107;&#111;&#x6e;&#x2e;&#99;&#x6f;&#x6d;</a> before 30th of May.</h2>
-
-<h4>Read this <a href="http://sylviamunyisia.blogspot.com/2015/05/call-for-papers.html" target="_blank"><strong>page</strong></a> by Sylvia that explains the call for papers very well.</h4>
-
-<h4>Also feel free to interact with the team on social media through <a href="https://twitter.com/AfricaHackon" target="_blank"><strong>twitter</strong></a> and <a href="https://www.facebook.com/AfricaHackon" target="_blank"><strong>facebook</strong></a>.</h4>
-
-<h4>Visit the <a href="http://www.AfricaHackon.com/" target="_blank"><strong>AfricaHackon site</strong></a> for past presentations and to keep yourself updated.</h4>
-
-<p>Be part of the story.
-And remember, everybody needs a hacker :)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Crypto magic - homomorphic encryption]]></title>
-    <link href="http://www.ckn.io/blog/2015/05/11/crypto-magic-homomorphic-encryption/"/>
-    <updated>2015-05-11T13:45:52+03:00</updated>
-    <id>http://www.ckn.io/blog/2015/05/11/crypto-magic-homomorphic-encryption</id>
-    <content type="html"><![CDATA[<p>Could Google do your search without knowing what it was looking for? Could your hospital provide you with information regarding your health records without knowing what you asked?</p>
-
-<!--more-->
-
-
-<p>Can data be encrypted in such a way that computation can be done on it without decrypting it first?
-Yes it can! This is what homomorphic encryption is all about.
-Our exploration of crypto magic continues :)</p>
-
-<p>Let&rsquo;s start with two scenarios</p>
-
-<h1>scenario 1: encrypted search</h1>
-
-<p>First, I am not talking about searching over secure protocols like https. What I am referring to is where your search term is in encrypted form before it reaches the search engine (say Google). Google therefore doesn&rsquo;t know what you want to search for.
-After Google receives your encrypted search term, it searches for it in an encrypted database. The results it gets are also encrypted which are then passed on to you. You can then privately decrypt them :). You&rsquo;ll note that Google never knew what you were looking for nor what results were returned. No decryption occured at any point before you received the results.</p>
-
-<h1>scenario 2: secure cloud processing</h1>
-
-<p>Would it not be nice to have some powerful hosting provider do complex computation on your data without them ever knowing the contents? A case would be like your bank having a cloud provider hosting its data. The bank would encrypt the data before uploading it, so the cloud provider never sees the plain version. The bank would then be able to perform complex computation on the encrypted data using the cloud providers powerful processing power without it ever been decrypted. The bank could also be able to request information from the encrypted data using encrypted queries. The returned answers would also be in encrypted form which only the bank can decrypt. And again no decryption takes place at the cloud provider.</p>
-
-<h1>How can this be done?</h1>
-
-<p>This concept was first proposed over 30 years ago by Rivest, Adleman and Dertouzos and is referred to homomorphic encryption (They also suggested it was probably impossible).
-Let&rsquo;s say you have x and y. if you multiply the encrypted version of x and the encrypted version of y and the answer is the same as if you multiplied their plain values and encrypted the answer, then the process is said to be homomorphic with respect to multiplication.
-Any computer algorithm is a series of arithmetic steps so if we can get a process that is homomorphic with respect to both addition and multiplication, any computing application would be possible on encrypted data.</p>
-
-<h1>Has it been achieved?</h1>
-
-<p>Over the past three decades, partial solutions have been discovered.
-However, it is not until 2009 that Craig Gentry developed a fully homomorphic system. Unfortunately it requires lots and lots of computational power. For instance, an encrypted Google search would multiply the computation time to 1 trillion times that of a normal one :(.
-The good news is that the theoretical barrier was broken and with lots of work a practical solution may be found :).</p>
-
-<h4>For anyone willing to give it a go, <a href="http://www.i-programmer.info/news/112-theory/2330-darpa-spends-20-million-on-homomorphic-encryption.html" target="_blank"><strong>DARPA is offering $20 million</strong></a> if you can come up with a scheme that only takes 100,000 times as long as unencrypted calculations :).</h4>
-
-<p>And we may well be on our way there, three MIT scientists developed a system that emulates fully homomorphic encryption for most of the functions of the SQL databases used in many applications. It computes only with encrypted data and takes just 15% to 26% more computing time.
-The project is called CryptDB and you can check it out <a href="https://github.com/CryptDB/cryptdb" target="_blank"><strong>here</strong></a>.</p>
-
-<p>The application of this in information security does not even need explaining :)</p>
 ]]></content>
   </entry>
   

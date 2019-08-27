@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://www.ckn.io/blog/2019/08/27/exploiting-the-eques-elf-smart-plug-part-four/</loc>
+<lastmod>2019-08-27T07:10:52+03:00</lastmod>
+</url>
+<url>
+<loc>http://www.ckn.io/blog/2019/08/26/exploiting-the-eques-elf-smart-plug-part-three/</loc>
+<lastmod>2019-08-26T11:53:09+03:00</lastmod>
+</url>
+<url>
+<loc>http://www.ckn.io/blog/2019/08/25/exploiting-the-eques-elf-smart-plug-part-two/</loc>
+<lastmod>2019-08-25T14:23:39+03:00</lastmod>
+</url>
+<url>
+<loc>http://www.ckn.io/blog/2019/08/24/exploiting-the-eques-elf-smart-plug-part-one/</loc>
+<lastmod>2019-08-24T11:57:50+03:00</lastmod>
+</url>
+<url>
 <loc>http://www.ckn.io/blog/2017/12/28/wireguard-vpn-portable-raspberry-pi-setup/</loc>
 <lastmod>2017-12-28T16:44:50+03:00</lastmod>
 </url>
@@ -128,6 +144,9 @@
 </url>
 <url>
 <loc>http://www.ckn.io/blog/categories/vpn/</loc>
+</url>
+<url>
+<loc>http://www.ckn.io/blog/categories/iot/</loc>
 </url>
 <url>
 <loc>http://www.ckn.io/2/</loc>
