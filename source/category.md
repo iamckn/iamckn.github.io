@@ -10,6 +10,18 @@ footer: true
 
 ***
 
+#[hardware](/blog/categories/hardware/)
+
+***
+
+#[iot](/blog/categories/iot/)
+
+***
+
+#[vpn](/blog/categories/vpn/)
+
+***
+
 #[the setup](/blog/categories/the-setup/)
 
 ***
@@ -19,10 +31,6 @@ footer: true
 ***
 
 #[the network project](blog/categories/the-network-project/)
-
-***
-
-#[hardware](/blog/categories/hardware/)
 
 ***
 
