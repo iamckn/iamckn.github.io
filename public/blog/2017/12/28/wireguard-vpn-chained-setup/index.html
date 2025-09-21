@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> Wireguard Vpn Chained Setup | The poetry of (in)security</title>
+  <link rel = 'canonical' href = 'https://example.org/blog/2017/12/28/wireguard-vpn-chained-setup/'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="Wireguard Vpn Chained Setup" />
+<meta property="og:description" content="Moving on from my previous post about setting up a typical Wireguard VPN connection, let&rsquo;s go through how to do a chained setup. I will show how to do both the typical chained Wireguard VPN connection and the one with selective routing as described in my earlier post here." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.org/blog/2017/12/28/wireguard-vpn-chained-setup/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2017-12-28T07:33:38+03:00" />
+<meta property="article:modified_time" content="2017-12-28T07:33:38+03:00" />
+
+
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Wireguard Vpn Chained Setup"/>
+<meta name="twitter:description" content="Moving on from my previous post about setting up a typical Wireguard VPN connection, let&rsquo;s go through how to do a chained setup. I will show how to do both the typical chained Wireguard VPN connection and the one with selective routing as described in my earlier post here."/>
+
+  
+  
+  
+  <link rel="stylesheet" href="https://example.org/css/styles.e6089d87700a06caa386c15bac0e1f25720ef059b3e065c0a37502617f43d5e1ef54d1c10e3f4be773eb071ea4ae80b46775fad1ad2ae146f1ceac479135227f.css" integrity="sha512-5gidh3AKBsqjhsFbrA4fJXIO8Fmz4GXAo3UCYX9D1eHvVNHBDj9L53PrBx6kroC0Z3X60a0q4UbxzqxHkTUifw=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://example.org/images/favicon.ico" />
+
+  
+  
+  
+  
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HY9XRSX5QQ"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-HY9XRSX5QQ', { 'anonymize_ip': false });
+}
+</script>
+
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="https://example.org/">
+  
+    <div id="logo" style="background-image: url(https://example.org/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>The poetry of (in)security</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/post">Posts</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
+      
+        <li><a href="/whoami">Whoami</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <p>Moving on from my previous <a href="https://www.ckn.io/blog/2017/11/14/wireguard-vpn-typical-setup/"><strong>post</strong></a> about setting up a typical Wireguard VPN connection, let&rsquo;s go through how to do a chained setup. I will show how to do both the typical chained Wireguard VPN connection and the one with selective routing as described in my earlier post <a href="https://www.ckn.io/blog/2017/11/12/vpns-an-opsec-primer/"><strong>here</strong></a>.</p>
+<h1 id="set-up-details">Set up details</h1>
+<p>Let us start with the typical Wireguard VPN chained connection.</p>
+<p><img src="/images/chained_vpn.png" alt="alt"></p>
+<p>Here&rsquo;s how our setup will look like:</p>
+<ul>
+<li>An ubuntu 16.04 (x64) VPS as our first VPN server which we will refer to as the middleman (VPN Gateway One as shown in the diagram above).</li>
+<li>An ubuntu 16.04 (x64) VPS as our second VPN server which we will refer to as the gate (VPN Gateway Two as shown in the diagram above).</li>
+<li>An ubuntu 16.04 (x64) computer as the client.</li>
+<li>The internet facing interface on both VPN servers is <code>eth0</code>.</li>
+<li>We will use the <code>10.200.200.0/24</code> subnet for the network between the client and the middleman.</li>
+<li>We will use the <code>10.100.100.0/24</code> subnet for the network between the middleman and the gate.</li>
+<li>We will use <code>10.200.200.1/24</code> as the middleman client facing interface <code>wg0</code> IP.</li>
+<li>We will use <code>10.200.200.2/24</code> as the VPN client interface <code>vpn0</code> IP .</li>
+<li>We will use <code>10.100.100.1/24</code> as the gate VPN interface <code>wg0</code> IP.</li>
+<li>We will use <code>10.100.100.2/24</code> as the middleman gate facing interface <code>gate0</code> IP.</li>
+<li>Unbound DNS resolver for added security.</li>
+</ul>
+<h1 id="set-up-steps">Set up steps</h1>
+<ol>
+<li>Install Wireguard on the middleman.</li>
+<li>Install Wireguard on the gate.</li>
+<li>Set up a Wireguard VPN tunnel between the client and the middleman.</li>
+<li>Set up a Wireguard VPN tunnel between the middleman and the gate.</li>
+<li>Configure policy routing on the middleman to route traffic from the client to the gate.</li>
+<li>Update the middleman gate facing interface <code>gate0</code> to allow all traffic from the gate to be allowed in the tunnel.</li>
+<li>Confirm everything works as desired by doing a traceroute to the internet from the client.</li>
+</ol>
+<h1 id="1-install-wireguard-on-the-middleman">1. Install Wireguard on the middleman.</h1>
+<p>I already went into the specifics of a typical Wirguard VPN setup in my previous post, so I&rsquo;ll not go into the details here.</p>
+<p>I have shared ansible scripts on <a href="https://github.com/iamckn/chained-wireguard-ansible"><strong>Github</strong></a> for the automation so I&rsquo;ll just run through the process here.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#Clone the repo on the client</span>
+</span></span><span style="display:flex;"><span>git clone https://github.com/iamckn/chained-wireguard-ansible
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Move into the middleman folder</span>
+</span></span><span style="display:flex;"><span>cd chained-wireguard-ansible/middleman/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Edit the hosts file in that directory to change the IP to that of your middleman VPS</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Begin the installation process by running</span>
+</span></span><span style="display:flex;"><span>ansible-playbook wireguard.yml -u root -k -i hosts
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#If you&#39;re using an SSH key for authentication run this instead</span>
+</span></span><span style="display:flex;"><span>ansible-playbook wireguard.yml -u root -i hosts
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Give it a few minutes and the server set up will be complete.</span>
+</span></span></code></pre></div><h1 id="2-install-wireguard-on-the-gate">2. Install Wireguard on the gate.</h1>
+<p>The installation process is as below.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#Clone the repo on the client</span>
+</span></span><span style="display:flex;"><span>git clone https://github.com/iamckn/chained-wireguard-ansible
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Move into the gate folder</span>
+</span></span><span style="display:flex;"><span>cd chained-wireguard-ansible/gate/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Edit the hosts file in that directory to change the IP to that of your gate VPS</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Begin the installation process by running</span>
+</span></span><span style="display:flex;"><span>ansible-playbook wireguard.yml -u root -k -i hosts
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#If you&#39;re using an SSH key for authentication run this instead</span>
+</span></span><span style="display:flex;"><span>ansible-playbook wireguard.yml -u root -i hosts
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Give it a few minutes and the server set up will be complete.</span>
+</span></span></code></pre></div><h1 id="3-set-up-a-wireguard-vpn-tunnel-between-the-client-and-the-middleman">3. Set up a Wireguard VPN tunnel between the client and the middleman.</h1>
+<p>We then set up Wireguard on our client.</p>
+<p>We begin by installing wireguard on the client depending on what platform we&rsquo;re on.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>add-apt-repository ppa:wireguard/wireguard
+</span></span><span style="display:flex;"><span>apt-get update
+</span></span><span style="display:flex;"><span>apt-get install wireguard-dkms wireguard-tools linux-headers-<span style="color:#66d9ef">$(</span>uname -r<span style="color:#66d9ef">)</span>
+</span></span></code></pre></div><p>If you are on Kali Linux, you may have to install <code>resolvconf</code> if you don&rsquo;t have it already.</p>
+<p>Our Wireguard client config was generated during the middleman install process. The file is named <code>wg0.conf</code> and is in the home folder of the middleman. Use scp or whatever other method you prefer to copy it to your client.</p>
+<p>I&rsquo;ll rename mine to <code>vpn0.conf</code> and move it to <code>/etc/wireguard/vpn0.conf</code>.</p>
+<p>We finally bring up our VPN interface by running the command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo wg-quick up vpn0
+</span></span></code></pre></div><p>We have our Wireguard VPN tunnel in place.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>vpn0      Link encap:UNSPEC  HWaddr 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00  
+</span></span><span style="display:flex;"><span>          inet addr:10.200.200.2  P-t-P:10.200.200.2  Mask:255.255.255.255
+</span></span><span style="display:flex;"><span>          UP POINTOPOINT RUNNING NOARP  MTU:1420  Metric:1
+</span></span><span style="display:flex;"><span>          RX packets:110 errors:0 dropped:0 overruns:0 frame:0
+</span></span><span style="display:flex;"><span>          TX packets:241 errors:0 dropped:0 overruns:0 carrier:0
+</span></span><span style="display:flex;"><span>          collisions:0 txqueuelen:1 
+</span></span><span style="display:flex;"><span>          RX bytes:46064 <span style="color:#f92672">(</span>46.0 KB<span style="color:#f92672">)</span>  TX bytes:51540 <span style="color:#f92672">(</span>51.5 KB<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>You should now have a secure VPN connection in place. You can confirm this by checking your IP on sites such as <a href="https://whoer.net/">https://whoer.net/</a>. Your public IP should be that of the middleman.</p>
+<h1 id="4-set-up-a-wireguard-vpn-tunnel-between-the-middleman-and-the-gate">4. Set up a Wireguard VPN tunnel between the middleman and the gate.</h1>
+<p>As it stands we have set up a standard VPN connection between the client and the middleman. The next step is now to set up a Wireguard VPN tunnel between the middleman and the gate.</p>
+<p>In our scenario the gate will act as the server and the middleman as the client in that tunnel.</p>
+<p>During the gate install process, a file named <code>gate0.conf</code> was generated and you should find it in the home directory of the gate. Copy it to the middleman using scp.</p>
+<p>Move the file to <code>/etc/wireguard/gate0.conf</code> on the middleman.</p>
+<p>Bring up the VPN interface by running the command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wg-quick up gate0
+</span></span></code></pre></div><p>We now have our Wireguard VPN tunnel between the middleman and the gate in place.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gate0     Link encap:UNSPEC  HWaddr 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00  
+</span></span><span style="display:flex;"><span>          inet addr:10.100.100.2  P-t-P:10.100.100.2  Mask:255.255.255.255
+</span></span><span style="display:flex;"><span>          UP POINTOPOINT RUNNING NOARP  MTU:1420  Metric:1
+</span></span><span style="display:flex;"><span>          RX packets:1 errors:0 dropped:0 overruns:0 frame:0
+</span></span><span style="display:flex;"><span>          TX packets:2 errors:0 dropped:0 overruns:0 carrier:0
+</span></span><span style="display:flex;"><span>          collisions:0 txqueuelen:1 
+</span></span><span style="display:flex;"><span>          RX bytes:92 <span style="color:#f92672">(</span>92.0 B<span style="color:#f92672">)</span>  TX bytes:180 <span style="color:#f92672">(</span>180.0 B<span style="color:#f92672">)</span>
+</span></span></code></pre></div><h1 id="5-configure-policy-routing-on-the-middleman-to-route-traffic-from-the-client-to-the-gate">5. Configure policy routing on the middleman to route traffic from the client to the gate.</h1>
+<p>We now have all the tunnels in place but traffic from the client will still go out to the internet through the middleman.</p>
+<p>Normally all we need to do is modify our routes on the middleman to route traffic from the client to the gate. Wireguard however, using the <code>wg-quick</code> tool employs a variant of Rule-based routing using <a href="https://www.linux.org/docs/man8/tc-fw.html"><strong>fwmark</strong></a>.</p>
+<p>We are therefore going to configure policy routing to ensure traffic from the client is passed on to the gate by the middleman.</p>
+<p>Do the configuration on the middleman as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;1 middleman&#34;</span> &gt;&gt; /etc/iproute2/rt_tables
+</span></span><span style="display:flex;"><span>ip route add 0.0.0.0/0 dev gate0 table middleman 
+</span></span><span style="display:flex;"><span>ip rule add from 10.200.200.0/24 lookup middleman
+</span></span></code></pre></div><h1 id="6-update-the-middleman-gate-facing-interface-gate0-to-allow-all-traffic-from-the-gate-to-be-allowed-in-the-tunnel">6. Update the middleman gate facing interface <code>gate0</code> to allow all traffic from the gate to be allowed in the tunnel.</h1>
+<p>Next we need to allow all traffic coming from the gate to be allowed through the tunnel between the middleman and the gate. This is necessary to allow internet traffic that will be passed through the tunnel. Wireguard interfaces are strict in inspecting the origin of traffic that can be allowed to participate in the encrypted tunnel.</p>
+<p>On the middleman run the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wg set gate0 peer &lt;peer_public_key&gt; allowed-ips 0.0.0.0/0
+</span></span></code></pre></div><p>Note that the <code>peer_public_key</code> in the command above can be gotten by running <em>wg show</em> on the middleman and checking the peer key on the <code>gate0</code> interface.</p>
+<h1 id="7-confirm-everything-works-as-desired-by-doing-a-traceroute-to-the-internet-from-the-client">7. Confirm everything works as desired by doing a <code>traceroute</code> to the internet from the client.</h1>
+<p>Before celebration, do various tests to confirm traffic from your client is going out through the gate and not the middleman.</p>
+<p>Below is a <code>traceroute</code> to <code>4.2.2.2</code> confirming my traffic passess through the middleman and goes out through the gate to the internet.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>traceroute to 4.2.2.2 <span style="color:#f92672">(</span>4.2.2.2<span style="color:#f92672">)</span>, <span style="color:#ae81ff">30</span> hops max, <span style="color:#ae81ff">60</span> byte packets
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">1</span>  10.200.200.1 <span style="color:#f92672">(</span>10.200.200.1<span style="color:#f92672">)</span>  257.422 ms  258.769 ms  258.783 ms
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">2</span>  10.100.100.1 <span style="color:#f92672">(</span>10.100.100.1<span style="color:#f92672">)</span>  258.772 ms  258.752 ms  258.878 ms
+</span></span><span style="display:flex;"><span> 3	104.131.0.253 <span style="color:#f92672">(</span>104.131.0.253<span style="color:#f92672">)</span>  258.877 ms 104.131.0.254 <span style="color:#f92672">(</span>104.131.0.254<span style="color:#f92672">)</span>  259.595 ms  260.021 ms
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">4</span>  138.197.251.20 <span style="color:#f92672">(</span>138.197.251.20<span style="color:#f92672">)</span>  260.028 ms 138.197.251.26 <span style="color:#f92672">(</span>138.197.251.26<span style="color:#f92672">)</span>  260.029 ms 138.197.248.36 <span style="color:#f92672">(</span>138.197.248.36<span style="color:#f92672">)</span>  260.005 ms
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">5</span>  138.197.244.20 <span style="color:#f92672">(</span>138.197.244.20<span style="color:#f92672">)</span>  260.430 ms 138.197.244.28 <span style="color:#f92672">(</span>138.197.244.28<span style="color:#f92672">)</span>  260.841 ms  261.134 ms
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">6</span>  * * lag-103.ear4.Newark1.Level3.net <span style="color:#f92672">(</span>4.14.218.29<span style="color:#f92672">)</span>  259.196 ms
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">7</span>  * * *
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">8</span>  b.resolvers.Level3.net <span style="color:#f92672">(</span>4.2.2.2<span style="color:#f92672">)</span>  259.679 ms  260.234 ms  260.117 ms
+</span></span></code></pre></div><p>Notice that <code>10.200.200.1</code> is the the middleman client facing interface IP and <code>10.100.100.1</code> is the gate VPN interface IP.</p>
+<p>Don&rsquo;t forget to confirm your public IP on sites such as <a href="https://whoer.net/">https://whoer.net/</a> and run a DNS leak test on <a href="http://dnsleak.com/">http://dnsleak.com/</a>.</p>
+<p>We are done!</p>
+<h1 id="selective-routing">Selective Routing</h1>
+<p>What if we want to allow only certain traffic to go out to the internet through the gate and all the rest to go out through the middleman? The scenario is as below:</p>
+<p><img src="/images/chained_selective.png" alt="alt"></p>
+<p>Let&rsquo;s put an example scenario to test. We want all our internet traffic to go out through the middleman and not be forwarded to the gate. We however desire to have an exception for traffic to <code>4.2.2.2</code>, which we want to go out through the gate.</p>
+<p>The only thing we will need to do is modify the policy routes we set up on the middleman as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#Delete the route that forwarded all traffic to the gate</span>
+</span></span><span style="display:flex;"><span>ip route del 0.0.0.0/0 dev gate0 table middleman 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Add a route to forward 4.2.2.2 to the gate</span>
+</span></span><span style="display:flex;"><span>ip route add 4.2.2.2/32 dev gate0 table middleman 
+</span></span></code></pre></div><p>Doing traceroute tests should confirm our results.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#Normal internet traffic</span>
+</span></span><span style="display:flex;"><span>traceroute to 8.8.8.8 <span style="color:#f92672">(</span>8.8.8.8<span style="color:#f92672">)</span>, <span style="color:#ae81ff">30</span> hops max, <span style="color:#ae81ff">60</span> byte packets
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">1</span>  10.200.200.1 <span style="color:#f92672">(</span>10.200.200.1<span style="color:#f92672">)</span>  256.786 ms  257.063 ms  257.094 ms
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">2</span>  104.131.0.253 <span style="color:#f92672">(</span>104.131.0.253<span style="color:#f92672">)</span>  257.827 ms 104.131.0.254 <span style="color:#f92672">(</span>104.131.0.254<span style="color:#f92672">)</span>  257.830 ms  258.201 ms
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">3</span>  138.197.248.52 <span style="color:#f92672">(</span>138.197.248.52<span style="color:#f92672">)</span>  258.208 ms  258.196 ms 138.197.248.32 <span style="color:#f92672">(</span>138.197.248.32<span style="color:#f92672">)</span>  259.771 ms
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">4</span>  138.197.244.34 <span style="color:#f92672">(</span>138.197.244.34<span style="color:#f92672">)</span>  259.040 ms  259.439 ms 138.197.244.32 <span style="color:#f92672">(</span>138.197.244.32<span style="color:#f92672">)</span>  259.409 ms
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">5</span>  72.14.194.62 <span style="color:#f92672">(</span>72.14.194.62<span style="color:#f92672">)</span>  259.692 ms  260.107 ms 162.243.191.255 <span style="color:#f92672">(</span>162.243.191.255<span style="color:#f92672">)</span>  260.110 ms
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">6</span>  * * *
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">7</span>  108.170.238.197 <span style="color:#f92672">(</span>108.170.238.197<span style="color:#f92672">)</span>  258.633 ms 108.170.238.195 <span style="color:#f92672">(</span>108.170.238.195<span style="color:#f92672">)</span>  258.223 ms 108.170.235.179 <span style="color:#f92672">(</span>108.170.235.179<span style="color:#f92672">)</span>  258.646 ms
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">8</span>  google-public-dns-a.google.com <span style="color:#f92672">(</span>8.8.8.8<span style="color:#f92672">)</span>  259.006 ms  259.652 ms  259.583 ms
+</span></span></code></pre></div><p>Note that our traffic doesn&rsquo;t get routed through the gate interface <code>10.100.100.1</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#Traffic to 4.2.2.2 </span>
+</span></span><span style="display:flex;"><span>traceroute to 4.2.2.2 <span style="color:#f92672">(</span>4.2.2.2<span style="color:#f92672">)</span>, <span style="color:#ae81ff">30</span> hops max, <span style="color:#ae81ff">60</span> byte packets
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">1</span>  10.200.200.1 <span style="color:#f92672">(</span>10.200.200.1<span style="color:#f92672">)</span>  256.622 ms  256.789 ms  256.787 ms
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">2</span>  10.100.100.1 <span style="color:#f92672">(</span>10.100.100.1<span style="color:#f92672">)</span>  257.783 ms  258.323 ms  258.317 ms
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">3</span>  * * *
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">4</span>  * * *
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">5</span>  * * *
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">6</span>  * * *
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">7</span>  * * *
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">8</span>  b.resolvers.Level3.net <span style="color:#f92672">(</span>4.2.2.2<span style="color:#f92672">)</span>  259.457 ms  259.321 ms  259.270 ms
+</span></span></code></pre></div><p>Note that traffic to <code>4.2.2.2</code> gets routed through the gate interface <code>10.100.100.1</code>.</p>
+<p>Modify the policy routes as need be to suit your needs.</p>
+<p>I&rsquo;ll wrap up the VPN series in the next post by showing how to set up a portable VPN solution on a Raspberry PI.</p>
+<p>Till then, happy hacking!</p>
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2025  CK 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/post">Posts</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/whoami">Whoami</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>

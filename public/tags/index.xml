@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on The poetry of (in)security</title>
+    <link>https://example.org/tags/</link>
+    <description>Recent content in Tags on The poetry of (in)security</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>CK</copyright>
+    <lastBuildDate>Tue, 27 Aug 2019 16:10:52 +0300</lastBuildDate>
+    <atom:link href="https://example.org/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hardware</title>
+      <link>https://example.org/tags/hardware/</link>
+      <pubDate>Tue, 27 Aug 2019 16:10:52 +0300</pubDate>
+      <guid>https://example.org/tags/hardware/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Iot</title>
+      <link>https://example.org/tags/iot/</link>
+      <pubDate>Tue, 27 Aug 2019 16:10:52 +0300</pubDate>
+      <guid>https://example.org/tags/iot/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Vpn</title>
+      <link>https://example.org/tags/vpn/</link>
+      <pubDate>Thu, 28 Dec 2017 16:44:50 +0300</pubDate>
+      <guid>https://example.org/tags/vpn/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Radio</title>
+      <link>https://example.org/tags/radio/</link>
+      <pubDate>Wed, 28 Jun 2017 18:30:35 +0300</pubDate>
+      <guid>https://example.org/tags/radio/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>The Setup</title>
+      <link>https://example.org/tags/the-setup/</link>
+      <pubDate>Sat, 17 Oct 2015 11:40:08 +0300</pubDate>
+      <guid>https://example.org/tags/the-setup/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ramblings</title>
+      <link>https://example.org/tags/ramblings/</link>
+      <pubDate>Sun, 04 Oct 2015 09:06:09 +0300</pubDate>
+      <guid>https://example.org/tags/ramblings/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Network Security</title>
+      <link>https://example.org/tags/network-security/</link>
+      <pubDate>Thu, 17 Sep 2015 20:54:07 +0300</pubDate>
+      <guid>https://example.org/tags/network-security/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Cryptography</title>
+      <link>https://example.org/tags/cryptography/</link>
+      <pubDate>Mon, 11 May 2015 13:45:52 +0300</pubDate>
+      <guid>https://example.org/tags/cryptography/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

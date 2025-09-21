@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The Setup on The poetry of (in)security</title>
+    <link>http://localhost:1313/categories/the-setup/</link>
+    <description>Recent content in The Setup on The poetry of (in)security</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 17 Oct 2015 11:40:08 +0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/the-setup/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Christian ~ 127.0.0.1</title>
+      <link>http://localhost:1313/blog/2015-10-17-christian/</link>
+      <pubDate>Sat, 17 Oct 2015 11:40:08 +0300</pubDate>
+      <guid>http://localhost:1313/blog/2015-10-17-christian/</guid>
+      <description>&lt;p&gt;#who are you?&lt;/p&gt;&#xA;&lt;p&gt;I am a passionate Information Security enthusiast. I specialize in Digital Forensics and Incident Response (DFIR). Research and artifacts analysis are the cause of my sleepless nights. I have a keen interest in PC and mobile device malware, I am therefore always tinkering with VMs and mobile phones.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Bright</title>
+      <link>http://localhost:1313/blog/2015-04-27-bright/</link>
+      <pubDate>Mon, 27 Apr 2015 08:01:00 +0300</pubDate>
+      <guid>http://localhost:1313/blog/2015-04-27-bright/</guid>
+      <description>&lt;p&gt;#who are you?&lt;/p&gt;&#xA;&lt;p&gt;Bright Gameli Mawudor is my name. Friends in the infosec world call me ~ze3D~. A passionate information security engineer with a love for system exploitation, gleaning information from all corners of the web about a target, and social engineering using all possible methods.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Jade</title>
+      <link>http://localhost:1313/blog/2015-04-20-jade/</link>
+      <pubDate>Mon, 20 Apr 2015 06:34:17 +0300</pubDate>
+      <guid>http://localhost:1313/blog/2015-04-20-jade/</guid>
+      <description>&lt;p&gt;#who are you?&lt;/p&gt;&#xA;&lt;p&gt;I am Jade Solomon, an Infosec/Code machine, I dedicate a lot of sleepless nights to Reverse Engineering, GSM/Mobile technology and Exploit Development.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>ck</title>
+      <link>http://localhost:1313/blog/2015-03-14-ck-the-setup/</link>
+      <pubDate>Sat, 14 Mar 2015 19:46:34 +0300</pubDate>
+      <guid>http://localhost:1313/blog/2015-03-14-ck-the-setup/</guid>
+      <description>&lt;p&gt;#who are you?&lt;/p&gt;&#xA;&lt;p&gt;I am an information security engineer with main interests in network security, hardware and radio frequency.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

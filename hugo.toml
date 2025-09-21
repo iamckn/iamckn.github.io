@@ -1,0 +1,61 @@
+baseURL = 'https://example.org/'
+languageCode = 'en-us'
+title = 'The poetry of (in)security'
+theme = 'cactus'
+copyright = "CK"
+
+[[menu.main]]
+name = "Home"
+url = "/"
+weight = 1
+
+[[menu.main]]
+name = "Posts"
+url = "/post"
+weight = 2
+
+[[menu.main]]
+name = "Tags"
+url = "/tags"
+weight = 3
+
+[[menu.main]]
+name = "Whoami"
+url = "/whoami"
+weight = 4
+
+[[module.mounts]]
+source = 'static'
+target = 'static'
+
+[[module.mounts]]
+source = 'images'
+target = 'static/images'
+
+[[params.social]]
+name = "gitHub"
+link = "https://github.com/iamckn"
+
+[[params.social]]
+name = "twitter"
+link = "https://twitter.com/iamckn/"
+
+[permalinks]
+  [permalinks.page]
+    post = '/blog/:year/:month/:day/:filename/'
+
+[params]
+  showAllPostsOnHomePage = true
+  postsOnHomePage = 5 # this option will be ignored
+  rss = true
+  showAllPostsArchive = true
+
+[services]
+  [services.googleAnalytics]
+    id = "G-HY9XRSX5QQ"
+
+[markup]
+  [markup.tableOfContents]
+    endLevel = 4
+    ordered = false
+    startLevel = 2

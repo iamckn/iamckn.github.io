@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ramblings on The poetry of (in)security</title>
+    <link>https://example.org/tags/ramblings/</link>
+    <description>Recent content in Ramblings on The poetry of (in)security</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>CK</copyright>
+    <lastBuildDate>Sun, 04 Oct 2015 09:06:09 +0300</lastBuildDate>
+    <atom:link href="https://example.org/tags/ramblings/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Saints and Outlaws</title>
+      <link>https://example.org/blog/2015/10/04/saints-and-outlaws/</link>
+      <pubDate>Sun, 04 Oct 2015 09:06:09 +0300</pubDate>
+      <guid>https://example.org/blog/2015/10/04/saints-and-outlaws/</guid>
+      <description>&lt;p&gt;I have been teaching a class on Network Security at mlab and one student asked what the state of cyber-security in the country was. In this post I explain the current state and the outlook over the coming years.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hackers Wanted</title>
+      <link>https://example.org/blog/2015/09/13/hackers-wanted/</link>
+      <pubDate>Sun, 13 Sep 2015 11:31:27 +0300</pubDate>
+      <guid>https://example.org/blog/2015/09/13/hackers-wanted/</guid>
+      <description>&lt;p&gt;Early last year (2014), I started getting into information security. I have always had a passion for figuring out how things work and everything had been building up to my transition into the hacking profession. I was from a non-IT educational background but I had been working in IT for slightly over two years. The job was in a big firm with good pay and I was getting promoted yearly. I however wanted to get into hacking on a full time basis and I decided I&amp;rsquo;d quit after 6 months which would coincide with the end of the financial year. I would also avoid having to do the yearly performance review :-). During the next 6 months, I studied the books I could find on information security, watched hacker conference talks and practiced on virtual environments. As scheduled I tendered in my resignation in June last year, maneuvered through having to go through counter-offer talks as I wasn&amp;rsquo;t leaving for greener pastures, wrote a colourful farewell and became unemployed from the start of July. Thus started my freelance infosec life.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Learning to Hack</title>
+      <link>https://example.org/blog/2015/08/25/learning-to-hack/</link>
+      <pubDate>Tue, 25 Aug 2015 14:27:24 +0300</pubDate>
+      <guid>https://example.org/blog/2015/08/25/learning-to-hack/</guid>
+      <description>&lt;p&gt;Becoming a skilled hacker or the politically correct &amp;ldquo;information security specialist&amp;rdquo; doesn&amp;rsquo;t have a straightforward defined path. Here I will try to layout what constitutes a good way to go about it.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Africahackon Be Part of the Story</title>
+      <link>https://example.org/blog/2015/05/17/africahackon-be-part-of-the-story/</link>
+      <pubDate>Sun, 17 May 2015 08:42:08 +0300</pubDate>
+      <guid>https://example.org/blog/2015/05/17/africahackon-be-part-of-the-story/</guid>
+      <description>&lt;p&gt;I first heard of AfricaHackon at my previous job where I was working in IT. A colleague and friend told me about a conference about information security that would be held at our building. This was early last year. Being in charge of the network, I would be assisting in setting up internet access for the conference. Now when you&amp;rsquo;re in charge of the network and you hear you&amp;rsquo;ll be giving access to your network to a room full of the best &amp;ldquo;hackers&amp;rdquo; in the country, you get a bit nervous. I use the word &amp;ldquo;hackers&amp;rdquo; in quotes because that&amp;rsquo;s where I&amp;rsquo;d like to start.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

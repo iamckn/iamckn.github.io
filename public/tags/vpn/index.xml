@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vpn on The poetry of (in)security</title>
+    <link>https://example.org/tags/vpn/</link>
+    <description>Recent content in Vpn on The poetry of (in)security</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>CK</copyright>
+    <lastBuildDate>Thu, 28 Dec 2017 16:44:50 +0300</lastBuildDate>
+    <atom:link href="https://example.org/tags/vpn/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Wireguard Vpn Portable Raspberry Pi Setup</title>
+      <link>https://example.org/blog/2017/12/28/wireguard-vpn-portable-raspberry-pi-setup/</link>
+      <pubDate>Thu, 28 Dec 2017 16:44:50 +0300</pubDate>
+      <guid>https://example.org/blog/2017/12/28/wireguard-vpn-portable-raspberry-pi-setup/</guid>
+      <description>&lt;p&gt;We often use wireless networks to access the internet. This may be at home, work or even places like restaurants. When we connect to these networks, the security of our internet traffic is under the control of the owner of the wireless network. This is also the case when we connect to a wired connection on a network we don&amp;rsquo;t control.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Wireguard Vpn Chained Setup</title>
+      <link>https://example.org/blog/2017/12/28/wireguard-vpn-chained-setup/</link>
+      <pubDate>Thu, 28 Dec 2017 07:33:38 +0300</pubDate>
+      <guid>https://example.org/blog/2017/12/28/wireguard-vpn-chained-setup/</guid>
+      <description>&lt;p&gt;Moving on from my previous &lt;a href=&#34;https://www.ckn.io/blog/2017/11/14/wireguard-vpn-typical-setup/&#34;&gt;&lt;strong&gt;post&lt;/strong&gt;&lt;/a&gt; about setting up a typical Wireguard VPN connection, let&amp;rsquo;s go through how to do a chained setup. I will show how to do both the typical chained Wireguard VPN connection and the one with selective routing as described in my earlier post &lt;a href=&#34;https://www.ckn.io/blog/2017/11/12/vpns-an-opsec-primer/&#34;&gt;&lt;strong&gt;here&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Wireguard Vpn Typical Setup</title>
+      <link>https://example.org/blog/2017/11/14/wireguard-vpn-typical-setup/</link>
+      <pubDate>Tue, 14 Nov 2017 07:51:06 +0300</pubDate>
+      <guid>https://example.org/blog/2017/11/14/wireguard-vpn-typical-setup/</guid>
+      <description>&lt;p&gt;I recently discovered the awesome &lt;a href=&#34;https://www.wireguard.com/&#34;&gt;&lt;strong&gt;Wireguard&lt;/strong&gt;&lt;/a&gt; VPN tunnel and I was sold. Wireguard is a simple, kernel-based, state-of-the-art VPN that also happens to be ridiculously fast and uses modern cryptographic principles that all other highspeed VPN solutions lack.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Vpns an Opsec Primer</title>
+      <link>https://example.org/blog/2017/11/12/vpns-an-opsec-primer/</link>
+      <pubDate>Sun, 12 Nov 2017 12:05:24 +0300</pubDate>
+      <guid>https://example.org/blog/2017/11/12/vpns-an-opsec-primer/</guid>
+      <description>&lt;p&gt;The internet is a glorious place. This gloriousness does often come with some pitfalls here and there. Being probably the greatest source of information ever, various actors are constantly devising ways to acquire and make use of all this data.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

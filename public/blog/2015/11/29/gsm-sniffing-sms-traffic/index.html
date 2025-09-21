@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> Gsm Sniffing Sms Traffic | The poetry of (in)security</title>
+  <link rel = 'canonical' href = 'https://example.org/blog/2015/11/29/gsm-sniffing-sms-traffic/'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="Gsm Sniffing Sms Traffic" />
+<meta property="og:description" content="In the previous post, I explained how GSM traffic can be sniffed with the HackRF One. GSM traffic carries a lot of information, from system information to the actual voice and data we are familiar with. The traffic that the normal user of a telecommunication network is concerned with is voice and data. With this in mind I&rsquo;ll do a two part series to demonstrate how voice and data can be sniffed using the HackRF. I start with SMS traffic which falls under the data category. Let&rsquo;s get right into it!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.org/blog/2015/11/29/gsm-sniffing-sms-traffic/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2015-11-29T10:14:48+03:00" />
+<meta property="article:modified_time" content="2015-11-29T10:14:48+03:00" />
+
+
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Gsm Sniffing Sms Traffic"/>
+<meta name="twitter:description" content="In the previous post, I explained how GSM traffic can be sniffed with the HackRF One. GSM traffic carries a lot of information, from system information to the actual voice and data we are familiar with. The traffic that the normal user of a telecommunication network is concerned with is voice and data. With this in mind I&rsquo;ll do a two part series to demonstrate how voice and data can be sniffed using the HackRF. I start with SMS traffic which falls under the data category. Let&rsquo;s get right into it!"/>
+
+  
+  
+  
+  <link rel="stylesheet" href="https://example.org/css/styles.e6089d87700a06caa386c15bac0e1f25720ef059b3e065c0a37502617f43d5e1ef54d1c10e3f4be773eb071ea4ae80b46775fad1ad2ae146f1ceac479135227f.css" integrity="sha512-5gidh3AKBsqjhsFbrA4fJXIO8Fmz4GXAo3UCYX9D1eHvVNHBDj9L53PrBx6kroC0Z3X60a0q4UbxzqxHkTUifw=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://example.org/images/favicon.ico" />
+
+  
+  
+  
+  
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HY9XRSX5QQ"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-HY9XRSX5QQ', { 'anonymize_ip': false });
+}
+</script>
+
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="https://example.org/">
+  
+    <div id="logo" style="background-image: url(https://example.org/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>The poetry of (in)security</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/post">Posts</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
+      
+        <li><a href="/whoami">Whoami</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <p>In the previous <a href="https://www.ckn.io/blog/2015/11/01/sniffing-gsm-traffic/"><strong>post</strong></a>, I explained how GSM traffic can be sniffed with the <a href="https://www.ckn.io/blog/2015/10/11/the-hackrf-one-first-steps/"><strong>HackRF One</strong></a>. GSM traffic carries a lot of information, from system information to the actual voice and data we are familiar with. The traffic that the normal user of a telecommunication network is concerned with is voice and data. With this in mind I&rsquo;ll do a two part series to demonstrate how voice and data can be sniffed using the HackRF. I start with SMS traffic which falls under the data category. Let&rsquo;s get right into it!</p>
+<p>I am going to send an SMS from a Safaricom line to an Orange line, capture the traffic over the <a href="https://en.wikipedia.org/wiki/Um_interface"><strong>Um (air) interface</strong></a> and decrypt the data to retrieve the SMS. I own both lines steering clear of the legality issue of decrypting other people&rsquo;s traffic.</p>
+<h2 id="identifying-the-bts"><strong>Identifying the BTS</strong></h2>
+<p>The specific point at which I&rsquo;ll capture the traffic is as it&rsquo;s being sent by the BTS to the Orange line. The technical term for this is the downlink. I therefore need to identify the BTS that my Orange line is connected to. A BTS is uniquely identified using an assigned cell identity (Cell ID). The cell identity combined with the <a href="https://en.wikipedia.org/wiki/Location_area_identity"><strong>location area identity (LAI)</strong></a> which uniquely identifies the country, mobile network and location area code is what we need to get. There are various ways to get this information such as the engineering menu on blackberries. The phone I am using is an android phone and there are several android apps that will give you this information. In my case I use the awesome <a href="https://github.com/SecUpwN/Android-IMSI-Catcher-Detector"><strong>Android IMSI Catcher Detector</strong></a>.
+Next we sniff the GSM frequencies our mobile operators use and identify the specific frequency the BTS is operating on. Follow the previous <a href="https://www.ckn.io/blog/2015/11/01/sniffing-gsm-traffic/"><strong>post</strong></a> on how to do this. We will accomplish this by searching the traffic being captured on wireshark for the LAI and Cell ID our phone is on until we have a match. In this case the frequency the Orange BTS was operating on is 949.2MHz.</p>
+<h2 id="capturing-sms-traffic"><strong>Capturing SMS traffic</strong></h2>
+<p>I&rsquo;ll use the <code>airprobe_rtlsdr_capture</code> module of <a href="https://github.com/ptrkrysik/gr-gsm"><strong>gr-gsm</strong></a> to capture the SMS traffic. I begin the capture using the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>airprobe_rtlsdr_capture.py -f <span style="color:#ae81ff">949200000</span> -s <span style="color:#ae81ff">1000000</span> -g <span style="color:#ae81ff">40</span> -c capture.cfile -T <span style="color:#ae81ff">60</span>
+</span></span></code></pre></div><p><code>-f</code> is the frequency in Hz, <code>-s</code> the sample rate in Hz, <code>-g</code> the gain, <code>-c</code> the output file and <code>-T</code> the duration of our capture in seconds.</p>
+<p>I then send an SMS reading &ldquo;This is a demo of GSM decryption&rdquo; to the Orange line.</p>
+<h2 id="getting-the-tmsi-and-kc"><strong>Getting the <code>TMSI</code> and <code>Kc</code></strong></h2>
+<p>We now have the traffic captured and saved in a file called <code>capture.cfile</code>. Before we get into the decryption process, we need some information specific to our SIM card.
+First we need the Temporary Mobile Subscriber Identity (<code>TMSI</code>). This is a random assigned identity assigned to the SIM when it connects to a BTS. Its purpose is to avoid the subscriber from being identified and tracked by eavesdroppers on the air interface as I am trying to do :).
+We will then need to get the <code>Kc</code>, which is the key used to encrypt the traffic between the phone and the BTS over the air. I will get into the details of how the <code>Kc</code> is calculated in a later post but for now you can read up on the <code>A8</code> algorithm.
+There are various ways to get the <code>TMSI</code> and <code>Kc</code>. These guides <a href="http://domonkos.tomcsanyi.net/?p=369"><strong>here</strong></a> and <a href="http://openbsc.osmocom.org/trac/wiki/A5_GSM_AT_tricks"><strong>here</strong></a> are great references.
+I used AT commands on a connected Samsung S3 mini as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>AT+CRSM<span style="color:#f92672">=</span>176,28448,0,0,9
+</span></span><span style="display:flex;"><span>+CRSM: 144,0,0E10EAF30299F2C404
+</span></span></code></pre></div><p>The <code>Kc</code> from the output is <code>0E10EAF30299F2C4</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>AT+CRSM<span style="color:#f92672">=</span>176,28542,0,0,11
+</span></span><span style="display:flex;"><span>+CRSM: 144,0,38256E5136F9702B5D0000
+</span></span></code></pre></div><p>The <code>TMSI</code> from the output is <code>38256E51</code></p>
+<h2 id="decoding-bcch"><strong>Decoding <code>BCCH</code></strong></h2>
+<p><code>BCCH</code> is the Broadcast Control Channel that the BTS uses to communicate system information messages to the mobile device on.
+In idle mode the phone has to listen on the <code>BCCH</code> to detect traffic to be sent to it.
+In this case the BTS sends two paging request messages which inform the phone of an incoming SMS.
+This will then be followed by an Immediate Assignment where an <code>SDCCH</code> is established for the SMS transfer.
+<code>SDCCH</code> is a Standalone Dedicated Control Channel used for most short transactions, including initial call setup step, registration and SMS transfer.
+We therefore need to identify what <code>SDCCH</code> is used for the SMS transfer.
+We first start wireshark and monitor the loopback interface and then run the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>airprobe_decode.py -c capture.cfile -s <span style="color:#ae81ff">1000000</span> -f <span style="color:#ae81ff">949200000</span> -m BCCH -t <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><p><code>capture.cfile</code> is the file with the traffic we captured earlier.
+We then search for traffic specific to our TMSI by searching for it in wireshark packet details.</p>
+<p><img src="/images/tmsi_search.png" alt="alt"></p>
+<p>We look for the two paging requests and inspect the Immediate Assignment that follows:</p>
+<p><img src="/images/sdcch_channel.png" alt="alt"></p>
+<p>Note that it&rsquo;s <code>SDCCH/8</code>, <code>Timeslot 2</code>.</p>
+<h2 id="decoding-sdcch"><strong>Decoding <code>SDCCH</code></strong></h2>
+<p>We now need to identify the ciphering mode the BTS tells the phone to use.
+We restart wireshark on the loopback interface and then run the following command specifying <code>SDCCH8</code> and <code>Timeslot 2</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>airprobe_decode.py -c capture.cfile -s <span style="color:#ae81ff">1000000</span> -f <span style="color:#ae81ff">949200000</span> -m SDCCH8 -t <span style="color:#ae81ff">2</span>
+</span></span></code></pre></div><p>We look for a Paging Response followed by a Ciphering Mode Command.</p>
+<p><img src="/images/cipher_mode.png" alt="alt"></p>
+<p>We see that the algorithm in use is <code>A5/1</code> (more on this in a later post).</p>
+<h2 id="decrypting-the-sms-traffic-finally"><strong>Decrypting the SMS traffic. Finally!</strong></h2>
+<p>We confirm the most recently used <code>Kc</code> as shown earlier, then we restart wireshark on the loopback interface and run the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>airprobe_decode.py -c capture.cfile -s <span style="color:#ae81ff">1000000</span> -f <span style="color:#ae81ff">949200000</span> -m SDCCH8 -t <span style="color:#ae81ff">2</span> -e <span style="color:#ae81ff">1</span> -k 0x0E,0x10,0xEA,0xF3,0x02,0x99,0xF2,0xC4
+</span></span></code></pre></div><p><code>-e 1</code> specifies the algorithm <code>A5/1</code>, <code>-k 0x0E,0x10,0xEA,0xF3,0x02,0x99,0xF2,0xC4</code> specifies the <code>Kc</code>.</p>
+<p>On wireshark we look for the GSM SMS traffic and we can see the text of our SMS :).</p>
+<p><img src="/images/decrypted_sms.png" alt="alt"></p>
+<h2 id="wrapping-up"><strong>Wrapping up</strong></h2>
+<p>If you&rsquo;ve followed through keenly you&rsquo;ll note that every variable is available readily from just sniffing the traffic except the <code>Kc</code>. Everything else is exchanged between the BTS and Mobile device, from the TMSI and BTS details to the data traffic though encrypted. The question becomes how do you get the <code>Kc</code> in use by another mobile device? The good people at <a href="https://srlabs.de/decrypting_gsm/"><strong>SRLabs</strong></a> figured out how to crack the <code>A5/1</code> encryption used and created a tool called <strong>Kraken</strong> and 2TB rainbow tables to find the <code>Kc</code>.
+They also automated a lot of the steps in this post making decryption of gsm voice and data almost trivial.</p>
+<p>In the next post I&rsquo;ll demonstrate how to decrypt voice traffic :) as I continue explaining GSM communication.
+Till then, happy hacking.</p>
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2025  CK 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/post">Posts</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/whoami">Whoami</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>

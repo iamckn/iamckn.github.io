@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> Crypto Magic Homomorphic Encryption | The poetry of (in)security</title>
+  <link rel = 'canonical' href = 'https://example.org/blog/2015/05/11/crypto-magic-homomorphic-encryption/'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="Crypto Magic Homomorphic Encryption" />
+<meta property="og:description" content="Could Google do your search without knowing what it was looking for? Could your hospital provide you with information regarding your health records without knowing what you asked?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.org/blog/2015/05/11/crypto-magic-homomorphic-encryption/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2015-05-11T13:45:52+03:00" />
+<meta property="article:modified_time" content="2015-05-11T13:45:52+03:00" />
+
+
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Crypto Magic Homomorphic Encryption"/>
+<meta name="twitter:description" content="Could Google do your search without knowing what it was looking for? Could your hospital provide you with information regarding your health records without knowing what you asked?"/>
+
+  
+  
+  
+  <link rel="stylesheet" href="https://example.org/css/styles.e6089d87700a06caa386c15bac0e1f25720ef059b3e065c0a37502617f43d5e1ef54d1c10e3f4be773eb071ea4ae80b46775fad1ad2ae146f1ceac479135227f.css" integrity="sha512-5gidh3AKBsqjhsFbrA4fJXIO8Fmz4GXAo3UCYX9D1eHvVNHBDj9L53PrBx6kroC0Z3X60a0q4UbxzqxHkTUifw=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://example.org/images/favicon.ico" />
+
+  
+  
+  
+  
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HY9XRSX5QQ"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-HY9XRSX5QQ', { 'anonymize_ip': false });
+}
+</script>
+
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="https://example.org/">
+  
+    <div id="logo" style="background-image: url(https://example.org/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>The poetry of (in)security</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/post">Posts</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
+      
+        <li><a href="/whoami">Whoami</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <p>Could Google do your search without knowing what it was looking for? Could your hospital provide you with information regarding your health records without knowing what you asked?</p>
+<p>Can data be encrypted in such a way that computation can be done on it without decrypting it first?
+Yes it can! This is what homomorphic encryption is all about.
+Our exploration of crypto magic continues :)</p>
+<p>Let&rsquo;s start with two scenarios</p>
+<h1 id="scenario-1-encrypted-search">scenario 1: encrypted search</h1>
+<p>First, I am not talking about searching over secure protocols like https. What I am referring to is where your search term is in encrypted form before it reaches the search engine (say Google). Google therefore doesn&rsquo;t know what you want to search for.
+After Google receives your encrypted search term, it searches for it in an encrypted database. The results it gets are also encrypted which are then passed on to you. You can then privately decrypt them :). You&rsquo;ll note that Google never knew what you were looking for nor what results were returned. No decryption occurred at any point before you received the results.</p>
+<h1 id="scenario-2-secure-cloud-processing">scenario 2: secure cloud processing</h1>
+<p>Would it not be nice to have some powerful hosting provider do complex computation on your data without them ever knowing the contents? A case would be like your bank having a cloud provider hosting its data. The bank would encrypt the data before uploading it, so the cloud provider never sees the plain version. The bank would then be able to perform complex computation on the encrypted data using the cloud providers powerful processing power without it ever been decrypted. The bank could also be able to request information from the encrypted data using encrypted queries. The returned answers would also be in encrypted form which only the bank can decrypt. And again no decryption takes place at the cloud provider.</p>
+<h1 id="how-can-this-be-done">How can this be done?</h1>
+<p>This concept was first proposed over 30 years ago by Rivest, Adleman and Dertouzos and is referred to homomorphic encryption (They also suggested it was probably impossible).
+Let&rsquo;s say you have x and y. if you multiply the encrypted version of x and the encrypted version of y and the answer is the same as if you multiplied their plain values and encrypted the answer, then the process is said to be homomorphic with respect to multiplication.
+Any computer algorithm is a series of arithmetic steps so if we can get a process that is homomorphic with respect to both addition and multiplication, any computing application would be possible on encrypted data.</p>
+<h1 id="has-it-been-achieved">Has it been achieved?</h1>
+<p>Over the past three decades, partial solutions have been discovered.
+However, it is not until 2009 that Craig Gentry developed a fully homomorphic system. Unfortunately it requires lots and lots of computational power. For instance, an encrypted Google search would multiply the computation time to 1 trillion times that of a normal one :(.
+The good news is that the theoretical barrier was broken and with lots of work a practical solution may be found :).</p>
+<p>For anyone willing to give it a go, <a href="http://www.i-programmer.info/news/112-theory/2330-darpa-spends-20-million-on-homomorphic-encryption.html"><strong>DARPA is offering $20 million</strong></a> if you can come up with a scheme that only takes 100,000 times as long as unencrypted calculations :).</p>
+<p>And we may well be on our way there, three MIT scientists developed a system that emulates fully homomorphic encryption for most of the functions of the SQL databases used in many applications. It computes only with encrypted data and takes just 15% to 26% more computing time.
+The project is called CryptDB and you can check it out <a href="https://github.com/CryptDB/cryptdb"><strong>here</strong></a>.</p>
+<p>The application of this in information security does not even need explaining :)</p>
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2025  CK 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/post">Posts</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/whoami">Whoami</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>

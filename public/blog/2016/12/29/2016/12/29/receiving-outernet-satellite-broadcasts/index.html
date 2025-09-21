@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html><head lang="en"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Receiving Outernet Satellite Broadcasts - The poetry of (in)security</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Receiving satellite data is something I&rsquo;ve been hoping to try out for a while. It&rsquo;s an area that captures the magic of long range radio communication and has become easier to experiment in as time has gone by." />
+	<meta property="og:image" content=""/>
+	<meta property="og:title" content="Receiving Outernet Satellite Broadcasts" />
+<meta property="og:description" content="Receiving satellite data is something I&rsquo;ve been hoping to try out for a while. It&rsquo;s an area that captures the magic of long range radio communication and has become easier to experiment in as time has gone by." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/blog/2016/12/29/2016/12/29/receiving-outernet-satellite-broadcasts/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2016-12-29T00:00:00+00:00" />
+<meta property="article:modified_time" content="2016-12-29T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Receiving Outernet Satellite Broadcasts"/>
+<meta name="twitter:description" content="Receiving satellite data is something I&rsquo;ve been hoping to try out for a while. It&rsquo;s an area that captures the magic of long range radio communication and has become easier to experiment in as time has gone by."/>
+
+        <link href="http://localhost:1313/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="http://localhost:1313/">The poetry of (in)security</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/posts">All posts</a>
+		
+		<a href="/about">About</a>
+		
+		<a href="/tags">Tags</a>
+		
+		
+	</nav>
+</header>
+
+<main>
+  <article>
+    <div class="post-container">
+      
+      <div class="post-content">
+        <div class="title">
+          <h1 class="title">Receiving Outernet Satellite Broadcasts</h1>
+          <div class="meta">Posted on Dec 29, 2016</div>
+        </div>
+        
+        <section class="body">
+          <p>Receiving satellite data is something I&rsquo;ve been hoping to try out for a while. It&rsquo;s an area that captures the magic of long range radio communication and has become easier to experiment in as time has gone by.</p>
+<p>This is where <!-- raw HTML omitted --><strong>Outernet</strong><!-- raw HTML omitted --> comes in. They are a global data broadcasting company that provides access to content all over the world through geostationary and low earth orbit satellites. They broadcast their signal over three Inmarsat satellites at a bitrate of about 2kbps or 20MB of content per day. Full information on the technology aspects can be found <!-- raw HTML omitted --><strong>here</strong><!-- raw HTML omitted -->.</p>
+<p>They provide a Do-It-Yourself kit for $99 that one can get up and running in a short amount of time. I already had the RTL-SDR V3 dongle and a Pi 3 so all I needed was their portable L-Band patch antenna and the Low Noise Amplifier. They&rsquo;ve documented the set up process extremely well so I&rsquo;ll not dwell on it here. Their detailed guide is available <!-- raw HTML omitted --><strong>here</strong><!-- raw HTML omitted -->.</p>
+<p>Here&rsquo;s my assembled hardware set up.</p>
+<p>{% img /images/outernet_hardware.jpg 500 %}</p>
+<p>Once the hardware is powered up, a wireless hotpspot called Outernet is created which you connect to and visit the page <strong>my.outernet.is</strong> on your browser. You&rsquo;ll be prompted for various initial configuraton details which you can also modify later to your liking. Of importance is the choice of the satellite to use, with three available. In my case. the one serving my region is <strong>Alphasat</strong> on the 1545.94 MHz frequency.</p>
+<p>The next step is to point the antenna directly at the satellite for good signal reception. A good way to find the direction of the satellite using the  <!-- raw HTML omitted --><strong>Satellite AR</strong><!-- raw HTML omitted -->  Android app. Check the Tuner Settings on the web dashboard while positioning the antenna until you get a Signal to Noise Ratio of at least 3dB.</p>
+<p>{% img /images/outernet_tuner.png %}</p>
+<p>Data will start streaming in at the rate of 2kbps/20MB per day so give it some hours before you start exploring the downloaded content. Below is a sample of what the content includes after a week.</p>
+<h2 id="amateur-radio-content-from-aprs-and-amsat">Amateur radio content from APRS and AMSAT</h2>
+<p>News and messages from APRS and AMSAT.</p>
+<p>{% img /images/outernet_amateur.gif %}</p>
+<h2 id="community-content-contributed-by-the-public">Community content contributed by the public</h2>
+<p>Content uploaded to outernet servers by the community. The public is allowed to submit content which may be incorporated after review.</p>
+<p>{% img /images/outernet_community.gif %}</p>
+<h2 id="games">Games</h2>
+<p>Browser based games.</p>
+<p>{% img /images/outernet_games.gif %}</p>
+<h2 id="offline-wikipedia-pages">Offline Wikipedia pages</h2>
+<p>Select offline Wikpedia pages.</p>
+<p>{% img /images/outernet_wikipedia.gif %}</p>
+<p>##News
+Up to date news from around the world.</p>
+<p>{% img /images/outernet_news.gif %}</p>
+<p>##Interactive weather data
+And finally my favorite, a beautiful interactive 3D weather map that is simply amazing.</p>
+<p>{% img /images/outernet_weather.gif %}</p>
+<p>The Outernet service is constantly evolving and I am looking forward to more exciting content and functionality.</p>
+<p>Till next time, happy hacking!</p>
+        </section>
+        <div class="post-tags">
+          
+          
+          
+        </div>
+      </div>
+
+      
+      
+    </div>
+
+    </article>
+</main>
+<footer>
+  <div style="display:flex"><a class="soc" href="https://github.com/iamckn" rel="me" title="GitHub"><svg class="feather">
+   <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#github" />
+</svg></a><a class="border"></a><a class="soc" href="https://twitter.com/iamckn/" rel="me" title="Twitter"><svg class="feather">
+   <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#twitter" />
+</svg></a><a class="border"></a></div>
+  <div class="footer-info">
+    2025  <a
+      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+  </div>
+</footer>
+
+</div>
+    </body>
+</html>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Network Security on The poetry of (in)security</title>
+    <link>https://example.org/tags/network-security/</link>
+    <description>Recent content in Network Security on The poetry of (in)security</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>CK</copyright>
+    <lastBuildDate>Thu, 17 Sep 2015 20:54:07 +0300</lastBuildDate>
+    <atom:link href="https://example.org/tags/network-security/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Bro Chronicles 2</title>
+      <link>https://example.org/blog/2015/09/17/the-bro-chronicles-2/</link>
+      <pubDate>Thu, 17 Sep 2015 20:54:07 +0300</pubDate>
+      <guid>https://example.org/blog/2015/09/17/the-bro-chronicles-2/</guid>
+      <description>&lt;p&gt;In part one I analysed the data communication that takes place on a phone over a one hour period. Read the post &lt;a href=&#34;https://www.ckn.io/blog/2015/09/06/the-bro-chronicles-1/&#34;&gt;&lt;strong&gt;here&lt;/strong&gt;&lt;/a&gt; for details and background info.&#xA;Here, I go further and analyse what happens over a twelve hour period of normal phone usage. I ran &lt;a href=&#34;https://www.bro.org/&#34;&gt;&lt;strong&gt;BRO&lt;/strong&gt;&lt;/a&gt; on my phone from &lt;code&gt;6:40am&lt;/code&gt; to &lt;code&gt;6:40pm&lt;/code&gt; and ensured that data was on and WIFI off the whole time.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>The Bro Chronicles 1</title>
+      <link>https://example.org/blog/2015/09/06/the-bro-chronicles-1/</link>
+      <pubDate>Sun, 06 Sep 2015 08:56:06 +0300</pubDate>
+      <guid>https://example.org/blog/2015/09/06/the-bro-chronicles-1/</guid>
+      <description>&lt;p&gt;I was having a random conversation with &lt;a href=&#34;https://twitter.com/xtian_kisutsa&#34;&gt;&lt;strong&gt;Christian&lt;/strong&gt;&lt;/a&gt;. The conversation was based around Kali Nethunter and all the cool stuff that can be done with it. The discussion was revolving around &amp;ldquo;man in the middle attacks&amp;rdquo; and I suggested that having &lt;a href=&#34;https://www.bro.org/&#34;&gt;&lt;strong&gt;BRO&lt;/strong&gt;&lt;/a&gt; running on Nethunter would be awesome. This got him excited and true to his nature, he couldn&amp;rsquo;t rest till he&amp;rsquo;d attempted it. Long story short, he did some amazing work and had it running soon afterwards complete with a detailed &amp;ldquo;how to&amp;rdquo; guide. Here&amp;rsquo;s a link to the &lt;a href=&#34;http://t.co/Iz992aMCL5&#34;&gt;&lt;strong&gt;guide&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

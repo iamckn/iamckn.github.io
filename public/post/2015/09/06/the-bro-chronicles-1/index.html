@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> The Bro Chronicles 1 | The poetry of (in)security</title>
+  <link rel = 'canonical' href = 'http://localhost:1313/post/2015/09/06/the-bro-chronicles-1/'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="The Bro Chronicles 1" />
+<meta property="og:description" content="I was having a random conversation with Christian. The conversation was based around Kali Nethunter and all the cool stuff that can be done with it. The discussion was revolving around &ldquo;man in the middle attacks&rdquo; and I suggested that having BRO running on Nethunter would be awesome. This got him excited and true to his nature, he couldn&rsquo;t rest till he&rsquo;d attempted it. Long story short, he did some amazing work and had it running soon afterwards complete with a detailed &ldquo;how to&rdquo; guide. Here&rsquo;s a link to the guide." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/2015/09/06/the-bro-chronicles-1/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2015-09-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2015-09-06T00:00:00+00:00" />
+
+
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="The Bro Chronicles 1"/>
+<meta name="twitter:description" content="I was having a random conversation with Christian. The conversation was based around Kali Nethunter and all the cool stuff that can be done with it. The discussion was revolving around &ldquo;man in the middle attacks&rdquo; and I suggested that having BRO running on Nethunter would be awesome. This got him excited and true to his nature, he couldn&rsquo;t rest till he&rsquo;d attempted it. Long story short, he did some amazing work and had it running soon afterwards complete with a detailed &ldquo;how to&rdquo; guide. Here&rsquo;s a link to the guide."/>
+
+  
+  
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="http://localhost:1313/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="http://localhost:1313/">
+  
+    <div id="logo" style="background-image: url(http://localhost:1313/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>The poetry of (in)security</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <p>I was having a random conversation with <a href="https://twitter.com/xtian_kisutsa"></a><strong>Christian</strong><!-- raw HTML omitted -->. The conversation was based around Kali Nethunter and all the cool stuff that can be done with it. The discussion was revolving around &ldquo;man in the middle attacks&rdquo; and I suggested that having <a href="https://www.bro.org/"></a><strong>BRO</strong><!-- raw HTML omitted --> running on Nethunter would be awesome. This got him excited and true to his nature, he couldn&rsquo;t rest till he&rsquo;d attempted it. Long story short, he did some amazing work and had it running soon afterwards complete with a detailed &ldquo;how to&rdquo; guide. Here&rsquo;s a link to the <a href="http://t.co/Iz992aMCL5"></a><strong>guide</strong><!-- raw HTML omitted -->.</p>
+<p>With bro running on a phone, a world of exploration is opened up. You now have an enterprise level IDS running on your phone :). I hope you see where this is headed. What do you do with an IDS on your phone? You obviously investigate what your phone communicates with.
+What interested me most was the rmnet0 interface on android. This is the interface assigned to your data connection. It gets assigned a public IP by your telecommunications provider so no NAT issues.</p>
+<p>#The set up
+This Saturday afternoon I decided to see what my phone communicates to over a one hour period while connected to the mobile data network.
+This is how I set up things:</p>
+<p>####&gt;Nethunter running on a Nexus 5 with Android 5.1
+####&gt;BRO running in standalone mode monitoring rmnet0
+####&gt;Mobile data connection on the Safaricom network
+####&gt;ADB connection to a laptop
+####&gt;shodan-cli to investigate IPs</p>
+<p>Once everything was in place I used the phone as I would normally for about 10 minutes or so - browsed a bit and opened a few apps such as Twitter and Facebook. After that I left it idle for about an hour.</p>
+<p>#Results and Analysis
+It was then time to process and analyse the results. Nethunter runs in a chroot environment so I transferred the BRO logs to the sdcard then to my laptop, that&rsquo;s where adb comes in handy.
+Lets start with the ports and IPs that were most active during both normal usage of the phone and when it was idle.</p>
+<p>##Idle</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>	 <span style="color:#a6e22e">Ports</span>        <span style="color:#f92672">|</span> <span style="color:#a6e22e">Sources</span>                   <span style="color:#f92672">|</span> <span style="color:#a6e22e">Destinations</span>              <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#ae81ff">443</span>    <span style="color:#ae81ff">38.5</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span> <span style="color:#ae81ff">105.57</span>.<span style="color:#ae81ff">36.93</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">1</span>      <span style="color:#ae81ff">99.0</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span> <span style="color:#ae81ff">196.201</span>.<span style="color:#ae81ff">216.21</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">2</span>    <span style="color:#ae81ff">20.0</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span> 
+</span></span><span style="display:flex;"><span>     <span style="color:#ae81ff">53</span>     <span style="color:#ae81ff">25.5</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span> <span style="color:#ae81ff">196.201</span>.<span style="color:#ae81ff">216.4</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">3</span>      <span style="color:#ae81ff">0.5</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span> <span style="color:#ae81ff">216.58</span>.<span style="color:#ae81ff">223.10</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">4</span>     <span style="color:#ae81ff">10.0</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span> 
+</span></span><span style="display:flex;"><span>     <span style="color:#ae81ff">123</span>    <span style="color:#ae81ff">24.0</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span> <span style="color:#ae81ff">66.196</span>.<span style="color:#ae81ff">116.132</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">5</span>     <span style="color:#ae81ff">0.5</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span> <span style="color:#ae81ff">196.49</span>.<span style="color:#ae81ff">6.67</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">6</span>        <span style="color:#ae81ff">9.0</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span> 
+</span></span><span style="display:flex;"><span>     <span style="color:#ae81ff">993</span>     <span style="color:#ae81ff">3.0</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span>                           <span style="color:#f92672">|</span> <span style="color:#ae81ff">196.201</span>.<span style="color:#ae81ff">218.15</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">7</span>     <span style="color:#ae81ff">6.5</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span> 
+</span></span><span style="display:flex;"><span>     <span style="color:#ae81ff">80</span>      <span style="color:#ae81ff">3.0</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span>                           <span style="color:#f92672">|</span> <span style="color:#ae81ff">197.12</span>.<span style="color:#ae81ff">0.14</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">8</span>        <span style="color:#ae81ff">5.0</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span> 
+</span></span><span style="display:flex;"><span>     <span style="color:#ae81ff">995</span>     <span style="color:#ae81ff">1.5</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span>                           <span style="color:#f92672">|</span> <span style="color:#ae81ff">196.25</span>.<span style="color:#ae81ff">1.5</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">9</span>         <span style="color:#ae81ff">5.0</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span> 
+</span></span><span style="display:flex;"><span>     <span style="color:#ae81ff">8996</span>    <span style="color:#ae81ff">1.0</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span>                           <span style="color:#f92672">|</span> <span style="color:#ae81ff">197.84</span>.<span style="color:#ae81ff">150.123</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">10</span>    <span style="color:#ae81ff">3.5</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span> 
+</span></span><span style="display:flex;"><span>     <span style="color:#ae81ff">5228</span>    <span style="color:#ae81ff">1.0</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span>                           <span style="color:#f92672">|</span> <span style="color:#ae81ff">199.16</span>.<span style="color:#ae81ff">156.199</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">11</span>    <span style="color:#ae81ff">3.0</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span> 
+</span></span><span style="display:flex;"><span>     <span style="color:#ae81ff">3</span>       <span style="color:#ae81ff">1.0</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span>                           <span style="color:#f92672">|</span> <span style="color:#ae81ff">62.210</span>.<span style="color:#ae81ff">87.71</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">12</span>      <span style="color:#ae81ff">3.0</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span> 
+</span></span><span style="display:flex;"><span>     <span style="color:#ae81ff">55602</span>   <span style="color:#ae81ff">0.5</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span>                           <span style="color:#f92672">|</span> <span style="color:#ae81ff">216.58</span>.<span style="color:#ae81ff">223.14</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">13</span>     <span style="color:#ae81ff">2.0</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span> 
+</span></span></code></pre></div><p>##Normal use</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>	 <span style="color:#a6e22e">Ports</span>        <span style="color:#f92672">|</span> <span style="color:#a6e22e">Sources</span>                   <span style="color:#f92672">|</span> <span style="color:#a6e22e">Destinations</span>              <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#ae81ff">80</span>     <span style="color:#ae81ff">67.7</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span> <span style="color:#ae81ff">105.161</span>.<span style="color:#ae81ff">166.138</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">1</span>   <span style="color:#ae81ff">99.9</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span> <span style="color:#ae81ff">196.201</span>.<span style="color:#ae81ff">217.7</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">2</span>     <span style="color:#ae81ff">14.6</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#ae81ff">53</span>     <span style="color:#ae81ff">15.8</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span> <span style="color:#ae81ff">66.196</span>.<span style="color:#ae81ff">116.132</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">3</span>     <span style="color:#ae81ff">0.1</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span> <span style="color:#ae81ff">173.241</span>.<span style="color:#ae81ff">248.221</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">4</span>   <span style="color:#ae81ff">11.4</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#ae81ff">443</span>    <span style="color:#ae81ff">15.0</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span> <span style="color:#ae81ff">174.37</span>.<span style="color:#ae81ff">231.85</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">5</span>      <span style="color:#ae81ff">0.0</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span> <span style="color:#ae81ff">173.241</span>.<span style="color:#ae81ff">248.220</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">6</span>    <span style="color:#ae81ff">5.2</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#ae81ff">993</span>     <span style="color:#ae81ff">0.4</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span>                           <span style="color:#f92672">|</span> <span style="color:#ae81ff">94.31</span>.<span style="color:#ae81ff">29.96</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">7</span>        <span style="color:#ae81ff">3.2</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#ae81ff">995</span>     <span style="color:#ae81ff">0.3</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span>                           <span style="color:#f92672">|</span> <span style="color:#ae81ff">198.232</span>.<span style="color:#ae81ff">124.225</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">8</span>    <span style="color:#ae81ff">2.5</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#ae81ff">8996</span>    <span style="color:#ae81ff">0.2</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span>                           <span style="color:#f92672">|</span> <span style="color:#ae81ff">192.0</span>.<span style="color:#ae81ff">77.2</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">9</span>         <span style="color:#ae81ff">1.7</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#ae81ff">3</span>       <span style="color:#ae81ff">0.1</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span>                           <span style="color:#f92672">|</span> <span style="color:#ae81ff">31.13</span>.<span style="color:#ae81ff">75.8</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">10</span>        <span style="color:#ae81ff">1.7</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#ae81ff">5228</span>    <span style="color:#ae81ff">0.1</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span>                           <span style="color:#f92672">|</span> <span style="color:#ae81ff">46.228</span>.<span style="color:#ae81ff">164.11</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">11</span>     <span style="color:#ae81ff">1.6</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#ae81ff">123</span>     <span style="color:#ae81ff">0.1</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span>                           <span style="color:#f92672">|</span> <span style="color:#ae81ff">95.172</span>.<span style="color:#ae81ff">94.57</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">12</span>      <span style="color:#ae81ff">1.5</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#ae81ff">57553</span>   <span style="color:#ae81ff">0.0</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span>                           <span style="color:#f92672">|</span> <span style="color:#ae81ff">46.228</span>.<span style="color:#ae81ff">164.13</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">13</span>     <span style="color:#ae81ff">1.4</span><span style="color:#f92672">%</span> <span style="color:#f92672">|</span>
+</span></span></code></pre></div><p>As expected most traffic is either HTTP (80), HTTPS (443) or DNS (53). NTP traffic (123) also features prominently when the phone is idle.
+Of interest is that we can confirm Safaricom uses their own DNS servers, in this case <code>196.201.216.21</code>, <code>196.201.218.15</code> and <code>196.201.217.7</code>. An OpenDNS server <code>208.67.222.222</code> was also queried once so they probably have OpenDNS as an option.
+The ntp servers were distributed among African countries, Angola - <code>196.223.19.3</code>, Tunisia - <code>197.12.0.14</code>, SA - <code>197.84.150.123</code> and so on. We can therefore safely say they use the africa.pool.ntp.org pool.
+Then comes the interesting bit, there were some Safaricom IPs communicating with the phone on some weird ports, one case is <code>196.201.216.4</code>, Shodan reveals port <code>500</code> and <code>4500</code> open on whatever is running on that IP. Let&rsquo;s leave Safaricom for now and look at the other traffic.</p>
+<p>The BRO logs are pretty detailed and therefore I needed some way to clean them up to do my own analysis. I therefore wrote a bash script to do some filtering.
+I then used Shodan-cli to get information of every unique IP and save the output. Here is the script for anyone interested.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>	<span style="color:#75715e">#!/bin/bash</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	echo <span style="color:#e6db74">&#34;Enter the name of the connection log: &#34;</span>
+</span></span><span style="display:flex;"><span>	read LOG
+</span></span><span style="display:flex;"><span>	echo <span style="color:#e6db74">&#34;Getting details from shodan&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">`</span>sed -e <span style="color:#e6db74">&#39;/^#/d&#39;</span> $LOG | cut -f <span style="color:#ae81ff">5</span> | sort -u &gt; filtered<span style="color:#e6db74">`</span>
+</span></span><span style="display:flex;"><span>	touch output
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">while</span> read -r line; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>		echo $line
+</span></span><span style="display:flex;"><span>		<span style="color:#e6db74">`</span>sudo shodan host $line &gt;&gt; output<span style="color:#e6db74">`</span>
+</span></span><span style="display:flex;"><span>		echo <span style="color:#e6db74">&#34;&#34;</span>&gt;**&gt; output
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">done</span> &lt; <span style="color:#e6db74">&#34;filtered&#34;</span>
+</span></span><span style="display:flex;"><span>	echo <span style="color:#e6db74">&#34;Done! Output saved to output&#34;</span>
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	exit <span style="color:#ae81ff">0</span> 	
+</span></span></code></pre></div><p>I am going to cut right to the chase as this post is getting too long. The world is being taken over by analytics, advertising and digital content companies!
+Let me just list a few of the companies that communicated with my phone over that one hour period, remember I left it idle most of that time. Here we go</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>	Mediamath.com 		 Mixpane.com 		 Criteo.com
+</span></span><span style="display:flex;"><span>	Fastly Inc 			AOL			   		AppNexus
+</span></span><span style="display:flex;"><span>	Akamai 				Chango   			Trapad
+</span></span><span style="display:flex;"><span>	Exelate.com 		 	Openx.com    		Adtech.de
+</span></span><span style="display:flex;"><span>	Lijit.com 			Crashlytics.com   	Pubmatic
+</span></span><span style="display:flex;"><span>	ACNielson 			Amazon  			...and several others
+</span></span></code></pre></div><p>I usually am not worried about companies using analytics for their marketing purposes but this time something spooked me.
+Several of these servers are vulnerable to the <a href="https://weakdh.org/"></a><strong>logjam attack</strong><!-- raw HTML omitted --> and even more worryingly some are vulnerable to heartbleed. It would therefore not be far-fetched to assume they&rsquo;ve already been compromised or they will be. With all the traffic going on between my phone and these servers, I had hoped they&rsquo;d have their security figured out. It&rsquo;s often said that third parties are some of the most promising targets for hackers and you can see exactly why here.</p>
+<p>#Conclusion
+That was a long post so let&rsquo;s wrap it up.
+There were some peculiar IPs that I&rsquo;ll be investigating in subsequent BRO chronicles. Other random titbits include the discovery that several Instagram servers communicating with my phone are also vulnerable to the logjam attack, Yahoo mail is particularly noisy traffic wise and so on.
+When going through all that analytics and ad based traffic I remembered a quote by Jeffrey Hammerbacher, one of Facebook&rsquo;s first 100 employees. I therefore aptly end this post with his quote:</p>
+<blockquote>
+<p>##The best minds of my generation are thinking about how to make people click ads. That sucks.</p>
+</blockquote>
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2025  The poetry of (in)security 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/about">About</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Radio on The poetry of (in)security</title>
+    <link>https://example.org/tags/radio/</link>
+    <description>Recent content in Radio on The poetry of (in)security</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>CK</copyright>
+    <lastBuildDate>Wed, 28 Jun 2017 18:30:35 +0300</lastBuildDate>
+    <atom:link href="https://example.org/tags/radio/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The 2017 Africahackon Conference Badge</title>
+      <link>https://example.org/blog/2017/06/28/the-2017-africahackon-conference-badge/</link>
+      <pubDate>Wed, 28 Jun 2017 18:30:35 +0300</pubDate>
+      <guid>https://example.org/blog/2017/06/28/the-2017-africahackon-conference-badge/</guid>
+      <description>&lt;p&gt;Information security conference badges have rapidly evolved over time. They have become a favorite among conference organisers and attendees as fun accessories that tie in to the conference experience. Unique badges have become collectible items that attendees keep and identify with a particular conference.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Receiving Outernet Satellite Broadcasts</title>
+      <link>https://example.org/blog/2016/12/29/receiving-outernet-satellite-broadcasts/</link>
+      <pubDate>Thu, 29 Dec 2016 10:18:31 +0300</pubDate>
+      <guid>https://example.org/blog/2016/12/29/receiving-outernet-satellite-broadcasts/</guid>
+      <description>&lt;p&gt;Receiving satellite data is something I&amp;rsquo;ve been hoping to try out for a while. It&amp;rsquo;s an area that captures the magic of long range radio communication and has become easier to experiment in as time has gone by.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hijacking Wireless Mice and Keyboards</title>
+      <link>https://example.org/blog/2016/07/09/hijacking-wireless-mice-and-keyboards/</link>
+      <pubDate>Sat, 09 Jul 2016 14:40:38 +0300</pubDate>
+      <guid>https://example.org/blog/2016/07/09/hijacking-wireless-mice-and-keyboards/</guid>
+      <description>&lt;p&gt;Earlier this year researchers from &lt;a href=&#34;https://www.bastille.net/&#34;&gt;&lt;strong&gt;Bastille&lt;/strong&gt;&lt;/a&gt; discovered vulnerabilities in wireless mice and keyboards that could lead to them being remotely hijacked from as far as 225 meters away. They have a dedicated site detailing the vulnerabilities dubbed &lt;a href=&#34;https://www.mousejack.com/&#34;&gt;&lt;strong&gt;mousejack&lt;/strong&gt;&lt;/a&gt;. They also released POC code which I have built on to implement a remote takeover of a machine using a wireless mouse/keyboard.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>A Diy Listening Device</title>
+      <link>https://example.org/blog/2016/02/16/a-diy-listening-device/</link>
+      <pubDate>Tue, 16 Feb 2016 19:51:44 +0300</pubDate>
+      <guid>https://example.org/blog/2016/02/16/a-diy-listening-device/</guid>
+      <description>&lt;p&gt;I have had a set of Intex Wireless Roaming Headphones lying around the house for a couple of years. They consist of a receiver (headphones) and a separate transmitter. The headphones include an FM receiver powered by two AAA batteries with reset and scan buttons for normal FM operation, and of course volume control. The separate transmitter comes with audio and microphone jack ports and is also powered by two AAA batteries. It also has a DC port as an alternative power source option. Here&amp;rsquo;s how it looks:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Gsm Sniffing Voice Traffic</title>
+      <link>https://example.org/blog/2016/01/25/gsm-sniffing-voice-traffic/</link>
+      <pubDate>Mon, 25 Jan 2016 06:51:00 +0300</pubDate>
+      <guid>https://example.org/blog/2016/01/25/gsm-sniffing-voice-traffic/</guid>
+      <description>&lt;p&gt;I wrap up the GSM series with a walkthrough on how to decrypt voice traffic. Voice is the way most people interact on a telecommunications network and therefore a major component of GSM traffic. I&amp;rsquo;ve explained a lot of the background on GSM communication in the previous posts so I&amp;rsquo;ll get right to it.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Gsm Sniffing Sms Traffic</title>
+      <link>https://example.org/blog/2015/11/29/gsm-sniffing-sms-traffic/</link>
+      <pubDate>Sun, 29 Nov 2015 10:14:48 +0300</pubDate>
+      <guid>https://example.org/blog/2015/11/29/gsm-sniffing-sms-traffic/</guid>
+      <description>&lt;p&gt;In the previous &lt;a href=&#34;https://www.ckn.io/blog/2015/11/01/sniffing-gsm-traffic/&#34;&gt;&lt;strong&gt;post&lt;/strong&gt;&lt;/a&gt;, I explained how GSM traffic can be sniffed with the &lt;a href=&#34;https://www.ckn.io/blog/2015/10/11/the-hackrf-one-first-steps/&#34;&gt;&lt;strong&gt;HackRF One&lt;/strong&gt;&lt;/a&gt;. GSM traffic carries a lot of information, from system information to the actual voice and data we are familiar with. The traffic that the normal user of a telecommunication network is concerned with is voice and data. With this in mind I&amp;rsquo;ll do a two part series to demonstrate how voice and data can be sniffed using the HackRF. I start with SMS traffic which falls under the data category. Let&amp;rsquo;s get right into it!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Sniffing Gsm Traffic</title>
+      <link>https://example.org/blog/2015/11/01/sniffing-gsm-traffic/</link>
+      <pubDate>Sun, 01 Nov 2015 09:30:27 +0300</pubDate>
+      <guid>https://example.org/blog/2015/11/01/sniffing-gsm-traffic/</guid>
+      <description>&lt;p&gt;I have been playing around with the HackRF for the past couple of weeks and progressively exploring the Radio Frequency spectrum. In this post I&amp;rsquo;ll take you through how to sniff GSM traffic. I&amp;rsquo;ll be specifically monitoring the &lt;a href=&#34;https://en.wikipedia.org/wiki/Um_interface&#34;&gt;&lt;strong&gt;Um interface&lt;/strong&gt;&lt;/a&gt;. This in the air interface between the Mobile Station (MS) and the Base Transceiver Station (BTS). The MS in this case will be the mobile phone while the BTS is what the phone connects to on the Mobile network. The BTS is usually hosted on towers which you can spot in various locations. Here is what a typical one looks like.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>The Hackrf One First Steps</title>
+      <link>https://example.org/blog/2015/10/11/the-hackrf-one-first-steps/</link>
+      <pubDate>Sun, 11 Oct 2015 20:18:10 +0300</pubDate>
+      <guid>https://example.org/blog/2015/10/11/the-hackrf-one-first-steps/</guid>
+      <description>&lt;p&gt;The wireless world is an area I&amp;rsquo;ve been interested in for a long time. From the the more common applications such as Wi-Fi, bluetooth and FM to the lesser explored such as radar, satellite and GSM, radio frequency is an area I plan to explore extensively. How awesome is the concept of &lt;a href=&#34;https://en.wikipedia.org/wiki/Electromagnetic_pulse&#34;&gt;&lt;strong&gt;electromagnetic pulses&lt;/strong&gt;&lt;/a&gt; in this age that is driven by electromagnetism. I digress so let me get back on track, there will be several more posts to explore the possibilities.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Crypto on The poetry of (in)security</title>
+    <link>http://localhost:1313/categories/crypto/</link>
+    <description>Recent content in Crypto on The poetry of (in)security</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 11 May 2015 13:45:52 +0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/crypto/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Crypto magic - homomorphic encryption</title>
+      <link>http://localhost:1313/blog/2015-05-11-crypto-magic-homomorphic-encryption/</link>
+      <pubDate>Mon, 11 May 2015 13:45:52 +0300</pubDate>
+      <guid>http://localhost:1313/blog/2015-05-11-crypto-magic-homomorphic-encryption/</guid>
+      <description>&lt;p&gt;Could Google do your search without knowing what it was looking for? Could your hospital provide you with information regarding your health records without knowing what you asked?&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Crypto magic - zero knowledge</title>
+      <link>http://localhost:1313/blog/2015-05-05-crypto-magic-zero-knowledge/</link>
+      <pubDate>Tue, 05 May 2015 09:23:11 +0300</pubDate>
+      <guid>http://localhost:1313/blog/2015-05-05-crypto-magic-zero-knowledge/</guid>
+      <description>&lt;p&gt;There are some applications of cryptography that can only be classified as magical. It is only fitting that my first crypto post begins with one of them - zero knowledge proofs.&#xA;I will try and explain it without all the rather complicated mathematical stuff.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

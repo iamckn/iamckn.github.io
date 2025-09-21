@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html><head lang="en"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Crypto magic - homomorphic encryption - The poetry of (in)security</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Could Google do your search without knowing what it was looking for? Could your hospital provide you with information regarding your health records without knowing what you asked?" />
+	<meta property="og:image" content=""/>
+	<meta property="og:title" content="Crypto magic - homomorphic encryption" />
+<meta property="og:description" content="Could Google do your search without knowing what it was looking for? Could your hospital provide you with information regarding your health records without knowing what you asked?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/blog/2015-05-11-crypto-magic-homomorphic-encryption/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2015-05-11T13:45:52+03:00" />
+<meta property="article:modified_time" content="2015-05-11T13:45:52+03:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Crypto magic - homomorphic encryption"/>
+<meta name="twitter:description" content="Could Google do your search without knowing what it was looking for? Could your hospital provide you with information regarding your health records without knowing what you asked?"/>
+
+        <link href="http://localhost:1313/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="http://localhost:1313/">The poetry of (in)security</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/posts">All posts</a>
+		
+		<a href="/about">About</a>
+		
+		<a href="/tags">Tags</a>
+		
+		
+	</nav>
+</header>
+
+<main>
+  <article>
+    <div class="post-container">
+      
+      <div class="post-content">
+        <div class="title">
+          <h1 class="title">Crypto magic - homomorphic encryption</h1>
+          <div class="meta">Posted on May 11, 2015</div>
+        </div>
+        
+        <section class="body">
+          <p>Could Google do your search without knowing what it was looking for? Could your hospital provide you with information regarding your health records without knowing what you asked?</p>
+<p>Can data be encrypted in such a way that computation can be done on it without decrypting it first?
+Yes it can! This is what homomorphic encryption is all about.
+Our exploration of crypto magic continues :)</p>
+<p>Let&rsquo;s start with two scenarios
+#scenario 1: encrypted search
+First, I am not talking about searching over secure protocols like https. What I am referring to is where your search term is in encrypted form before it reaches the search engine (say Google). Google therefore doesn&rsquo;t know what you want to search for.
+After Google receives your encrypted search term, it searches for it in an encrypted database. The results it gets are also encrypted which are then passed on to you. You can then privately decrypt them :). You&rsquo;ll note that Google never knew what you were looking for nor what results were returned. No decryption occured at any point before you received the results.</p>
+<p>#scenario 2: secure cloud processing
+Would it not be nice to have some powerful hosting provider do complex computation on your data without them ever knowing the contents? A case would be like your bank having a cloud provider hosting its data. The bank would encrypt the data before uploading it, so the cloud provider never sees the plain version. The bank would then be able to perform complex computation on the encrypted data using the cloud providers powerful processing power without it ever been decrypted. The bank could also be able to request information from the encrypted data using encrypted queries. The returned answers would also be in encrypted form which only the bank can decrypt. And again no decryption takes place at the cloud provider.</p>
+<p>#How can this be done?
+This concept was first proposed over 30 years ago by Rivest, Adleman and Dertouzos and is referred to homomorphic encryption (They also suggested it was probably impossible).
+Let&rsquo;s say you have x and y. if you multiply the encrypted version of x and the encrypted version of y and the answer is the same as if you multiplied their plain values and encrypted the answer, then the process is said to be homomorphic with respect to multiplication.
+Any computer algorithm is a series of arithmetic steps so if we can get a process that is homomorphic with respect to both addition and multiplication, any computing application would be possible on encrypted data.</p>
+<p>#Has it been achieved?
+Over the past three decades, partial solutions have been discovered.
+However, it is not until 2009 that Craig Gentry developed a fully homomorphic system. Unfortunately it requires lots and lots of computational power. For instance, an encrypted Google search would multiply the computation time to 1 trillion times that of a normal one :(.
+The good news is that the theoretical barrier was broken and with lots of work a practical solution may be found :).</p>
+<p>####For anyone willing to give it a go, <!-- raw HTML omitted --><strong>DARPA is offering $20 million</strong><!-- raw HTML omitted --> if you can come up with a scheme that only takes 100,000 times as long as unencrypted calculations :).</p>
+<p>And we may well be on our way there, three MIT scientists developed a system that emulates fully homomorphic encryption for most of the functions of the SQL databases used in many applications. It computes only with encrypted data and takes just 15% to 26% more computing time.
+The project is called CryptDB and you can check it out <!-- raw HTML omitted --><strong>here</strong><!-- raw HTML omitted -->.</p>
+<p>The application of this in information security does not even need explaining :)</p>
+        </section>
+        <div class="post-tags">
+          
+          
+          
+        </div>
+      </div>
+
+      
+      
+    </div>
+
+    </article>
+</main>
+<footer>
+  <div style="display:flex"><a class="soc" href="https://github.com/iamckn" rel="me" title="GitHub"><svg class="feather">
+   <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#github" />
+</svg></a><a class="border"></a><a class="soc" href="https://twitter.com/iamckn/" rel="me" title="Twitter"><svg class="feather">
+   <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#twitter" />
+</svg></a><a class="border"></a></div>
+  <div class="footer-info">
+    2025  <a
+      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+  </div>
+</footer>
+
+</div>
+    </body>
+</html>

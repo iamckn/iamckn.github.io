@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> Receiving Outernet Satellite Broadcasts | The poetry of (in)security</title>
+  <link rel = 'canonical' href = 'https://example.org/blog/2016/12/29/receiving-outernet-satellite-broadcasts/'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="Receiving Outernet Satellite Broadcasts" />
+<meta property="og:description" content="Receiving satellite data is something I&rsquo;ve been hoping to try out for a while. It&rsquo;s an area that captures the magic of long range radio communication and has become easier to experiment in as time has gone by." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.org/blog/2016/12/29/receiving-outernet-satellite-broadcasts/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2016-12-29T10:18:31+03:00" />
+<meta property="article:modified_time" content="2016-12-29T10:18:31+03:00" />
+
+
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Receiving Outernet Satellite Broadcasts"/>
+<meta name="twitter:description" content="Receiving satellite data is something I&rsquo;ve been hoping to try out for a while. It&rsquo;s an area that captures the magic of long range radio communication and has become easier to experiment in as time has gone by."/>
+
+  
+  
+  
+  <link rel="stylesheet" href="https://example.org/css/styles.e6089d87700a06caa386c15bac0e1f25720ef059b3e065c0a37502617f43d5e1ef54d1c10e3f4be773eb071ea4ae80b46775fad1ad2ae146f1ceac479135227f.css" integrity="sha512-5gidh3AKBsqjhsFbrA4fJXIO8Fmz4GXAo3UCYX9D1eHvVNHBDj9L53PrBx6kroC0Z3X60a0q4UbxzqxHkTUifw=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://example.org/images/favicon.ico" />
+
+  
+  
+  
+  
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HY9XRSX5QQ"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-HY9XRSX5QQ', { 'anonymize_ip': false });
+}
+</script>
+
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="https://example.org/">
+  
+    <div id="logo" style="background-image: url(https://example.org/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>The poetry of (in)security</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/post">Posts</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
+      
+        <li><a href="/whoami">Whoami</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <p>Receiving satellite data is something I&rsquo;ve been hoping to try out for a while. It&rsquo;s an area that captures the magic of long range radio communication and has become easier to experiment in as time has gone by.</p>
+<p>This is where <a href="https://outernet.is"><strong>Outernet</strong></a> comes in. They are a global data broadcasting company that provides access to content all over the world through geostationary and low earth orbit satellites. They broadcast their signal over three Inmarsat satellites at a bitrate of about 2kbps or 20MB of content per day. Full information on the technology aspects can be found <a href="https://outernet.is/tech/"><strong>here</strong></a>.</p>
+<p>They provide a Do-It-Yourself kit for $99 that one can get up and running in a short amount of time. I already had the RTL-SDR V3 dongle and a Pi 3 so all I needed was their portable L-Band patch antenna and the Low Noise Amplifier. They&rsquo;ve documented the set up process extremely well so I&rsquo;ll not dwell on it here. Their detailed guide is available <a href="https://static1.squarespace.com/static/55ccfcb0e4b0c5b275895965/t/58325122579fb38c5719f2fb/1479692584995/Outernet+L-Band+Manual+v03.10.pdf"><strong>here</strong></a>.</p>
+<p>Here&rsquo;s my assembled hardware set up.</p>
+<p><img src="/images/outernet_hardware.jpg" alt="alt"></p>
+<p>Once the hardware is powered up, a wireless hotpspot called Outernet is created which you connect to and visit the page <strong>my.outernet.is</strong> on your browser. You&rsquo;ll be prompted for various initial configuraton details which you can also modify later to your liking. Of importance is the choice of the satellite to use, with three available. In my case. the one serving my region is <strong>Alphasat</strong> on the 1545.94 MHz frequency.</p>
+<p>The next step is to point the antenna directly at the satellite for good signal reception. A good way to find the direction of the satellite using the  <a href="https://play.google.com/store/apps/details?id=com.agi.android.augmentedreality&amp;hl=en"><strong>Satellite AR</strong></a>  Android app. Check the Tuner Settings on the web dashboard while positioning the antenna until you get a Signal to Noise Ratio of at least 3dB.</p>
+<p><img src="/images/outernet_tuner.png" alt="alt"></p>
+<p>Data will start streaming in at the rate of 2kbps/20MB per day so give it some hours before you start exploring the downloaded content. Below is a sample of what the content includes after a week.</p>
+<h2 id="amateur-radio-content-from-aprs-and-amsat">Amateur radio content from APRS and AMSAT</h2>
+<p>News and messages from APRS and AMSAT.</p>
+<p><img src="/images/outernet_amateur.gif" alt="alt"></p>
+<h2 id="community-content-contributed-by-the-public">Community content contributed by the public</h2>
+<p>Content uploaded to outernet servers by the community. The public is allowed to submit content which may be incorporated after review.</p>
+<p><img src="/images/outernet_community.gif" alt="alt"></p>
+<h2 id="games">Games</h2>
+<p>Browser based games.</p>
+<p><img src="/images/outernet_games.gif" alt="alt"></p>
+<h2 id="offline-wikipedia-pages">Offline Wikipedia pages</h2>
+<p>Select offline Wikpedia pages.</p>
+<p><img src="/images/outernet_wikipedia.gif" alt="alt"></p>
+<h2 id="news">News</h2>
+<p>Up to date news from around the world.</p>
+<p><img src="/images/outernet_news.gif" alt="alt"></p>
+<h2 id="interactive-weather-data">Interactive weather data</h2>
+<p>And finally my favorite, a beautiful interactive 3D weather map that is simply amazing.</p>
+<p><img src="/images/outernet_weather.gif" alt="alt"></p>
+<p>The Outernet service is constantly evolving and I am looking forward to more exciting content and functionality.</p>
+<p>Till next time, happy hacking!</p>
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2025  CK 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/post">Posts</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/whoami">Whoami</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>

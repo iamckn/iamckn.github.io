@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> Vpns an Opsec Primer | The poetry of (in)security</title>
+  <link rel = 'canonical' href = 'http://localhost:1313/post/2017/11/12/vpns-an-opsec-primer/'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="Vpns an Opsec Primer" />
+<meta property="og:description" content="The internet is a glorious place. This gloriousness does often come with some pitfalls here and there. Being probably the greatest source of information ever, various actors are constantly devicing ways to acquire and make use of all this data." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/2017/11/12/vpns-an-opsec-primer/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2017-11-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-11-12T00:00:00+00:00" />
+
+
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Vpns an Opsec Primer"/>
+<meta name="twitter:description" content="The internet is a glorious place. This gloriousness does often come with some pitfalls here and there. Being probably the greatest source of information ever, various actors are constantly devicing ways to acquire and make use of all this data."/>
+
+  
+  
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="http://localhost:1313/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="http://localhost:1313/">
+  
+    <div id="logo" style="background-image: url(http://localhost:1313/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>The poetry of (in)security</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <p>The internet is a glorious place. This gloriousness does often come with some pitfalls here and there. Being probably the greatest source of information ever, various actors are constantly devicing ways to acquire and make use of all this data.</p>
+<p>Businesses want to mine this data for monetisation purposes through targeted ads and the like. Criminals want it for malicious intent and profit. Governments and intelligence agencies want it for law enforcement and often censure and control. ISPs want it for monitoring, traffic filtering and so on. The list is endless and the motives ranging from good to bad are almost always controversial.</p>
+<p>A lot of the internet community is ok with the status quo and unlikely to be overly concerned with all this. Whether they should be, is a debate that has been explored extensively and therefore something this post will not dwell on.</p>
+<p>There are however a lot of us that prefer some form of control over our data as we interact with the World Wide Web. There are those who may have reasons to bypass restrictions placed upon their internet activity as prescribed by various entities mainly ISPs. Then there are those whose work demands operational security as they go about their business. These could include <a href="https://en.wikipedia.org/wiki/Red_team"></a><strong>red teams</strong><!-- raw HTML omitted -->, law enforcement, activists and even criminals.</p>
+<p>Here, I will try to cover the various ways these groups can use <a href="https://en.wikipedia.org/wiki/Virtual_private_network"></a><strong>virtual private networks</strong><!-- raw HTML omitted --> and the merits and weakness of each scenario. I will do so by providing a rating of the operational security each scenario affords them.</p>
+<h1 id="typical-internet-connection">Typical internet connection</h1>
+<p>Let&rsquo;s begin by describing the typical way most users access the internet.</p>
+<p><img src="/images/typical.png" alt="alt"></p>
+<p>This is usually the basic internet connection. The user connects to the network through a router which connects them to their ISP and out into the internet.</p>
+<h3 id="opsec-rating-low">OPSEC Rating: <strong>Low</strong></h3>
+<ul>
+<li>ISP observes all connections between client and the internet</li>
+<li>ISP can view all clear text communication</li>
+<li>ISP can see all destination and source IP/port info between client and the internet</li>
+<li>ISP can block or filter certain types of traffic</li>
+</ul>
+<p>As can be seen, the typical internet connection places almost all the control with the ISP.</p>
+<h1 id="typical-vpn-connection">Typical VPN connection</h1>
+<p>A typical VPN setup involves the client connecting to a VPN gateway/provider over an encrypted tunnel. Their internet traffic therefore goes through this tunnel before being directed out to the internet by the VPN gateway/provider.</p>
+<p><img src="/images/typical_vpn.png" alt="alt"></p>
+<h3 id="opsec-rating-medium">OPSEC Rating: <strong>Medium</strong></h3>
+<ul>
+<li>ISP can only see destination and source IP/port info between client and VPN Gateway</li>
+<li>ISP blocking and filtering of traffic is bypassed by use of the VPN tunnel</li>
+<li>No clear text communication as traffic is encrypted in the VPN tunnel</li>
+<li>ISP can correlate connection details between the Client and it&rsquo;s other clients</li>
+<li>Hoster of VPN Gateway can correlate traffic between Client and the internet</li>
+</ul>
+<p>This VPN connection will meet the needs of most users. It however fails if the intention is good anonymity.
+The first problem is the following scenario: let&rsquo;s say the client wants to anonymously connect to a server owned by another client hosted on the same ISP. They will connect to the VPN Gateway which will then forward them to the server. I hope you see the problem here. First, the ISP can see that the client is connected to the VPN Gateway. Secondly, the ISP can also see the VPN Gateway connecting to the server as this server is owned by another client hosted by them. The ISP can therefore correlate the two connection details even though a VPN gateway was involved.</p>
+<p>The second problem is that the VPN Gateway can basically see all the connection details between the client and the internet.</p>
+<h1 id="chained-vpn-connection">Chained VPN connection</h1>
+<p>To overcome some of the challenges identified in the typical VPN connection, a chained VPN connection can be set up as follows.</p>
+<p><img src="/images/chained_vpn.png" alt="alt"></p>
+<h3 id="opsec-rating-good">OPSEC Rating: <strong>Good</strong></h3>
+<ul>
+<li>ISP can only see destination and source IP/port info between client and first VPN Gateway</li>
+<li>ISP blocking and filtering of traffic is bypassed by use of the VPN tunnel</li>
+<li>No clear text communication as traffic is encrypted in the VPN tunnel</li>
+<li>ISP cannot correlate connection details between the Client and it&rsquo;s other clients</li>
+<li>Hoster of VPN gateway one cannot correlate traffic between Client and the internet</li>
+<li>Hoster of VPN gateway two can correlate normal internet browsing and traffic to the sensitive network</li>
+</ul>
+<p>This vpn connection provides relatively good anonymity as opposed to the typical one described earlier. It can be seen that the ISP never sees the connection between the two VPN Gateways and therefore cannot link the client to VPN Gateway Two. As all internet traffic goes out through VPN Gateway Two, VPN Gateway One provides an added layer of security against correlation weaknesses of the typical VPN connection.</p>
+<p>It should however be noted that VPN Gateway two could possibly identify the client through correlation of metadata information should the client perform personally identifiable internet activity. A likely scenario where this would occur is the client accessing their personal social media or email accounts (metadata such as urls can give away this information). If the client then uses the same VPN connection for other purposes such as accessing the sensitive network shown in the diagram, VPN Gateway two can correlate this to potentially identify the client.</p>
+<h1 id="chained-vpn-connection-with-selective-routing">Chained VPN connection with selective routing</h1>
+<p>A variation of the chained VPN connection could be set up as follows.</p>
+<p><img src="/images/chained_selective.png" alt="alt"></p>
+<h3 id="opsec-rating-good-1">OPSEC Rating: <strong>Good</strong></h3>
+<ul>
+<li>ISP can only see destination and source IP info between client and first VPN Gateway</li>
+<li>ISP blocking and filtering of traffic is bypassed by use of the VPN tunnel</li>
+<li>No clear text communication as traffic is encrypted in the VPN tunnel</li>
+<li>ISP cannot correlate connection details between client and sensivite network</li>
+<li>Hoster of VPN gateway one cannot correlate normal internet browsing and traffic to the sensitive network</li>
+<li>Hoster of VPN Gateway two cannot observe Client&rsquo;s normal internet browsing</li>
+</ul>
+<p>In this setup, normal internet traffic from the client is forwarded directly to the destination by VPN Gateway One and isn&rsquo;t forwarded to VPN Gateway Two. Select traffic that may be considered sensitive is however explicitly forwarded to to VPN Gateway Two.</p>
+<p>What this achieves is to ensure that the client&rsquo;s normal traffic such as normal web surfing doesn&rsquo;t go out the same VPN Gateway as traffic they wouldn&rsquo;t want linked to them. VPN Gateway One will only see normal internet traffic while VPN Gateway Two will only see traffic to the sensitive network.</p>
+<h1 id="takeway-notes">Takeway notes</h1>
+<ul>
+<li>The typical vpn connection should suit most users who just need basic anonymity and security.</li>
+<li>The two chained options provide improved anonymity.</li>
+<li>Use of any of the VPN setups described alone isn&rsquo;t to be assumed to guarantee operational security. Opsec hygiene should be observed and complementary solutions and techniques employed.</li>
+<li>An advanced adversary such as a nation state will defeat the setups described with a high likelihood.</li>
+</ul>
+<h1 id="addendum">Addendum</h1>
+<p>I&rsquo;ll be doing a series on how to implement the various setups using my favorite VPN solution, the extremely simple yet fast solution VPN called <a href="https://www.wireguard.com/"></a><strong>Wireguard</strong><!-- raw HTML omitted -->.
+As part of the series, I&rsquo;ll also detail how to setup the portable Wireguard VPN solution shown below using a Raspberry Pi.</p>
+<p><img src="/images/portable_vpn.png" alt="alt"></p>
+<p>Here are some useful links related to this post.</p>
+<ul>
+<li>
+<p>Some great opsec rules from <a href="https://grugq.tumblr.com/post/60463307186/rules-of-clandestine-operation">https://grugq.tumblr.com/post/60463307186/rules-of-clandestine-operation</a></p>
+</li>
+<li>
+<p>The awesome Wireguard VPN <a href="https://www.wireguard.com/">https://www.wireguard.com/</a></p>
+</li>
+<li>
+<p>My go to network diagram tool <a href="https://www.draw.io/">https://www.draw.io/</a></p>
+</li>
+</ul>
+<p>A typical VPN connection using Wireguard follows next.</p>
+<p>Till next time, happy hacking!</p>
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2025  The poetry of (in)security 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/about">About</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>

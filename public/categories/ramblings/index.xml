@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ramblings on The poetry of (in)security</title>
+    <link>http://localhost:1313/categories/ramblings/</link>
+    <description>Recent content in Ramblings on The poetry of (in)security</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 04 Oct 2015 09:06:09 +0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/ramblings/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Saints and Outlaws</title>
+      <link>http://localhost:1313/blog/2015-10-04-saints-and-outlaws/</link>
+      <pubDate>Sun, 04 Oct 2015 09:06:09 +0300</pubDate>
+      <guid>http://localhost:1313/blog/2015-10-04-saints-and-outlaws/</guid>
+      <description>&lt;p&gt;I have been teaching a class on Network Security at mlab and one student asked what the state of cyber-security in the country was. In this post I explain the current state and the outlook over the coming years.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hackers Wanted!</title>
+      <link>http://localhost:1313/blog/2015-09-13-hackers-wanted/</link>
+      <pubDate>Sun, 13 Sep 2015 11:31:27 +0300</pubDate>
+      <guid>http://localhost:1313/blog/2015-09-13-hackers-wanted/</guid>
+      <description>&lt;p&gt;####&amp;gt;Some expletives have been edited out&amp;lt;&#xA;####&amp;gt;The catching of feelings is encouraged&amp;lt;&#xA;####&amp;gt;Heavy Hip Hop references included&amp;lt;&#xA; &lt;br&gt;&#xA;####&amp;gt;Begin Rant&amp;lt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Learning to hack</title>
+      <link>http://localhost:1313/blog/2015-08-25-learning-to-hack/</link>
+      <pubDate>Tue, 25 Aug 2015 14:27:24 +0300</pubDate>
+      <guid>http://localhost:1313/blog/2015-08-25-learning-to-hack/</guid>
+      <description>&lt;p&gt;Becoming a skilled hacker or the politically correct &amp;ldquo;information security specialist&amp;rdquo; doesn&amp;rsquo;t have a straightforward defined path. Here I will try to layout what constitutes a good way to go about it.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AfricaHackon - Be part of the story</title>
+      <link>http://localhost:1313/blog/2015-05-17-africahackon-be-part-of-the-story/</link>
+      <pubDate>Sun, 17 May 2015 08:42:08 +0300</pubDate>
+      <guid>http://localhost:1313/blog/2015-05-17-africahackon-be-part-of-the-story/</guid>
+      <description>&lt;p&gt;I first heard of AfricaHackon at my previous job where I was working in IT. A colleague and friend told me about a conference about information security that would be held at our building. This was early last year. Being in charge of the network, I would be assisting in setting up internet access for the conference. Now when you&amp;rsquo;re incharge of the network and you hear you&amp;rsquo;ll be giving access to your network to a room full of the best &amp;ldquo;hackers&amp;rdquo; in the country, you get a bit nervous. I use the word &amp;ldquo;hackers&amp;rdquo; in quotes because that&amp;rsquo;s where I&amp;rsquo;d like to start.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

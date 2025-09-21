@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html><head lang="en"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>A DIY Listening Device - The poetry of (in)security</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="I have had a set of Intex Wireless Roaming Headphones lying around the house for a couple of years. They consist of a receiver (headphones) and a separate transmitter. The headphones include an FM receiver powered by two AAA batteries with reset and scan buttons for normal FM operation, and of course volume control. The separate transmitter comes with audio and microphone jack ports and is also powered by two AAA batteries. It also has a DC port as an alternative power source option. Here&rsquo;s how it looks:" />
+	<meta property="og:image" content=""/>
+	<meta property="og:title" content="A DIY Listening Device" />
+<meta property="og:description" content="I have had a set of Intex Wireless Roaming Headphones lying around the house for a couple of years. They consist of a receiver (headphones) and a separate transmitter. The headphones include an FM receiver powered by two AAA batteries with reset and scan buttons for normal FM operation, and of course volume control. The separate transmitter comes with audio and microphone jack ports and is also powered by two AAA batteries. It also has a DC port as an alternative power source option. Here&rsquo;s how it looks:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/blog/2016-02-13-a-diy-listening-device/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2016-02-16T19:51:44+03:00" />
+<meta property="article:modified_time" content="2016-02-16T19:51:44+03:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="A DIY Listening Device"/>
+<meta name="twitter:description" content="I have had a set of Intex Wireless Roaming Headphones lying around the house for a couple of years. They consist of a receiver (headphones) and a separate transmitter. The headphones include an FM receiver powered by two AAA batteries with reset and scan buttons for normal FM operation, and of course volume control. The separate transmitter comes with audio and microphone jack ports and is also powered by two AAA batteries. It also has a DC port as an alternative power source option. Here&rsquo;s how it looks:"/>
+
+        <link href="http://localhost:1313/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="http://localhost:1313/">The poetry of (in)security</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/posts">All posts</a>
+		
+		<a href="/about">About</a>
+		
+		<a href="/tags">Tags</a>
+		
+		
+	</nav>
+</header>
+
+<main>
+  <article>
+    <div class="post-container">
+      
+      <div class="post-content">
+        <div class="title">
+          <h1 class="title">A DIY Listening Device</h1>
+          <div class="meta">Posted on Feb 16, 2016</div>
+        </div>
+        
+        <section class="body">
+          <p>I have had a set of Intex Wireless Roaming Headphones lying around the house for a couple of years. They consist of a receiver (headphones) and a separate transmitter. The headphones include an FM receiver powered by two AAA batteries with reset and scan buttons for normal FM operation, and of course volume control. The separate transmitter comes with audio and microphone jack ports and is also powered by two AAA batteries. It also has a DC port as an alternative power source option. Here&rsquo;s how it looks:</p>
+<p>{% img /images/headsets.jpg %}</p>
+<p>How it works is that you connect your audio source to either the transmitter or the headphones with an aux cable. If you go the transmitter way, to listen to the audio, you press the reset button then the scan button on the headphones. The headphones then receive the audio wireless from the transmitter. That&rsquo;s how I had been using the headphones until I got the HackRF One. What was taking place behind the scenes had to be investigated&hellip;naturally :).</p>
+<p>The wireless operation of the headsets provided the first clue. The pressing of the reset button followed by the scan button to get the audio from the transmitter meant that the communication was FM. It also followed that the frequency in use was lower than the normal FM frequency band as the audio was heard immediately after the first scan button press.</p>
+<p>It was then time to fire up the HackRF One and confirm this. I therefore opened <strong>gqrx</strong> and tuned to around 87.5MHz. The normal FM band is from 87.5 to 108MHz so I wanted to observe the frequencies just before 87.5MHz.
+What remained was to connect an audio source to the transmitter and observe what happened on the gqrx display. What was observed is a strong signal peaking at 86.5MHz as shown below:</p>
+<p>{% img /images/transmitter_86_5.png %}</p>
+<p>Tuning to that frequency and listening to the audio output confirmed that it was the audio from the transmitter being received.
+Further investigation revealed that the receiver had a frequency range from 84Mhz to 108MHz. The makers of the headsets used the fact that most recievers are tuned to only receive 87.5MHz as the lower end frequency. The 86.5MHz the headsets use is therefore not received on normal FM receivers otherwise anyone listening to FM radio could listen in.</p>
+<p><strong>This is where the fun begins</strong></p>
+<p>It was now time to open up the headphones and transmitter to see what the actual circuit boards looked like.
+The headphones&rsquo; circuit board as expected is just a simple FM receiver that can be tuned to lower frequencies than normal FM receivers.
+The interesting circuit board is the one from the transmitter. Its input audio source is one of three options: an audio jack, a microphone jack, or an inbuilt microphone. The option to use is selected using a slide switch. The frequency it transmits on is controlled by a trimmer capacitor set in place using epoxy.</p>
+<p>The circuit board was relatively small in size so I separated it from its casing.
+I then fashioned a micro-usb power port by patching together the two power cables meant for the triple AAA batteries with the end of a female micro-usb cable.
+Finally I cleared away the epoxy on the trimmer capacitor to enable tuning of the transmit frequency :). This is how the end product looks like:</p>
+<p>{% img /images/fm_transmitter.jpg 400 %}</p>
+<p>I had an old powerbank that had some issues so I decided to re-purpose it. I took out the rechargeable batteries patched them up to the end of a USB cable to fashion a portable battery pack. The charging circuit board would come in handy for recharging the batteries :).</p>
+<p>Here&rsquo;s the charging circuit board:</p>
+<p>{% img /images/battery_charger.jpg 400 %}</p>
+<p>Here&rsquo;s the transmitter hooked up to the rechargeable batteries:</p>
+<p>{% img /images/transmitter_and_battery.jpg 400 %}</p>
+<p><strong>Testing it out</strong></p>
+<p>With the transmitter hooked up to the batteries and gqrx running, it was time to test out tuning to different frequencies.
+Adjusting the transmit frequency by turning the trimmer capacitor with a small screw driver works as expected. Here&rsquo;s the frequency adjusted to 88.5MHz, which can be listened to on normal FM receivers.</p>
+<p>{% img /images/transmitter_88_5.png %}</p>
+<p>If we set the slide switch on the transmitter to microphone, the transmitter listens to sounds around it and transmits on the frequency we set. Its frequency response range is 20 - 20000Hz which is the human hearing range, making it optimized to capture human voice :).</p>
+<p>You can either use the internal mic on the circuit board or connect an external one to the mic jack to meet your specific needs.</p>
+<p>With the micro-usb power cable I added, you can power it using the rechargeable batteries, computer/phone USB ports or the normal USB chargers.
+The frequency can be tuned using the trimmer capacitor and listened to on a normal FM receiver, or tuned to frequencies below the FM band to prevent eavesdropping by everyone else.
+The range of the transmitter is about 30m, but this could easily be increased by having a retransmitter within range.
+The transmitter circuit board is small enough to be easily concealed. Creative ways can also be employed like placing it in a hard disk case as I&rsquo;ve done below :)</p>
+<p>{% img /images/transmitter_case_open.jpg 200 %} {% img /images/transmitter_case_closed.jpg 200 %}</p>
+<p><strong>Can it DOS?</strong></p>
+<p>Set the slide switch to audio and you can play audio from your preferred audio source (say your phone) using an aux cable to the frequency you tune the transmitter to. If that frequency is allocated to a radio station, then anyone tuned to that station within 30m listens to what you play (legal issues ensue). With its portable nature, you become a mobile radio station DOSer.</p>
+<p>The cost of the headsets is about 10 dollars and for that you can come up with some creative ways of making use of the transmitter. You can continue using the headphones independently with an aux cable or listening to FM radio.</p>
+<p>For now I plan on replacing the trimmer capacitor with a more flexible one, and hopefully interface it with a smartphone to provide an interface to control the frequency :).</p>
+<p>Till next time, happy hacking!</p>
+        </section>
+        <div class="post-tags">
+          
+          
+          
+        </div>
+      </div>
+
+      
+      
+    </div>
+
+    </article>
+</main>
+<footer>
+  <div style="display:flex"><a class="soc" href="https://github.com/iamckn" rel="me" title="GitHub"><svg class="feather">
+   <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#github" />
+</svg></a><a class="border"></a><a class="soc" href="https://twitter.com/iamckn/" rel="me" title="Twitter"><svg class="feather">
+   <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#twitter" />
+</svg></a><a class="border"></a></div>
+  <div class="footer-info">
+    2025  <a
+      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+  </div>
+</footer>
+
+</div>
+    </body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html><head lang="en"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Gsm Sniffing Voice Traffic - The poetry of (in)security</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="I wrap up the GSM series with a walkthrough on how to decrypt voice traffic. Voice is the way most people interact on a telecommunications network and therefore a major componenent of GSM traffic. I&rsquo;ve explained a lot of the background on GSM communication in the previous posts so I&rsquo;ll get right to it." />
+	<meta property="og:image" content=""/>
+	<meta property="og:title" content="Gsm Sniffing Voice Traffic" />
+<meta property="og:description" content="I wrap up the GSM series with a walkthrough on how to decrypt voice traffic. Voice is the way most people interact on a telecommunications network and therefore a major componenent of GSM traffic. I&rsquo;ve explained a lot of the background on GSM communication in the previous posts so I&rsquo;ll get right to it." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/blog/2016/01/25/2016/01/25/gsm-sniffing-voice-traffic/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2016-01-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2016-01-25T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Gsm Sniffing Voice Traffic"/>
+<meta name="twitter:description" content="I wrap up the GSM series with a walkthrough on how to decrypt voice traffic. Voice is the way most people interact on a telecommunications network and therefore a major componenent of GSM traffic. I&rsquo;ve explained a lot of the background on GSM communication in the previous posts so I&rsquo;ll get right to it."/>
+
+        <link href="http://localhost:1313/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="http://localhost:1313/">The poetry of (in)security</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/posts">All posts</a>
+		
+		<a href="/about">About</a>
+		
+		<a href="/tags">Tags</a>
+		
+		
+	</nav>
+</header>
+
+<main>
+  <article>
+    <div class="post-container">
+      
+      <div class="post-content">
+        <div class="title">
+          <h1 class="title">Gsm Sniffing Voice Traffic</h1>
+          <div class="meta">Posted on Jan 25, 2016</div>
+        </div>
+        
+        <section class="body">
+          <p>I wrap up the GSM series with a walkthrough on how to decrypt voice traffic. Voice is the way most people interact on a telecommunications network and therefore a major componenent of GSM traffic. I&rsquo;ve explained a lot of the background on GSM communication in the previous posts so I&rsquo;ll get right to it.</p>
+<p>We will capture the traffic using the <strong>HackRF one</strong> and the call will take place between two Safaricom lines. The capture will take place on the downlink - that is the receiving end of the call. I&rsquo;ll use a Blackberry as the receiving device so that I can easily get the TMSI and Kc.</p>
+<p>##<strong>Capturing the traffic</strong></p>
+<p>I&rsquo;ll speed through a lot of these steps as they are similar to the <!-- raw HTML omitted --><strong>sniffing SMS traffic scenario</strong><!-- raw HTML omitted -->. I&rsquo;ll use the  Absolute Radio Frequency Channel Number <!-- raw HTML omitted --><strong>ARFCN</strong><!-- raw HTML omitted --> in specifying the radio channel. GSM uses ARFCNs to represent the various frequencies the BTS and mobile device communicate on. I&rsquo;ll use the ARFCN instead of the frequency in the commands I&rsquo;ll run for variety as I&rsquo;ve been using frequency in the previous posts.
+We begin by getting the ARFCN, TMSI and Kc from the Blackberry. On a Blackberry these are readily available from the engineering screen menu. The ARFCN is gotten by navigating to the <strong>Cell Identity</strong> submenu, the TMSI from the <strong>Mobile Identity</strong> submenu and finally the Kc from the <strong>SIM Browser</strong> submenu.</p>
+<p>The values I get are:</p>
+<p>ARFCN: <strong>17</strong>
+TMSI: <strong>8D4812F8</strong>
+Kc: <strong>239E4C213612C000</strong></p>
+<p>I use the airprobe_rtlsdr_capture module of <!-- raw HTML omitted --><strong>gr-gsm</strong><!-- raw HTML omitted --> to capture the voice traffic. I begin the capture by running the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>airprobe_rtlsdr_capture.py -a <span style="color:#ae81ff">17</span> -s <span style="color:#ae81ff">1000000</span> -g <span style="color:#ae81ff">40</span> -c voice_capture.cfile -T <span style="color:#ae81ff">150</span>
+</span></span></code></pre></div><p><strong>-a</strong> is the ARFCN, <strong>-s</strong> the sample rate in Hz, <strong>-g</strong> the gain, <strong>-c</strong> the output file and <strong>-T</strong> the duration of our capture in seconds.</p>
+<p>I then make a call while the capture is in progress.</p>
+<p>##<strong>Decoding BCCH</strong>
+As explained in the previous post, in idle mode the phone has to listen on the BCCH to detect traffic to be sent to it.
+Our aim here is to identify what SDCCH (Standalone Dedicated Control Channel) is used for our call setup.</p>
+<p>We first start wireshark, monitor the loopback interface and then run the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>airprobe_decode.py -c voice_capture.cfile -s <span style="color:#ae81ff">1000000</span> -a <span style="color:#ae81ff">17</span> -m BCCH -t <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><p><strong>voice_capture.cfile</strong> is the file with the voice traffic we captured.
+We then search for traffic specific to our TMSI by searching for it in wireshark packet details.
+we look for the paging request and inspect the Immediate Assignment that follows:</p>
+<p>{% img /images/SDCCH_Search.png %}</p>
+<p>Note that it&rsquo;s <strong>SDCCH/8</strong>, <strong>Timeslot 1</strong>.</p>
+<p>#<strong>Decoding SDCCH</strong>
+We now need to identify the ciphering mode the BTS tells the phone to use.
+We restart wireshark on the loopback interface and then run the following command specifying <strong>SDCCH8</strong> and <strong>Timeslot 1</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>airprobe_decode.py -c voice_capture.cfile -s <span style="color:#ae81ff">1000000</span> -a <span style="color:#ae81ff">17</span> -m SDCCH8 -t <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p>We look for a Paging Response followed by a Ciphering Mode Command.</p>
+<p>{% img /images/ciphering_mode.png %}</p>
+<p>We see that the algorithm in use is <strong>A5/1</strong>.</p>
+<p>##<strong>Decoding TCH</strong></p>
+<p>TCH is the Traffic Channel in GSM and is used to carry voice traffic and data. It could either be full rate TCH/F or half rate TCH/H. You can read up more on it <!-- raw HTML omitted --><strong>here</strong><!-- raw HTML omitted -->.</p>
+<p>We now restart wireshark on the loopback interface and run the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>airprobe_decode.py -c voice_capture.cfile -s <span style="color:#ae81ff">1000000</span> -a <span style="color:#ae81ff">17</span> -m SDCCH8 -t <span style="color:#ae81ff">1</span> -e <span style="color:#ae81ff">1</span> -k 0x23,0x9E,0x4C,0x21,0x36,0x12,0xC0,0x00
+</span></span></code></pre></div><p><strong>-e 1</strong> specifies the algorithm <strong>A5/1</strong>, <strong>-k 0x23,0x9E,0x4C,0x21,0x36,0x12,0xC0,0x00</strong> specifies the <strong>Kc</strong>.</p>
+<p>On wireshark we first look for the Call Control Setup traffic and we can actually see the calling party number as below.</p>
+<p>{% img /images/cc_setup.png %}</p>
+<p>A bit down the capture we should see an Assignment command. We see that the voice call is assigned to Timeslot 7 and the Traffic Channel is full rate (TCH/F).</p>
+<p>{% img /images/call_assignment.png %}</p>
+<p>##<strong>Decoding the voice traffic</strong></p>
+<p>We can now finally decode the voice traffic by running the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>airprobe_decode.py -c voice_capture.cfile -s <span style="color:#ae81ff">1000000</span> -a <span style="color:#ae81ff">17</span> -m TCHF -t <span style="color:#ae81ff">7</span> -e <span style="color:#ae81ff">1</span> -k 0x23,0x9E,0x4C,0x21,0x36,0x12,0xC0,0x00 -d FR -o speech.au.gsm
+</span></span></code></pre></div><p><strong>-m TCHF</strong> specifies the traffic channel, <strong>-t 7</strong> the TCH/F timeslot, <strong>-d FR</strong> specifies the voice codec of the channel as full rate, and  <strong>speech.au.gsm</strong> specifies the output file.</p>
+<p><strong>speech.au.gsm</strong> contains the voice traffic. We convert it to an audio file using toast as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>toast -d speech.au.gsm
+</span></span></code></pre></div><p>We will get a file called <strong>speech.au</strong> which we can play back and listen to the captured voice call :).</p>
+<p>##<strong>Alternative method</strong></p>
+<p>Alternatively one could use the mainstream airprobe modules instead of gr-gsm with the same results.
+The original modules had issues with the HackRF and later GNU Radio versions. I however did some patching and you can clone the patched version from my Github <!-- raw HTML omitted --><strong>here</strong><!-- raw HTML omitted -->.</p>
+<p>The equivalent commands for the whole process starting from decoding BCCH to decoding voice are:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./go.sh voice_capture.cfile <span style="color:#ae81ff">64</span> 0B
+</span></span><span style="display:flex;"><span>./go.sh voice_capture.cfile <span style="color:#ae81ff">64</span> 1S 239E4C213612C00001
+</span></span><span style="display:flex;"><span>./go.sh voice_capture.cfile <span style="color:#ae81ff">64</span> 7T 239E4C213612C00001
+</span></span><span style="display:flex;"><span>toast -d speech.au.gsm 
+</span></span></code></pre></div><p>That concludes the GSM radio series for now.
+Till next time, happy hacking!</p>
+        </section>
+        <div class="post-tags">
+          
+          
+          
+        </div>
+      </div>
+
+      
+      
+    </div>
+
+    </article>
+</main>
+<footer>
+  <div style="display:flex"><a class="soc" href="https://github.com/iamckn" rel="me" title="GitHub"><svg class="feather">
+   <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#github" />
+</svg></a><a class="border"></a><a class="soc" href="https://twitter.com/iamckn/" rel="me" title="Twitter"><svg class="feather">
+   <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#twitter" />
+</svg></a><a class="border"></a></div>
+  <div class="footer-info">
+    2025  <a
+      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+  </div>
+</footer>
+
+</div>
+    </body>
+</html>

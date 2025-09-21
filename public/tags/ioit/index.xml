@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ioit on The poetry of (in)security</title>
+    <link>http://localhost:1313/tags/ioit/</link>
+    <description>Recent content in Ioit on The poetry of (in)security</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 27 Aug 2019 14:23:39 +0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/ioit/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Exploiting the Eques Elf Smart Plug Part Two</title>
+      <link>http://localhost:1313/blog/2019/08/27/exploiting-the-eques-elf-smart-plug-part-two/</link>
+      <pubDate>Tue, 27 Aug 2019 14:23:39 +0300</pubDate>
+      <guid>http://localhost:1313/blog/2019/08/27/exploiting-the-eques-elf-smart-plug-part-two/</guid>
+      <description>&lt;p&gt;In part one, we concentrated on analysing the network communication when one turns the smart power plug on or off from the app.&#xA;We had noticed some form of encrypted/encoded communication happening on udp port 27431 between the smart plug and the app installed on the phone. We also noticed some form of encrypted/encoded communication on tcp ports 9123 and 5222(xmpp) between the app, smart plug and ikonkek2.com.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

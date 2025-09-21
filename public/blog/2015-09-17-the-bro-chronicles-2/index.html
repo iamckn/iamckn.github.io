@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html><head lang="en"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>The BRO Chronicles 2 - The poetry of (in)security</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="In part one I analysed the data communication that takes place on a phone over a one hour period. Read the post here for details and background info.
+Here, I go further and analyse what happens over a twelve hour period of normal phone usage. I ran BRO on my phone from 6:40am to 6:40pm and ensured that data was on and WIFI off the whole time." />
+	<meta property="og:image" content=""/>
+	<meta property="og:title" content="The BRO Chronicles 2" />
+<meta property="og:description" content="In part one I analysed the data communication that takes place on a phone over a one hour period. Read the post here for details and background info.
+Here, I go further and analyse what happens over a twelve hour period of normal phone usage. I ran BRO on my phone from 6:40am to 6:40pm and ensured that data was on and WIFI off the whole time." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/blog/2015-09-17-the-bro-chronicles-2/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2015-09-17T20:54:07+03:00" />
+<meta property="article:modified_time" content="2015-09-17T20:54:07+03:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="The BRO Chronicles 2"/>
+<meta name="twitter:description" content="In part one I analysed the data communication that takes place on a phone over a one hour period. Read the post here for details and background info.
+Here, I go further and analyse what happens over a twelve hour period of normal phone usage. I ran BRO on my phone from 6:40am to 6:40pm and ensured that data was on and WIFI off the whole time."/>
+
+        <link href="http://localhost:1313/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="http://localhost:1313/">The poetry of (in)security</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/posts">All posts</a>
+		
+		<a href="/about">About</a>
+		
+		<a href="/tags">Tags</a>
+		
+		
+	</nav>
+</header>
+
+<main>
+  <article>
+    <div class="post-container">
+      
+      <div class="post-content">
+        <div class="title">
+          <h1 class="title">The BRO Chronicles 2</h1>
+          <div class="meta">Posted on Sep 17, 2015</div>
+        </div>
+        
+        <section class="body">
+          <p>In part one I analysed the data communication that takes place on a phone over a one hour period. Read the post <!-- raw HTML omitted --><strong>here</strong><!-- raw HTML omitted --> for details and background info.
+Here, I go further and analyse what happens over a twelve hour period of normal phone usage. I ran <!-- raw HTML omitted --><strong>BRO</strong><!-- raw HTML omitted --> on my phone from <code>6:40am</code> to <code>6:40pm</code> and ensured that data was on and WIFI off the whole time.</p>
+<p>Let me start with figures of some standout statistics.</p>
+<blockquote>
+<p>####The phone communicated with <code>233</code> unique IPs from diverse parts of the globe over that period.</p>
+</blockquote>
+<p>I broke this down further to specific ports of interest. Note that my IP was <code>105.52.174.7</code> during that period.</p>
+<p>##Port 21 : FTP</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>	<span style="color:#a6e22e">Unique</span> <span style="color:#a6e22e">IPs</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Source</span>			<span style="color:#a6e22e">Destination</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span> 		<span style="color:#ae81ff">158.69</span>.<span style="color:#ae81ff">128.126</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">180.97</span>.<span style="color:#ae81ff">106.37</span>		<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span>
+</span></span></code></pre></div><p>Why my phone wanted to connect to <code>158.69.128.126</code> on FTP raises some interesting questions.</p>
+<p>##Port 22 : SSH</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>	<span style="color:#a6e22e">Unique</span> <span style="color:#a6e22e">IPs</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">6</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Source</span>			<span style="color:#a6e22e">Destination</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">180.97</span>.<span style="color:#ae81ff">106.36</span> 		<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">218.65</span>.<span style="color:#ae81ff">30.23</span> 		<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">42.116</span>.<span style="color:#ae81ff">163.127</span> 	<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">80.82</span>.<span style="color:#ae81ff">65.123</span> 		<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">89.248</span>.<span style="color:#ae81ff">168.28</span> 		<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">94.102</span>.<span style="color:#ae81ff">49.102</span> 		<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span>
+</span></span></code></pre></div><p>##Port 23 : Telnet</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>	<span style="color:#a6e22e">Unique</span> <span style="color:#a6e22e">IPs</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">24</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Source</span>			<span style="color:#a6e22e">Destination</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">101.29</span>.<span style="color:#ae81ff">2.192</span> 		<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span> <span style="color:#ae81ff">23</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">106.115</span>.<span style="color:#ae81ff">98.232</span> 	<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span> <span style="color:#ae81ff">23</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">110.195</span>.<span style="color:#ae81ff">77.199</span> 	<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span> <span style="color:#ae81ff">23</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">and</span> <span style="color:#ae81ff">21</span> <span style="color:#a6e22e">others</span>
+</span></span></code></pre></div><p>That translates to an average of two telnet connection attempts per hour from unique IPs!</p>
+<p>##Summary of some other ports of interest</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>	<span style="color:#a6e22e">Port</span> 		<span style="color:#a6e22e">Unique</span> <span style="color:#a6e22e">IPs</span> 	
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">53</span>			<span style="color:#ae81ff">24</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">25</span> 			<span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">80</span> 			<span style="color:#ae81ff">129</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">123</span>			<span style="color:#ae81ff">26</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">443</span> 			<span style="color:#ae81ff">218</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">993</span> 			<span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">995</span> 			<span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">1900</span> 			<span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">5060</span> 			<span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">5222</span> 			<span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">5228</span> 			<span style="color:#ae81ff">7</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">8080</span> 			<span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">8996</span> 			<span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p>These results immediately direct our attention to internet wide scanning. This has slowly become a growing phenomenon over the past two years and has been aided by the release of extremely fast scanning tools. We have <!-- raw HTML omitted --><strong>zmap</strong><!-- raw HTML omitted --> created and maintained by a team from the University of Michigan which can scan the entire IPv4 space in under 5 minutes with a ten gigabit ethernet connection. Masscan, created by Robert Graham of Errata Security is fast enough to do the same in under <!-- raw HTML omitted --><strong>3 minutes</strong><!-- raw HTML omitted -->!
+Internet wide scanning is being used a lot by researchers to investigate vulnerabilities and do various internet wide studies. A case in point is that several internet wide scans were done targeting the heartbleed vulnerability within 48 hours of disclosure. A more recent case is this week&rsquo;s <!-- raw HTML omitted --><strong>synful attack scan</strong><!-- raw HTML omitted --> done by the zmap team on September 15, 2015.
+<!-- raw HTML omitted --><strong>Shodan</strong><!-- raw HTML omitted --> does regular internet wide scans and hosts the data on their site which is made available to the public in an interactive way.
+The University of Michigan team (same one that maintains zmap) also does daily scans and hosts the raw data on the <!-- raw HTML omitted --><strong>scans.io</strong><!-- raw HTML omitted --> site. They also host scans done by other researchers such as the Rapid7 team which does various scans regularly.
+The flip side of this is that a lot more people do these scans with malicious intent. They&rsquo;re always on the lookout for vulnerable systems on the internet and their activity spikes every time a major vulnerable is released. They mostly hide behind <!-- raw HTML omitted --><strong>bulletproof hosting providers</strong><!-- raw HTML omitted --> or run their scans from countries likely to be lenient, with China featuring prominently.
+Let me now relate the activity on my phone with internet wide scanning.</p>
+<p>##Some known research scans I observed during that 12 hour period</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>	<span style="color:#a6e22e">IP</span> 				<span style="color:#a6e22e">Domain</span> <span style="color:#a6e22e">Name</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">169.229</span>.<span style="color:#ae81ff">3.90</span>		<span style="color:#a6e22e">researchscan0</span>.<span style="color:#a6e22e">EECS</span>.<span style="color:#a6e22e">Berkeley</span>.<span style="color:#a6e22e">EDU</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">216.218</span>.<span style="color:#ae81ff">206.69</span>		<span style="color:#a6e22e">scan</span><span style="color:#f92672">-</span><span style="color:#ae81ff">08.</span><span style="color:#a6e22e">shadowserver</span>.<span style="color:#a6e22e">org</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">74.82</span>.<span style="color:#ae81ff">47.20</span> 		<span style="color:#a6e22e">scan</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">shadowserver</span>.<span style="color:#a6e22e">org</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">184.105</span>.<span style="color:#ae81ff">247.204</span>	<span style="color:#a6e22e">scan</span><span style="color:#f92672">-</span><span style="color:#ae81ff">15</span><span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">shadowserver</span>.<span style="color:#a6e22e">org</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">74.82</span>.<span style="color:#ae81ff">47.29</span>		<span style="color:#a6e22e">scan</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">shadowserver</span>.<span style="color:#a6e22e">org</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">188.138</span>.<span style="color:#ae81ff">9.50</span> 		<span style="color:#a6e22e">atlantic</span>.<span style="color:#a6e22e">census</span>.<span style="color:#a6e22e">shodan</span>.<span style="color:#a6e22e">io</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">93.120</span>.<span style="color:#ae81ff">27.62</span>		<span style="color:#a6e22e">m247</span>.<span style="color:#a6e22e">ro</span>.<span style="color:#a6e22e">shodan</span>.<span style="color:#a6e22e">io</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">71.6</span>.<span style="color:#ae81ff">167.142</span>		<span style="color:#a6e22e">census9</span>.<span style="color:#a6e22e">shodan</span>.<span style="color:#a6e22e">io</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">71.6</span>.<span style="color:#ae81ff">165.200</span>		<span style="color:#a6e22e">census12</span>.<span style="color:#a6e22e">shodan</span>.<span style="color:#a6e22e">io</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">198.20</span>.<span style="color:#ae81ff">70.114</span>		<span style="color:#a6e22e">census3</span>.<span style="color:#a6e22e">shodan</span>.<span style="color:#a6e22e">io</span> 
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">188.138</span>.<span style="color:#ae81ff">9.51</span>		<span style="color:#a6e22e">atlantic482</span>.<span style="color:#a6e22e">serverprofi24</span>.<span style="color:#a6e22e">de</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">80.82</span>.<span style="color:#ae81ff">70.198</span>		<span style="color:#a6e22e">icsresearch1</span>.<span style="color:#a6e22e">plcscan</span>.<span style="color:#a6e22e">org</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">141.212</span>.<span style="color:#ae81ff">122.181</span>	<span style="color:#a6e22e">researchscan436</span>.<span style="color:#a6e22e">eecs</span>.<span style="color:#a6e22e">umich</span>.<span style="color:#a6e22e">edu</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">141.212</span>.<span style="color:#ae81ff">122.182</span>	<span style="color:#a6e22e">researchscan436</span>.<span style="color:#a6e22e">eecs</span>.<span style="color:#a6e22e">umich</span>.<span style="color:#a6e22e">edu</span>
+</span></span></code></pre></div><p>##And of course several scans from unknown actors</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>	<span style="color:#a6e22e">IP</span> 				<span style="color:#a6e22e">Country</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">124.193</span>.<span style="color:#ae81ff">141.130</span>	<span style="color:#a6e22e">China</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">223.167</span>.<span style="color:#ae81ff">14.33</span>		<span style="color:#a6e22e">China</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">123.151</span>.<span style="color:#ae81ff">149.222</span>	<span style="color:#a6e22e">China</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">104.245</span>.<span style="color:#ae81ff">101.253</span>	<span style="color:#a6e22e">US</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">199.203</span>.<span style="color:#ae81ff">59.120</span>		<span style="color:#a6e22e">Israel</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">125.253</span>.<span style="color:#ae81ff">126.75</span> 	<span style="color:#a6e22e">Vietnam</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">80.82</span>.<span style="color:#ae81ff">70.238</span>		<span style="color:#a6e22e">Netherlands</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">115.230</span>.<span style="color:#ae81ff">124.164</span>	<span style="color:#a6e22e">China</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">177.44</span>.<span style="color:#ae81ff">69.36</span>		<span style="color:#a6e22e">Brazil</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">119.235</span>.<span style="color:#ae81ff">95.174</span>		<span style="color:#a6e22e">Fiji</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">125.24</span>.<span style="color:#ae81ff">223.93</span>		<span style="color:#a6e22e">Thailand</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">220.134</span>.<span style="color:#ae81ff">101.246</span>	<span style="color:#a6e22e">Taiwan</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">37.145</span>.<span style="color:#ae81ff">43.253</span>		<span style="color:#a6e22e">Russia</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">95.59</span>.<span style="color:#ae81ff">98.19</span>		<span style="color:#a6e22e">Kazakhstan</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">91.236</span>.<span style="color:#ae81ff">75.224</span>		<span style="color:#a6e22e">Polland</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">46.10</span>.<span style="color:#ae81ff">74.117</span>		<span style="color:#a6e22e">Bulgaria</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">186.45</span>.<span style="color:#ae81ff">49.254</span>		<span style="color:#a6e22e">Trinidad</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">202.12</span>.<span style="color:#ae81ff">81.138</span>		<span style="color:#a6e22e">India</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">211.247</span>.<span style="color:#ae81ff">102.117</span>	<span style="color:#a6e22e">South</span> <span style="color:#a6e22e">Korea</span>
+</span></span></code></pre></div><p>It is evident that every day, anything you put on the internet will be poked at unless you are behind some NAT network and/or have some form of firewall filtering traffic.
+The takeaway is that you really should keep your internet facing systems updated and with as good a security posture as possible. Watch out for newly released vulnerabilities and patch them as fast as possible. Past cases indicate that 48 hours later may already be too late.
+Implement defences on the edge of your network and monitor your logs regularly and diligently. Try out the awesome BRO IDS (I am not being paid to promote it incase you&rsquo;re wondering).
+Some of these scanners are extremely aggressive. To demonstrate just how aggressive, I leave you with this Netherlands IP that was scanning port numbers that have the digits 443.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>	<span style="color:#a6e22e">Source</span> <span style="color:#a6e22e">IP</span> 		<span style="color:#a6e22e">Destination</span> <span style="color:#a6e22e">IP</span> 	<span style="color:#a6e22e">Destination</span> <span style="color:#a6e22e">Port</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">80.82</span>.<span style="color:#ae81ff">70.238</span> 	<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span> 	<span style="color:#ae81ff">1443</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">80.82</span>.<span style="color:#ae81ff">70.238</span> 	<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span> 	<span style="color:#ae81ff">2443</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">80.82</span>.<span style="color:#ae81ff">70.238</span> 	<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span> 	<span style="color:#ae81ff">3443</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">80.82</span>.<span style="color:#ae81ff">70.238</span> 	<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span> 	<span style="color:#ae81ff">4431</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">80.82</span>.<span style="color:#ae81ff">70.238</span> 	<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span> 	<span style="color:#ae81ff">4435</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">80.82</span>.<span style="color:#ae81ff">70.238</span> 	<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span> 	<span style="color:#ae81ff">4436</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">80.82</span>.<span style="color:#ae81ff">70.238</span> 	<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span> 	<span style="color:#ae81ff">4438</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">80.82</span>.<span style="color:#ae81ff">70.238</span> 	<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span> 	<span style="color:#ae81ff">4439</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">80.82</span>.<span style="color:#ae81ff">70.238</span> 	<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span> 	<span style="color:#ae81ff">4443</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">80.82</span>.<span style="color:#ae81ff">70.238</span> 	<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span> 	<span style="color:#ae81ff">5443</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">80.82</span>.<span style="color:#ae81ff">70.238</span> 	<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span> 	<span style="color:#ae81ff">6443</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">80.82</span>.<span style="color:#ae81ff">70.238</span> 	<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span> 	<span style="color:#ae81ff">7443</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">80.82</span>.<span style="color:#ae81ff">70.238</span> 	<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span> 	<span style="color:#ae81ff">10443</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">80.82</span>.<span style="color:#ae81ff">70.238</span> 	<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span> 	<span style="color:#ae81ff">11443</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">80.82</span>.<span style="color:#ae81ff">70.238</span> 	<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span> 	<span style="color:#ae81ff">22443</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">80.82</span>.<span style="color:#ae81ff">70.238</span> 	<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span> 	<span style="color:#ae81ff">33443</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">80.82</span>.<span style="color:#ae81ff">70.238</span> 	<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span> 	<span style="color:#ae81ff">44310</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">80.82</span>.<span style="color:#ae81ff">70.238</span> 	<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span> 	<span style="color:#ae81ff">44322</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">80.82</span>.<span style="color:#ae81ff">70.238</span> 	<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span> 	<span style="color:#ae81ff">44366</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">80.82</span>.<span style="color:#ae81ff">70.238</span> 	<span style="color:#ae81ff">105.52</span>.<span style="color:#ae81ff">174.7</span> 	<span style="color:#ae81ff">55443</span>
+</span></span></code></pre></div>
+        </section>
+        <div class="post-tags">
+          
+          
+          
+        </div>
+      </div>
+
+      
+      
+    </div>
+
+    </article>
+</main>
+<footer>
+  <div style="display:flex"><a class="soc" href="https://github.com/iamckn" rel="me" title="GitHub"><svg class="feather">
+   <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#github" />
+</svg></a><a class="border"></a><a class="soc" href="https://twitter.com/iamckn/" rel="me" title="Twitter"><svg class="feather">
+   <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#twitter" />
+</svg></a><a class="border"></a></div>
+  <div class="footer-info">
+    2025  <a
+      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+  </div>
+</footer>
+
+</div>
+    </body>
+</html>

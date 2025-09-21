@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> Wireguard Vpn Typical Setup | The poetry of (in)security</title>
+  <link rel = 'canonical' href = 'https://example.org/blog/2017/11/14/wireguard-vpn-typical-setup/'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="Wireguard Vpn Typical Setup" />
+<meta property="og:description" content="I recently discovered the awesome Wireguard VPN tunnel and I was sold. Wireguard is a simple, kernel-based, state-of-the-art VPN that also happens to be ridiculously fast and uses modern cryptographic principles that all other highspeed VPN solutions lack." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.org/blog/2017/11/14/wireguard-vpn-typical-setup/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2017-11-14T07:51:06+03:00" />
+<meta property="article:modified_time" content="2017-11-14T07:51:06+03:00" />
+
+
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Wireguard Vpn Typical Setup"/>
+<meta name="twitter:description" content="I recently discovered the awesome Wireguard VPN tunnel and I was sold. Wireguard is a simple, kernel-based, state-of-the-art VPN that also happens to be ridiculously fast and uses modern cryptographic principles that all other highspeed VPN solutions lack."/>
+
+  
+  
+  
+  <link rel="stylesheet" href="https://example.org/css/styles.e6089d87700a06caa386c15bac0e1f25720ef059b3e065c0a37502617f43d5e1ef54d1c10e3f4be773eb071ea4ae80b46775fad1ad2ae146f1ceac479135227f.css" integrity="sha512-5gidh3AKBsqjhsFbrA4fJXIO8Fmz4GXAo3UCYX9D1eHvVNHBDj9L53PrBx6kroC0Z3X60a0q4UbxzqxHkTUifw=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://example.org/images/favicon.ico" />
+
+  
+  
+  
+  
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HY9XRSX5QQ"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-HY9XRSX5QQ', { 'anonymize_ip': false });
+}
+</script>
+
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="https://example.org/">
+  
+    <div id="logo" style="background-image: url(https://example.org/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>The poetry of (in)security</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/post">Posts</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
+      
+        <li><a href="/whoami">Whoami</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <p>I recently discovered the awesome <a href="https://www.wireguard.com/"><strong>Wireguard</strong></a> VPN tunnel and I was sold. Wireguard is a simple, kernel-based, state-of-the-art VPN that also happens to be ridiculously fast and uses modern cryptographic principles that all other highspeed VPN solutions lack.</p>
+<p>Openvpn used to be my VPN solution of choice but after a few weeks with Wireguard, things changed. See the performance comparison charts done by the Wireguard author, Jason Donenfeld.</p>
+<p><img src="/images/wireguard_comparisions.png" alt="alt"></p>
+<p>Here are just a few of the reasons why Wireguard blows away the competition:</p>
+<ul>
+<li>It aims to be as easy to configure and deploy as SSH.</li>
+<li>It is capable of roaming between IP addresses (especially useful to prevent dropped connections when you have flaky internet).</li>
+<li>Uses state-of-the-art cryptography.</li>
+<li>It is meant to be easily implemented in very few lines of code, and easily auditable for security vulnerabilities.</li>
+<li>A combination of extremely high speed cryptographic primitives and the fact that WireGuard lives inside the Linux kernel means that secure networking can be very high-speed.</li>
+<li>Stealth - does not respond to any unauthenticated packets and both peers become silent when there&rsquo;s no data to be exchanged.</li>
+</ul>
+<p>Hopefully you too have been sold so let&rsquo;s get into the set up process.</p>
+<h1 id="set-up-details">Set up details</h1>
+<p>We will be setting up the typical VPN connection described in the previous post.</p>
+<p><img src="/images/typical_vpn.png" alt="alt"></p>
+<p>Here&rsquo;s how our set up will look like:</p>
+<ul>
+<li>An ubuntu 16.04 (x64) VPS as our VPN server (Gateway).</li>
+<li>The internet facing interface on the server is <code>eth0</code>.</li>
+<li>An ubuntu 16.04 (x64) computer as the client.</li>
+<li>We will use <code>10.200.200.1/24</code> as the VPN server interface IP.</li>
+<li>We will use <code>10.200.200.2/24</code> as the VPN client interface IP.</li>
+<li>Unbound DNS resolver for added security.</li>
+</ul>
+<h1 id="set-up-steps">Set up steps</h1>
+<ol>
+<li>Install WireGuard on the VPN server.</li>
+<li>Generate server and client keys.</li>
+<li>Generate server and client configs.</li>
+<li>Enable WireGuard interface on the server.</li>
+<li>Enable IP forwarding on the server.</li>
+<li>Configure firewall rules on the server.</li>
+<li>Configure DNS.</li>
+<li>Set up Wireguard on clients.</li>
+</ol>
+<h1 id="1-install-wireguard-on-the-vpn-server">1. Install WireGuard on the VPN server</h1>
+<p>Comprehensive details on Wireguard installation can be found on the official site <a href="https://www.wireguard.com/install/"><strong>here</strong></a>.
+For our Ubuntu case the process is:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>add-apt-repository ppa:wireguard/wireguard
+</span></span><span style="display:flex;"><span>apt-get update
+</span></span><span style="display:flex;"><span>apt-get install wireguard-dkms wireguard-tools linux-headers-<span style="color:#66d9ef">$(</span>uname -r<span style="color:#66d9ef">)</span>
+</span></span></code></pre></div><h1 id="2-generate-server-and-client-keys">2. Generate server and client keys</h1>
+<p>We will generate the following four files: <code>server_private_key</code>, <code>server_public_key</code>, <code>client_private_key</code>, <code>client_public_key</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Umask <span style="color:#ae81ff">077</span>
+</span></span><span style="display:flex;"><span>wg genkey | tee server_private_key | wg pubkey &gt; server_public_key
+</span></span><span style="display:flex;"><span>wg genkey | tee client_private_key | wg pubkey &gt; client_public_key
+</span></span></code></pre></div><h1 id="31-generate-server-config">3.1 Generate server config</h1>
+<p>Create a file called <code>/etc/wireguard/wg0.conf</code> on the server and add the following content.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>Interface<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>Address <span style="color:#f92672">=</span> 10.200.200.1/24
+</span></span><span style="display:flex;"><span>SaveConfig <span style="color:#f92672">=</span> true
+</span></span><span style="display:flex;"><span>PrivateKey <span style="color:#f92672">=</span> &lt;insert server_private_key&gt;
+</span></span><span style="display:flex;"><span>ListenPort <span style="color:#f92672">=</span> <span style="color:#ae81ff">51820</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>Peer<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>PublicKey <span style="color:#f92672">=</span> &lt;insert client_public_key&gt;
+</span></span><span style="display:flex;"><span>AllowedIPs <span style="color:#f92672">=</span> 10.200.200.2/32
+</span></span></code></pre></div><p><code>wg0.conf</code> will result in an interface named <code>wg0</code> therefore you can rename the file if you fancy something different.</p>
+<p><code>AllowedIPs = 10.200.200.2/32</code> provides enhanced security by ensuring that only that a client with the IP <code>10.200.200.2</code> and the correct private key will be allowed to authenticate on the VPN tunnel .</p>
+<p><code>ListenPort</code> is the udp port to listen on. A different one can be used.</p>
+<h1 id="32-generate-client-config">3.2 Generate client config</h1>
+<p>Create a file called <code>wg0-client.conf</code> on the client and add the following content.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>Interface<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>Address <span style="color:#f92672">=</span> 10.200.200.2/32
+</span></span><span style="display:flex;"><span>PrivateKey <span style="color:#f92672">=</span> &lt;insert client_private_key&gt;
+</span></span><span style="display:flex;"><span>DNS <span style="color:#f92672">=</span> 10.200.200.1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>Peer<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>PublicKey <span style="color:#f92672">=</span> &lt;insert server_public_key&gt;
+</span></span><span style="display:flex;"><span>Endpoint <span style="color:#f92672">=</span> &lt;insert vpn_server_address&gt;:51820
+</span></span><span style="display:flex;"><span>AllowedIPs <span style="color:#f92672">=</span> 0.0.0.0/0
+</span></span><span style="display:flex;"><span>PersistentKeepalive <span style="color:#f92672">=</span> <span style="color:#ae81ff">21</span>
+</span></span></code></pre></div><p>Similar to the server case, <code>wg0-client.conf</code> will result in an interface named wg0-client so you can rename the file if you fancy something different.</p>
+<p><code>AllowedIPs = 0.0.0.0/0</code> will allow and route all traffic on the client through the VPN tunnel. This can be narrowed down if you only want some traffic to go over VPN.</p>
+<p><code>DNS = 10.200.200.1</code> will set the DNS resolver IP to our VPN server. This is important to prevent DNS leaks when on the VPN.</p>
+<h1 id="4-enable-the-wireguard-interface-on-the-server">4. Enable the WireGuard interface on the server.</h1>
+<p>We will bring up the Wireguard interface on the VPN server as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chown -v root:root /etc/wireguard/wg0.conf
+</span></span><span style="display:flex;"><span>chmod -v <span style="color:#ae81ff">600</span> /etc/wireguard/wg0.conf
+</span></span><span style="display:flex;"><span>wg-quick up wg0
+</span></span><span style="display:flex;"><span>systemctl enable wg-quick@wg0.service <span style="color:#75715e">#Enable the interface at boot</span>
+</span></span></code></pre></div><p>After this confirm you have a new interface named wg0 by running <code>ifconfig</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wg0       Link encap:UNSPEC  HWaddr 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00  
+</span></span><span style="display:flex;"><span>          inet addr:10.200.200.1  P-t-P:10.200.200.1  Mask:255.255.255.0
+</span></span><span style="display:flex;"><span>          UP POINTOPOINT RUNNING NOARP  MTU:1420  Metric:1
+</span></span><span style="display:flex;"><span>          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+</span></span><span style="display:flex;"><span>          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+</span></span><span style="display:flex;"><span>          collisions:0 txqueuelen:1 
+</span></span><span style="display:flex;"><span>          RX bytes:0 <span style="color:#f92672">(</span>0.0 B<span style="color:#f92672">)</span>  TX bytes:0 <span style="color:#f92672">(</span>0.0 B<span style="color:#f92672">)</span>
+</span></span></code></pre></div><h1 id="5-enable-ip-forwarding-on-the-server">5. Enable IP forwarding on the server</h1>
+<p>Edit the file <code>/etc/sysctl.conf</code> and set the following line as:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>net.ipv4.ip_forward<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p>Then also do the following to stop having to reboot the server</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sysctl -p
+</span></span><span style="display:flex;"><span>echo <span style="color:#ae81ff">1</span> &gt; /proc/sys/net/ipv4/ip_forward
+</span></span></code></pre></div><h1 id="6-configure-firewall-rules-on-the-server">6. Configure firewall rules on the server</h1>
+<p>We will need to set up a few firewall rules to manage our VPN and DNS traffic.</p>
+<p>Track VPN connection</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+</span></span><span style="display:flex;"><span>iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+</span></span></code></pre></div><p>Allowing incoming VPN traffic on the listening port</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>iptables -A INPUT -p udp -m udp --dport <span style="color:#ae81ff">51820</span> -m conntrack --ctstate NEW -j ACCEPT
+</span></span></code></pre></div><p>Allow both TCP and UDP recursive DNS traffic</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>iptables -A INPUT -s 10.200.200.0/24 -p tcp -m tcp --dport <span style="color:#ae81ff">53</span> -m conntrack --ctstate NEW -j ACCEPT
+</span></span><span style="display:flex;"><span>iptables -A INPUT -s 10.200.200.0/24 -p udp -m udp --dport <span style="color:#ae81ff">53</span> -m conntrack --ctstate NEW -j ACCEPT
+</span></span></code></pre></div><p>Allow forwarding of packets that stay in the VPN tunnel</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>iptables -A FORWARD -i wg0 -o wg0 -m conntrack --ctstate NEW -j ACCEPT
+</span></span></code></pre></div><p>Set up nat</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>iptables -t nat -A POSTROUTING -s 10.200.200.0/24 -o eth0 -j MASQUERADE
+</span></span></code></pre></div><p>We also want to ensure that the rules remain persistent across reboots.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>apt-get install iptables-persistent
+</span></span><span style="display:flex;"><span>systemctl enable netfilter-persistent
+</span></span><span style="display:flex;"><span>netfilter-persistent save
+</span></span></code></pre></div><h1 id="7-configure-dns">7. Configure DNS</h1>
+<p>A major issue with a lot of VPN set ups is that the DNS is not done well enough. This ends up leaking client connection and location details. A good way to test this is through the great <a href="http://dnsleak.com/">http://dnsleak.com/</a> site.</p>
+<p>We are therefore going to ensure that our DNS traffic is secure. After some research I came to the conclusion that the unbound DNS solution is a very good option to use. Some of its merits include:</p>
+<ul>
+<li>Lightweight and fast</li>
+<li>Easy to install and configure</li>
+<li>Security oriented</li>
+<li>Supports DNSSEC</li>
+</ul>
+<p>We’ll set it up in a way to counter DNS leakage, more sophisticated attacks like fake proxy configuration, rogue routers and all sorts of MITM attacks on HTTPS and other protocols.</p>
+<p>We first do the installation on the server</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>apt-get install unbound unbound-host
+</span></span></code></pre></div><p>We then download the list of Root DNS Servers</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -o /var/lib/unbound/root.hints https://www.internic.net/domain/named.cache
+</span></span></code></pre></div><p>Next we edit the following file <code>/etc/unbound/unbound.conf</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>server:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  num-threads: <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#Enable logs</span>
+</span></span><span style="display:flex;"><span>  verbosity: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#list of Root DNS Server</span>
+</span></span><span style="display:flex;"><span>  root-hints: <span style="color:#e6db74">&#34;/var/lib/unbound/root.hints&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#Use the root servers key for DNSSEC</span>
+</span></span><span style="display:flex;"><span>  auto-trust-anchor-file: <span style="color:#e6db74">&#34;/var/lib/unbound/root.key&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#Respond to DNS requests on all interfaces</span>
+</span></span><span style="display:flex;"><span>  interface: 0.0.0.0
+</span></span><span style="display:flex;"><span>  max-udp-size: <span style="color:#ae81ff">3072</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#Authorized IPs to access the DNS Server</span>
+</span></span><span style="display:flex;"><span>  access-control: 0.0.0.0/0                 refuse
+</span></span><span style="display:flex;"><span>  access-control: 127.0.0.1                 allow
+</span></span><span style="display:flex;"><span>  access-control: 10.200.200.0/24	   		allow
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#not allowed to be returned for public internet  names</span>
+</span></span><span style="display:flex;"><span>  private-address: 10.200.200.0/24
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Hide DNS Server info</span>
+</span></span><span style="display:flex;"><span>  hide-identity: yes
+</span></span><span style="display:flex;"><span>  hide-version: yes
+</span></span><span style="display:flex;"><span>     
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#Limit DNS Fraud and use DNSSEC</span>
+</span></span><span style="display:flex;"><span>  harden-glue: yes
+</span></span><span style="display:flex;"><span>  harden-dnssec-stripped: yes
+</span></span><span style="display:flex;"><span>  harden-referral-path: yes
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#Add an unwanted reply threshold to clean the cache and avoid when possible a DNS Poisoning</span>
+</span></span><span style="display:flex;"><span>  unwanted-reply-threshold: <span style="color:#ae81ff">10000000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#Have the validator print validation failures to the log.</span>
+</span></span><span style="display:flex;"><span>  val-log-level: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#Minimum lifetime of cache entries in seconds</span>
+</span></span><span style="display:flex;"><span>  cache-min-ttl: 1800	
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#Maximum lifetime of cached entries</span>
+</span></span><span style="display:flex;"><span>  cache-max-ttl: <span style="color:#ae81ff">14400</span>
+</span></span><span style="display:flex;"><span>  prefetch: yes
+</span></span><span style="display:flex;"><span>  prefetch-key: yes
+</span></span></code></pre></div><p>I have commented the config file explaining the specific configuration details.</p>
+<p>Finally we set some permissions, enable and test the operation on our DNS resolver.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chown -R unbound:unbound /var/lib/unbound
+</span></span><span style="display:flex;"><span>systemctl enable unbound
+</span></span></code></pre></div><p>Here are some sample test results</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nslookup www.google.com. 10.200.200.1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	Server:		10.200.200.1
+</span></span><span style="display:flex;"><span>	Address:	10.200.200.1#53
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	Non-authoritative answer:
+</span></span><span style="display:flex;"><span>	Name:	www.google.com
+</span></span><span style="display:flex;"><span>	Address: 172.217.7.228
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Testing DNSSEC</span>
+</span></span><span style="display:flex;"><span>unbound-host -C /etc/unbound/unbound.conf -v ietf.org
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">[</span>1510648646<span style="color:#f92672">]</span> libunbound<span style="color:#f92672">[</span>1739:0<span style="color:#f92672">]</span> notice: init module 0: validator
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">[</span>1510648646<span style="color:#f92672">]</span> libunbound<span style="color:#f92672">[</span>1739:0<span style="color:#f92672">]</span> notice: init module 1: iterator
+</span></span><span style="display:flex;"><span>	ietf.org has address 4.31.198.44 <span style="color:#f92672">(</span>secure<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>	ietf.org has IPv6 address 2001:1900:3001:11::2c <span style="color:#f92672">(</span>secure<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>	ietf.org mail is handled by <span style="color:#ae81ff">0</span> mail.ietf.org. <span style="color:#f92672">(</span>secure<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>With that, our server setup is done :)</p>
+<h1 id="8-set-up-wireguard-on-clients">8. Set up Wireguard on clients</h1>
+<p>We can now finally set up our client.</p>
+<p>We begin by installing wireguard on the client depending on what platform we&rsquo;re on. The installation process is the same as the server&rsquo;s.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>add-apt-repository ppa:wireguard/wireguard
+</span></span><span style="display:flex;"><span>apt-get update
+</span></span><span style="display:flex;"><span>apt-get install wireguard-dkms wireguard-tools linux-headers-<span style="color:#66d9ef">$(</span>uname -r<span style="color:#66d9ef">)</span>
+</span></span></code></pre></div><p>If you are on Kali Linux, you may have to install <code>resolvconf</code> if you don&rsquo;t have it already.</p>
+<p>We had already generated the <code>wg0-client.conf</code> client config in step <code>3.2</code>.
+All we need to do is to move it to <code>/etc/wireguard/wg0-client.conf</code>.</p>
+<p>We finally bring up our VPN interface by running the command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo wg-quick up wg0-client
+</span></span></code></pre></div><p>And voila, we have our Wireguard VPN tunnel in place.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wg0-client Link encap:UNSPEC  HWaddr 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00  
+</span></span><span style="display:flex;"><span>          inet addr:10.200.200.2  P-t-P:10.200.200.2  Mask:255.255.255.255
+</span></span><span style="display:flex;"><span>          UP POINTOPOINT RUNNING NOARP  MTU:1420  Metric:1
+</span></span><span style="display:flex;"><span>          RX packets:95 errors:0 dropped:0 overruns:0 frame:0
+</span></span><span style="display:flex;"><span>          TX packets:177 errors:0 dropped:0 overruns:0 carrier:0
+</span></span><span style="display:flex;"><span>          collisions:0 txqueuelen:1 
+</span></span><span style="display:flex;"><span>          RX bytes:14236 <span style="color:#f92672">(</span>14.2 KB<span style="color:#f92672">)</span>  TX bytes:31516 <span style="color:#f92672">(</span>31.5 KB<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>The wg command is a great Wireguard utility that you can use to view connection status.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo wg show
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	interface: wg0-client
+</span></span><span style="display:flex;"><span>	  public key: FwdTNMXqL46jNhZwkkzWsyR1AIlGX66vRWe1HFSemHw<span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>	  private key: <span style="color:#f92672">(</span>hidden<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>	  listening port: <span style="color:#ae81ff">39451</span>
+</span></span><span style="display:flex;"><span>	  fwmark: 0xca6c
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	peer: +lb7/6Nn8uhlA/6fjT3ivfM5fWKKQ2L+stX+dSq18CI<span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>	  endpoint: 165.227.120.177:51820
+</span></span><span style="display:flex;"><span>	  allowed ips: 0.0.0.0/0
+</span></span><span style="display:flex;"><span>	  latest handshake: <span style="color:#ae81ff">49</span> seconds ago
+</span></span><span style="display:flex;"><span>	  transfer: 11.41 MiB received, 862.25 KiB sent
+</span></span><span style="display:flex;"><span>	  persistent keepalive: every <span style="color:#ae81ff">21</span> seconds
+</span></span></code></pre></div><p>You should now have a secure VPN connection in place. You can confirm this by checking your IP on sites such as <a href="https://whoer.net/">https://whoer.net/</a>.</p>
+<p>Ensure you also run a DNS leak test on <a href="http://dnsleak.com/">http://dnsleak.com/</a>.</p>
+<p>If you want to disconnect from the VPN you have to bring the VPN interface down.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo wg-quick down wg0-client
+</span></span></code></pre></div><h1 id="wrapping-up">Wrapping up</h1>
+<p>There are some points about the use of Wireguard that should be noted.
+First, your VPN connection will remain persistent across networks. This means that unless you specifically bring the interface down or shutdown the computer, you will always be on the VPN. Disconnecting and reconnecting to the same or a different network maintains the connection. Also note that a sleep or suspend of the computer will maintain the interface for when the computer becomes active again.</p>
+<p>This is mostly a good thing as you&rsquo;ll maintain your VPN connection even when your internet is unstable or you switch networks.</p>
+<p>Another thing to note is that you can set up the VPN interface to be persistent across reboots by enabling it as a service.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl enable wg-quick@wg0-client.service
+</span></span></code></pre></div><p>This means that you&rsquo;ll be always on VPN from the moment you boot up the computer.</p>
+<p>You may also want to add new clients and the way you do this is as follows:</p>
+<p>Generate new client keys on the server</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wg genkey | tee new_client_private_key | wg pubkey &gt; new_client_public_key
+</span></span></code></pre></div><p>Then register them on the server</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wg set wg0 peer &lt;new_client_public_key&gt; allowed-ips &lt;new_client_vpn_IP&gt;/32
+</span></span></code></pre></div><p>Finally generate the new client config as described in step <code>3.2</code> and you can then set up your clients as per step <code>8</code>.</p>
+<h1 id="automation">Automation</h1>
+<p>I realised that having to go through all the steps when setting up a new VPN server will probably be a tedious process.
+I therefore automated the whole process using <a href="https://www.ansible.com/"><strong>Ansible</strong></a>.</p>
+<p>You can therefore quickly spin up a new Wireguard VPN on a new VPS in a few minutes.</p>
+<p>You can access the details here <a href="https://github.com/iamckn/wireguard_ansible">https://github.com/iamckn/wireguard_ansible</a></p>
+<p>Here are some useful links that have guided this post.</p>
+<ul>
+<li>Official Wireguard site <a href="https://www.wireguard.com/">https://www.wireguard.com/</a></li>
+<li>Unbound – Your own DNS Server <a href="https://freedif.org/unbound-your-own-dns-server/">https://freedif.org/unbound-your-own-dns-server/</a></li>
+<li>Installing Wireguard <a href="https://research.kudelskisecurity.com/2017/06/07/installing-wireguard-the-modern-vpn/">https://research.kudelskisecurity.com/2017/06/07/installing-wireguard-the-modern-vpn/</a></li>
+<li>Wireguard IPv6 set up <a href="https://danrl.com/blog/2016/travel-wifi/">https://danrl.com/blog/2016/travel-wifi/</a></li>
+</ul>
+<p>The next post will be about how to up a chained Wireguard VPN connection.</p>
+<p>Till then, happy hacking!</p>
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2025  CK 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/post">Posts</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/whoami">Whoami</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>

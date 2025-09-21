@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Iot on The poetry of (in)security</title>
+    <link>http://localhost:1313/categories/iot/</link>
+    <description>Recent content in Iot on The poetry of (in)security</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 27 Aug 2019 16:10:52 +0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/iot/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Exploiting the eques elf smart plug: Part four</title>
+      <link>http://localhost:1313/blog/2019-08-27-exploiting-the-eques-elf-smart-plug-part-four/</link>
+      <pubDate>Tue, 27 Aug 2019 16:10:52 +0300</pubDate>
+      <guid>http://localhost:1313/blog/2019-08-27-exploiting-the-eques-elf-smart-plug-part-four/</guid>
+      <description>&lt;p&gt;In part three, we finally figured out how to remotely control the smart power plugs (turn them on or off). In this final part, we are going to see how inadequate security controls can be exploited for various purposes. We are also going to look at one more scenario where the smart power plugs have no internet access.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Exploiting the eques elf smart plug: Part three</title>
+      <link>http://localhost:1313/blog/2019-08-26-exploiting-the-eques-elf-smart-plug-part-three/</link>
+      <pubDate>Tue, 27 Aug 2019 15:53:09 +0300</pubDate>
+      <guid>http://localhost:1313/blog/2019-08-26-exploiting-the-eques-elf-smart-plug-part-three/</guid>
+      <description>&lt;p&gt;In part two, we figured out how to discover the smart plugs in a network and their details. We were also able to send remote commands to ikonkek2.com and query details about specific smart plugs. This was made possible by the discovery of a hardcoded aes key used to encrypt messages. We however still cannot turn a smart plug on or off remotely. So let&amp;rsquo;s concentrate on that in this post.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Exploiting the eques elf smart plug: Part two</title>
+      <link>http://localhost:1313/blog/2019-08-25-exploiting-the-eques-elf-smart-plug-part-two/</link>
+      <pubDate>Tue, 27 Aug 2019 14:23:39 +0300</pubDate>
+      <guid>http://localhost:1313/blog/2019-08-25-exploiting-the-eques-elf-smart-plug-part-two/</guid>
+      <description>&lt;p&gt;In part one, we concentrated on analysing the network communication when one turns the smart power plug on or off from the app.&#xA;We had noticed some form of encrypted/encoded communication happening on udp port 27431 between the smart plug and the app installed on the phone. We also noticed some form of encrypted/encoded communication on tcp ports 9123 and 5222(xmpp) between the app, smart plug and ikonkek2.com.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Exploiting the eques elf smart plug: Part one</title>
+      <link>http://localhost:1313/blog/2019-08-19-exploiting-the-eques-elf-smart-plug-part-one/</link>
+      <pubDate>Tue, 27 Aug 2019 11:57:50 +0300</pubDate>
+      <guid>http://localhost:1313/blog/2019-08-19-exploiting-the-eques-elf-smart-plug-part-one/</guid>
+      <description>&lt;p&gt;I bought some smart power plugs and they were pretty awesome! These are the &lt;!-- raw HTML omitted --&gt;&lt;strong&gt;Eques Elf smart plugs.&lt;/strong&gt;&lt;!-- raw HTML omitted --&gt; They can be controlled using an app through a connected Wi-Fi network, and remotely over the internet.&lt;/p&gt;&#xA;&lt;p&gt;Everything was going on well till I noticed some strange urls on my home network monitoring system. It turns out it was the smart plug constantly communicating with some external hosts.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
