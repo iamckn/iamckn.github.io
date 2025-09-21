@@ -71,7 +71,7 @@ Masscan, created by Robert Graham of Errata Security is fast enough to do the sa
 Internet wide scanning is being used a lot by researchers to investigate vulnerabilities and do various internet wide studies. A case in point is that several internet wide scans were done targeting the heartbleed vulnerability within 48 hours of disclosure. A more recent case is this week's [**synful attack scan**](https://zmap.io/synful/) done by the zmap team on September 15, 2015.
 [**Shodan**](https://www.shodan.io/) does regular internet wide scans and hosts the data on their site which is made available to the public in an interactive way.
 
-The University of Michigan team (same one that maintains zmap) also does daily scans and hosts the raw data on the [](https://www.scans.io/)**scans.io**</a> site. They also host scans done by other researchers such as the Rapid7 team which does various scans regularly.
+The University of Michigan team (same one that maintains zmap) also does daily scans and hosts the raw data on the [](https://www.scans.io/)**scans.io** site. They also host scans done by other researchers such as the Rapid7 team which does various scans regularly.
 
 The flip side of this is that a lot more people do these scans with malicious intent. They're always on the lookout for vulnerable systems on the internet and their activity spikes every time a major vulnerable is released. They mostly hide behind [**bulletproof hosting providers**](https://en.wikipedia.org/wiki/Bulletproof_hosting) or run their scans from countries likely to be lenient, with China featuring prominently.
 Let me now relate the activity on my phone with internet wide scanning.

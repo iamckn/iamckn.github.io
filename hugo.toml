@@ -1,4 +1,4 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://ckn.io/'
 languageCode = 'en-us'
 title = 'The poetry of (in)security'
 theme = 'cactus'
